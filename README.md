@@ -2,7 +2,7 @@
 
 Unity **6000.5.9f1** 的第三人称动作游戏。现有玩法代码是基线，之后按切片做。
 
-**打开。** 用 Unity Hub 打开本目录，版本与 `ProjectSettings/ProjectVersion.txt` 一致。场景文件在 `Assets/Scenes/Game.unity`。Build Settings 里目前没有场景。
+**打开。** 用 Unity Hub 打开本目录，版本与 `ProjectSettings/ProjectVersion.txt` 一致。Build Settings 里只有 `Assets/Scenes/Game.unity`。激活的玩家是场景里的 Player SPP，不是 `Perfabs/1 Old/Player`。开着的近战敌人是 `Assets/Perfabs/Humanoid A.I - Melee.prefab` 的实例。播放器 `bundleVersion` 的 `0.1` 不是开发计划版本。
 
 **工作流。** 只维护 `main`，一次只做一个可验收切片。入口是 [`Docs/开发计划/README.md`](Docs/开发计划/README.md)。代码地图见 [`Docs/现状.md`](Docs/现状.md)。
 
