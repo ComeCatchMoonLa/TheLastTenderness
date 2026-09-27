@@ -167,12 +167,13 @@ namespace CatchMoon
 
         void ResetCollider()
         {
-            if (!(isRolling || isJumping))
-            {
-                cCollider.center = pLocomotion.defaultColliderCenter;
-                cCollider.height = pLocomotion.defaultColliderHeight;
+            if (isRolling || isJumping)
+                return;
+
+            cCollider.center = pLocomotion.defaultColliderCenter;
+            cCollider.height = pLocomotion.defaultColliderHeight;
+            if (!aimingRadiusApplied)
                 cCollider.radius = pLocomotion.defaultColliderRadius;
-            }
         }
 
         protected override void UpdateBoolsValue()
