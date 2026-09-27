@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.27 已完成。
-- [ ] 读过技术设计：只去掉玩家覆写里的 `isInteracting` 判断。
+- [x] 0.27 已完成。
+- [x] 读过技术设计：只去掉玩家覆写里的 `isInteracting` 判断。
 
 **阶段门槛：** 知道 15 秒不在本版。
 
 ## 1. 到时写回
 
-- [ ] `PlayerStatsManager.HandlePoiseResetTimer` 在计时结束时写回 `armorPoiseBonus`。
-- [ ] 不再看 `isInteracting`。
-- [ ] `totalPoiseResetTime` 和基类不改。
+- [x] `PlayerStatsManager.HandlePoiseResetTimer` 在计时结束时写回 `armorPoiseBonus`。
+- [x] 不再看 `isInteracting`。
+- [x] `totalPoiseResetTime` 和基类不改。
 
 **阶段门槛：** 受击硬直还在时也会写回。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 0.28 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 0.28 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

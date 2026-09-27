@@ -122,8 +122,7 @@ namespace CatchMoon
             }
             else
             {
-                if (!player.isInteracting)
-                    totalPoiseDefence = armorPoiseBonus;
+                totalPoiseDefence = armorPoiseBonus;
             }
         }
 
