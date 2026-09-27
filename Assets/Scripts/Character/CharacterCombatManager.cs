@@ -145,8 +145,11 @@ namespace CatchMoon
             if (attacker != null && character.cCombat.isBlocking)
             {
                 Vector3 directionFromAttackerToTarget = attacker.transform.position - character.transform.position;
-                float dotValue = Vector3.Dot(directionFromAttackerToTarget, character.transform.forward);
-                successfulBlocked = dotValue > 0.3f;
+                if (directionFromAttackerToTarget.sqrMagnitude > 0.0001f)
+                {
+                    float dotValue = Vector3.Dot(directionFromAttackerToTarget.normalized, character.transform.forward);
+                    successfulBlocked = dotValue > 0.3f;
+                }
             }
 
             if (successfulBlocked)
