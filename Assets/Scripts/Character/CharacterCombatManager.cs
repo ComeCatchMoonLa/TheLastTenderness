@@ -77,9 +77,9 @@ namespace CatchMoon
             }
         }
 
-        public virtual void AttemptBlock(DamageCollider attackingWeapon, string blockAnimation, float pd, float fd, float md, float ld, float dd)
+        public virtual void AttemptBlock(float guardBreakModifider, string blockAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            float staminaDA = (pd + fd + md + ld + dd) * attackingWeapon.guardBreakModifider * (1 - character.cStats.blockingStabilityRating);
+            float staminaDA = (pd + fd + md + ld + dd) * guardBreakModifider * (1 - character.cStats.blockingStabilityRating);
 
             character.cStats.DeductStamina(staminaDA);
 
@@ -119,6 +119,55 @@ namespace CatchMoon
             }
         }
 
+        public void ResolveIncomingHit(
+            CharacterManager attacker,
+            string damageAnimation,
+            float multiplier,
+            bool applyBlockAndPoise,
+            float poiseDamage,
+            float guardBreakModifider,
+            float pd, float fd, float md, float ld, float dd)
+        {
+            pd *= multiplier;
+            fd *= multiplier;
+            md *= multiplier;
+            ld *= multiplier;
+            dd *= multiplier;
+
+            if (!applyBlockAndPoise)
+            {
+                character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
+                return;
+            }
+
+            bool successfulBlocked = false;
+            if (attacker != null && character.cCombat.isBlocking)
+            {
+                Vector3 directionFromAttackerToTarget = attacker.transform.position - character.transform.position;
+                float dotValue = Vector3.Dot(directionFromAttackerToTarget, character.transform.forward);
+                successfulBlocked = dotValue > 0.3f;
+            }
+
+            if (successfulBlocked)
+            {
+                AttemptBlock(guardBreakModifider, damageAnimation, pd, fd, md, ld, dd);
+                pd *= (1 - character.cStats.blockingPDA);
+                fd *= (1 - character.cStats.blockingFDA);
+                md *= (1 - character.cStats.blockingMDA);
+                ld *= (1 - character.cStats.blockingLDA);
+                dd *= (1 - character.cStats.blockingDDA);
+                character.cStats.TakeDamage(null, pd, fd, md, ld, dd);
+                return;
+            }
+
+            character.cStats.poiseResetTimer = character.cStats.totalPoiseResetTime;
+            character.cStats.totalPoiseDefence -= poiseDamage;
+            if (character.cStats.totalPoiseDefence > poiseDamage)
+                character.cStats.TakeDamage(null, pd, fd, md, ld, dd);
+            else
+                character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
+        }
+
         public void GetBackStabbed(CharacterManager characterPerformingBackStab, float dist)
         {
             // 0.标记状态
@@ -128,8 +177,8 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingBackStab.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cStats.TakeDamage("Back Stabbed", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
-                weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);
+            character.cCombat.ResolveIncomingHit(characterPerformingBackStab, "Back Stabbed", weapon.criticalAttackDM,
+                false, 0f, 0f, weapon.pd, weapon.fd, weapon.md, weapon.ld, weapon.dd);
         }
 
         public void GetRiposte(CharacterManager characterPerformingRiposte, float dist)
@@ -141,8 +190,8 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingRiposte.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cStats.TakeDamage("Riposted", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
-                weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);
+            character.cCombat.ResolveIncomingHit(characterPerformingRiposte, "Riposted", weapon.criticalAttackDM,
+                false, 0f, 0f, weapon.pd, weapon.fd, weapon.md, weapon.ld, weapon.dd);
         }
     }
 }

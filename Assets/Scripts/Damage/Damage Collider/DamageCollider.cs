@@ -112,67 +112,34 @@ namespace CatchMoon
 
         protected virtual void DealDamage(CharacterManager damageTarget, string damageAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            // 处理伤害系数(根据攻击的类型，如重攻击与轻攻击伤害系数不同)
+            float multiplier = 1f;
             if (character.isUsingRightHand)
             {
                 WeaponItem rightWeapon = character.cInventory.rightWeapon;
                 if (character.cCombat.attackType == AttackType.light_1)
-                    DealDamageWithM(rightWeapon.laFirstPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = rightWeapon.laFirstPhaseDM;
                 else if (character.cCombat.attackType == AttackType.light_2)
-                    DealDamageWithM(rightWeapon.laSecondPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = rightWeapon.laSecondPhaseDM;
                 else if (character.cCombat.attackType == AttackType.heavy_1)
-                    DealDamageWithM(rightWeapon.haFirstPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = rightWeapon.haFirstPhaseDM;
                 else if (character.cCombat.attackType == AttackType.heavy_2)
-                    DealDamageWithM(rightWeapon.haSecondPhasDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = rightWeapon.haSecondPhasDM;
             }
             else if (character.isUsingLeftHand)
             {
                 WeaponItem leftWeapon = character.cInventory.leftWeapon;
                 if (character.cCombat.attackType == AttackType.light_1)
-                    DealDamageWithM(leftWeapon.laFirstPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = leftWeapon.laFirstPhaseDM;
                 else if (character.cCombat.attackType == AttackType.light_2)
-                    DealDamageWithM(leftWeapon.laSecondPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = leftWeapon.laSecondPhaseDM;
                 else if (character.cCombat.attackType == AttackType.heavy_1)
-                    DealDamageWithM(leftWeapon.haFirstPhaseDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = leftWeapon.haFirstPhaseDM;
                 else if (character.cCombat.attackType == AttackType.heavy_2)
-                    DealDamageWithM(leftWeapon.haSecondPhasDM, ref pd, ref fd, ref md, ref ld, ref dd);
+                    multiplier = leftWeapon.haSecondPhasDM;
             }
-            // 处理格挡(若格挡成功，则伤害会被吸收一部分)
-            CharacterStatsManager enemyShield = damageTarget.cStats;
-            Vector3 directinoFromPlayerToEnemy = character.transform.position - damageTarget.transform.position;
-            float dotValueFromPlayerToEnemy = Vector3.Dot(directinoFromPlayerToEnemy, damageTarget.transform.forward);
-            bool successfulBlocked = damageTarget.cCombat.isBlocking && dotValueFromPlayerToEnemy > 0.3f;
-            if (successfulBlocked)
-            {
-                damageTarget.cCombat.AttemptBlock(this, damageAnimation, pd, fd, md, ld, dd);
 
-                pd *= (1 - enemyShield.blockingPDA);
-                fd *= (1 - enemyShield.blockingFDA);
-                md *= (1 - enemyShield.blockingMDA);
-                ld *= (1 - enemyShield.blockingLDA);
-                dd *= (1 - enemyShield.blockingDDA);
-
-                damageTarget.cStats.TakeDamage(null, pd, fd, md, ld, dd);
-            }
-            else
-            {
-                // 判断 机体稳定性 是否被打破(若被打破则播放受伤动画，否则不播放受伤动画)
-                damageTarget.cStats.poiseResetTimer = damageTarget.cStats.totalPoiseResetTime;
-                damageTarget.cStats.totalPoiseDefence -= poiseBreak;
-                if (damageTarget.cStats.totalPoiseDefence > poiseBreak)
-                    damageTarget.cStats.TakeDamage(null, pd, fd, md, ld, dd);
-                else
-                    damageTarget.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
-            }
-        }
-
-        void DealDamageWithM(float damageMuiltiplier, ref float pd, ref float fd, ref float md, ref float ld, ref float dd)
-        {
-            pd *= damageMuiltiplier;
-            fd *= damageMuiltiplier;
-            md *= damageMuiltiplier;
-            ld *= damageMuiltiplier;
-            dd *= damageMuiltiplier;
+            damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, multiplier, true, poiseBreak, guardBreakModifider,
+                pd, fd, md, ld, dd);
         }
 
         protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)

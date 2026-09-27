@@ -16,9 +16,9 @@ namespace CatchMoon
             HandleCombatInput();
         }
 
-        public override void AttemptBlock(DamageCollider attackingWeapon, string blockAnimation, float pd, float fd, float md, float ld, float dd)
+        public override void AttemptBlock(float guardBreakModifider, string blockAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            base.AttemptBlock(attackingWeapon, blockAnimation, pd, fd, md, ld, dd);
+            base.AttemptBlock(guardBreakModifider, blockAnimation, pd, fd, md, ld, dd);
             player.ui.hud.staminaBar.SetCurrentStamina(player.pStats.currentStamina);
         }
 
