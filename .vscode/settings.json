@@ -1,0 +1,12 @@
+{
+  "explorer.excludeGitIgnore": true,
+  "search.useIgnoreFiles": true,
+  "files.exclude": {
+    "**/*.meta": true,
+    "ProjectSettings/*.asset": true
+  },
+  "search.exclude": {
+    "**/*.meta": true,
+    "ProjectSettings/*.asset": true
+  }
+}
