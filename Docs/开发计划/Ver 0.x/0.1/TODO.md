@@ -25,8 +25,8 @@
 
 ## 3. 验收
 
-- [ ] 用 Unity 打开工程，确认能打开，且没有因此改到 `Game.unity`。
-- [ ] `git status` 里没有商店资源。
-- [ ] 大纲里的 0.1 标成已完成。提交说明用中文。
+- [x] `Packages/manifest.json` 没有 `com.unity.collab-proxy`；两处 Collaborate 开关为 `0`；模式仍是 Visible Meta Files。
+- [x] `ignore.conf` 不在版本库里，且 `git check-ignore` 能命中。商店资源不在 `git status` 里。
+- [x] 本版 diff 不含 `Game.unity` 和 `Assets/Scripts/`。大纲里的 0.1 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 2 节全部满足。
