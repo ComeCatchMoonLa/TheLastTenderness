@@ -208,6 +208,11 @@ namespace CatchMoon
             else return false;
         }
 
+        public virtual void EmptyStamina()
+        {
+            currentStamina = 0;
+        }
+
         public virtual bool AddMP(float addAmount)
         {
             if (currentMP < maxMP)

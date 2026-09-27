@@ -81,7 +81,8 @@ namespace CatchMoon
         {
             float staminaDA = (pd + fd + md + ld + dd) * guardBreakModifider * (1 - character.cStats.blockingStabilityRating);
 
-            character.cStats.DeductStamina(staminaDA);
+            if (!character.cStats.DeductStamina(staminaDA))
+                character.cStats.EmptyStamina();
 
             if (character.cStats.currentStamina <= 0)
             {

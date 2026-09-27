@@ -81,6 +81,12 @@ namespace CatchMoon
             else return false;
         }
 
+        public override void EmptyStamina()
+        {
+            base.EmptyStamina();
+            player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
+        }
+
         public override bool AddMP(float addAmount)
         {
             if (base.AddMP(addAmount))
