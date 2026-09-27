@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483667b64899878429e82dc07cab0e4b, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  auto: 0
+  wordForWord: 1
+  skip: 0
+  enableFps: 1
+  autoChangeLockOnTarget: 0
+  cameraUpAndDownSpeed: 60
+  cameraLeftAndRightSpeed: 240
+  vsync_Options: 1
+  frameRateLimit_Options: 3
+  displayQuality_Options: 5
+  postTreatmentQuality_Options: 1
+  specialEffectQuality_Options: 1

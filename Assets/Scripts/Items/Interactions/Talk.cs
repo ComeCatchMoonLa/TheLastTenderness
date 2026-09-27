@@ -1,0 +1,50 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace CatchMoon
+{
+    public class Talk : Interactable
+    {
+        [Header("对话对象")]
+        [SerializeField] EnemyManager npc;
+
+        [Header("Player对话时站的位置")]
+        [SerializeField] Transform playerStandingPoint;
+
+        [Header("对话内容")]
+        public List<DialogueTextData> talkContent;
+
+        public override void Interact(PlayerManager player)
+        {
+            npc.gameObject.tag = "Untagged";
+            // 设置Player的Transform
+            player.rigidBody.velocity = Vector3.zero;
+            player.transform.position = playerStandingPoint.position;
+            player.transform.LookAt(npc.transform, Vector3.up);
+            // 设置Player的UI
+            player.ui.hud.Hide();
+            player.ui.popUps.talkUI.PopUp();
+            player.ui.popUps.talkUI.SetTalkContent(talkContent);
+            // 禁用玩家输入
+            player.input.inputActions.Disable();
+            player.input.inputActions.Interacte.Enable();
+            player.input.inputActions.Locomotion.CameraRotate.Enable();
+            // 处理对话(更新文本及动画)
+            player.storyNpc = npc;
+            if (player.ui.escWin.GetSettingWin().gameSettingsData.auto)
+            {
+                if (player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord)
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_Auto_WFW(npc);
+                else
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_Auto_SBS(npc);
+            }
+            else
+            {
+                if (player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord)
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_WFW_Helper(npc);
+                else
+                    player.ui.popUps.talkUI.UpdateDialogueSBS_Helper(npc);
+            }
+        }
+    }
+}

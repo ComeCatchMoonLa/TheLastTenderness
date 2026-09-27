@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a54454344dd8374982775349f2a6970, type: 3}
+  m_Name: Chr_Torso_Female_03
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemIcon: {fileID: 21300000, guid: 9c8101d479c60d34185259c220494c61, type: 3}
+  itemName: Chr_Torso_Female_03
+  transformName: Chr_Torso_Female_03
+  equipmentType: 1
+  armorType: 1
+  physicalDA: 0
+  fireDA: 0
+  magicDA: 0
+  lightningDA: 0
+  darkDA: 0

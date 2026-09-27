@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8db4df2c49e8c40841ec1753e8dc16, type: 3}
+  m_Name: Talk TextData Test 1
+  m_EditorClassIdentifier: 
+  text: "\u4F60\u6E34\u671B\u6240\u8C13\u7684\u771F\u76F8\u5417\uFF1F\u4E0D\uFF0C\u4F60\u6E34\u671B\u7684\u4ECE\u6765\u90FD\u4E0D\u662F\u4EC0\u4E48\u771F\u76F8\uFF0C\u4F60\u6E34\u671B\u7684\u662F\u6EE1\u8DB3\u4F60\u90A3\u865A\u4F2A\u7CDC\u81ED\u7684\u6B32\u671B\uFF01\u4F60\u4F1A\u7684\uFF0C\u50CF\u880A\u86C6\u90A3\u822C\uFF0C\u4E8E\u8840\u6CB3\u9AA8\u6D77\u4E4B\u4E2D\uFF0C\u5438\u542E\u8214\u8210\u5C38\u4F53\u4E0A\u7684\u6743\u8D22\u3002"
+  isPlayerSaid: 0
+  duration: 10

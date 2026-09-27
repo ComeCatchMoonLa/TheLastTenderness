@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027913435cf0ba14499c5507e54379ff, type: 3}
+  m_Name: Sword11_Blood
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemIcon: {fileID: -1073077546, guid: f79df972ac26d8643b9ffdbf64bf73c9, type: 3}
+  itemName: Sword 11 Blood
+  transformName: 
+  equipmentType: 0
+  modelPrefab: {fileID: 1262331158525860362, guid: 778e4553aa0986f43aa3c10ee0dbd798, type: 3}
+  transform: {fileID: 0}
+  weaponController: {fileID: 22100000, guid: c605ba7f0edacaa42916573a3005469c, type: 2}
+  offHandIdleAnimation: Left_Arm_Idle
+  weaponType: 3
+  pd: 10
+  fd: 0
+  md: 0
+  ld: 0
+  dd: 0
+  laFirstPhaseDM: 1
+  laSecondPhaseDM: 1.2
+  haFirstPhaseDM: 1.6
+  haSecondPhasDM: 1.8
+  criticalAttackDM: 2.4
+  guardBreakM: 1
+  poiseBreak: 25
+  offensivePoiseBonus: 0
+  physicalDA: 0
+  fireDA: 0
+  magicDA: 0
+  lightningDA: 0
+  darkDA: 0
+  blockingStabilityRating: 0
+  stability: 0.67
+  baseStaminaCost: 25
+  laStaminaCostM: 1
+  haStaminaCostM: 1.5
+  oh_tap_e_action: {fileID: 11400000, guid: 7eda8d58ef67b314a801f7bba18f22e7, type: 2}
+  oh_hold_e_action: {fileID: 11400000, guid: a65d3d74d904f5f419212dc9701d2077, type: 2}
+  oh_tap_q_action: {fileID: 11400000, guid: 7eda8d58ef67b314a801f7bba18f22e7, type: 2}
+  oh_hold_q_action: {fileID: 0}
+  oh_tap_r_action: {fileID: 11400000, guid: a1da57e59708a734e8b3baa003ebfb47, type: 2}
+  oh_hold_r_action: {fileID: 0}
+  oh_tap_z_action: {fileID: 11400000, guid: a1da57e59708a734e8b3baa003ebfb47, type: 2}
+  oh_hold_z_action: {fileID: 0}
+  th_tap_e_action: {fileID: 0}
+  th_hold_e_action: {fileID: 0}
+  th_tap_q_action: {fileID: 0}
+  th_hold_q_action: {fileID: 0}
+  th_tap_r_action: {fileID: 0}
+  th_hold_r_action: {fileID: 0}
+  th_tap_z_action: {fileID: 0}
+  th_hold_z_action: {fileID: 0}
+  weaponWhooshesSound:
+  - {fileID: 8300000, guid: 3aea0e7aed0f2b248ac37da1a855b53d, type: 3}
