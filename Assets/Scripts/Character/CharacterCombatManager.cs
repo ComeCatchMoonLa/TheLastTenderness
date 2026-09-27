@@ -77,9 +77,26 @@ namespace CatchMoon
             }
         }
 
+        float BlockingWeaponStability()
+        {
+            if (character.cInventory == null)
+                return 0f;
+
+            WeaponItem blockingWeapon = null;
+            if (character.isUsingRightHand)
+                blockingWeapon = character.cInventory.rightWeapon;
+            else if (character.isUsingLeftHand)
+                blockingWeapon = character.cInventory.leftWeapon;
+
+            if (blockingWeapon == null)
+                return 0f;
+            return blockingWeapon.stability;
+        }
+
         public virtual void AttemptBlock(float guardBreakModifider, string blockAnimation, float pd, float fd, float md, float ld, float dd)
         {
             float staminaDA = (pd + fd + md + ld + dd) * guardBreakModifider * (1 - character.cStats.blockingStabilityRating);
+            staminaDA *= 1f - BlockingWeaponStability();
 
             if (!character.cStats.DeductStamina(staminaDA))
                 character.cStats.EmptyStamina();

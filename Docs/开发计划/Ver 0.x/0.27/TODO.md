@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.26 已完成。
-- [ ] 读过技术设计：只在现有扣费上再乘 `(1 - stability)`。
+- [x] 0.26 已完成。
+- [x] 读过技术设计：只在现有扣费上再乘 `(1 - stability)`。
 
 **阶段门槛：** 知道 `guardBreakM` 和资产数字不在本版。
 
 ## 1. 乘上稳定度
 
-- [ ] `AttemptBlock` 按先右手、再左手取正在格挡的武器。
-- [ ] 扣费再乘这把武器的 `(1 - stability)`。为空时按 0。
-- [ ] `guardBreakM` 和 `blockingStabilityRating` 的抄写不改。
+- [x] `AttemptBlock` 按先右手、再左手取正在格挡的武器。
+- [x] 扣费再乘这把武器的 `(1 - stability)`。为空时按 0。
+- [x] `guardBreakM` 和 `blockingStabilityRating` 的抄写不改。
 
 **阶段门槛：** 付不清仍走 `EmptyStamina` 和 `Guard_Break`。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。`stability` 为 0 时消耗与改之前相同。
-- [ ] 大纲里的 0.27 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。`stability` 为 0 时消耗与改之前相同。
+- [x] 大纲里的 0.27 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
