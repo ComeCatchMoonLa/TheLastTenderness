@@ -19,7 +19,7 @@
 ## 2. 对齐版本文件
 
 - [x] 打得开之后，`ProjectSettings/ProjectVersion.txt` 的 `m_EditorVersion` 为 `6000.5.9f1`。修订号 `b57deb96f08d` 由本机编辑器写回。
-- [x] 根目录 `README.md` 和 `Docs/现状.md` 里的编辑器版本改成同一串。
+- [x] 根目录 `README.md` 和 `Docs/更新日志.md` 里的编辑器版本改成同一串。
 - [x] 不提交 `Game.unity`。为在 6.5 编译通过而改的包版本和脚本 API 一并提交。未点名的 ProjectSettings 写回不提交。
 
 **阶段门槛：** 版本文件与文档一致，diff 里没有场景和玩法脚本。
