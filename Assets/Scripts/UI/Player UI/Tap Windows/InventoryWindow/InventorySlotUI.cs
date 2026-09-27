@@ -66,6 +66,7 @@ namespace CatchMoon
             PlayerInventoryManager pInventory = player.pInventory;
             EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
             EquipmentSlotType selectedSlotType = player.ui.tapWin.GetEquipmentWin().selectedSlotType;
+            bool placed = true;
             // 移除当前装备的物品
             if (selectedSlotType == EquipmentSlotType.weapon_RH_Slot_1)
             {
@@ -91,6 +92,14 @@ namespace CatchMoon
                 pInventory.weaponsInLeftHandSlot[1] = weapon;
                 equipmentWin.GetLeftHandSlot_2().AddItem(pInventory.weaponsInLeftHandSlot[1]);
             }
+            else
+            {
+                placed = false;
+            }
+
+            if (!placed)
+                return;
+
             pInventory.RemoveItem(weapon);
 
             // 加载模型
