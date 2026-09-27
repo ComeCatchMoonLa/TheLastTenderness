@@ -1,0 +1,87 @@
+# ==================================================
+# Unity generated files
+# ==================================================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# Memory captures / recordings
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Crash reports
+sysinfo.txt
+mono_crash.*
+
+
+# ==================================================
+# IDE / Editor
+# ==================================================
+
+.vs/
+.idea/
+
+# Rider user settings
+*.DotSettings.user
+
+# Visual Studio / Rider generated project files
+*.csproj
+*.sln
+*.slnx
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+
+# ==================================================
+# OS
+# ==================================================
+
+.DS_Store
+Thumbs.db
+
+
+# ==================================================
+# Build output
+# ==================================================
+
+*.apk
+*.aab
+*.app
+*.exe
+
+*.unitypackage
+
+
+# ==================================================
+# Temporary files
+# ==================================================
+
+*.tmp
+*.temp
+*.log
+*.swp
+
+
+# ==================================================
+# Unity Collaborate 忽略列表里、上面没有的条目
+# ==================================================
+
+**/Assets/AssetStoreTools
+**/assets/assetstoretools
+/Assets/Plugins/PlasticSCM*
+/assets/plugins/PlasticSCM*
+
+
+# ==================================================
+# Local / 不默认入库
+# ==================================================
+
+.cursor/agents/interviewer.md
+.cursor/agents/interviewee.md

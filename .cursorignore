@@ -1,0 +1,16 @@
+# Agent 硬拦截：只挡读了也没用的二进制。
+# 不要忽略同目录的 .meta（查 GUID 需要它们）。
+# 不要忽略 *.cs、Docs、ProjectSettings。
+# Library 等生成目录已由 .gitignore 覆盖，Cursor 会跟过去。
+
+Assets/**/*.png
+Assets/**/*.tga
+Assets/**/*.psd
+Assets/**/*.wav
+Assets/**/*.mp3
+Assets/**/*.ogg
+Assets/**/*.fbx
+Assets/**/*.FBX
+Assets/**/*.hdr
+Assets/**/*.exr
+Assets/**/*.unitypackage
