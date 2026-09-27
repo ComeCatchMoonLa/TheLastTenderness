@@ -41,10 +41,7 @@ namespace CatchMoon
         public void UpdateCurrentWeaponIcon(bool isLeft, WeaponItem weapon)
         {
             if (weapon.itemIcon == null)
-            {
-                Debug.LogError("weapon.itemIcon == null");
                 return;
-            }
 
             if (isLeft)
             {
@@ -62,10 +59,7 @@ namespace CatchMoon
         {
             if (spell == null) return;
             if (spell.itemIcon == null)
-            {
-                Debug.LogError("spell.itemIcon == null");
                 return;
-            }
 
             currentSpellIcon.sprite = spell.itemIcon;
             currentSpellIcon.enabled = true;
@@ -75,10 +69,7 @@ namespace CatchMoon
         {
             if (consumable == null) return;
             if (consumable.itemIcon == null)
-            {
-                Debug.LogError("consumable.itemIcon == null");
                 return;
-            }
 
             currentConsumableIcon.sprite = consumable.itemIcon;
             currentConsumableIcon.enabled = true;
