@@ -85,3 +85,22 @@ Thumbs.db
 
 .cursor/agents/interviewer.md
 .cursor/agents/interviewee.md
+
+
+# ==================================================
+# 商店能再下的资源，缺了再导入，不进 git
+# 这些目录旁边的 .meta 不在目录内部，仍然可以入库
+# ==================================================
+
+Assets/Art/0 Resources/Models/
+Assets/Art/0 Resources/TextMesh Pro/
+Assets/Ida Faber/
+Assets/Art/Sounds/
+Assets/Art/Animations/Humanoid/
+Assets/Art/Animations/Prop/
+Assets/Art/Fonts/
+Assets/Art/Images/
+Assets/Perfabs/0 Resource/
+Assets/Perfabs/1 Old/
+Assets/Scenes/Game/Lightmap-*
+Assets/Scenes/Game/ReflectionProbe-*

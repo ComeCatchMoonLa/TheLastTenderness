@@ -14,3 +14,9 @@ Assets/**/*.FBX
 Assets/**/*.hdr
 Assets/**/*.exr
 Assets/**/*.unitypackage
+
+# 动画片段和超大地图预制体不进 Agent 上下文。
+# Map Test 1.prefab 仍由 git 跟踪，只是不让 Agent 整份读取。
+Assets/Art/Animations/Humanoid/
+Assets/Art/Animations/Prop/
+Assets/Perfabs/Map Test 1.prefab
