@@ -1,26 +1,31 @@
-# 0.2 TODO：唯一运行入口
+# 0.2 TODO：编辑器改为 Unity 6.5
 
-> **一节做完再做下一节。** 需求以 [`游戏设计.md`](游戏设计.md) 为准，改哪些文件以 [`技术设计.md`](技术设计.md) 为准。
+> **先等人用 `6000.5.9f1` 打开。** 需求以 [`游戏设计.md`](游戏设计.md) 为准，改法以 [`技术设计.md`](技术设计.md) 为准。
 
 ## 0. 开始前
 
-- [ ] 0.1 已完成，或至少 Unity 版本控制已经卸掉、工作区干净。
-- [ ] 读过技术设计：只追加场景，保留 Input System 的 `m_configObjects`。
+- [x] 0.1 已完成。
+- [ ] 工作区里打开编辑器产生的设置改动，还没有被当成 0.1 提交。
 
-**阶段门槛：** 知道本版不改场景物体。
+**阶段门槛：** 知道本版先不改 `ProjectVersion.txt`。
 
-## 1. Build Settings 只登记 Game
+## 1. 人打开
 
-- [ ] `EditorBuildSettings.asset` 的场景列表只追加 `Assets/Scenes/Game.unity`。
-- [ ] `m_configObjects` 里的 Input System 配置还在。
-- [ ] 不改 `Game.unity`。
+- [ ] 用 Hub 的 `6000.5.9f1` 打开本仓库。
+- [ ] 记下打得开，或把打不开的报错写在本版目录。
 
-**阶段门槛：** Build Settings 里只有 `Game`。
+**阶段门槛：** 有一次明确的打开结果。打不开则停在这里。
 
-## 2. 写明入口并验收
+## 2. 对齐版本文件
 
-- [ ] 更新 `Docs/现状.md` 和根目录 `README.md`。
-- [ ] Play：激活的玩家是 Player SPP，开着的近战敌人来自 `Humanoid A.I - Melee`，移动和攻击与本版开始前一致。
+- [ ] 打得开之后，`ProjectSettings/ProjectVersion.txt` 的 `m_EditorVersion` 为 `6000.5.9f1`。Unity 没写回的话再改，修订号用本机编辑器的。
+- [ ] 根目录 `README.md` 和 `Docs/现状.md` 里的编辑器版本改成同一串。
+- [ ] 不改 `Game.unity` 和 `Assets/Scripts/`。未点名的 ProjectSettings 写回不提交。
+
+**阶段门槛：** 版本文件与文档一致，diff 里没有场景和玩法脚本。
+
+## 3. 收尾
+
 - [ ] 大纲里的 0.2 标成已完成。提交说明用中文。
 
-**阶段门槛：** 游戏设计第 3 节全部满足。
+**阶段门槛：** 游戏设计第 2 节全部满足。
