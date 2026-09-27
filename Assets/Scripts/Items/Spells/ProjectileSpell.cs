@@ -90,7 +90,23 @@ namespace CatchMoon
             SpellDamageCollider spellDC = instantiatedSpellFx.GetComponent<SpellDamageCollider>();
 
             spellDC.teamID = player.pStats.teamID;
-            spellDC.fd = baseDamage;
+            spellDC.pd = 0;
+            spellDC.fd = 0;
+            spellDC.md = 0;
+            spellDC.ld = 0;
+            spellDC.dd = 0;
+            switch (spellType)
+            {
+                case SpellType.pyromancy:
+                    spellDC.fd = baseDamage;
+                    break;
+                case SpellType.sorvery:
+                    spellDC.md = baseDamage;
+                    break;
+                case SpellType.miracle:
+                    spellDC.ld = baseDamage;
+                    break;
+            }
 
             if (player.pCamera.curLockOnTarget != null)
             {

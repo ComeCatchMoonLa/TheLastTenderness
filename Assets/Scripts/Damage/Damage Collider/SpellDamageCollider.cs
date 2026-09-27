@@ -37,7 +37,7 @@ namespace CatchMoon
                     spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
 
                     if (spellTarget != null && spellTarget.teamID != teamID)
-                        spellTarget.TakeDamage(damageAnimation: "Damage_ForwardRight_01", fd: fd);
+                        spellTarget.TakeDamage(damageAnimation: "Damage_ForwardRight_01", pd: pd, fd: fd, md: md, ld: ld, dd: dd);
 
                 }
                 impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
