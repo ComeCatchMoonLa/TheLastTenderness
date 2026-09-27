@@ -29,9 +29,9 @@ namespace CatchMoon
             player.ui.hud.manaBar.SetCurrentMP(currentMP);
         }
 
-        public override bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f)
+        public override bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f, bool playHurtSound = true)
         {
-            if (base.TakeDamage(damageAnimation, pd, fd, md, ld, dd))
+            if (base.TakeDamage(damageAnimation, pd, fd, md, ld, dd, playHurtSound))
             {
                 player.ui.hud.healthBar.SetCurrentHP(currentHP);
 

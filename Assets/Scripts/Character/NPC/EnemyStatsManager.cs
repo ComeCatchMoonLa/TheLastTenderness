@@ -51,9 +51,9 @@ namespace CatchMoon
             }
         }
 
-        public override bool TakeDamage(string damageAnimation, float physicalDamage = 0f, float fireDamage = 0f, float magicDamage = 0f, float lightningDamage = 0f, float darkDamage = 0f)
+        public override bool TakeDamage(string damageAnimation, float physicalDamage = 0f, float fireDamage = 0f, float magicDamage = 0f, float lightningDamage = 0f, float darkDamage = 0f, bool playHurtSound = true)
         {
-            if (base.TakeDamage(damageAnimation, physicalDamage, fireDamage, magicDamage, lightningDamage, darkDamage))
+            if (base.TakeDamage(damageAnimation, physicalDamage, fireDamage, magicDamage, lightningDamage, darkDamage, playHurtSound))
             {
                 if (!enemy.aiSettings.isBoss)
                 {

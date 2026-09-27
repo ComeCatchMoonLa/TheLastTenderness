@@ -122,7 +122,7 @@ namespace CatchMoon
         /// </summary>
         /// <param name="pd">物理伤害</param>
         /// <param name="damageAnimation">受伤动画</param>
-        public virtual bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f)
+        public virtual bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f, bool playHurtSound = true)
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
@@ -139,7 +139,8 @@ namespace CatchMoon
             //Debug.Log($"最终伤害: {finalDamage:N0}.");
             currentHP -= finalDamage;
 
-            character.cSoundFX.PlayRandomDamageSoundsFX();
+            if (playHurtSound)
+                character.cSoundFX.PlayRandomDamageSoundsFX();
 
             if (damageAnimation != null)
                 character.cAnimator.PlayTargetAnimation(damageAnimation, true);

@@ -156,7 +156,7 @@ namespace CatchMoon
                 md *= (1 - character.cStats.blockingMDA);
                 ld *= (1 - character.cStats.blockingLDA);
                 dd *= (1 - character.cStats.blockingDDA);
-                character.cStats.TakeDamage(null, pd, fd, md, ld, dd);
+                character.cStats.TakeDamage(null, pd, fd, md, ld, dd, playHurtSound: character.cStats.currentStamina <= 0);
                 return;
             }
 
