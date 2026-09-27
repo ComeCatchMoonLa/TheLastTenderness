@@ -19,6 +19,7 @@ namespace CatchMoon
 
         Dictionary<ConsumableItem, int> consumableLeft;
         Dictionary<AmmoItem, int> ammoLeft;
+        public ConsumableItem consumableBeingUsed;
 
         protected override void Awake()
         {

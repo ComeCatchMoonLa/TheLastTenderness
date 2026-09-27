@@ -13,8 +13,10 @@ public class HandleUseComsumableState : StateMachineBehaviour
         character.cCombat.isUsingConsumable = true;
     }
 
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        character.cCombat.isUsingConsumable = false;
-    }
+        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        {
+            character.cCombat.isUsingConsumable = false;
+            if (character is PlayerManager player)
+                player.pInventory.consumableBeingUsed = null;
+        }
 }

@@ -109,7 +109,11 @@ namespace CatchMoon
         }
         void SuccessfullyCastConsumable()
         {
-            player.pInventory.currentConsumable.SucessfullyUsedConsumable(player);
+            ConsumableItem used = player.pInventory.consumableBeingUsed != null
+                ? player.pInventory.consumableBeingUsed
+                : player.pInventory.currentConsumable;
+            player.pInventory.consumableBeingUsed = null;
+            used.SucessfullyUsedConsumable(player);
         }
     }
 }

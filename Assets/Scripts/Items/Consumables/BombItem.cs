@@ -23,6 +23,7 @@ namespace CatchMoon
             
             if (player.pInventory.TrySpendConsumable(this))
             {
+                player.pInventory.consumableBeingUsed = this;
 
                 if (player.pCamera.lockOnFlag)
                 {
@@ -45,8 +46,7 @@ namespace CatchMoon
         {
             Destroy(player.pEffects.instantialtedFXModel.gameObject);
             player.pEffects.instantialtedFXModel = null;
-            BombItem fireBombItem = player.pInventory.currentConsumable as BombItem;
-            GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, player.pWeaponSlot.rightHandSlot.transform.position, player.pCamera.cameraPivotTransform.rotation);
+            GameObject activeModelBomb = Instantiate(liveBombModel, player.pWeaponSlot.rightHandSlot.transform.position, player.pCamera.cameraPivotTransform.rotation);
             if (player.pCamera.curLockOnTarget != null)
                 activeModelBomb.transform.LookAt(player.pCamera.curLockOnTarget.transform);
             else
@@ -55,10 +55,10 @@ namespace CatchMoon
             BombDamageCollider bombDC = activeModelBomb.GetComponentInChildren<BombDamageCollider>();
 
             bombDC.teamID = player.pStats.teamID;
-            bombDC.explosionDamage = fireBombItem.baseDamage;
-            bombDC.explosionSplashDamage = fireBombItem.explosiveDamage;
-            bombDC.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
-            bombDC.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
+            bombDC.explosionDamage = baseDamage;
+            bombDC.explosionSplashDamage = explosiveDamage;
+            bombDC.bombRigidBody.AddForce(activeModelBomb.transform.forward * forwardVelocity);
+            bombDC.bombRigidBody.AddForce(activeModelBomb.transform.up * upwardVelocity);
 
             player.pWeaponSlot.LoadWeaponOnSlot(player.pInventory.rightWeapon, false);
         }
