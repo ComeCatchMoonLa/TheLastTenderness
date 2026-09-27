@@ -25,6 +25,6 @@
 - [x] 打开同一个 `.unitypackage`。只勾 `Assets/Art`。不勾 `Assets/Scripts`，不勾 `Assets/Scenes`，不点 Import All。
 - [x] 改掉导入后挡住编译的三处：`MuscleInspectorEditor` 的 `TreeView<int>`，`PostProcessingFactory` 的 `AssetCreationEndAction`，`MotionBlurComponent` 去掉 `OpenGLES2`。
 - [x] `Construct/Fire/Cylinder` 的缺失材质不另导入。人在 Inspector 指定一份已有材质。
-- [x] 大纲里写明这一节已交付。血条、体力条、快捷栏空图标仍留在 0.7。WebGL 的 `node.exe` 仍不进 0.x。
+- [x] 大纲里写明这一节已交付。血条、体力条、快捷栏空图标仍留在 0.8。WebGL 的 `node.exe` 仍不进 0.x。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

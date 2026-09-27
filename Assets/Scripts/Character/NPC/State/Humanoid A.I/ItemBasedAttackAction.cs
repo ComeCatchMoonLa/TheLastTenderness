@@ -5,13 +5,13 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "A.I/Actions/Humanoid A.I Actions/Item Based Attack Action")]
     public class ItemBasedAttackAction : ScriptableObject
     {
-        [Header("¹¥»÷ÀàÐÍ")]
+        [Header("æ”»å‡»ç±»åž‹")]
         public bool isLightAttack;
 
-        [Header("¹¥»÷ÐÐÎªÉèÖÃ")]
+        [Header("æ”»å‡»è¡Œä¸ºè®¾ç½®")]
         public bool isRightHandAction = true;
 
-        [Header("¹¥»÷ÐÐÎªÉèÖÃ - Values")]
+        [Header("æ”»å‡»è¡Œä¸ºè®¾ç½® - Values")]
         public int attackScore = 3;
         public float recoveryTime = 2f;
         public float maxAttackAngle = 35f;

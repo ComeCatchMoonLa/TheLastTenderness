@@ -1,7 +1,7 @@
 namespace CatchMoon
 {
     /// <summary>
-    /// À¶Á¿
+    /// è“é‡
     /// </summary>
     public class FocusPointsBar : BaseBar
     {

@@ -4,7 +4,7 @@ namespace CatchMoon
 {
     public class DestoryAuto : MonoBehaviour
     {
-        public float timeUntilDestoryed = 1f; // Ïú»ÙÇ°µÈ´ıµÄÊ±¼ä
+        public float timeUntilDestoryed = 1f; // é”€æ¯å‰ç­‰å¾…çš„æ—¶é—´
 
         private void Start()
         {

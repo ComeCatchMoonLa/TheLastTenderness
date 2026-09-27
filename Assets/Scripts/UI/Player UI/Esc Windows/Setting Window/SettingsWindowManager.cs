@@ -6,19 +6,19 @@ namespace CatchMoon
 {
     public class SettingsWindowManager : MonoBehaviour
     {
-        [Header("ÓÎÏ·ÉèÖÃÊı¾İ")]
+        [Header("æ¸¸æˆè®¾ç½®æ•°æ®")]
         public GameSettingsData gameSettingsData;
 
-        [Header("×Ó´°¿Ú")]
+        [Header("å­çª—å£")]
         [SerializeField] GameObject gameSettingsWin;
         [SerializeField] GameObject displayWin;
         [SerializeField] GameObject soundWin;
         [SerializeField] GameObject controlWin;
 
-        [Header("±»Ñ¡ÔñµÄ´°¿Ú")]
+        [Header("è¢«é€‰æ‹©çš„çª—å£")]
         [SerializeField] SettingsWinType selectedWin;
 
-        [Header("ÓÎÏ·ÉèÖÃ")]
+        [Header("æ¸¸æˆè®¾ç½®")]
         [SerializeField] Toggle auto_Toggle;
         [SerializeField] Toggle wordForWord_Toggle;
         [SerializeField] Toggle skip_Toggle;
@@ -27,14 +27,14 @@ namespace CatchMoon
         [SerializeField] TMP_InputField cameraUpAndDownSpeed;
         [SerializeField] TMP_InputField cameraLeftAndRightSpeed;
 
-        [Header("ÏÔÊ¾ÉèÖÃ")]
+        [Header("æ˜¾ç¤ºè®¾ç½®")]
         [SerializeField] TextMeshProUGUI vsync_Option_Text;
         [SerializeField] TextMeshProUGUI frameRateLimit_Option_text;
         [SerializeField] TextMeshProUGUI displayQuality_Option_text;
         [SerializeField] TextMeshProUGUI postTreatmentQuality_text;
         [SerializeField] TextMeshProUGUI specialEffectQuality_text;
 
-        [Header("Ñ¡ÏîµÄÎÄ±¾(¸ÃÑ¡Ïî±»Ñ¡ÖĞºó¼Ó´Ö)")]
+        [Header("é€‰é¡¹çš„æ–‡æœ¬(è¯¥é€‰é¡¹è¢«é€‰ä¸­ååŠ ç²—)")]
         [SerializeField] TextMeshProUGUI selectButton_GameSetting_Text;
         [SerializeField] TextMeshProUGUI selectButton_Display_Text;
         [SerializeField] TextMeshProUGUI selectButton_Sound_Text;
@@ -42,7 +42,7 @@ namespace CatchMoon
 
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (gameSettingsData == null)
                 Debug.LogError("gameSettingsData == null");
 
@@ -59,7 +59,7 @@ namespace CatchMoon
             #endregion
         }
 
-        // ¿ØÖÆ×Ó´°¿ÚÖ®¼äµÄÇĞ»»
+        // æ§åˆ¶å­çª—å£ä¹‹é—´çš„åˆ‡æ¢
         public void SelectGameSettingsWin()
         {
             UnselectCurrentWin();
@@ -148,10 +148,10 @@ namespace CatchMoon
             }
         }
 
-        // Ó¦ÓÃÓÎÏ·ÉèÖÃ
+        // åº”ç”¨æ¸¸æˆè®¾ç½®
         public void ApplyGameSettings(PlayerManager player)
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (gameSettingsData == null)
                 Debug.LogError("gameSettingsData == null");
 
@@ -167,12 +167,12 @@ namespace CatchMoon
                 Debug.LogError("specialEffectQuality_text == null");
             #endregion
 
-            // ¡¾ÓÎÏ·¡¿×Ó´°¿ÚÉèÖÃ
+            // ã€æ¸¸æˆã€‘å­çª—å£è®¾ç½®
             ApplyDialogueBoxSetting();
             ApplyFpsSetting();
             ApplyAutoChangeLockOnTargetSetting();
             ApplyCameraSpeedSetting(player);
-            // ¡¾»­Ãæ¡¿×Ó´°¿ÚÉèÖÃ
+            // ã€ç”»é¢ã€‘å­çª—å£è®¾ç½®
             VSYNC_ApplyCurrentOption();
             FrameRateLimit_ApplyCurrentOption();
             DisplayQuality_ApplyCurrentOption(); 
@@ -180,8 +180,8 @@ namespace CatchMoon
             SpecialEffectQuality_ApplyCurrentOption();
         }
 
-        #region ¡¾ÓÎÏ·¡¿×Ó´°¿ÚÉèÖÃ
-        // µ×²¿ÎÄ×Ö¿òÉèÖÃ
+        #region ã€æ¸¸æˆã€‘å­çª—å£è®¾ç½®
+        // åº•éƒ¨æ–‡å­—æ¡†è®¾ç½®
         public void SaveAutoSetting()
         {
             gameSettingsData.auto = auto_Toggle.isOn;
@@ -200,7 +200,7 @@ namespace CatchMoon
             wordForWord_Toggle.isOn = gameSettingsData.wordForWord;
             skip_Toggle.isOn = gameSettingsData.skip;
         }
-        // FPSÉèÖÃ
+        // FPSè®¾ç½®
         public void SaveFpsSetting()
         {
             gameSettingsData.enableFps = fps_Toggle.isOn;
@@ -209,7 +209,7 @@ namespace CatchMoon
         {
             fps_Toggle.isOn = gameSettingsData.enableFps;
         }
-        // Ïà»úËÙ¶ÈÉèÖÃ
+        // ç›¸æœºé€Ÿåº¦è®¾ç½®
         public void SaveCameraLeftAndRightSpeedSetting()
         {
             gameSettingsData.cameraLeftAndRightSpeed = float.Parse(cameraLeftAndRightSpeed.text);
@@ -225,7 +225,7 @@ namespace CatchMoon
             cameraLeftAndRightSpeed.placeholder.GetComponent<TextMeshProUGUI>().text = gameSettingsData.cameraLeftAndRightSpeed.ToString();
             cameraUpAndDownSpeed.placeholder.GetComponent<TextMeshProUGUI>().text = gameSettingsData.cameraUpAndDownSpeed.ToString();
         }
-        // Ïà»ú×Ô¶¯ÇĞ»»Ëø¶¨Ä¿±êÉèÖÃ
+        // ç›¸æœºè‡ªåŠ¨åˆ‡æ¢é”å®šç›®æ ‡è®¾ç½®
         public void SaveAutoChangeLockOnTargetSetting()
         {
             gameSettingsData.autoChangeLockOnTarget = autoChangeLockOnTarget_Toggle.isOn;
@@ -236,8 +236,8 @@ namespace CatchMoon
         }
         #endregion
 
-        #region ¡¾»­Ãæ¡¿×Ó´°¿ÚÉèÖÃ
-        // ´¹Ö±Í¬²½
+        #region ã€ç”»é¢ã€‘å­çª—å£è®¾ç½®
+        // å‚ç›´åŒæ­¥
         public void VSYNC_SwitchOption()
         {
             switch (gameSettingsData.vsync_Options)
@@ -245,13 +245,13 @@ namespace CatchMoon
                 case VSYNC_Options.enable:
                     {
                         gameSettingsData.vsync_Options = VSYNC_Options.disable;
-                        vsync_Option_Text.text = "½ûÓÃ";
+                        vsync_Option_Text.text = "ç¦ç”¨";
                     }
                     break;
                 case VSYNC_Options.disable:
                     {
                         gameSettingsData.vsync_Options = VSYNC_Options.enable;
-                        vsync_Option_Text.text = "ÆôÓÃ";
+                        vsync_Option_Text.text = "å¯ç”¨";
                     }
                     break;
             }
@@ -262,18 +262,18 @@ namespace CatchMoon
             {
                 case VSYNC_Options.enable:
                     {
-                        vsync_Option_Text.text = "ÆôÓÃ";
+                        vsync_Option_Text.text = "å¯ç”¨";
                     }
                     break;
                 case VSYNC_Options.disable:
                     {
-                        vsync_Option_Text.text = "½ûÓÃ";
+                        vsync_Option_Text.text = "ç¦ç”¨";
                     }
                     break;
             }
         }
 
-        // Ö¡ÂÊÏŞÖÆ
+        // å¸§ç‡é™åˆ¶
         public void FrameRateLimit_SetNextOption()
         {
             switch (gameSettingsData.frameRateLimit_Options)
@@ -295,7 +295,7 @@ namespace CatchMoon
                 case FrameRateLimit_Options.max120:
                     {
                         gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.unlimited;
-                        frameRateLimit_Option_text.text = "ÎŞÏŞÖÆ";
+                        frameRateLimit_Option_text.text = "æ— é™åˆ¶";
                         Application.targetFrameRate = -1;
                     }
                     break;
@@ -315,7 +315,7 @@ namespace CatchMoon
                 case FrameRateLimit_Options.max60:
                     {
                         gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.unlimited;
-                        frameRateLimit_Option_text.text = "ÎŞÏŞÖÆ";
+                        frameRateLimit_Option_text.text = "æ— é™åˆ¶";
                         Application.targetFrameRate = -1;
                     }
                     break;
@@ -367,14 +367,14 @@ namespace CatchMoon
                     break;
                 case FrameRateLimit_Options.unlimited:
                     {
-                        frameRateLimit_Option_text.text = "ÎŞÏŞÖÆ";
+                        frameRateLimit_Option_text.text = "æ— é™åˆ¶";
                         Application.targetFrameRate = -1;
                     }
                     break;
             }
         }
 
-        // »­ÖÊ
+        // ç”»è´¨
         public void DisplayQuality_SetNextOption()
         {
             switch (gameSettingsData.displayQuality_Options)
@@ -382,42 +382,42 @@ namespace CatchMoon
                 case DisplayQuality_Options.veryLow:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.low;
-                        displayQuality_Option_text.text = "µÍ";
+                        displayQuality_Option_text.text = "ä½";
                         QualitySettings.SetQualityLevel(1);
                     }
                     break;
                 case DisplayQuality_Options.low:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.medium;
-                        displayQuality_Option_text.text = "ÖĞ";
+                        displayQuality_Option_text.text = "ä¸­";
                         QualitySettings.SetQualityLevel(2);
                     }
                     break;
                 case DisplayQuality_Options.medium:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.high;
-                        displayQuality_Option_text.text = "¸ß";
+                        displayQuality_Option_text.text = "é«˜";
                         QualitySettings.SetQualityLevel(3);
                     }
                     break;
                 case DisplayQuality_Options.high:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryHigh;
-                        displayQuality_Option_text.text = "·Ç³£¸ß";
+                        displayQuality_Option_text.text = "éå¸¸é«˜";
                         QualitySettings.SetQualityLevel(4);
                     }
                     break;
                 case DisplayQuality_Options.veryHigh:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.Ultra;
-                        displayQuality_Option_text.text = "×î¸ß";
+                        displayQuality_Option_text.text = "æœ€é«˜";
                         QualitySettings.SetQualityLevel(5);
                     }
                     break;
                 case DisplayQuality_Options.Ultra:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryLow;
-                        displayQuality_Option_text.text = "·Ç³£µÍ";
+                        displayQuality_Option_text.text = "éå¸¸ä½";
                         QualitySettings.SetQualityLevel(0);
                     }
                     break;
@@ -430,42 +430,42 @@ namespace CatchMoon
                 case DisplayQuality_Options.veryLow:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.Ultra;
-                        displayQuality_Option_text.text = "×î¸ß"; 
+                        displayQuality_Option_text.text = "æœ€é«˜"; 
                         QualitySettings.SetQualityLevel(5);
                     }
                     break;
                 case DisplayQuality_Options.low:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryLow;
-                        displayQuality_Option_text.text = "·Ç³£µÍ";
+                        displayQuality_Option_text.text = "éå¸¸ä½";
                         QualitySettings.SetQualityLevel(0);
                     }
                     break;
                 case DisplayQuality_Options.medium:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.low;
-                        displayQuality_Option_text.text = "µÍ";
+                        displayQuality_Option_text.text = "ä½";
                         QualitySettings.SetQualityLevel(1);
                     }
                     break;
                 case DisplayQuality_Options.high:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.medium;
-                        displayQuality_Option_text.text = "ÖĞµÈ";
+                        displayQuality_Option_text.text = "ä¸­ç­‰";
                         QualitySettings.SetQualityLevel(2);
                     }
                     break;
                 case DisplayQuality_Options.veryHigh:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.high;
-                        displayQuality_Option_text.text = "¸ß"; 
+                        displayQuality_Option_text.text = "é«˜"; 
                         QualitySettings.SetQualityLevel(3);
                     }
                     break;
                 case DisplayQuality_Options.Ultra:
                     {
                         gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryHigh;
-                        displayQuality_Option_text.text = "·Ç³£¸ß"; 
+                        displayQuality_Option_text.text = "éå¸¸é«˜"; 
                         QualitySettings.SetQualityLevel(4);
                     }
                     break;
@@ -477,44 +477,44 @@ namespace CatchMoon
             {
                 case DisplayQuality_Options.veryLow:
                     {
-                        displayQuality_Option_text.text = "·Ç³£µÍ";
+                        displayQuality_Option_text.text = "éå¸¸ä½";
                         QualitySettings.SetQualityLevel(0);
                     }
                     break;
                 case DisplayQuality_Options.low:
                     {
-                        displayQuality_Option_text.text = "µÍ";
+                        displayQuality_Option_text.text = "ä½";
                         QualitySettings.SetQualityLevel(1);
                     }
                     break;
                 case DisplayQuality_Options.medium:
                     {
-                        displayQuality_Option_text.text = "ÖĞµÈ";
+                        displayQuality_Option_text.text = "ä¸­ç­‰";
                         QualitySettings.SetQualityLevel(2);
                     }
                     break;
                 case DisplayQuality_Options.high:
                     {
-                        displayQuality_Option_text.text = "¸ß";
+                        displayQuality_Option_text.text = "é«˜";
                         QualitySettings.SetQualityLevel(3);
                     }
                     break;
                 case DisplayQuality_Options.veryHigh:
                     {
-                        displayQuality_Option_text.text = "·Ç³£¸ß";
+                        displayQuality_Option_text.text = "éå¸¸é«˜";
                         QualitySettings.SetQualityLevel(4);
                     }
                     break;
                 case DisplayQuality_Options.Ultra:
                     {
-                        displayQuality_Option_text.text = "×î¸ß";
+                        displayQuality_Option_text.text = "æœ€é«˜";
                         QualitySettings.SetQualityLevel(5);
                     }
                     break;
             }
         }
 
-        // ºó´¦ÀíÆ·ÖÊ
+        // åå¤„ç†å“è´¨
         public void PostTreatmentQuality_SwitchOption()
         {
             switch (gameSettingsData.postTreatmentQuality_Options)
@@ -522,13 +522,13 @@ namespace CatchMoon
                 case PostTreatmentQuality_Options.low:
                     {
                         gameSettingsData.postTreatmentQuality_Options = PostTreatmentQuality_Options.high;
-                        postTreatmentQuality_text.text = "¸ß";
+                        postTreatmentQuality_text.text = "é«˜";
                     }
                     break;
                 case PostTreatmentQuality_Options.high:
                     {
                         gameSettingsData.postTreatmentQuality_Options = PostTreatmentQuality_Options.low;
-                        postTreatmentQuality_text.text = "µÍ";
+                        postTreatmentQuality_text.text = "ä½";
                     }
                     break;
             }
@@ -539,18 +539,18 @@ namespace CatchMoon
             {
                 case PostTreatmentQuality_Options.low:
                     {
-                        postTreatmentQuality_text.text = "µÍ";
+                        postTreatmentQuality_text.text = "ä½";
                     }
                     break;
                 case PostTreatmentQuality_Options.high:
                     {
-                        postTreatmentQuality_text.text = "¸ß";
+                        postTreatmentQuality_text.text = "é«˜";
                     }
                     break;
             }
         }
 
-        // ÌØĞ§ÖÊÁ¿
+        // ç‰¹æ•ˆè´¨é‡
         public void SpecialEffectQuality_SwitchOption()
         {
             switch (gameSettingsData.specialEffectQuality_Options)
@@ -558,13 +558,13 @@ namespace CatchMoon
                 case SpecialEffectQuality_Options.low:
                     {
                         gameSettingsData.specialEffectQuality_Options = SpecialEffectQuality_Options.high;
-                        specialEffectQuality_text.text = "¸ß";
+                        specialEffectQuality_text.text = "é«˜";
                     }
                     break;
                 case SpecialEffectQuality_Options.high:
                     {
                         gameSettingsData.specialEffectQuality_Options = SpecialEffectQuality_Options.low;
-                        specialEffectQuality_text.text = "µÍ";
+                        specialEffectQuality_text.text = "ä½";
                     }
                     break;
             }
@@ -575,18 +575,18 @@ namespace CatchMoon
             {
                 case SpecialEffectQuality_Options.low:
                     {
-                        specialEffectQuality_text.text = "µÍ";
+                        specialEffectQuality_text.text = "ä½";
                     }
                     break;
                 case SpecialEffectQuality_Options.high:
                     {
-                        specialEffectQuality_text.text = "¸ß";
+                        specialEffectQuality_text.text = "é«˜";
                     }
                     break;
             }
         }
         
-        /// [Î´Íê³É] ÁÁ¶Èµ÷½Ú(×¼È·À´ËµÊÇÙ¤ÂíÖµ)
+        /// [æœªå®Œæˆ] äº®åº¦è°ƒèŠ‚(å‡†ç¡®æ¥è¯´æ˜¯ä¼½é©¬å€¼)
         #endregion
     }
 }

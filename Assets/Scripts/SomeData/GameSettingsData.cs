@@ -5,7 +5,7 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "Data/GameSettings")]
     public class GameSettingsData : ScriptableObject
     {
-        [Header("ÓÎÏ·ÉèÖÃ")]
+        [Header("æ¸¸æˆè®¾ç½®")]
         public bool auto;
         public bool wordForWord;
         public bool skip;
@@ -14,7 +14,7 @@ namespace CatchMoon
         public float cameraUpAndDownSpeed;
         public float cameraLeftAndRightSpeed;
 
-        [Header("ÏÔÊ¾ÉèÖÃ")]
+        [Header("æ˜¾ç¤ºè®¾ç½®")]
         public VSYNC_Options vsync_Options;
         public FrameRateLimit_Options frameRateLimit_Options;
         public DisplayQuality_Options displayQuality_Options;
@@ -27,7 +27,7 @@ namespace CatchMoon
 
         }
 
-        #region Ä¬ÈÏÉèÖÃ
+        #region é»˜è®¤è®¾ç½®
         const bool default_Auto = false;
         const bool default_WordForWord = true;
         const bool default_Skip = false;

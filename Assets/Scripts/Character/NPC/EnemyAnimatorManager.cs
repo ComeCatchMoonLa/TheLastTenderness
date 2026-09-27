@@ -14,11 +14,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ���Ŷ���ʱִ�еĲ���
+        /// 播放动画时执行的操作
         /// </summary>
         private void OnAnimatorMove()
         {
-            // ���ø�����ٶ�Ϊ������ˮƽ���ϵ��ٶ�
+            // 设置刚体的速度为动画在水平面上的速度
             enemy.rigidBody.linearDamping = 0;
             Vector3 deltaPosition = enemy.animator.deltaPosition;
             deltaPosition.y = 0;
@@ -27,7 +27,7 @@ namespace CatchMoon
                 Vector3 velocity = deltaPosition / Time.deltaTime;
                 enemy.rigidBody.linearVelocity = velocity;
             }
-            // �ж��Ƿ���ҪӦ�ö����ĸ��˶�������ת(��ת֮����α���Ȼͨ��isInteracting����)
+            // 判断是否需要应用动画的根运动决定旋转(旋转之外的形变依然通过isInteracting决定)
             if (enemy.isRotatingWithRootMotion)
                 enemy.transform.rotation = enemy.animator.deltaRotation;
         }

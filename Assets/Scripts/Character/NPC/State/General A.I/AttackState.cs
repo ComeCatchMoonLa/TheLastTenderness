@@ -10,7 +10,7 @@ namespace CatchMoon
         public EnemyAttackAction currentAttack;
 
         bool willDoComboOnNextAttack = false;
-        public bool hasPerformedAttack = false; // ¾­ĞĞÁË¹¥»÷
+        public bool hasPerformedAttack = false; // ç»è¡Œäº†æ”»å‡»
 
         private void Awake()
         {
@@ -50,7 +50,7 @@ namespace CatchMoon
             hasPerformedAttack = true;
             enemy.eAnimator.PlayTargetAnimation(currentAttack.actionAnimation, true);
             enemy.eEffects.PlayWeaponTrialFX();
-            enemy.currentRecoveryTime = currentAttack.recoveryTime; // ÖØÖÃ¹¥»÷ÀäÈ´Ê±¼ä
+            enemy.currentRecoveryTime = currentAttack.recoveryTime; // é‡ç½®æ”»å‡»å†·å´æ—¶é—´
         }
 
         private void AttackTargetWithCombo(EnemyManager enemy)
@@ -59,12 +59,12 @@ namespace CatchMoon
             willDoComboOnNextAttack = false;
             enemy.eAnimator.PlayTargetAnimation(currentAttack.actionAnimation, true);
             enemy.eEffects.PlayWeaponTrialFX();
-            enemy.currentRecoveryTime = currentAttack.recoveryTime; // ÖØÖÃ¹¥»÷ÀäÈ´Ê±¼ä
+            enemy.currentRecoveryTime = currentAttack.recoveryTime; // é‡ç½®æ”»å‡»å†·å´æ—¶é—´
             currentAttack = null;
         }
 
         /// <summary>
-        /// [´¦Àí] ¹¥»÷Ê±Ğı×ª(³¯ÏòÄ¿±ê)
+        /// [å¤„ç†] æ”»å‡»æ—¶æ—‹è½¬(æœå‘ç›®æ ‡)
         /// </summary>
         private void RotateTowardsTargrtWhilstAttacking(EnemyManager enemy)
         {
@@ -80,7 +80,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Ëæ»ú¾ö¶¨ÊÇ·ñÁ¬»÷
+        /// éšæœºå†³å®šæ˜¯å¦è¿å‡»
         /// </summary>
         private void RollForComboChance(EnemyManager enemy)
         {

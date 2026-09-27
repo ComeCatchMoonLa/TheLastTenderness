@@ -10,14 +10,14 @@ namespace CatchMoon
         TorsoModelChanger torsoModelChanger;
         HipModelChanger hipModelChanger;
 
-        [Header("默认赤裸模型")]
+        [Header("榛樿璧よ８妯″瀷")]
         [SerializeField] string nakedTorsoModelName;
         [SerializeField] string nakedHipsModelName;
 
-        [Header("当前盔甲")]
-        public HeadArmorItem currentHeadArmor;     // 当前头部铠甲
-        public TorsoArmorItem currentTorsoArmor;   // 当前躯干铠甲
-        public HipsArmorItem currentHipsArmor;     // 当前下身铠甲 
+        [Header("褰撳墠鐩旂敳")]
+        public HeadArmorItem currentHeadArmor;     // 褰撳墠澶撮儴閾犵敳
+        public TorsoArmorItem currentTorsoArmor;   // 褰撳墠韬共閾犵敳
+        public HipsArmorItem currentHipsArmor;     // 褰撳墠涓嬭韩閾犵敳 
 
         private void Awake()
         {
@@ -37,7 +37,7 @@ namespace CatchMoon
 
         public void EquipAllArmorModels()
         {
-            // Head 盔甲
+            // Head 鐩旂敳
             headModelChanger.UnEquipAllModels();
             if (currentHeadArmor != null)
             {
@@ -48,7 +48,7 @@ namespace CatchMoon
             {
                 player.pStats.headArmorPDA = 0;
             }
-            // Torso 盔甲
+            // Torso 鐩旂敳
             torsoModelChanger.UnEquipAllModels();
             if (currentTorsoArmor != null)
             {
@@ -60,7 +60,7 @@ namespace CatchMoon
                 torsoModelChanger.EquipModelByName(nakedTorsoModelName);
                 player.pStats.torsoArmorPDA = 0;
             }
-            // Hip 盔甲
+            // Hip 鐩旂敳
             hipModelChanger.UnEquipAllModels();
             if (currentHipsArmor != null)
             {

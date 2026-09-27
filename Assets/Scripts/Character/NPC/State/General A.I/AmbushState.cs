@@ -3,14 +3,14 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ĞİÃß×´Ì¬
+    /// ä¼‘çœ çŠ¶æ€
     /// </summary>
     public class AmbushState : State
     {
-        public bool isSleeping;             // ³ÁË¯ÖĞ
-        public float detectionRadius = 2;   // ²ì¾õ°ë¾¶
-        public string sleepAnimation;       // ³ÁË¯¶¯»­
-        public string wakeAnimation;        // ËÕĞÑ¶¯»­
+        public bool isSleeping;             // æ²‰ç¡ä¸­
+        public float detectionRadius = 2;   // å¯Ÿè§‰åŠå¾„
+        public string sleepAnimation;       // æ²‰ç¡åŠ¨ç”»
+        public string wakeAnimation;        // è‹é†’åŠ¨ç”»
 
         PursueTargetState pursueTargetState;
 

@@ -5,8 +5,8 @@ namespace CatchMoon
     public class AmmoDamageCollider : DamageCollider
     {
         public AmmoItem ammoItem;
-        bool hasAlreadyPanetratedASurface; // ´òÁËÄ³¸ö±íÃæÉÏ
-        GameObject penetratedModel;        // ´òÔÚÄ³¸ö±íÃæºóµÄÄ£ĞÍ(ÆÆËğÁË)
+        bool hasAlreadyPanetratedASurface; // æ‰“äº†æŸä¸ªè¡¨é¢ä¸Š
+        GameObject penetratedModel;        // æ‰“åœ¨æŸä¸ªè¡¨é¢åçš„æ¨¡å‹(ç ´æŸäº†)
 
         protected override void OnTriggerEnter(Collider collision)
         {
@@ -16,13 +16,13 @@ namespace CatchMoon
             {
                 //if (collision.tag == someTag)
                 //{
-                //    Debug.Log("´¥·¢¶ÔÓ¦ÊÂ¼ş");
+                //    Debug.Log("è§¦å‘å¯¹åº”äº‹ä»¶");
                 //    Destroy(transform.root.gameObject);
                 //}
             }
             else
             {
-                if (collision.tag == "Player" || collision.tag == "Enemy") // ¹¥»÷½ÇÉ«
+                if (collision.tag == "Player" || collision.tag == "Enemy") // æ”»å‡»è§’è‰²
                 {
                     CharacterManager damageTarget = collision.GetComponent<CharacterManager>();
                     if (damageTarget == null)

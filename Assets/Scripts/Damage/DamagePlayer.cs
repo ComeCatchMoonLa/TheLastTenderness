@@ -3,16 +3,16 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ÉËº¦Íæ¼Ò
+    /// ä¼¤å®³ç©å®¶
     /// </summary>
     public class DamagePlayer : MonoBehaviour
     {
         public int damage = 25;
 
         /// <summary>
-        /// ½øÈë´¥·¢Æ÷
+        /// è¿›å…¥è§¦å‘å™¨
         /// </summary>
-        /// <param name="other">´¥·¢Æ÷²¶»ñµÄ¶ÔÏó</param>
+        /// <param name="other">è§¦å‘å™¨æ•è·çš„å¯¹è±¡</param>
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player")

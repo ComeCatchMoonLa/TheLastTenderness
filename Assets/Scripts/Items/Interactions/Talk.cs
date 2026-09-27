@@ -5,31 +5,31 @@ namespace CatchMoon
 {
     public class Talk : Interactable
     {
-        [Header("�Ի�����")]
+        [Header("对话对象")]
         [SerializeField] EnemyManager npc;
 
-        [Header("Player�Ի�ʱվ��λ��")]
+        [Header("Player对话时站的位置")]
         [SerializeField] Transform playerStandingPoint;
 
-        [Header("�Ի�����")]
+        [Header("对话内容")]
         public List<DialogueTextData> talkContent;
 
         public override void Interact(PlayerManager player)
         {
             npc.gameObject.tag = "Untagged";
-            // ����Player��Transform
+            // 设置Player的Transform
             player.rigidBody.linearVelocity = Vector3.zero;
             player.transform.position = playerStandingPoint.position;
             player.transform.LookAt(npc.transform, Vector3.up);
-            // ����Player��UI
+            // 设置Player的UI
             player.ui.hud.Hide();
             player.ui.popUps.talkUI.PopUp();
             player.ui.popUps.talkUI.SetTalkContent(talkContent);
-            // �����������
+            // 禁用玩家输入
             player.input.inputActions.Disable();
             player.input.inputActions.Interacte.Enable();
             player.input.inputActions.Locomotion.CameraRotate.Enable();
-            // �����Ի�(�����ı�������)
+            // 处理对话(更新文本及动画)
             player.storyNpc = npc;
             if (player.ui.escWin.GetSettingWin().gameSettingsData.auto)
             {

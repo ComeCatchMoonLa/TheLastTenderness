@@ -9,7 +9,7 @@ namespace CatchMoon
 
         public void PlayWeaponTrialFX()
         {
-            noramalWeaponTrial.Play(); // 应该在攻击动画结束时, 执行Stop()
+            noramalWeaponTrial.Play(); // 搴旇鍦ㄦ敾鍑诲姩鐢荤粨鏉熸椂, 鎵цStop()
         }
 
         public void StopWeaponTrialFX()

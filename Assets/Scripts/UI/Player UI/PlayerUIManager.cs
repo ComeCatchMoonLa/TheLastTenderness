@@ -12,8 +12,8 @@ namespace CatchMoon
         public TapWindowsManager tapWin;
         public PopUpWindowsManager popUps;
 
-        [Header("´ò¿ªµÄ´°¿ÚÀàĞÍ")]
-        [Tooltip("ÓÃÓÚ¾ö¶¨ESC´°¿ÚÄ£Ê½ÏÂ£¬Back°´Å¥½«Ö´ĞĞÊ²Ã´²Ù×÷")]
+        [Header("æ‰“å¼€çš„çª—å£ç±»å‹")]
+        [Tooltip("ç”¨äºå†³å®šESCçª—å£æ¨¡å¼ä¸‹ï¼ŒBackæŒ‰é’®å°†æ‰§è¡Œä»€ä¹ˆæ“ä½œ")]
         public EscWinOpenedWinType openedWin;
 
         private void Awake()
@@ -22,7 +22,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
 
@@ -36,7 +36,7 @@ namespace CatchMoon
                 Debug.LogError("popUps == null");
             #endregion
             
-            // Ó¦ÓÃÓÎÏ·ÉèÖÃ
+            // åº”ç”¨æ¸¸æˆè®¾ç½®
             escWin.GetSettingWin().ApplyGameSettings(player);
         }
         private void Update()
@@ -47,7 +47,7 @@ namespace CatchMoon
             hud.UpdateCrosshair();
             hud.UpdateFPS();
 
-            // ´¦ÀíÔÚESC´°¿ÚÄ£Ê½Ïà¹ØÊäÈë²Ù×÷
+            // å¤„ç†åœ¨ESCçª—å£æ¨¡å¼ç›¸å…³è¾“å…¥æ“ä½œ
             if (openedWin == EscWinOpenedWinType.notEscWinMode)
             {
                 HandleEscInput();

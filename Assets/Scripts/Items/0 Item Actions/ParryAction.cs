@@ -11,7 +11,7 @@ namespace CatchMoon
 
             if (character.isTwoHandingWeapon)
             {
-                // 播放双手拿武器的动画
+                // 鎾斁鍙屾墜鎷挎鍣ㄧ殑鍔ㄧ敾
             }
             else
             {

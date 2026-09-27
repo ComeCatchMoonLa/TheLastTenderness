@@ -5,40 +5,40 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "A.I/A.I Settings/Simple A.I Settings")]
     public class EnemyAISettings : ScriptableObject
     {
-        [Header("A.I ÀàĞÍ")]
+        [Header("A.I ç±»å‹")]
         public bool isBoss;
 
-        [Header("ËÙ¶ÈÉèÖÃ")]
-        public float rotationSpeed = 25f;           // Ğı×ªËÙ¶È
+        [Header("é€Ÿåº¦è®¾ç½®")]
+        public float rotationSpeed = 25f;           // æ—‹è½¬é€Ÿåº¦
 
-        [Header("ÊÓ½ÇÉèÖÃ")]
-        public float maxViewAngel = 62f;            // ÊÓ½Ç×î´óÖµ(ÓÉÕıÇ°·½ÏòÓÒ)
-        public float minViewAngel = -62f;           // ÊÓ½Ç×îĞ¡Öµ(ÓÉÕıÇ°·½Ïò×ó)     
+        [Header("è§†è§’è®¾ç½®")]
+        public float maxViewAngel = 62f;            // è§†è§’æœ€å¤§å€¼(ç”±æ­£å‰æ–¹å‘å³)
+        public float minViewAngel = -62f;           // è§†è§’æœ€å°å€¼(ç”±æ­£å‰æ–¹å‘å·¦)     
 
-        [Header("Á¬»÷ÉèÖÃ")]
-        public bool allowAIToPerformCombos = true;  // ÊÇ·ñÔÊĞíAIÁ¬»÷
-        [Range(0, 100)] public int comboLikeHood = 30;              // ¿ÉÒÔÁ¬»÷µÄ¸ÅÂÊ(°Ù·Ö±ÈÖµ)
+        [Header("è¿å‡»è®¾ç½®")]
+        public bool allowAIToPerformCombos = true;  // æ˜¯å¦å…è®¸AIè¿å‡»
+        [Range(0, 100)] public int comboLikeHood = 30;              // å¯ä»¥è¿å‡»çš„æ¦‚ç‡(ç™¾åˆ†æ¯”å€¼)
 
-        [Header("µĞ¶Ô°ë¾¶")]
-        [Tooltip("ÔÚ´Ë·¶Î§ÄÚÊ±»áÎ§×ÅÍæ¼Ò×ß, ÔÚ°ë¾¶Íâ²ì¾õ°ë¾¶ÄÚÊ±»á×·ÏòÍæ¼Ò, ÔÚ²ì¾õ°ë¾¶ÍâÊ±»áÍÑÀëÕ½¶·")]
+        [Header("æ•Œå¯¹åŠå¾„")]
+        [Tooltip("åœ¨æ­¤èŒƒå›´å†…æ—¶ä¼šå›´ç€ç©å®¶èµ°, åœ¨åŠå¾„å¤–å¯Ÿè§‰åŠå¾„å†…æ—¶ä¼šè¿½å‘ç©å®¶, åœ¨å¯Ÿè§‰åŠå¾„å¤–æ—¶ä¼šè„±ç¦»æˆ˜æ–—")]
         public float aggroRadius = 5f;
 
-        [Header("²ì¾õ°ë¾¶")]
+        [Header("å¯Ÿè§‰åŠå¾„")]
         public float detectionRadius = 20f;
 
-        [Header("Õ½¶··ç¸ñ")]
+        [Header("æˆ˜æ–—é£æ ¼")]
         public NPCCombatStyle combatStyle;
 
-        [Header("¸ñµ²ÉèÖÃ")]
+        [Header("æ ¼æŒ¡è®¾ç½®")]
         public bool allowAIToPerformBlock;
-        [Range(0, 100)] public int blockLikelyHood;    // Ëæ»úµ½blockµÄ¸ÅÂÊ
+        [Range(0, 100)] public int blockLikelyHood;    // éšæœºåˆ°blockçš„æ¦‚ç‡
 
-        [Header("ÉÁ±ÜÉèÖÃ")]
+        [Header("é—ªé¿è®¾ç½®")]
         public bool allowAIToPerformDodge;
-        [Range(0, 100)] public int dodgeLikelyHood;    // Ëæ»úµ½dodgeµÄ¸ÅÂÊ
+        [Range(0, 100)] public int dodgeLikelyHood;    // éšæœºåˆ°dodgeçš„æ¦‚ç‡
 
-        [Header("µ¯·´ÉèÖÃ")]
+        [Header("å¼¹åè®¾ç½®")]
         public bool allowAIToPerformParry;
-        [Range(0, 100)] public int parryLikelyHood;    // Ëæ»úµ½parryµÄ¸ÅÂÊ
+        [Range(0, 100)] public int parryLikelyHood;    // éšæœºåˆ°parryçš„æ¦‚ç‡
     }
 }

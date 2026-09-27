@@ -8,18 +8,18 @@ namespace CatchMoon
         CharacterManager character;
         AudioSource audioSource;
 
-        // ¹¥»÷ÒôĞ§
-        // ÊÜÉËÒôĞ§ ÊÜÉËÓïÒô
+        // æ”»å‡»éŸ³æ•ˆ
+        // å—ä¼¤éŸ³æ•ˆ å—ä¼¤è¯­éŸ³
 
-        [Header("ÈËÎïÊÜÉËµÄÒôĞ§")]
+        [Header("äººç‰©å—ä¼¤çš„éŸ³æ•ˆ")]
         public AudioClip[] takingDamageSounds;
         List<AudioClip> potentialDamageSounds;
         AudioClip lastDamageSoundPlayed;
 
-        [Header("ÎäÆ÷»Ó¶¯µÄÒôĞ§")]
+        [Header("æ­¦å™¨æŒ¥åŠ¨çš„éŸ³æ•ˆ")]
         List<AudioClip> potentialWeaponWhooshSounds;
         AudioClip lastWeaponWhooshPlayed;
-        // ½Å²½ÒôĞ§
+        // è„šæ­¥éŸ³æ•ˆ
 
         protected void Awake()
         {

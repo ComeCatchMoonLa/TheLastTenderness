@@ -6,32 +6,33 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        Vector3 normalVector = Vector3.up;  // ������(���ڵ��������µ��ٶ�, �����ٶȼ�С, �����ٶ�����)
-        public Vector3 moveDir;             // �ƶ�����
+        Vector3 normalVector = Vector3.up;  // 法向量(用于调整上下坡的速度, 上坡速度减小, 下坡速度增大)
+        public Vector3 moveDir;             // 移动方向
 
         [Header("Ground & Air Detection Stats")]
-        // ��Fall��Land, ��ֱ��Land, ��ʲô������
-        // Player��ײ�����·��ĸ߶Ⱦ�����
-        float rayStartPointHeight;                              // ��ؼ�����ߵ����߶�
-        [SerializeField] float HeightToBeginLand = 0.8f;        // ��ʼ��½�ĸ߶�
-        float minHeightNeedToLand;                              // ��ĳ��ƽ̨����Land��������Сƽ̨�߶�
-        [SerializeField] float rayStartPointOffsetDist = 0.2f;  // ��ؼ����������ƫ��(Player�ƶ�ʱ)
-        [SerializeField] UnityEngine.LayerMask GroundCheckLayer;            // ��ؼ��Ĳ�
+        // 先Fall再Land, 或直接Land, 或什么都不做
+        // Player碰撞器最下方的高度决定了
+        float rayStartPointHeight;                              // 落地检测射线的起点高度
+        [SerializeField] float HeightToBeginLand = 0.8f;        // 开始着陆的高度
+        float minHeightNeedToLand;                              // 下某个平台播放Land动画的最小平台高度
+        [SerializeField] float rayStartPointOffsetDist = 0.2f;  // 落地检测射线起点的偏移(Player移动时)
+        [SerializeField] UnityEngine.LayerMask GroundCheckLayer;            // 落地检侧的层
 
-        [Header("����ٶ�")]
-        [SerializeField] float rotateSpeed = 10; // ��ת�ٶ�
-        [SerializeField] float runSpeed = 5;     // �����ٶ�
-        [SerializeField] float sprintSpeed = 7;  // ����ٶ�
-        [SerializeField] float fallSpeed = 200;  // �����ٶ�
+        [Header("玩家速度")]
+        [SerializeField] float rotateSpeed = 10; // 旋转速度
+        [SerializeField] float runSpeed = 5;     // 奔跑速度
+        [SerializeField] float sprintSpeed = 7;  // 冲刺速度
+        [SerializeField] float fallSpeed = 200;  // 降落速度
+        [SerializeField] float currentSpeed;
 
-        [Header("��������")]
-        [SerializeField] float rollCost = 10;     // �������ĵ�����ֵ
-        [SerializeField] float backStepCost = 5;  // ���������ĵ�����ֵ
-        public float sprintCost = 0.2f;           // �������
-        public float sprintNeedMinStamina = 10f;  // �����Ҫ����������ֵ
-        [SerializeField] float jumpCost = 10;     // ��Ծ���ĵ�����ֵ
+        [Header("体力消耗")]
+        [SerializeField] float rollCost = 10;     // 翻滚消耗的体力值
+        [SerializeField] float backStepCost = 5;  // 后跳步消耗的体力值
+        public float sprintCost = 0.2f;           // 冲刺消耗
+        public float sprintNeedMinStamina = 10f;  // 冲刺需要的最少体力值
+        [SerializeField] float jumpCost = 10;     // 跳跃消耗的体力值
 
-        [Header("��ͬ״̬�µ�Collider")]
+        [Header("不同状态下的Collider")]
         public Vector3 defaultColliderCenter = new Vector3(0f, 1.2f, 0f);
         public float defaultColliderRadius = 0.3f;
         public float defaultColliderHeight = 1.2f;
@@ -46,8 +47,8 @@ namespace CatchMoon
         }
         private void Start()
         {
-            rayStartPointHeight = player.cCollider.center.y - player.cCollider.height * 0.5f; //(��Player��ײ�����·�ͬ��)
-            minHeightNeedToLand = rayStartPointHeight; // ��ֱ���ϵ�ƽ̨�߶Ⱦ���ֱ����
+            rayStartPointHeight = player.cCollider.center.y - player.cCollider.height * 0.5f; //(与Player碰撞器最下方同高)
+            minHeightNeedToLand = rayStartPointHeight; // 能直接上的平台高度就能直接下
 
             GroundCheckLayer = (LayerMask.environment | LayerMask.npc | LayerMask.player);
         }
@@ -61,6 +62,7 @@ namespace CatchMoon
             HandleJump();
             HandleRoll();
             HandleBackStep();
+            currentSpeed = player.rigidBody.linearVelocity.magnitude;
         }
 
         void HandleMove()
@@ -70,26 +72,26 @@ namespace CatchMoon
 
             UpdateMoveDir();
             float speed = runSpeed;
-            if (player.isSprinting) // ���
+            if (player.isSprinting) // 冲刺
             {
                 speed = sprintSpeed;
                 player.pStats.DeductStamina(sprintCost);
             }
 
-            // normalVector��ʾPlayer��ǰ��վ��λ�ô�����ƽ��Ĵ�ֱ����
-            // ��Player���ٶ�ʸ��ͶӰ����������������ƽ����, ����������ΪPlayer�ĸ�����ٶ�(���������ʱ���ٶ�)
+            // normalVector表示Player当前所站的位置处地形平面的垂直向量
+            // 将Player的速度矢量投影到法向量所决定的平面上, 并将其设置为Player的刚体的速度(这个是上坡时的速度)
             Vector3 projectVelocity = Vector3.ProjectOnPlane(moveDir * speed, normalVector);
-            // �ж�������ʱ����������Player������
+            // 判断是下坡时，我们增加Player的移速
             if (moveDir != Vector3.zero)
             {
-                float theta = Vector3.Angle(moveDir, normalVector); // ������ƶ����������ڵ���ƽ��ļнǵĲ���, 0��ֵ����(0, 180)
+                float theta = Vector3.Angle(moveDir, normalVector); // 即玩家移动方向与所在地形平面的夹角的补角, 0的值域在(0, 180)
 
-                if (theta < 90) // ����
+                if (theta < 90) // 下坡
                     projectVelocity *= (2f / Mathf.Sin(theta * Mathf.Deg2Rad) - 1);
             }
             player.rigidBody.linearVelocity = projectVelocity;
 
-            // ��������Ƿ�����������Ƿ��̾�������ƶ��ķ�ʽ
+            // 根据相机是否锁定与玩家是否冲刺决定玩家移动的方式
             if (player.pCamera.lockOnFlag && !player.isSprinting)
                 player.pAnimator.UpdateAnimatorValues(player.input.vertical, player.input.horizontal, player.isSprinting, true);
             else
@@ -128,21 +130,21 @@ namespace CatchMoon
 
             RaycastHit hit;
 
-            /// ���ô������߼����������
+            /// 设置触地射线检测的射线起点
             Vector3 origin = transform.position;
             origin.y += rayStartPointHeight;
 
-            // ��ǰ�����ϰ���, �򲻽��м����������ƫ��
+            // 若前方有障碍物, 则不进行检测射线起点的偏移
             if (!Physics.Raycast(origin, transform.forward, out hit, rayStartPointOffsetDist))
                 origin += moveDir.normalized * rayStartPointOffsetDist;
 
-            //  ����ڿ������Ǿ͸���ʩ��������(һ�����ƶ�����, һ������)
+            //  如果在空中我们就给他施加两个力(一个朝移动方向, 一个朝下)
             if (player.isInAir)
                 player.rigidBody.AddForce((Vector3.down + moveDir * 0.1f) * fallSpeed * player.rigidBody.mass);
 
-            Vector3 targetPosition = transform.position; // ��������Player�ĸ߶�
+            Vector3 targetPosition = transform.position; // 用于设置Player的高度
 
-            // �ж��Ƿ���½(����Land״̬���ڵ�����)
+            // 判断是否着陆(进入Land状态或在地面上)
             Debug.DrawRay(origin, Vector3.down * (rayStartPointHeight +  HeightToBeginLand), Color.red, 0.1f, false);
             if (Physics.Raycast(origin, Vector3.down, out hit, (rayStartPointHeight + HeightToBeginLand), GroundCheckLayer))
             {
@@ -164,7 +166,7 @@ namespace CatchMoon
                 }
             }
             
-            // ��Player���õ�targetPosition(������ҵ�������������)
+            // 将Player设置到targetPosition(避免玩家的陷入地面或悬空)
             if (!player.isInAir)
                 transform.position = targetPosition;
         }

@@ -13,7 +13,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒýÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (soulCntText == null)
                 Debug.LogError("soulCountText == null");
             #endregion

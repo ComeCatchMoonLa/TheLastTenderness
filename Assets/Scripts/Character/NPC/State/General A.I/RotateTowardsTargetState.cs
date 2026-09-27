@@ -15,15 +15,15 @@ namespace CatchMoon
         {
             if (enemy.eStats.isDead)
                 return this;
-            // 等待攻击动画结束
+            // 绛夊緟鏀诲嚮鍔ㄧ敾缁撴潫
             if (enemy.isInteracting)
                 return this;
 
-            // 停止移动
+            // 鍋滄绉诲姩
             enemy.animator.SetFloat("Vertical", 0);
             enemy.animator.SetFloat("Horizontal", 0);
 
-            // 若玩家不在敌人视野内, 且敌人不在交互中, 则敌人会向后转身
+            // 鑻ョ帺瀹朵笉鍦ㄦ晫浜鸿閲庡唴, 涓旀晫浜轰笉鍦ㄤ氦浜掍腑, 鍒欐晫浜轰細鍚戝悗杞韩
             if (!enemy.isInteracting)
             {
                 if (45f < enemy.targetDirAngle)

@@ -5,22 +5,22 @@ using TMPro;
 namespace CatchMoon
 {
     /// <summary>
-    /// ¿É½»»¥UI
+    /// å¯äº¤äº’UI
     /// </summary>
     public class InteractUI : MonoBehaviour
     {
-        [Header("½»»¥ÌáÊ¾UI")]
-        [SerializeField] GameObject interactInfoUI;       // ½»»¥ĞÅÏ¢UI: Íæ¼Ò¿¿½ü¿É½»»¥ÎïÆ·Ê±£¬ÌáÊ¾Íæ¼ÒÈçºÎ½»»¥µÄUI£¨¸æËßÍæ¼ÒÊ°È¡ÎïÆ·¡¢µİ½»ÎïÆ·µÈ£©£¬»òÕ¹Ê¾ÎÄ×ÖĞÅÏ¢µÄUI£¨Â·±êÌáÊ¾»òÊÇNPCµÄ¶Ô»°µÈ£©
-        [SerializeField] TextMeshProUGUI interactTipText; // Íæ¼ÒÓëÎïÆ·½»»¥Ê±µÄÌáÊ¾ÎÄ±¾
+        [Header("äº¤äº’æç¤ºUI")]
+        [SerializeField] GameObject interactInfoUI;       // äº¤äº’ä¿¡æ¯UI: ç©å®¶é è¿‘å¯äº¤äº’ç‰©å“æ—¶ï¼Œæç¤ºç©å®¶å¦‚ä½•äº¤äº’çš„UIï¼ˆå‘Šè¯‰ç©å®¶æ‹¾å–ç‰©å“ã€é€’äº¤ç‰©å“ç­‰ï¼‰ï¼Œæˆ–å±•ç¤ºæ–‡å­—ä¿¡æ¯çš„UIï¼ˆè·¯æ ‡æç¤ºæˆ–æ˜¯NPCçš„å¯¹è¯ç­‰ï¼‰
+        [SerializeField] TextMeshProUGUI interactTipText; // ç©å®¶ä¸ç‰©å“äº¤äº’æ—¶çš„æç¤ºæ–‡æœ¬
 
-        [Header("½»»¥Æ·ĞÅÏ¢UI")]
-        [SerializeField] GameObject interactionInfoUI;        // ½»»¥ÎïÆ·ĞÅÏ¢UI: µ±Íæ¼ÒÍê³ÉÓëÎïÆ·µÄ½»»¥ºó£¬Õ¹Ê¾ÎïÆ·ĞÅÏ¢µÄUI
-        [SerializeField] TextMeshProUGUI interactionInfoText; // ½»»¥ÎïÆ·µÄĞÅÏ¢ÎÄ±¾
-        [SerializeField] Image interactionIcon;               // ½»»¥ÎïÆ·µÄÍ¼±ê
+        [Header("äº¤äº’å“ä¿¡æ¯UI")]
+        [SerializeField] GameObject interactionInfoUI;        // äº¤äº’ç‰©å“ä¿¡æ¯UI: å½“ç©å®¶å®Œæˆä¸ç‰©å“çš„äº¤äº’åï¼Œå±•ç¤ºç‰©å“ä¿¡æ¯çš„UI
+        [SerializeField] TextMeshProUGUI interactionInfoText; // äº¤äº’ç‰©å“çš„ä¿¡æ¯æ–‡æœ¬
+        [SerializeField] Image interactionIcon;               // äº¤äº’ç‰©å“çš„å›¾æ ‡
 
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (interactInfoUI == null)
                 Debug.LogError("interactInfoUI == null");
             if (interactTipText == null)

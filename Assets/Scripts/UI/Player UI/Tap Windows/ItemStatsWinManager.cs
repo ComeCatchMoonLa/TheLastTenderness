@@ -76,7 +76,7 @@ namespace CatchMoon
             armorStats.SetActive(true);
         }
 
-        // ¸üĞÂitem×´Ì¬
+        // æ›´æ–°itemçŠ¶æ€
         public bool UpdateNameAndIcon(Item item)
         {
             if (item == null)

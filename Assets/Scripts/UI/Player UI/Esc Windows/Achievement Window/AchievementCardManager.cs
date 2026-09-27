@@ -9,17 +9,17 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        [Header("ÏÔÊ¾³É¾ÍĞÅÏ¢µÄ¿Ø¼ş")]
+        [Header("æ˜¾ç¤ºæˆå°±ä¿¡æ¯çš„æ§ä»¶")]
         public TextMeshProUGUI achievementNameTMP;
         public TextMeshProUGUI achievementDescriptionTMP;
         public Image achievementImage;
         public Image achievementImageBlack;
         public List<GameObject> toggles;
 
-        [Header("µ±Ç°Ô¤ÀÀµÄ³É¾ÍÎªµÚ¼¸½×¶Î")]
+        [Header("å½“å‰é¢„è§ˆçš„æˆå°±ä¸ºç¬¬å‡ é˜¶æ®µ")]
         [Min(1)]public int currentViewAchievementStage = 1;
 
-        [Header("³É¾ÍµÄĞÅÏ¢")]
+        [Header("æˆå°±çš„ä¿¡æ¯")]
         [TextArea] public List<string> achievementDescription;
 
         private void Awake()
@@ -28,7 +28,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
             #endregion
@@ -49,9 +49,9 @@ namespace CatchMoon
             player.ui.openedWin = EscWinOpenedWinType.achievementWin;
         }
 
-        // ¿ØÖÆ¿¨Æ¬ÔÚ²»Í¬½×¶ÎÖ®¼äµÄÇĞ»»
+        // æ§åˆ¶å¡ç‰‡åœ¨ä¸åŒé˜¶æ®µä¹‹é—´çš„åˆ‡æ¢
         /// <summary>
-        /// Ô¤ÀÀ¿¨Æ¬µÄÏÂÒ»¸ö½×¶Î
+        /// é¢„è§ˆå¡ç‰‡çš„ä¸‹ä¸€ä¸ªé˜¶æ®µ
         /// </summary>
         public void ViewNextCardStage()
         {
@@ -60,7 +60,7 @@ namespace CatchMoon
             ApplyCurrentCardStage();
         }
         /// <summary>
-        /// Ô¤ÀÀ¿¨Æ¬µÄÉÏÒ»¸ö½×¶Î
+        /// é¢„è§ˆå¡ç‰‡çš„ä¸Šä¸€ä¸ªé˜¶æ®µ
         /// </summary>
         public void ViewPreCardStage()
         {

@@ -6,7 +6,7 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        [Header("灵魂数量")]
+        [Header("鐏甸瓊鏁伴噺")]
         public int soulCount = 0;
 
         protected override void Awake()
@@ -101,7 +101,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// 获取灵魂
+        /// 鑾峰彇鐏甸瓊
         /// </summary>
         public void AddSouls(int souls)
         {

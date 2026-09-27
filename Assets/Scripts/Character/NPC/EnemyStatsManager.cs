@@ -11,7 +11,7 @@ namespace CatchMoon
         WorldManager world;
 
         [Header("Souls Awarde Death")]
-        public int soulsAwardedDeath = 50; // ËÀÍöºóÉú³ÉµÄÁé»êÊıÁ¿
+        public int soulsAwardedDeath = 50; // æ­»äº¡åç”Ÿæˆçš„çµé­‚æ•°é‡
 
         public float destoryWaitTime = 3f;
 
@@ -27,7 +27,7 @@ namespace CatchMoon
 
             world = FindAnyObjectByType<WorldManager>();
 
-            #region ¼ì´í
+            #region æ£€é”™
             if (enemy.aiSettings.isBoss)
             {
                 if (bossCombatStanceState == null)
@@ -104,7 +104,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ´òÆÆÕò¶¨(½øÈë½©Ö±×´Ì¬)
+        /// æ‰“ç ´é•‡å®š(è¿›å…¥åƒµç›´çŠ¶æ€)
         /// </summary>
         public void BreakGuard()
         {
@@ -112,7 +112,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¸üĞÂBossÑªÌõ
+        /// æ›´æ–°Bossè¡€æ¡
         /// </summary>
         public void UpdateBossHealthBar(float currentHealth, float maxHealth)
         {
@@ -123,7 +123,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÇĞ»»ÖÁµÚ¶ş½×¶Î
+        /// åˆ‡æ¢è‡³ç¬¬äºŒé˜¶æ®µ
         /// </summary>
         public void ShiftToSecondPhase()
         {

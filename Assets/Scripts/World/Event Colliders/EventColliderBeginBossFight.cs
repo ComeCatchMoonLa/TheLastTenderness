@@ -16,7 +16,7 @@ namespace CatchMoon
         {
             if (enemy == null || !enemy.aiSettings.isBoss)
             {
-                Debug.LogError("ÇëÍÏÈëboss¶ÔÏó");
+                Debug.LogError("è¯·æ‹–å…¥bosså¯¹è±¡");
                 return;
             }
         }

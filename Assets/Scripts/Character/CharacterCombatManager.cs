@@ -7,10 +7,10 @@ namespace CatchMoon
     {
         CharacterManager character;
 
-        [Header("µ±Ç°¹¥»÷ÀàĞÍ")]
+        [Header("å½“å‰æ”»å‡»ç±»å‹")]
         public AttackType attackType;
 
-        [Header("±³´ÌÓëµ¯·´µÄÅĞ¶¨·¶Î§")]
+        [Header("èƒŒåˆºä¸å¼¹åçš„åˆ¤å®šèŒƒå›´")]
         public float criticalAttackRange = 0.9f;
         public float pendingCriticalDamage;
 
@@ -18,12 +18,12 @@ namespace CatchMoon
         public Transform criticalAttackRayCastStartPoint;
 
         [Header("Flags")]
-        public bool isAttacking;                // ÕıÔÚ¹¥»÷
-        public bool isParrying;                 // ÕıÔÚµ¯·´
-        public bool isUsingSpell;               // ÕıÔÚÊ¹ÓÃ·¨Êõ
-        public bool isUsingConsumable;          // ÕıÔÚÊ¹ÓÃÏûºÄÆ·
-        public bool isBlocking;                 // ÕıÔÚ·ÀÓù
-        public bool isAiming;                   // ÕıÔÚÃé×¼
+        public bool isAttacking;                // æ­£åœ¨æ”»å‡»
+        public bool isParrying;                 // æ­£åœ¨å¼¹å
+        public bool isUsingSpell;               // æ­£åœ¨ä½¿ç”¨æ³•æœ¯
+        public bool isUsingConsumable;          // æ­£åœ¨ä½¿ç”¨æ¶ˆè€—å“
+        public bool isBlocking;                 // æ­£åœ¨é˜²å¾¡
+        public bool isAiming;                   // æ­£åœ¨ç„å‡†
 
         protected virtual void Awake()
         {
@@ -121,11 +121,11 @@ namespace CatchMoon
 
         public void GetBackStabbed(CharacterManager characterPerformingBackStab, float dist)
         {
-            // 0.±ê¼Ç×´Ì¬
+            // 0.æ ‡è®°çŠ¶æ€
             character.isBeingBackStabbed = true;
-            // 1.µ÷ÕûÎ»ÖÃÓë½Ç¶È
+            // 1.è°ƒæ•´ä½ç½®ä¸è§’åº¦
             StartCoroutine(ForceMoveCharacterToEnemyBackStabPosition(characterPerformingBackStab, dist));
-            // 2.´¦ÀíÊÜÉË
+            // 2.å¤„ç†å—ä¼¤
             WeaponItem weapon = character.cInventory.rightWeapon;
             character.cStats.TakeDamage("Back Stabbed", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
                 weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);
@@ -133,11 +133,11 @@ namespace CatchMoon
 
         public void GetRiposte(CharacterManager characterPerformingRiposte, float dist)
         {
-            // 0.±ê¼Ç×´Ì¬
+            // 0.æ ‡è®°çŠ¶æ€
             character.isBeingRiposted = true;
-            // 1.µ÷ÕûÎ»ÖÃÓë½Ç¶È
+            // 1.è°ƒæ•´ä½ç½®ä¸è§’åº¦
             StartCoroutine(ForceMoveCharacterToEnemyRipostePosition(characterPerformingRiposte, dist));
-            // 2.´¦ÀíÊÜÉË
+            // 2.å¤„ç†å—ä¼¤
             WeaponItem weapon = character.cInventory.rightWeapon;
             character.cStats.TakeDamage("Riposted", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
                 weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);

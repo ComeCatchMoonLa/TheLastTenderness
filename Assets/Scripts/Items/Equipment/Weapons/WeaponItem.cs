@@ -5,53 +5,53 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "Item/Equipment/Weapon")]
     public class WeaponItem : EquipmentItem
     {
-        public GameObject modelPrefab; // ÎäÆ÷Ô¤ÖÆ¼ş
+        public GameObject modelPrefab; // æ­¦å™¨é¢„åˆ¶ä»¶
         public Transform transform;
 
         [Header("Animator Replacer")]
         public AnimatorOverrideController weaponController;
         public string offHandIdleAnimation = "Left_Arm_Idle_01";
 
-        [Header("ÎäÆ÷ÀàĞÍ")]
+        [Header("æ­¦å™¨ç±»å‹")]
         public WeaponType weaponType;
 
-        [Header("ÉËº¦")]
+        [Header("ä¼¤å®³")]
         public int pd;
         public int fd;
         public int md;
         public int ld;
         public int dd;
 
-        [Header("ÉËº¦±¶Êı")]
+        [Header("ä¼¤å®³å€æ•°")]
         public float laFirstPhaseDM = 1; 
         public float laSecondPhaseDM = 1.2f;
         public float haFirstPhaseDM = 1.6f;
         public float haSecondPhasDM = 1.8f;
-        public float criticalAttackDM = 2.4f; // »áĞÄÒ»»÷ÉËº¦ÏµÊı(¶ÔÓÚ»ù´¡ÉËº¦¶øÑÔ)
-        public float guardBreakM = 1;         // ¸ñµ²±»´òÆÆÊ±ÊÜµ½µÄÉËº¦µÄÏµÊı
+        public float criticalAttackDM = 2.4f; // ä¼šå¿ƒä¸€å‡»ä¼¤å®³ç³»æ•°(å¯¹äºåŸºç¡€ä¼¤å®³è€Œè¨€)
+        public float guardBreakM = 1;         // æ ¼æŒ¡è¢«æ‰“ç ´æ—¶å—åˆ°çš„ä¼¤å®³çš„ç³»æ•°
 
         [Header("Poise")]
         public float poiseBreak = 25;
         public float offensivePoiseBonus;
 
-        [Header("ÉËº¦ÎüÊÕÂÊ")]
+        [Header("ä¼¤å®³å¸æ”¶ç‡")]
         [Range(0, 1)] public float physicalDA;
         [Range(0, 1)] public float fireDA;
         [Range(0, 1)] public float magicDA;
         [Range(0, 1)] public float lightningDA;
         [Range(0, 1)] public float darkDA;
 
-        [Header("·ÀÓùÊ±µÄÌåÁ¦¶Ò»»ÂÊ")]
+        [Header("é˜²å¾¡æ—¶çš„ä½“åŠ›å…‘æ¢ç‡")]
         [Range(0, 1)] public float blockingStabilityRating;
 
-        [Header("ÎÈ¶¨ÂÊ")]
-        [Tooltip("µ²ÏÂ¹¥»÷Ê±»áÏûºÄ¹¥»÷Õß¹¥»÷ÏûºÄÌåÁ¦µÄÏµÊı,ÀıÈç, ¹¥»÷ÕßµÄ¹¥»÷ÏûºÄÁË30ÌåÁ¦, ÄÇÃ´Íæ¼ÒÓÃ¶ÜÅÆµ²ÏÂ¹¥»÷¾Í»áÏûºÄ30*(1-0.67)µÄÌåÁ¦")]
+        [Header("ç¨³å®šç‡")]
+        [Tooltip("æŒ¡ä¸‹æ”»å‡»æ—¶ä¼šæ¶ˆè€—æ”»å‡»è€…æ”»å‡»æ¶ˆè€—ä½“åŠ›çš„ç³»æ•°,ä¾‹å¦‚, æ”»å‡»è€…çš„æ”»å‡»æ¶ˆè€—äº†30ä½“åŠ›, é‚£ä¹ˆç©å®¶ç”¨ç›¾ç‰ŒæŒ¡ä¸‹æ”»å‡»å°±ä¼šæ¶ˆè€—30*(1-0.67)çš„ä½“åŠ›")]
         [Range(0, 1)] public float stability = 0.67f;
 
-        [Header("ÌåÁ¦ÏûºÄ")]
-        public int baseStaminaCost = 1;     // »ù´¡ÌåÁ¦ÏûºÄ
-        public float laStaminaCostM = 1;    // Çá¹¥»÷»¨·ÑÌåÁ¦ÏµÊı
-        public float haStaminaCostM = 1.5f; // ÖØ¹¥»÷»¨·ÑÌåÁ¦ÏµÊı
+        [Header("ä½“åŠ›æ¶ˆè€—")]
+        public int baseStaminaCost = 1;     // åŸºç¡€ä½“åŠ›æ¶ˆè€—
+        public float laStaminaCostM = 1;    // è½»æ”»å‡»èŠ±è´¹ä½“åŠ›ç³»æ•°
+        public float haStaminaCostM = 1.5f; // é‡æ”»å‡»èŠ±è´¹ä½“åŠ›ç³»æ•°
 
         [Header("Item Actions")]
         public WeaponItemAction oh_tap_e_action;
@@ -73,7 +73,7 @@ namespace CatchMoon
         public WeaponItemAction th_tap_z_action;
         public WeaponItemAction th_hold_z_action;
 
-        [Header("ÒôĞ§")]
+        [Header("éŸ³æ•ˆ")]
         public AudioClip[] weaponWhooshesSound;
     }
 }

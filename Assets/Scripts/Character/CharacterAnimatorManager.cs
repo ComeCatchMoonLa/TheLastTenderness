@@ -7,25 +7,25 @@ namespace CatchMoon
     {
         CharacterManager character;
 
-        [Header("攻击动画名称")]
-        [Space(5)]// 单手轻击
+        [Header("鏀诲嚮鍔ㄧ敾鍚嶇О")]
+        [Space(5)]// 鍗曟墜杞诲嚮
         public string ohLightAttack1 = "OH_Light_Attack_01";
         public string ohLightAttack2 = "OH_Light_Attack_02";
-        [Space(5)]// 单手重击
+        [Space(5)]// 鍗曟墜閲嶅嚮
         public string ohHeavyAttack1 = "OH_Heavy_Attack_01";
         public string ohHeavyAttack2 = "OH_Heavy_Attack_02";
-        [Space(5)]// 双手轻击
+        [Space(5)]// 鍙屾墜杞诲嚮
         public string thLightAttack1 = "TH_Light_Attack_01";
         public string thLightAttack2 = "TH_Light_Attack_02";
-        [Space(5)]// 双手重击                         
+        [Space(5)]// 鍙屾墜閲嶅嚮                         
         public string thHeavyAttack1 = "TH_Heavy_Attack_01";
         public string thHeavyAttack2 = "TH_Heavy_Attack_02";
 
         [Header("Weapon Art")]
         public string weapon_art = "Parry";
 
-        [Header("最后一击的动画名称")]
-        public string lastAttack;      // 最后一次攻击动画的名称
+        [Header("鏈�鍚庝竴鍑荤殑鍔ㄧ敾鍚嶇О")]
+        public string lastAttack;      // 鏈�鍚庝竴娆℃敾鍑诲姩鐢荤殑鍚嶇О
 
         [Header("IK")]
         protected RigBuilder rigBuilder;
@@ -45,10 +45,10 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// 播放目标动画
+        /// 鎾斁鐩爣鍔ㄧ敾
         /// </summary>
-        /// <param name="targetAnim">目标动画</param>
-        /// <param name="isInteracting">是否交互</param>
+        /// <param name="targetAnim">鐩爣鍔ㄧ敾</param>
+        /// <param name="isInteracting">鏄惁浜や簰</param>
         public void PlayTargetAnimation(
             string targetAnim,
             bool isInteracting,
@@ -65,7 +65,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// 根据武器设置手的IK
+        /// 鏍规嵁姝﹀櫒璁剧疆鎵嬬殑IK
         /// </summary>
         public virtual void SetHandIKForWeapon(LeftHandIKTarget leftHandIKTarget, RightHandIKTarget rightHandIKTarget, bool isTwoHandingWeapon)
         {
@@ -192,7 +192,7 @@ namespace CatchMoon
                 character.cEffects.Ammo.transform.parent = character.cWeaponSlot.rightHandSlot.overrideParentWhileHolding;
                 character.cEffects.Ammo.transform.localPosition = Vector3.zero;
                 character.cEffects.Ammo.transform.localRotation = Quaternion.identity;
-                /// 设置左手的IK
+                /// 璁剧疆宸︽墜鐨処K
             }
         }
 

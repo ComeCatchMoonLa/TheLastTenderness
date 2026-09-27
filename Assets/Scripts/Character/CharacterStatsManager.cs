@@ -7,30 +7,30 @@ namespace CatchMoon
     {
         CharacterManager character;
 
-        [Header("Ãû³Æ")]
+        [Header("åç§°")]
         public string cName;
 
         [Header("Flags")]
-        public bool isDead;         // ÊÇ·ñËÀÍö
-        public bool isInvulnerable; // ÊÇ·ñÎŞµĞ
+        public bool isDead;         // æ˜¯å¦æ­»äº¡
+        public bool isInvulnerable; // æ˜¯å¦æ— æ•Œ
 
-        [Header("¶ÓÎéID")]
+        [Header("é˜Ÿä¼ID")]
         public int teamID = 2;
 
         [Header("HP SP MP")]
-        public float maxHP;     // ×î´óÉúÃü
-        public float currentHP; // µ±Ç°ÉúÃü
+        public float maxHP;     // æœ€å¤§ç”Ÿå‘½
+        public float currentHP; // å½“å‰ç”Ÿå‘½
         [Space(5)]
-        public float maxStamina;          // ×î´óÌåÁ¦
-        public float currentStamina;      // µ±Ç°ÌåÁ¦
+        public float maxStamina;          // æœ€å¤§ä½“åŠ›
+        public float currentStamina;      // å½“å‰ä½“åŠ›
         [Space(5)]
-        public float maxMP;     // ×î´óÀ¶Á¿
-        public float currentMP; // µ±Ç°À¶Á¿
+        public float maxMP;     // æœ€å¤§è“é‡
+        public float currentMP; // å½“å‰è“é‡
 
-        [Header("µÈ¼¶")]
-        public int healthLevel = 10;        // ÑªÌõµÈ¼¶
-        public int staminaLevel = 10;       // ÌåÁ¦ÌõµÈ¼¶
-        public int focusLevel = 10;         // À¶ÌõµÈ¼¶
+        [Header("ç­‰çº§")]
+        public int healthLevel = 10;        // è¡€æ¡ç­‰çº§
+        public int staminaLevel = 10;       // ä½“åŠ›æ¡ç­‰çº§
+        public int focusLevel = 10;         // è“æ¡ç­‰çº§
         public int poiseLevel = 10;
         public int strengthLevel = 10;
         public int dexterityLevel = 10;
@@ -38,13 +38,13 @@ namespace CatchMoon
         public int faithLevel = 10;
 
         [Header("Poise")]
-        public float totalPoiseDefence;             // ÉËº¦¼ÆËãÊ±µÄ×ÜÕò¶¨(»ğÁ¦²îºÜ´óµÄ»°¿ÉÒÔĞÎ³ÉÑ¹ÖÆ)
-        public float offensivePoiseBonus;           // ÄãÓÃÎäÆ÷¹¥»÷Ê±µÄÕò¶¨
-        public float armorPoiseBonus;               // Í¨¹ı×°±¸»ñµÃµÄÕò¶¨
+        public float totalPoiseDefence;             // ä¼¤å®³è®¡ç®—æ—¶çš„æ€»é•‡å®š(ç«åŠ›å·®å¾ˆå¤§çš„è¯å¯ä»¥å½¢æˆå‹åˆ¶)
+        public float offensivePoiseBonus;           // ä½ ç”¨æ­¦å™¨æ”»å‡»æ—¶çš„é•‡å®š
+        public float armorPoiseBonus;               // é€šè¿‡è£…å¤‡è·å¾—çš„é•‡å®š
         public float totalPoiseResetTime = 15f;
         public float poiseResetTimer = 0f;
 
-        [Header("¿ø¼×µÄÉËº¦ÎüÊÕÂÊ")]    
+        [Header("ç›”ç”²çš„ä¼¤å®³å¸æ”¶ç‡")]    
         [Range(0, 1)] public float headArmorPDA;
         [Range(0, 1)] public float torsoArmorPDA;
         [Range(0, 1)] public float hipsArmorPDA;
@@ -65,17 +65,17 @@ namespace CatchMoon
         [Range(0, 1)] public float torsoArmorDDA;
         [Range(0, 1)] public float hipsArmorDDA;
 
-        [Header("·ÀÓùÊ±µÄÉËº¦ÎüÊÕÂÊ")]
+        [Header("é˜²å¾¡æ—¶çš„ä¼¤å®³å¸æ”¶ç‡")]
         [Range(0, 1)] public float blockingPDA;
         [Range(0, 1)] public float blockingFDA;
         [Range(0, 1)] public float blockingMDA;
         [Range(0, 1)] public float blockingLDA;
         [Range(0, 1)] public float blockingDDA;
 
-        [Header("·ÀÓùÊ±µÄÌåÁ¦¶Ò»»ÂÊ")]
+        [Header("é˜²å¾¡æ—¶çš„ä½“åŠ›å…‘æ¢ç‡")]
         [Range(0, 1)] public float blockingStabilityRating;
 
-        [Header("ÌåÁ¦»Ö¸´¼ÆÊ±Æ÷")]
+        [Header("ä½“åŠ›æ¢å¤è®¡æ—¶å™¨")]
         public int staminaRegenerationAmount = 300;
         public int staminaRegenerationAmountWhilstBlocking = 20;
         public float staminaRegenTimer;
@@ -100,33 +100,33 @@ namespace CatchMoon
 
         float SetMaxHealthFromHealthLevel()
         {
-            // ×î´óÑªÁ¿ÓëÑªÌõµÈ¼¶µÄ×ª»»¹«Ê½
+            // æœ€å¤§è¡€é‡ä¸è¡€æ¡ç­‰çº§çš„è½¬æ¢å…¬å¼
             maxHP = healthLevel * 10;
             return maxHP;
         }
         float SetMaxStaminaFromStaminaLevel()
         {
-            // ÌåÁ¦ÉÏÏßÓëÌåÁ¦ÌõµÈ¼¶µÄ×ª»»¹«Ê½
+            // ä½“åŠ›ä¸Šçº¿ä¸ä½“åŠ›æ¡ç­‰çº§çš„è½¬æ¢å…¬å¼
             maxStamina = staminaLevel * 10;
             return maxStamina;
         }
         float SetMaxFocusPointsFromFocusLevel()
         {
-            // À¶Á¿ÉÏÏßÓëÀ¶ÌõµÈ¼¶µÄ×ª»»¹«Ê½
+            // è“é‡ä¸Šçº¿ä¸è“æ¡ç­‰çº§çš„è½¬æ¢å…¬å¼
             maxMP = focusLevel * 10;
             return maxMP;
         }
 
         /// <summary>
-        /// ÊÜÉË
+        /// å—ä¼¤
         /// </summary>
-        /// <param name="pd">ÎïÀíÉËº¦</param>
-        /// <param name="damageAnimation">ÊÜÉË¶¯»­</param>
+        /// <param name="pd">ç‰©ç†ä¼¤å®³</param>
+        /// <param name="damageAnimation">å—ä¼¤åŠ¨ç”»</param>
         public virtual bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f)
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
-            /// ¼ÆËã×îÖÕÉËº¦Õ¼Ô­Ê¼ÉËº¦µÄ±ÈÂÊ(head³ĞÊÜ60%ÉËº¦, torso³ĞÊÜ30%ÉËº¦, hips³ĞÊÜ10%ÉËº¦)
+            /// è®¡ç®—æœ€ç»ˆä¼¤å®³å åŸå§‹ä¼¤å®³çš„æ¯”ç‡(headæ‰¿å—60%ä¼¤å®³, torsoæ‰¿å—30%ä¼¤å®³, hipsæ‰¿å—10%ä¼¤å®³)
             Func<float, float, float, float> TotalDamageRate = (headDA, torsoDA, hipsDA) =>  (1 - headDA) * 0.6f + (1 - torsoDA) * 0.3f + (1 - hipsDA) * 0.1f;
 
             pd *= TotalDamageRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
@@ -136,7 +136,7 @@ namespace CatchMoon
             dd *= TotalDamageRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
 
             float finalDamage = pd + fd + md + ld + dd;
-            //Debug.Log($"×îÖÕÉËº¦: {finalDamage:N0}.");
+            //Debug.Log($"æœ€ç»ˆä¼¤å®³: {finalDamage:N0}.");
             currentHP -= finalDamage;
 
             character.cSoundFX.PlayRandomDamageSoundsFX();
@@ -148,9 +148,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ËÀÍö
+        /// æ­»äº¡
         /// </summary>
-        /// <param name="deathAnimation">ËÀÍö¶¯»­</param>
+        /// <param name="deathAnimation">æ­»äº¡åŠ¨ç”»</param>
         public virtual void Death(CharacterManager character, string deathAnimation = "Death")
         {
             currentHP = 0;
@@ -159,7 +159,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí]Õò¶¨ÖØÖÃ[¼ÆÊ±Æ÷]
+        /// [å¤„ç†]é•‡å®šé‡ç½®[è®¡æ—¶å™¨]
         /// </summary>
         protected virtual void HandlePoiseResetTimer()
         {

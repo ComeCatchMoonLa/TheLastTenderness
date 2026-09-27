@@ -3,20 +3,20 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ÎäÆ÷×°±¸²Û
+    /// æ­¦å™¨è£…å¤‡æ§½
     /// </summary>
     public class WeaponHolderSlot : MonoBehaviour
     {
         public ItemSlotType slotType;
 
-        public Transform overrideParentWhileHolding; // ÖØÔØ¸¸½Úµã, Ê¹×óÓÒÊÖÎäÆ÷ÄÜÓĞ²»Í¬µÄtransform¶ø²»ĞèÒªÓÃÁ½¸öperfab
-        public Transform overrideParentWhileGetting; // ÖØÔØ¸¸½Úµã, Ê¹×óÓÒÊÖÎäÆ÷ÄÜÓĞ²»Í¬µÄtransform¶ø²»ĞèÒªÓÃÁ½¸öperfab
-        public WeaponItem currentWeapon;             // µ±Ç°ÎäÆ÷
-        public GameObject currentWeaponModel;        // µ±Ç°ÎäÆ÷Ä£ĞÍ
+        public Transform overrideParentWhileHolding; // é‡è½½çˆ¶èŠ‚ç‚¹, ä½¿å·¦å³æ‰‹æ­¦å™¨èƒ½æœ‰ä¸åŒçš„transformè€Œä¸éœ€è¦ç”¨ä¸¤ä¸ªperfab
+        public Transform overrideParentWhileGetting; // é‡è½½çˆ¶èŠ‚ç‚¹, ä½¿å·¦å³æ‰‹æ­¦å™¨èƒ½æœ‰ä¸åŒçš„transformè€Œä¸éœ€è¦ç”¨ä¸¤ä¸ªperfab
+        public WeaponItem currentWeapon;             // å½“å‰æ­¦å™¨
+        public GameObject currentWeaponModel;        // å½“å‰æ­¦å™¨æ¨¡å‹
 
         private void Awake()
         {
-            #region ¼ì´í
+            #region æ£€é”™
             if (overrideParentWhileHolding == null)
                 Debug.LogWarning($"{slotType}: overrideParentWhileHolding is null.");
             if (overrideParentWhileGetting == null)
@@ -25,7 +25,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Ğ¶ÏÂÎäÆ÷
+        /// å¸ä¸‹æ­¦å™¨
         /// </summary>
         public void UnloadWeapon()
         {
@@ -35,7 +35,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Ïú»ÙÎäÆ÷
+        /// é”€æ¯æ­¦å™¨
         /// </summary>
         public void UnloadWeaponAndDestroy()
         {
@@ -46,9 +46,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¼ÓÔØÎäÆ÷Ä£ĞÍ
+        /// åŠ è½½æ­¦å™¨æ¨¡å‹
         /// </summary>
-        /// <param name="weaponItem">ÎäÆ÷Ô¤ÖÆ¼ş</param>
+        /// <param name="weaponItem">æ­¦å™¨é¢„åˆ¶ä»¶</param>
         public void LoadWeaponModel(WeaponItem weaponItem)
         {
             UnloadWeaponAndDestroy();
@@ -60,9 +60,9 @@ namespace CatchMoon
 
             GameObject model = Instantiate(weaponItem.modelPrefab);
             model.transform.parent = overrideParentWhileHolding;
-            // ÉèÖÃ¸¸½Úµãºótransform»á±ä, ¹ÊÖØÖÃÆätransform
+            // è®¾ç½®çˆ¶èŠ‚ç‚¹åtransformä¼šå˜, æ•…é‡ç½®å…¶transform
             model.transform.ResetLocal();
-            // Ö¸¶¨µ±Ç°Ä£ĞÍ
+            // æŒ‡å®šå½“å‰æ¨¡å‹
             currentWeaponModel = model;
         }
     }

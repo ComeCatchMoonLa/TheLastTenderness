@@ -10,10 +10,10 @@ namespace CatchMoon
 
         [SerializeField] AchievementCardManager achievementCard;
 
-        [Header("³É¾ÍĞÅÏ¢")]
+        [Header("æˆå°±ä¿¡æ¯")]
         public string achievementName;
-        public Sprite achievementSprite;      // ³É¾ÍÍ¼Æ¬
-        public Sprite achievementSpriteBlack; // ³É¾ÍÍ¼Æ¬(ºÚ°×)
+        public Sprite achievementSprite;      // æˆå°±å›¾ç‰‡
+        public Sprite achievementSpriteBlack; // æˆå°±å›¾ç‰‡(é»‘ç™½)
         [Min(1)]public int currentAchievementStage = 1;
         [TextArea] public List<string> achievementDescription;
 
@@ -23,7 +23,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
             #endregion
@@ -42,8 +42,8 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÉèÖÃ³É¾Í¿¨Æ¬µÄÏÔÊ¾ÄÚÈİ
-        /// (ÇĞ»»¿¨Æ¬½×¶ÎÊ±²»¸Ä±äµÄÄÚÈİ)
+        /// è®¾ç½®æˆå°±å¡ç‰‡çš„æ˜¾ç¤ºå†…å®¹
+        /// (åˆ‡æ¢å¡ç‰‡é˜¶æ®µæ—¶ä¸æ”¹å˜çš„å†…å®¹)
         /// </summary>
         void SetCardView()
         {
@@ -54,7 +54,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ´«µİ³É¾Í¿¨Æ¬µÄÏà¹ØĞÅÏ¢(ÇĞ»»¿¨Æ¬½×¶ÎÊ±»á¸Ä±äµÄÄÚÈİÊ¹ÓÃ)
+        /// ä¼ é€’æˆå°±å¡ç‰‡çš„ç›¸å…³ä¿¡æ¯(åˆ‡æ¢å¡ç‰‡é˜¶æ®µæ—¶ä¼šæ”¹å˜çš„å†…å®¹ä½¿ç”¨)
         /// </summary>
         void SetCardInfo()
         {

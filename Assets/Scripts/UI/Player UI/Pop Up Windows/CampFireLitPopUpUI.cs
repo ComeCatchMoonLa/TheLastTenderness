@@ -12,7 +12,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (canvas == null)
                 Debug.LogError("canvas == null");
             #endregion
@@ -32,7 +32,7 @@ namespace CatchMoon
             {
                 canvas.alpha = fade;
 
-                if (fade > 0.95f) // ×îºóÒ»ÌËÑ­»·fadeÂÔ´óÓÚ0.95
+                if (fade > 0.95f) // æœ€åä¸€è¶Ÿå¾ªç¯fadeç•¥å¤§äº0.95
                     StartCoroutine(FadeOutPopUp());
                 yield return new WaitForSeconds(0.05f);
             }
@@ -46,7 +46,7 @@ namespace CatchMoon
             { 
                 canvas.alpha = fade;
 
-                if (fade < 0.05f) // ×îºóÒ»ÌËÑ­»·fadeÂÔĞ¡ÓÚ0.05
+                if (fade < 0.05f) // æœ€åä¸€è¶Ÿå¾ªç¯fadeç•¥å°äº0.05
                 {
                     Debug.Log(fade);
                     gameObject.SetActive(false);

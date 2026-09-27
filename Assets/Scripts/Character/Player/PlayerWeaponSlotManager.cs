@@ -12,7 +12,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÔÚÎäÆ÷²ÛÖĞ¼ÓÔØÎäÆ÷
+        /// åœ¨æ­¦å™¨æ§½ä¸­åŠ è½½æ­¦å™¨
         /// </summary>
         public override void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {

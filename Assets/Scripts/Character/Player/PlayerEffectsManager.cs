@@ -7,7 +7,7 @@ namespace CatchMoon
         PlayerManager player;
 
         [Header("Player FX")]
-        public GameObject currentParticleFX;    // 用来播放当前影响玩家的效果的粒子系统, 例如中毒, 喝药水等
+        public GameObject currentParticleFX;    // 鐢ㄦ潵鎾斁褰撳墠褰卞搷鐜╁鐨勬晥鏋滅殑绮掑瓙绯荤粺, 渚嬪涓瘨, 鍠濊嵂姘寸瓑
         public GameObject instantialtedFXModel;
 
         protected override void Awake()

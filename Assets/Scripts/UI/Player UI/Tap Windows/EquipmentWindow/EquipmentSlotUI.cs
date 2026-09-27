@@ -19,7 +19,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì´í
+            #region æ£€é”™
             if (icon == null)
             {
                 Debug.LogError("icon is null.");

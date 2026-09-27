@@ -12,9 +12,9 @@ namespace CatchMoon
         }
 
         /**
-         *  ����Ŀ��
-         *  if Ŀ���ڵжԷ�Χ��:
-         *      �л�����ս��״̬
+         *  跟踪目标
+         *  if 目标在敌对范围内:
+         *      切换至跟战斗状态
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -28,11 +28,11 @@ namespace CatchMoon
                 return this;
             }
 
-            // ִ�ж���ʱֹͣ�ƶ�
+            // 执行动作时停止移动
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 enemy.animator.SetFloat("Vertical", 1f, 0.1f, Time.deltaTime);
 
-            // �ڹ�����Χ��
+            // 在攻击范围内
             if (enemy.distFromTarget <= enemy.aiSettings.aggroRadius)
                 return combatStanceState;
             else
@@ -40,11 +40,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [����] ����Ŀ��
+        /// [处理] 朝向目标
         /// </summary>
         private void HandleRotateTowardsTarget(EnemyManager enemy)
         {
-            // �˹���ת
+            // 人工旋转
             if (enemy.isPreformingAction)
             {
                 if (enemy.targetDir == Vector3.zero)
@@ -53,10 +53,10 @@ namespace CatchMoon
                 Quaternion targetRotation = Quaternion.LookRotation(enemy.targetDir);
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
             }
-            // ����navmesh������ת
+            // 根据navmesh导航旋转
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // ��Է���
+                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // 相对方向
                 Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
 
                 enemy.navmeshAgent.enabled = true;

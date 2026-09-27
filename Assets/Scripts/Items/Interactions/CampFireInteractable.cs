@@ -4,13 +4,13 @@ namespace CatchMoon
 {
     public class CampFireInteractable : Interactable
     {
-        [Header("óô»ğÎ»ÖÃ")]
+        [Header("ç¯ç«ä½ç½®")]
         public Transform campFireTransform;
 
-        [Header("óô»ğ×´Ì¬")]
+        [Header("ç¯ç«çŠ¶æ€")]
         public bool hasBeenActived;
 
-        [Header("óô»ğÌØĞ§")]
+        [Header("ç¯ç«ç‰¹æ•ˆ")]
         public ParticleSystem activationFX;
         public ParticleSystem fireFX;
         public AudioClip campFireActivationSFX;
@@ -23,11 +23,11 @@ namespace CatchMoon
             {
                 fireFX.gameObject.SetActive(true);
                 fireFX.Play();
-                interactTipText = "ĞİÏ¢";
+                interactTipText = "ä¼‘æ¯";
             }
             else
             {
-                interactTipText = "µã»ğ";
+                interactTipText = "ç‚¹ç«";
             }
 
             audioSource = GetComponent<AudioSource>();
@@ -37,14 +37,14 @@ namespace CatchMoon
         {
             if (hasBeenActived)
             {
-                // ´ò¿ªóô»ğ²Ëµ¥
+                // æ‰“å¼€ç¯ç«èœå•
             }
             else
             {
                 player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
                 player.ui.popUps.campFireLitPopUpUI.PopUp();
                 hasBeenActived = true;
-                interactTipText = "ĞİÏ¢";
+                interactTipText = "ä¼‘æ¯";
                 //activationFX.gameObject.SetActive(true);
                 //activationFX.Play();
                 fireFX.gameObject.SetActive(true);

@@ -8,8 +8,8 @@ namespace CatchMoon
 
         [Header("Ecplosive Damage & Radius")]
         public float explosiveRadius = 2f;
-        public int explosionDamage;       // ±¬Õ¨ÉËº¦
-        public int explosionSplashDamage; // ½¦ÉäÉËº¦
+        public int explosionDamage;       // çˆ†ç‚¸ä¼¤å®³
+        public int explosionSplashDamage; // æº…å°„ä¼¤å®³
 
         // magicExplosionDamage
         // lightningExplosionDamage
@@ -22,7 +22,7 @@ namespace CatchMoon
             base.Awake();
             bombRigidBody = GetComponent<Rigidbody>();
 
-            #region ¼ì´í
+            #region æ£€é”™
             if (bombRigidBody == null)
             { Debug.LogError("bombRigidBody is null."); }
             #endregion

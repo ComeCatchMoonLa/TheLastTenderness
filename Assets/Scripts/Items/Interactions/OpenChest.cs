@@ -15,7 +15,7 @@ namespace CatchMoon
         {
             animator = GetComponent<Animator>();
 
-            #region ¼ì´í
+            #region æ£€é”™
             if (animator == null)
             {
                 Debug.LogError("");

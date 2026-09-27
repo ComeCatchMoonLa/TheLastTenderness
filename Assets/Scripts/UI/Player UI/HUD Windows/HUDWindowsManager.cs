@@ -7,24 +7,24 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        [Header("×´Ì¬Ìõ")]
+        [Header("çŠ¶æ€æ¡")]
         public HealthBar healthBar;
         public StaminaBar staminaBar;
         public FocusPointsBar manaBar;
 
-        [Header("¿ì½İ²Û UI")]
+        [Header("å¿«æ·æ§½ UI")]
         public QuickSlotsUI quickSlotsUI;
 
-        [Header("Áé»êÊı UI")]
+        [Header("çµé­‚æ•° UI")]
         public SoulCountUI soulCountUI;
 
-        [Header("×¼ĞÄ")]
+        [Header("å‡†å¿ƒ")]
         public GameObject crosshair;
 
-        [Header("FPS(µ÷ÊÔÓÃ)")]
+        [Header("FPS(è°ƒè¯•ç”¨)")]
         public TextMeshProUGUI fps_TMP;
         float totalTime = 0f;
-        int needCnt = 300; // 300Ö¡Ë¢ĞÂÒ»´Îfps
+        int needCnt = 300; // 300å¸§åˆ·æ–°ä¸€æ¬¡fps
         int cnt= 0;
 
         private void Awake()
@@ -39,7 +39,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
 

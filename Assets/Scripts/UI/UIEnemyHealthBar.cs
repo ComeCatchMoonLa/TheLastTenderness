@@ -45,7 +45,7 @@ namespace CatchMoon
                 Destroy(slider.gameObject);
         }
 
-        /// <param name="showTime">BarµÄÏÔÊ¾Ê±¼ä</param>
+        /// <param name="showTime">Barçš„æ˜¾ç¤ºæ—¶é—´</param>
         public void ShowBar(int showTime = 2)
         {
             timeUntilBarIsHidden = showTime;

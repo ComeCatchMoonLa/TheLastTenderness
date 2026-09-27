@@ -15,7 +15,7 @@ namespace CatchMoon
         {
             if (!player.isTwoHandingWeapon) return;
 
-            // 没有箭时不能瞄准
+            // 娌℃湁绠椂涓嶈兘鐬勫噯
             if (player.pInventory.currentAmmo == null)
             {
                 player.aimingMode = false;
@@ -25,7 +25,7 @@ namespace CatchMoon
             }
 
             player.aimingMode = true;
-            // 交互打断瞄准
+            // 浜や簰鎵撴柇鐬勫噯
             if (player.isInteracting)
                 player.aimingMode = false;
         }

@@ -27,7 +27,7 @@ namespace CatchMoon
             WeaponItem leftWeapon = player.pInventory.leftWeapon;
             WeaponItem rightWeapon = player.pInventory.rightWeapon;
 
-            // º¯ÊıË³Ğò¾ö¶¨ÁËÄÜ·ñÓÃÒ»ÖÖĞĞÎª´ò¶ÏÁíÒ»ÖÖĞĞÎª
+            // å‡½æ•°é¡ºåºå†³å®šäº†èƒ½å¦ç”¨ä¸€ç§è¡Œä¸ºæ‰“æ–­å¦ä¸€ç§è¡Œä¸º
             Handle_Hold_E_Input(rightWeapon);
             Handle_Hold_Q_Input(leftWeapon, rightWeapon);
             Handle_Tap_E_Input(leftWeapon, rightWeapon);

@@ -14,9 +14,9 @@ namespace CatchMoon
 
         [Header("״̬ Flags")]
         [SerializeField] bool hadRollForChance = false;
-        [SerializeField] bool willPerformBlock = false;     // will����
-        [SerializeField] bool willPerformDodge = false;     // will����(����)
-        [SerializeField] bool willPerformParry = false;     // will����
+        [SerializeField] bool willPerformBlock = false;     // will防御
+        [SerializeField] bool willPerformDodge = false;     // will闪避(翻滚)
+        [SerializeField] bool willPerformParry = false;     // will弹反
 
         private void Awake()
         {
@@ -25,14 +25,14 @@ namespace CatchMoon
         }
 
         /**
-         *  ��⹥����Χ
-         *  if �ڹ�����Χ��:
-         *      if ������Ϊ����ȴ:
-         *          ���빥��״̬
+         *  检测攻击范围
+         *  if 在攻击范围内:
+         *      if 攻击行为已冷却:
+         *          进入攻击状态
          *      else: 
-         *          ��������ս����̬״̬
+         *          继续保持战斗姿态状态
          *  else:
-         *      �л�������Ŀ��״̬
+         *      切换至跟踪目标状态
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -48,7 +48,7 @@ namespace CatchMoon
 
         State ProcessMeleeCombatStyle(EnemyManager enemy)
         {
-            // ������, ֹͣ�����˶�
+            // 交互中, 停止所有运动
             if (enemy.isInteracting)
             {
                 enemy.animator.SetFloat("Vertical", 0);
@@ -59,21 +59,21 @@ namespace CatchMoon
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
-            // ��aggroRadius�����뾶��ʱ׷�����
+            // 在aggroRadius外察觉半径内时追向玩家
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
             {
                 ResetStateFlags();
                 return pursueTargetState;
             }
 
-            // ������ȴʱΧ��PlayerתȦ(�������)
+            // 攻击冷却时围绕Player转圈(随机左右)
             DecideCirclingAction(enemy);
 
             HandleRotateTowardsTarget(enemy);
             
             if (!hadRollForChance)
                 RollForChance(enemy);
-            // �����ӷ���
+            // 弹反加反击
             if (enemy.distFromTarget < enemy.cCombat.criticalAttackRange)
             {
                 if (willPerformParry)
@@ -81,10 +81,10 @@ namespace CatchMoon
                 if (enemy.currentTarget.canBeRiposted)
                     Riposte(enemy);
             }
-            // ����
+            // 闪避
             if (willPerformDodge && enemy.distFromTarget < 2f)
                 Dodge(enemy);
-            // ��
+            // 格挡
             if (willPerformBlock)
                 Block(enemy);
             else if (enemy.cCombat.isBlocking)
@@ -92,7 +92,7 @@ namespace CatchMoon
                 enemy.cCombat.isBlocking = false;
                 enemy.eAnimator.PlayTargetAnimation("Block - End", false, true);
             }
-            // ����
+            // 攻击
             if (enemy.currentRecoveryTime <= 0)
             {
                 if (attackState.currentAttack == null)
@@ -112,7 +112,7 @@ namespace CatchMoon
         {
             enemy.animator.SetBool("aimingMode", true);
 
-            // ������,ֹͣ�����˶�
+            // 交互中,停止所有运动
             if (enemy.isInteracting)
             {
                 enemy.animator.SetFloat("Vertical", 0);
@@ -123,11 +123,11 @@ namespace CatchMoon
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
-            // ��aggroRadius�����뾶��ʱ׷�����
+            // 在aggroRadius外察觉半径内时追向玩家
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 return pursueTargetState;
 
-            // ����ұȽϽ���ʱ��, �뿪���
+            // 在玩家比较近的时候, 离开玩家
             if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
             {
                 return attackState;
@@ -144,7 +144,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [����] ����Ŀ��
+        /// [处理] 朝向目标
         /// </summary>
         protected void HandleRotateTowardsTarget(EnemyManager enemy)
         {
@@ -156,7 +156,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ������ô����
+        /// 决定怎么拉扯
         /// </summary>
         protected void DecideCirclingAction(EnemyManager enemy)
         {
@@ -164,7 +164,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Χ��Ŀ����
+        /// 围绕目标走
         /// </summary>
         protected void WalkAroundTarget(EnemyManager enemy)
         {
@@ -173,10 +173,10 @@ namespace CatchMoon
                 if (!attackState.setAroundDirection)
                 {
                     attackState.setAroundDirection = true;
-                    // ������������, 0.5f��-0.5f���ʶ԰�
+                    // 随机向左或向右, 0.5f与-0.5f概率对半
                     horizontalMovementValue = Random.Range(0, 2) - 0.5f;
                 }
-                // ������ȴ�У���������ҵľ���
+                // 攻击冷却中，拉开与玩家的距离
                 if (enemy.distFromTarget < 3f)
                     verticalMovementValue = -0.5f;
                 else
@@ -185,7 +185,7 @@ namespace CatchMoon
             else
             {
                 horizontalMovementValue = 0f;
-                // ������ȴ����ȴ�򲻵����ӽ�Player
+                // 攻击冷却好了却打不到，接近Player
                 if (enemy.distFromTarget > 1.4f)
                     verticalMovementValue = 0.5f;
                 else
@@ -194,9 +194,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ��ȡ�µĹ�����Ϊ
+        /// 获取新的攻击行为
         /// </summary>
-        /// <param name="enemyManger">���˹�����</param>
+        /// <param name="enemyManger">敌人管理器</param>
         protected virtual void GetNewAttack(EnemyManager enemy)
         {
             int maxScore = 0;
@@ -232,7 +232,7 @@ namespace CatchMoon
             }
         }
 
-        // ���ݸ��ʾ����Ƿ�������Ϊ
+        // 根据概率决定是否发生该行为
         void RollForChance(EnemyManager enemy)
         {
             if (!enemy.isInteracting && enemy.currentTarget.cCombat.isAttacking)
@@ -268,7 +268,7 @@ namespace CatchMoon
             if (player.aimingMode)
             {
                 enemy.transform.LookAt(player.transform);
-                // ����˷�����󷽻��ҷ�����
+                // 向敌人方向的左方或右方闪避
                 int randomDir = Random.Range(0, 2) * 180 - 90;
                 enemy.transform.Rotate(new Vector3(0, randomDir, 0));
             }
@@ -291,7 +291,7 @@ namespace CatchMoon
                 {
                     willPerformParry = false;
 
-                    // ת�����
+                    // 转向玩家
                     enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation,
                         Quaternion.LookRotation(enemy.targetDir), enemy.aiSettings.rotationSpeed * Time.deltaTime);
                     enemy.eAnimator.PlayTargetAnimation("Parry", true);

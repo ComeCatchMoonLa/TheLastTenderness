@@ -9,9 +9,9 @@ namespace CatchMoon
 
         public List<FogWall> fogWalls;
 
-        public bool bossFightIsActive;   // Ä¿Ç°ÕıÔÚÕ½¶·µÄboss
-        public bool bossHasBeenAwakened; // (²¥·Åboss³ö³¡¶¯»­,) boss±»»½ĞÑ
-        public bool bossHasBeenDefeated; // boss±»»÷°Ü
+        public bool bossFightIsActive;   // ç›®å‰æ­£åœ¨æˆ˜æ–—çš„boss
+        public bool bossHasBeenAwakened; // (æ’­æ”¾bosså‡ºåœºåŠ¨ç”»,) bossè¢«å”¤é†’
+        public bool bossHasBeenDefeated; // bossè¢«å‡»è´¥
 
         private void Awake()
         {

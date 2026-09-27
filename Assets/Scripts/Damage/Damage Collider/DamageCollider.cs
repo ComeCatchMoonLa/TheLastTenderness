@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ÉËº¦´¥·¢Æ÷
+    /// ä¼¤å®³è§¦å‘å™¨
     /// </summary>
     public class DamageCollider : MonoBehaviour
     {
@@ -11,21 +11,21 @@ namespace CatchMoon
         protected Collider damageCollider;
         public bool enabledDamageColliderOnStartUp = false;
 
-        [Header("¶ÓÎéID")]
+        [Header("é˜Ÿä¼ID")]
         public int teamID = 0;
 
         [Header("Poise")]
         public float poiseBreak;
         public float offensivePoiseBonus;
 
-        [Header("ÉËº¦")]
+        [Header("ä¼¤å®³")]
         [HideInInspector] public float pd;
         [HideInInspector] public float fd;
         [HideInInspector] public float md;
         [HideInInspector] public float ld;
         [HideInInspector] public float dd;
 
-        [Header("ÉËº¦ÏµÊı")]
+        [Header("ä¼¤å®³ç³»æ•°")]
         public float guardBreakModifider = 1;
         protected string currentDamageAnimation;
 
@@ -33,7 +33,7 @@ namespace CatchMoon
         {
             damageCollider = GetComponent<Collider>();
 
-            #region ¼ì´í
+            #region æ£€é”™
             if (damageCollider == null)
             {
                 Debug.LogError("damageCollider is null.");
@@ -49,7 +49,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÆôÓÃÉËº¦´¥·¢Æ÷
+        /// å¯ç”¨ä¼¤å®³è§¦å‘å™¨
         /// </summary>
         public void EnableDamageCollider()
         {
@@ -57,7 +57,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ½ûÓÃÉËº¦´¥·¢Æ÷
+        /// ç¦ç”¨ä¼¤å®³è§¦å‘å™¨
         /// </summary>
         public void DisableDamageCollider()
         {
@@ -65,12 +65,12 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ½øÈë´¥·¢Æ÷
+        /// è¿›å…¥è§¦å‘å™¨
         /// </summary>
-        /// <param name="collision">´¥·¢Æ÷²¶»ñµÄ¶ÔÏó</param>
+        /// <param name="collision">è§¦å‘å™¨æ•è·çš„å¯¹è±¡</param>
         protected virtual void OnTriggerEnter(Collider collision)
         {
-            if (collision.tag == "Player" || collision.tag == "Enemy") // ¹¥»÷½ÇÉ«
+            if (collision.tag == "Player" || collision.tag == "Enemy") // æ”»å‡»è§’è‰²
             {
                 CharacterManager damageTarget = collision.GetComponent<CharacterManager>();
                 if (damageTarget == null)
@@ -81,27 +81,27 @@ namespace CatchMoon
 
                 if (character == damageTarget || damageTarget.cStats.teamID == teamID) return;
 
-                // ÕıÔÚµ¯·´
+                // æ­£åœ¨å¼¹å
                 if (damageTarget.cCombat.isParrying)
                 {
                     character.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
                     character.canBeRiposted = true;
                 }
-                // ·ÀÓù³É¹¦
+                // é˜²å¾¡æˆåŠŸ
                 else if (damageTarget.cCombat.isBlocking) 
                 {
                     DealDamage(damageTarget, "Block - Hit", pd, fd, md, ld, dd);
                 }
-                // Ã»ÓĞµ¯·´Ò²Ã»ÓĞ·ÀÓù³É¹¦(ÀıÈç, Í·²¿ÊÜµ½¹¥»÷, ÒÔ¼°ÊÜµ½À´×Ô²àÃæ»òºóÃæµÄ¹¥»÷)
+                // æ²¡æœ‰å¼¹åä¹Ÿæ²¡æœ‰é˜²å¾¡æˆåŠŸ(ä¾‹å¦‚, å¤´éƒ¨å—åˆ°æ”»å‡», ä»¥åŠå—åˆ°æ¥è‡ªä¾§é¢æˆ–åé¢çš„æ”»å‡»)
                 else
                 {
                     if (damageTarget.cStats.isInvulnerable) return;
 
-                    // »ñÈ¡ÎÒÃÇµÄÎäÆ÷Óë¸ÃcolliderµÚÒ»´Î½Ó´¥µÄµØ·½, ÔÚ¸Ã´¦²¥·ÅÑª½¦ÌØĞ§
+                    // è·å–æˆ‘ä»¬çš„æ­¦å™¨ä¸è¯¥colliderç¬¬ä¸€æ¬¡æ¥è§¦çš„åœ°æ–¹, åœ¨è¯¥å¤„æ’­æ”¾è¡€æº…ç‰¹æ•ˆ
                     Vector3 contactPoint = collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                     character.cEffects.PlayBloodSplatter(contactPoint);
 
-                    // ¸ù¾İÉËº¦µÄ·½Ïò, ¾ö¶¨²¥·ÅÄÄ¸öÊÜÉË¶¯»­
+                    // æ ¹æ®ä¼¤å®³çš„æ–¹å‘, å†³å®šæ’­æ”¾å“ªä¸ªå—ä¼¤åŠ¨ç”»
                     float directionHitFrom = Vector3.SignedAngle(character.transform.forward, damageTarget.transform.forward, Vector3.up);
                     ChooseWhichDirectionDamageCameFrom(directionHitFrom);
                     
@@ -112,7 +112,7 @@ namespace CatchMoon
 
         protected virtual void DealDamage(CharacterManager damageTarget, string damageAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            // ´¦ÀíÉËº¦ÏµÊı(¸ù¾İ¹¥»÷µÄÀàĞÍ£¬ÈçÖØ¹¥»÷ÓëÇá¹¥»÷ÉËº¦ÏµÊı²»Í¬)
+            // å¤„ç†ä¼¤å®³ç³»æ•°(æ ¹æ®æ”»å‡»çš„ç±»å‹ï¼Œå¦‚é‡æ”»å‡»ä¸è½»æ”»å‡»ä¼¤å®³ç³»æ•°ä¸åŒ)
             if (character.isUsingRightHand)
             {
                 WeaponItem rightWeapon = character.cInventory.rightWeapon;
@@ -137,7 +137,7 @@ namespace CatchMoon
                 else if (character.cCombat.attackType == AttackType.heavy_2)
                     DealDamageWithM(leftWeapon.haSecondPhasDM, ref pd, ref fd, ref md, ref ld, ref dd);
             }
-            // ´¦Àí¸ñµ²(Èô¸ñµ²³É¹¦£¬ÔòÉËº¦»á±»ÎüÊÕÒ»²¿·Ö)
+            // å¤„ç†æ ¼æŒ¡(è‹¥æ ¼æŒ¡æˆåŠŸï¼Œåˆ™ä¼¤å®³ä¼šè¢«å¸æ”¶ä¸€éƒ¨åˆ†)
             CharacterStatsManager enemyShield = damageTarget.cStats;
             Vector3 directinoFromPlayerToEnemy = character.transform.position - damageTarget.transform.position;
             float dotValueFromPlayerToEnemy = Vector3.Dot(directinoFromPlayerToEnemy, damageTarget.transform.forward);
@@ -156,7 +156,7 @@ namespace CatchMoon
             }
             else
             {
-                // ÅĞ¶Ï »úÌåÎÈ¶¨ĞÔ ÊÇ·ñ±»´òÆÆ(Èô±»´òÆÆÔò²¥·ÅÊÜÉË¶¯»­£¬·ñÔò²»²¥·ÅÊÜÉË¶¯»­)
+                // åˆ¤æ–­ æœºä½“ç¨³å®šæ€§ æ˜¯å¦è¢«æ‰“ç ´(è‹¥è¢«æ‰“ç ´åˆ™æ’­æ”¾å—ä¼¤åŠ¨ç”»ï¼Œå¦åˆ™ä¸æ’­æ”¾å—ä¼¤åŠ¨ç”»)
                 damageTarget.cStats.poiseResetTimer = damageTarget.cStats.totalPoiseResetTime;
                 damageTarget.cStats.totalPoiseDefence -= poiseBreak;
                 if (damageTarget.cStats.totalPoiseDefence > poiseBreak)

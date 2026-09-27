@@ -9,8 +9,8 @@ namespace CatchMoon
         public FlaskType flaskType;
 
         [Header("Recovery Amount")]
-        public int healthRecoverAmount;      // HP(ÑªÁ¿)»Ö¸´Á¿
-        public int focusPointsRecoverAmount; // FP(¾«Á¦Öµ)»Ö¸´Á¿
+        public int healthRecoverAmount;      // HP(è¡€é‡)æ¢å¤é‡
+        public int focusPointsRecoverAmount; // FP(ç²¾åŠ›å€¼)æ¢å¤é‡
 
         [Header("Recovery FX")]
         public GameObject recoveryFX;

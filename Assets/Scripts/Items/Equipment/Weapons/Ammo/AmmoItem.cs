@@ -14,7 +14,7 @@ namespace CatchMoon
         public bool useGravity = false;
 
         [Header("Ammo Capacity")]
-        public int maxCnt; // 数量上限
+        public int maxCnt; // 鏁伴噺涓婇檺
         public int cnt;
 
         [Header("Ammo Base Damage")]
@@ -25,8 +25,8 @@ namespace CatchMoon
         //public int lightDamage;
 
         [Header("Item Models")]
-        public GameObject loadedItemModel; // 射出前的模型
-        public GameObject liveItemModel;   // 射出后的模型
-        public GameObject penetratedModel; // 射中后的模型
+        public GameObject loadedItemModel; // 灏勫嚭鍓嶇殑妯″瀷
+        public GameObject liveItemModel;   // 灏勫嚭鍚庣殑妯″瀷
+        public GameObject penetratedModel; // 灏勪腑鍚庣殑妯″瀷
     }
 }

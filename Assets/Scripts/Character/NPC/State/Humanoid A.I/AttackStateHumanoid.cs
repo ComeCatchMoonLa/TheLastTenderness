@@ -8,7 +8,7 @@ namespace CatchMoon
         RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
         public ItemBasedAttackAction currentAttack;
 
-        public bool setAroundDirection = false;   // ÉèÖÃÁËÎ§ÈÆÍæ¼ÒĞı×ªµÄ·½Ïò
+        public bool setAroundDirection = false;   // è®¾ç½®äº†å›´ç»•ç©å®¶æ—‹è½¬çš„æ–¹å‘
         public bool willDoComboOnNextAttack = false;
         public bool hasPerformedAttack = false;
 
@@ -86,12 +86,12 @@ namespace CatchMoon
 
             hasPerformedAttack = false;
             setAroundDirection = false;
-            enemy.currentRecoveryTime = currentAttack.recoveryTime; // ÖØÖÃ¹¥»÷ÀäÈ´Ê±¼ä
+            enemy.currentRecoveryTime = currentAttack.recoveryTime; // é‡ç½®æ”»å‡»å†·å´æ—¶é—´
             currentAttack = null;
         }
 
         /// <summary>
-        /// [´¦Àí] ¹¥»÷Ê±Ğı×ª(³¯ÏòÄ¿±ê)
+        /// [å¤„ç†] æ”»å‡»æ—¶æ—‹è½¬(æœå‘ç›®æ ‡)
         /// </summary>
         private void RotateTowardsTargrtWhilstAttacking(EnemyManager enemy)
         {
@@ -106,7 +106,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Ëæ»ú¾ö¶¨ÊÇ·ñÁ¬»÷
+        /// éšæœºå†³å®šæ˜¯å¦è¿å‡»
         /// </summary>
         private void RollForComboChance(EnemyManager enemy)
         {
@@ -122,7 +122,7 @@ namespace CatchMoon
 
             hasPerformedAttack = false;
             setAroundDirection = false;
-            enemy.currentRecoveryTime = currentAttack.recoveryTime; // ÖØÖÃ¹¥»÷ÀäÈ´Ê±¼ä
+            enemy.currentRecoveryTime = currentAttack.recoveryTime; // é‡ç½®æ”»å‡»å†·å´æ—¶é—´
             currentAttack = null;
         }
     }

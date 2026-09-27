@@ -12,13 +12,13 @@ namespace CatchMoon
         [SerializeField] TextMeshProUGUI talkContentText;
         [SerializeField] TextMeshProUGUI talkerNameText;
 
-        [Header("¶Ô»°ÄÚÈİÁĞ±í")]
+        [Header("å¯¹è¯å†…å®¹åˆ—è¡¨")]
         public List<DialogueTextData> talkContent;
 
-        [Header("²¥·ÅÍêÎÄ±¾ºóµÄÍ£Áô»º³åÊ±¼ä")]
+        [Header("æ’­æ”¾å®Œæ–‡æœ¬åçš„åœç•™ç¼“å†²æ—¶é—´")]
         public float waitTime = 0.8f;
 
-        [Header("µ±Ç°¾ä×ÓÒÑ²¥·ÅÍêÕû(ÎÄ×Ö+ÓïÒô)")]
+        [Header("å½“å‰å¥å­å·²æ’­æ”¾å®Œæ•´(æ–‡å­—+è¯­éŸ³)")]
         [SerializeField] bool sentenceIsComplete;
 
         [System.NonSerialized] public Coroutine talkCoroutine;
@@ -29,7 +29,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
 
@@ -50,18 +50,18 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÉèÖÃ¶Ô»°ÄÚÈİ(½«npc¶ÔÓ¦µÄ¶Ô»°ÄÚÈİÌí¼Óµ½¶Ô»°ÄÚÈİÁĞ±í)
+        /// è®¾ç½®å¯¹è¯å†…å®¹(å°†npcå¯¹åº”çš„å¯¹è¯å†…å®¹æ·»åŠ åˆ°å¯¹è¯å†…å®¹åˆ—è¡¨)
         /// </summary>
         public void SetTalkContent(List<DialogueTextData> talkContent)
         {
-            // ÉèÖÃnpc¶Ô»°ÄÚÈİ
+            // è®¾ç½®npcå¯¹è¯å†…å®¹
             this.talkContent = new List<DialogueTextData>();
             foreach(DialogueTextData textData in talkContent)
                 this.talkContent.Add(textData);
         }
         
         /// <summary>
-        /// ÉèÖÃ¶Ô»°ÈËµÄ×´Ì¬(¶Ô»°ÈËÃû³Æ¡¢flag¡¢¶¯»­)
+        /// è®¾ç½®å¯¹è¯äººçš„çŠ¶æ€(å¯¹è¯äººåç§°ã€flagã€åŠ¨ç”»)
         /// </summary>
         void SetTalkerStatus(EnemyManager npc)
         {
@@ -70,7 +70,7 @@ namespace CatchMoon
                 npc.talkWithSB = false;
                 npc.animator.Play("NonCombat Whole Body Empty");
 
-                talkerNameText.text = "Äã";
+                talkerNameText.text = "ä½ ";
                 player.talkWithSB = true;
             }
             else
@@ -84,7 +84,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ×Ô¶¯Öğ¾ä²¥·Å¾çÇé
+        /// è‡ªåŠ¨é€å¥æ’­æ”¾å‰§æƒ…
         /// </summary>
         IEnumerator UpdateDialogue_Auto_SBS(EnemyManager npc)
         {
@@ -103,7 +103,7 @@ namespace CatchMoon
             talkCoroutine = StartCoroutine(UpdateDialogue_Auto_SBS(npc));
         }
         /// <summary>
-        /// ×Ô¶¯Öğ×Ö²¥·Å¾çÇé
+        /// è‡ªåŠ¨é€å­—æ’­æ”¾å‰§æƒ…
         /// </summary>
         IEnumerator UpdateDialogue_Auto_WFW(EnemyManager npc)
         {
@@ -118,7 +118,7 @@ namespace CatchMoon
                     talkContentText.text = newSentence;
                     yield return new WaitForSeconds((talkContent[0].duration - waitTime) / talkContent[0].text.Length);
                 }
-                talkContent.RemoveAt(0); // ´¦ÀíÍê¸Ã¶ÎÎÄ±¾ºó£¬ÔÚ¶Ô»°ÄÚÈİÁĞ±íÖĞÒÆ³ı¸Ã¶ÎÎÄ±¾
+                talkContent.RemoveAt(0); // å¤„ç†å®Œè¯¥æ®µæ–‡æœ¬åï¼Œåœ¨å¯¹è¯å†…å®¹åˆ—è¡¨ä¸­ç§»é™¤è¯¥æ®µæ–‡æœ¬
                 yield return new WaitForSeconds(waitTime);
             }
             HandleTalkEnd(npc);
@@ -128,7 +128,7 @@ namespace CatchMoon
             talkCoroutine = StartCoroutine(UpdateDialogue_Auto_WFW(npc));
         }
         /// <summary>
-        /// ·Ç×Ô¶¯Öğ¾ä²¥·Å¾çÇé
+        /// éè‡ªåŠ¨é€å¥æ’­æ”¾å‰§æƒ…
         /// </summary>
         public void Handle_UpdateDialogue_NonAuto_SBS(EnemyManager npc)
         {
@@ -157,7 +157,7 @@ namespace CatchMoon
             }
         }
         /// <summary>
-        /// ·Ç×Ô¶¯Öğ×Ö²¥·Å¾çÇé
+        /// éè‡ªåŠ¨é€å­—æ’­æ”¾å‰§æƒ…
         /// </summary>
         public void Handle_UpdateDialogue_NonAuto_WFW(EnemyManager npc)
         {
@@ -177,7 +177,7 @@ namespace CatchMoon
                     else
                     {
                         talkContentText.text = talkContent[0].text;
-                        talkContent.RemoveAt(0); // ´¦ÀíÍê¸Ã¶ÎÎÄ±¾ºó£¬ÔÚ¶Ô»°ÄÚÈİÁĞ±íÖĞÒÆ³ı¸Ã¶ÎÎÄ±¾
+                        talkContent.RemoveAt(0); // å¤„ç†å®Œè¯¥æ®µæ–‡æœ¬åï¼Œåœ¨å¯¹è¯å†…å®¹åˆ—è¡¨ä¸­ç§»é™¤è¯¥æ®µæ–‡æœ¬
                         sentenceIsComplete = true;
                     }
                 }
@@ -197,13 +197,13 @@ namespace CatchMoon
         }
         
         /// <summary>
-        /// Öğ×Ö¸üĞÂ¶Ô»°ÎÄ±¾ [¸¨Öúº¯Êı]
+        /// é€å­—æ›´æ–°å¯¹è¯æ–‡æœ¬ [è¾…åŠ©å‡½æ•°]
         /// </summary>
         /// <param name="npc"></param>
         /// <returns></returns>
         IEnumerator UpdateDialogue_WFW_Helper(EnemyManager npc)
         {
-            // ÉèÖÃËµ»°ÈËµÄÃû×Ö
+            // è®¾ç½®è¯´è¯äººçš„åå­—
             SetTalkerStatus(npc);
 
             sentenceIsComplete = false;
@@ -214,7 +214,7 @@ namespace CatchMoon
                 talkContentText.text = newSentence;
                 yield return new WaitForSeconds((talkContent[0].duration - waitTime) / talkContent[0].text.Length);
             }
-            talkContent.RemoveAt(0); // ´¦ÀíÍê¸Ã¶ÎÎÄ±¾ºó£¬ÔÚ¶Ô»°ÄÚÈİÁĞ±íÖĞÒÆ³ı¸Ã¶ÎÎÄ±¾
+            talkContent.RemoveAt(0); // å¤„ç†å®Œè¯¥æ®µæ–‡æœ¬åï¼Œåœ¨å¯¹è¯å†…å®¹åˆ—è¡¨ä¸­ç§»é™¤è¯¥æ®µæ–‡æœ¬
             sentenceIsComplete = true;
         }
         public void Start_UpdateDialogue_WFW_Helper(EnemyManager npc)
@@ -222,7 +222,7 @@ namespace CatchMoon
             talkCoroutine = StartCoroutine(UpdateDialogue_WFW_Helper(npc));
         }
         /// <summary>
-        /// Öğ¾ä¸üĞÂ¶Ô»°ÎÄ±¾ [¸¨Öúº¯Êı]
+        /// é€å¥æ›´æ–°å¯¹è¯æ–‡æœ¬ [è¾…åŠ©å‡½æ•°]
         /// </summary>
         public void UpdateDialogueSBS_Helper(EnemyManager npc)
         {
@@ -232,7 +232,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] Ìø¹ı¶Ô»°ÊäÈë
+        /// [å¤„ç†] è·³è¿‡å¯¹è¯è¾“å…¥
         /// </summary>
         public void Handle_SkipTalk_Input(EnemyManager npc)
         {
@@ -249,25 +249,25 @@ namespace CatchMoon
         }
         
         /// <summary>
-        /// ´¦Àí¶Ô»°½áÊø
+        /// å¤„ç†å¯¹è¯ç»“æŸ
         /// </summary>
         void HandleTalkEnd(EnemyManager npc)
         {
-            // npc ×´Ì¬
+            // npc çŠ¶æ€
             npc.talkWithSB = false;
             npc.gameObject.tag = "Interactable";
-            // npc ¶¯»­
+            // npc åŠ¨ç”»
             npc.animator.Play("NonCombat Whole Body Empty");
-            // player ×´Ì¬
+            // player çŠ¶æ€
             player.talkWithSB = false;
             // player UI
             player.ui.hud.Show();
             player.ui.popUps.talkUI.Close();
-            // player ÊäÈë
+            // player è¾“å…¥
             player.input.inputActions.Enable();
-            // player ¶¯»­
+            // player åŠ¨ç”»
             player.animator.Play("NonCombat Whole Body Empty");
-            // player½»»¥µÄ¾çÇénpc
+            // playeräº¤äº’çš„å‰§æƒ…npc
             player.storyNpc = null;
         }
     }

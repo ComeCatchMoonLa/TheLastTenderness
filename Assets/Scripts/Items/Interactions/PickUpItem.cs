@@ -4,11 +4,11 @@ namespace CatchMoon
 {
     public class PickUpItem : Interactable
     {
-        public Item item; // ����
+        public Item item; // 武器
 
         private void Start()
         {
-            #region ���
+            #region 检错
             if (item == null)
             {
                 Debug.LogError("weapon is null.");
@@ -18,17 +18,17 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ��ҽ���[��д]
+        /// 玩家交互[重写]
         /// </summary>
         public override void Interact(PlayerManager player)
         {
-            // ʰ����Ʒ�����������ƶ�
+            // 拾起物品操作打断玩家移动
             player.rigidBody.linearVelocity = Vector3.zero;
             player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             player.pInventory.AddItem(item);
             player.ui.popUps.interactUI.SetInteractionInfo(item);
 
-            player.ui.popUps.interactUI.PopUpInteractionInfoUI(); // ����ʾ��Ʒ��Ϣ��UI����
+            player.ui.popUps.interactUI.PopUpInteractionInfoUI(); // 将提示物品信息的UI激活
             Destroy(gameObject);
         }
     }

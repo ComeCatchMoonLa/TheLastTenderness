@@ -4,19 +4,19 @@ namespace CatchMoon
 {
     public class AchievementWinManager : MonoBehaviour
     {
-        [Header("×Ó´°¿Ú")]
+        [Header("å­çª—å£")]
         public GameObject statisticalWin;
         public AchievementCardsWinManager achievementCardsWin;
 
-        [Header("Ò»Ğ©°´Å¥")]
+        [Header("ä¸€äº›æŒ‰é’®")]
         public GameObject buttons;
 
-        [Header("±»Ñ¡ÔñµÄ´°¿Ú")]
+        [Header("è¢«é€‰æ‹©çš„çª—å£")]
         [SerializeField] AchievementWinType selectedWin;
 
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (statisticalWin == null)
                 Debug.LogError("statisticalWin == null");
             if (achievementCardsWin == null)
@@ -24,7 +24,7 @@ namespace CatchMoon
             #endregion
         }
 
-        // ¿ØÖÆ×Ó´°¿ÚÖ®¼äµÄÇĞ»»
+        // æ§åˆ¶å­çª—å£ä¹‹é—´çš„åˆ‡æ¢
         public void SelectStatisticalWin()
         {
             UnselectCurrentWin();

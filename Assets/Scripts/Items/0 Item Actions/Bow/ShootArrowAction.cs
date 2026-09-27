@@ -18,17 +18,17 @@ namespace CatchMoon
             if (!player.pCombat.isAiming || player.pStats.currentStamina <= 0)
                 return;
 
-            // ²¥·ÅÉä¼ý¶¯»­
+            // æ’­æ”¾å°„ç®­åŠ¨ç”»
             player.animator.Play("Shoot Arrow");
 
-            // Ïú»ÙloadModel
+            // é”€æ¯loadModel
             Destroy(player.pEffects.Ammo);
             player.pEffects.Ammo = null;
 
-            // ¼õÉÙÍæ¼ÒµÄ¿â´æ
+            // å‡å°‘çŽ©å®¶çš„åº“å­˜
             --(player.pInventory.currentAmmo.cnt);
 
-            // Éú³ÉliveModel
+            // ç”ŸæˆliveModel
             GameObject liveArrow = Instantiate(player.pInventory.currentAmmo.liveItemModel, player.pWeaponSlot.rightHandSlot.overrideParentWhileHolding);
             liveArrow.transform.localPosition = Vector3.zero;
 
@@ -65,14 +65,14 @@ namespace CatchMoon
             if (!enemy.eCombat.isAiming || enemy.eStats.currentStamina <= 0)
                 return;
 
-            // ²¥·ÅÉä¼ý¶¯»­
+            // æ’­æ”¾å°„ç®­åŠ¨ç”»
             enemy.animator.Play("Shoot Arrow");
 
-            // Ïú»ÙloadModel
+            // é”€æ¯loadModel
             Destroy(enemy.eEffects.Ammo);
             enemy.eEffects.Ammo = null;
 
-            // Éú³ÉliveModel
+            // ç”ŸæˆliveModel
             GameObject liveArrow = Instantiate(enemy.eInventory.currentAmmo.liveItemModel, enemy.eWeaponSlot.rightHandSlot.overrideParentWhileHolding);
             liveArrow.transform.localPosition = Vector3.zero;
             liveArrow.transform.LookAt(enemy.currentTarget.lockOnTransform);

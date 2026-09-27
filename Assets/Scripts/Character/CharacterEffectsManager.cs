@@ -7,7 +7,7 @@ namespace CatchMoon
         CharacterManager character;
 
         [Header("Ammo FX")]
-        [Tooltip("·ÉĞĞÖĞµÄµ¯Ò©")]
+        [Tooltip("é£è¡Œä¸­çš„å¼¹è¯")]
         public GameObject Ammo;
 
         [Header("Damage FX")]
@@ -23,7 +23,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ²¥·ÅÎäÆ÷ÍÏÎ²ÌØĞ§
+        /// æ’­æ”¾æ­¦å™¨æ‹–å°¾ç‰¹æ•ˆ
         /// </summary>
         public virtual void PlayWeaponTrialFX()
         {
@@ -40,7 +40,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ²¥·ÅÑª½¦ÌØĞ§
+        /// æ’­æ”¾è¡€æº…ç‰¹æ•ˆ
         /// </summary>
         /// <param name="bloodSplatterLocation"></param>
         public virtual void PlayBloodSplatter(Vector3 bloodSplatterLocation)

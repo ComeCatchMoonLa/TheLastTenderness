@@ -28,7 +28,7 @@ namespace CatchMoon
 
                     if (viewableAngle > enemy.aiSettings.minViewAngel && viewableAngle < enemy.aiSettings.maxViewAngel)
                     {
-                        // aiÊÓÒ°±»µ²
+                        // aiè§†é‡Žè¢«æŒ¡
                         if (Physics.Linecast(enemy.lockOnTransform.position, targetcharacter.lockOnTransform.position,
                             LayerMask.defaultLayerMask | LayerMask.environment, QueryTriggerInteraction.Ignore))
                         {

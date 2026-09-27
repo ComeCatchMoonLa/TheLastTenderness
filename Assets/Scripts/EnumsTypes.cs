@@ -124,10 +124,10 @@ namespace CatchMoon
         consumable,
     }
 
-    // ESC´°¿ÚÄ£Ê½ÏÂ, ´ò¿ªµÄ×Ó´°¿ÚÀàĞÍ(¼´±íÊ¾Ëù´¦µÄUI²ã¼¶£¬ÓÃÓÚ¿ØÖÆBack²Ù×÷)
+    // ESCçª—å£æ¨¡å¼ä¸‹, æ‰“å¼€çš„å­çª—å£ç±»å‹(å³è¡¨ç¤ºæ‰€å¤„çš„UIå±‚çº§ï¼Œç”¨äºæ§åˆ¶Backæ“ä½œ)
     public enum EscWinOpenedWinType
     {
-        notEscWinMode, // ±íÊ¾·ÇESC´°¿ÚÄ£Ê½
+        notEscWinMode, // è¡¨ç¤ºéESCçª—å£æ¨¡å¼
         escWin,
         settingsWin,
         achievementWin,
@@ -136,7 +136,7 @@ namespace CatchMoon
 
     public enum ChangeLockOnTargetMode
     {
-        nearset, // ×î½ü
-        minHP,   // ÑªÁ¿×îµÍ
+        nearset, // æœ€è¿‘
+        minHP,   // è¡€é‡æœ€ä½
     }
 }

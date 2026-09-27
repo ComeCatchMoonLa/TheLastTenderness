@@ -7,25 +7,25 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        [Header("±»Ñ¡ÔñµÄ´°¿Ú")]
+        [Header("è¢«é€‰æ‹©çš„çª—å£")]
         [SerializeField] InventoryWinType selectedWin;
 
-        [Header("ÎäÆ÷¿â´æ²Û")]
+        [Header("æ­¦å™¨åº“å­˜æ§½")]
         [SerializeField] Transform weaponInventorySlotsParent;
         [SerializeField] GameObject weaponInventorySlotPerfab;
         [SerializeField] List<InventorySlotUI> weaponInventorySlots;
 
-        [Header("¿ø¼×¿â´æ²Û")]
+        [Header("ç›”ç”²åº“å­˜æ§½")]
         [SerializeField] Transform armorInventorySlotsParent;
         [SerializeField] GameObject armorInventorySlotPerfab;
         [SerializeField] List<InventorySlotUI> armorInventorySlots;
 
-        [Header("·¨Êõ¿â´æ²Û")]
+        [Header("æ³•æœ¯åº“å­˜æ§½")]
         [SerializeField] Transform spellInventorySlotsParent;
         [SerializeField] GameObject spellInventorySlotPerfab;
         [SerializeField] List<InventorySlotUI> spellInventorySlots;
 
-        [Header("ÏûºÄÆ·¿â´æ²Û")]
+        [Header("æ¶ˆè€—å“åº“å­˜æ§½")]
         [SerializeField] Transform consumableInventorySlotsParent;
         [SerializeField] GameObject consumableInventorySlotPerfab;
         [SerializeField] List<InventorySlotUI> consumableInventorySlots;
@@ -40,7 +40,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (weaponInventorySlotsParent == null)
                 Debug.LogError("weaponInventorySlotsParent == null");
             if (weaponInventorySlotPerfab == null)
@@ -131,14 +131,14 @@ namespace CatchMoon
             {
                 if (i < player.pInventory.weapons.Count)
                 {
-                    if (weaponInventorySlots.Count < player.pInventory.weapons.Count) // Ìí¼ÓĞÂµÄ²Û
+                    if (weaponInventorySlots.Count < player.pInventory.weapons.Count) // æ·»åŠ æ–°çš„æ§½
                     {
                         GameObject newWeaponInventorySlotPerfab = Instantiate(weaponInventorySlotPerfab, weaponInventorySlotsParent);
                         weaponInventorySlots.Add(newWeaponInventorySlotPerfab.GetComponent<InventorySlotUI>());
                     }
 
                     if (i < player.pInventory.weapons.Count)
-                        weaponInventorySlots[i].AddItem(player.pInventory.weapons[i]);     // ½«ÏîÌí¼Óµ½²ÛÖĞ
+                        weaponInventorySlots[i].AddItem(player.pInventory.weapons[i]);     // å°†é¡¹æ·»åŠ åˆ°æ§½ä¸­
                     else
                         weaponInventorySlots[i].AddItem(player.pInventory.weapons[i]);
                 }
@@ -152,14 +152,14 @@ namespace CatchMoon
             {
                 if (i < player.pInventory.armors.Count)
                 {
-                    if (armorInventorySlots.Count < player.pInventory.armors.Count) // Ìí¼ÓĞÂµÄ²Û
+                    if (armorInventorySlots.Count < player.pInventory.armors.Count) // æ·»åŠ æ–°çš„æ§½
                     {
                         GameObject newArmorInventorySlotPerfab = Instantiate(armorInventorySlotPerfab, armorInventorySlotsParent);
                         armorInventorySlots.Add(newArmorInventorySlotPerfab.GetComponent<InventorySlotUI>());
                     }
 
                     if (i < player.pInventory.armors.Count)
-                        armorInventorySlots[i].AddItem(player.pInventory.armors[i]);     // ½«ÏîÌí¼Óµ½²ÛÖĞ
+                        armorInventorySlots[i].AddItem(player.pInventory.armors[i]);     // å°†é¡¹æ·»åŠ åˆ°æ§½ä¸­
                     else
                         armorInventorySlots[i].AddItem(player.pInventory.armors[i]);
                 }
@@ -173,14 +173,14 @@ namespace CatchMoon
             {
                 if (i < player.pInventory.spells.Count)
                 {
-                    if (spellInventorySlots.Count < player.pInventory.spells.Count) // Ìí¼ÓĞÂµÄ²Û
+                    if (spellInventorySlots.Count < player.pInventory.spells.Count) // æ·»åŠ æ–°çš„æ§½
                     {
                         GameObject newSpellInventorySlotPerfab = Instantiate(spellInventorySlotPerfab, spellInventorySlotsParent);
                         spellInventorySlots.Add(newSpellInventorySlotPerfab.GetComponent<InventorySlotUI>());
                     }
 
                     if (i < player.pInventory.spells.Count)
-                        spellInventorySlots[i].AddItem(player.pInventory.spells[i]);     // ½«ÏîÌí¼Óµ½²ÛÖĞ
+                        spellInventorySlots[i].AddItem(player.pInventory.spells[i]);     // å°†é¡¹æ·»åŠ åˆ°æ§½ä¸­
                     else
                         spellInventorySlots[i].AddItem(player.pInventory.spells[i]);
                 }
@@ -194,14 +194,14 @@ namespace CatchMoon
             {
                 if (i < player.pInventory.consumables.Count)
                 {
-                    if (consumableInventorySlots.Count < player.pInventory.consumables.Count) // Ìí¼ÓĞÂµÄ²Û
+                    if (consumableInventorySlots.Count < player.pInventory.consumables.Count) // æ·»åŠ æ–°çš„æ§½
                     {
                         GameObject newConsumableInventorySlotPerfab = Instantiate(consumableInventorySlotPerfab, consumableInventorySlotsParent);
                         consumableInventorySlots.Add(newConsumableInventorySlotPerfab.GetComponent<InventorySlotUI>());
                     }
 
                     if (i < player.pInventory.consumables.Count)
-                        consumableInventorySlots[i].AddItem(player.pInventory.consumables[i]);     // ½«ÏîÌí¼Óµ½²ÛÖĞ
+                        consumableInventorySlots[i].AddItem(player.pInventory.consumables[i]);     // å°†é¡¹æ·»åŠ åˆ°æ§½ä¸­
                     else
                         consumableInventorySlots[i].AddItem(player.pInventory.consumables[i]);
                 }

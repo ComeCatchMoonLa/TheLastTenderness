@@ -3,14 +3,14 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ����������
+    /// 动画处理器
     /// </summary>
     public class PlayerAnimatorManager : CharacterAnimatorManager
     {
         PlayerManager player;
 
-        int vertical;           // ǰ��
-        int horizontal;         // ����
+        int vertical;           // 前后
+        int horizontal;         // 左右
 
         protected override void Awake()
         {
@@ -24,11 +24,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ���¶�������
+        /// 更新动画参数
         /// </summary>
-        /// <param name="verticalMovement">ǰ��ƫ����</param>
-        /// <param name="horizontalMovement">����ƫ����</param>
-        /// <param name="isSprinting">�Ƿ��ڳ��</param>
+        /// <param name="verticalMovement">前后偏移量</param>
+        /// <param name="horizontalMovement">左右偏移量</param>
+        /// <param name="isSprinting">是否在冲刺</param>
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool lockOnFlagAndNoSprint)
         {
             #region Vertical
@@ -87,19 +87,19 @@ namespace CatchMoon
         }
       
         /// <summary>
-        /// ���Ŷ���ʱִ�еĲ���
+        /// 播放动画时执行的操作
         /// </summary>
         private void OnAnimatorMove()
         {
             if (!player.isInteracting) return;
 
             player.rigidBody.linearDamping = 0;
-            Vector3 deltaPosition = player.animator.deltaPosition; // ��ɫģ�ʹ�ʱ��λ�õ��ý�ɫģ����һ֡�ľ���
+            Vector3 deltaPosition = player.animator.deltaPosition; // 角色模型此时的位置到该角色模型上一帧的距离
             //deltaPosition.y = 0;
             if (Time.deltaTime > 0)
             {
-                Vector3 velocity = deltaPosition / Time.deltaTime; // ���㶯���н�ɫģ�͵�����
-                player.rigidBody.linearVelocity = velocity;     // ʹ���弴��ɫģ�͵������붯���н�ɫģ�͵��������
+                Vector3 velocity = deltaPosition / Time.deltaTime; // 计算动画中角色模型的速率
+                player.rigidBody.linearVelocity = velocity;     // 使刚体即角色模型的速率与动画中角色模型的速率相等
             }
         }
 

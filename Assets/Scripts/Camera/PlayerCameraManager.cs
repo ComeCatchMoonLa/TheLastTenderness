@@ -6,68 +6,68 @@ namespace CatchMoon
 {
     public class PlayerCameraManager : MonoBehaviour
     {
-        #region ±äÁ¿
+        #region å˜é‡
         PlayerManager player;
         
-        Vector3 cameraCurrentVelocity = Vector3.zero; // Ïà»ú¸úËæËÙ¶È(ÓÃÓÚÆ½»¬¹ı¶È)
+        Vector3 cameraCurrentVelocity = Vector3.zero; // ç›¸æœºè·Ÿéšé€Ÿåº¦(ç”¨äºå¹³æ»‘è¿‡åº¦)
 
-        [Header("Ïà»úÖ§¼Ü")]
-        public Transform cameraPivotTransform; // Ïà»úÖ§¼ÜTransform
+        [Header("ç›¸æœºæ”¯æ¶")]
+        public Transform cameraPivotTransform; // ç›¸æœºæ”¯æ¶Transform
 
-        [Header("Ïà»ú")]
-        public Transform cameraTransform; // Ïà»úTransform
-        public Camera cameraObject;       // Ïà»úCamera
+        [Header("ç›¸æœº")]
+        public Transform cameraTransform; // ç›¸æœºTransform
+        public Camera cameraObject;       // ç›¸æœºCamera
 
-        [Header("Ïà»ú¿É¼ì²âµ½µÄ²ã")]
-        public int cameraCanDetectLayers; // Ïà»ú¿ÉÒÔ¼ì²âµ½µÄ²ã
+        [Header("ç›¸æœºå¯æ£€æµ‹åˆ°çš„å±‚")]
+        public int cameraCanDetectLayers; // ç›¸æœºå¯ä»¥æ£€æµ‹åˆ°çš„å±‚
 
-        [Header("Ïà»úËÙ¶È")]
-        [SerializeField] float followFadeTime = 0.2f;       // Ïà»ú¸úËæ¹ı¶ÉÊ±¼ä
-        [SerializeField] float changeModeFadeTime = 0.02f;  // Ïà»úÄ£Ê½¹ı¶ÉÊ±¼ä
-        public float leftAndRightSpeed = 120f;        // Ïà»ú×óÓÒĞı×ªËÙ¶È
-        public float upAndDownSpeed = 60f;            // Ïà»úÉÏÏÂĞı×ªËÙ¶È
-        [SerializeField] float leftAndRightAimingSpeed = 60f; // Ïà»ú×óÓÒĞı×ªËÙ¶È(Ãé×¼Ê±)
-        [SerializeField] float upAndDownAimingSpeed = 30f;    // Ïà»ú×óÓÒĞı×ªËÙ¶È(Ãé×¼Ê±)
+        [Header("ç›¸æœºé€Ÿåº¦")]
+        [SerializeField] float followFadeTime = 0.2f;       // ç›¸æœºè·Ÿéšè¿‡æ¸¡æ—¶é—´
+        [SerializeField] float changeModeFadeTime = 0.02f;  // ç›¸æœºæ¨¡å¼è¿‡æ¸¡æ—¶é—´
+        public float leftAndRightSpeed = 120f;        // ç›¸æœºå·¦å³æ—‹è½¬é€Ÿåº¦
+        public float upAndDownSpeed = 60f;            // ç›¸æœºä¸Šä¸‹æ—‹è½¬é€Ÿåº¦
+        [SerializeField] float leftAndRightAimingSpeed = 60f; // ç›¸æœºå·¦å³æ—‹è½¬é€Ÿåº¦(ç„å‡†æ—¶)
+        [SerializeField] float upAndDownAimingSpeed = 30f;    // ç›¸æœºå·¦å³æ—‹è½¬é€Ÿåº¦(ç„å‡†æ—¶)
 
-        [Header("Ïà»úÊÓ½Ç")]
+        [Header("ç›¸æœºè§†è§’")]
         [SerializeField] float leftAndRightAngle;
         [SerializeField][Range(-35, 35)] float upAndDownAngle;
-        [SerializeField] float minLookUpAngle = -35; // ×îĞ¡Ñö½Ç(¾ÍÊÇ×î´ó¸©½Ç)
-        [SerializeField] float maxLookUpAngle = 35;  // ×î´óÑö½Ç
+        [SerializeField] float minLookUpAngle = -35; // æœ€å°ä»°è§’(å°±æ˜¯æœ€å¤§ä¿¯è§’)
+        [SerializeField] float maxLookUpAngle = 35;  // æœ€å¤§ä»°è§’
 
         public bool isDefaultMode = true;
 
-        [Header("Ïà»úColliderÉèÖÃ")]
-        // (Ğé¹¹µÄcollider, ÓÃÓÚ´¦ÀíÏà»úµÄ¶¯Ì¬Æ«ÒÆ)
-        [SerializeField] float cameraSphereRadius = 0.2f;       // Ïà»úÉäÏß¼ì²âÇòµÄ°ë¾¶Îª0.2
-        [SerializeField] float cameraCollisionOffSet = 0.2f;    // Ïà»úÅö×²Ê±µÄÏò½ÇÉ«µÄÎ»ÒÆ0.2
-        [SerializeField] float minCollisionOffSet = 0.2f;       // Ïà»ú×îĞ¡µÄÒÆ¶¯¾àÀëÎª0.2
+        [Header("ç›¸æœºColliderè®¾ç½®")]
+        // (è™šæ„çš„collider, ç”¨äºå¤„ç†ç›¸æœºçš„åŠ¨æ€åç§»)
+        [SerializeField] float cameraSphereRadius = 0.2f;       // ç›¸æœºå°„çº¿æ£€æµ‹çƒçš„åŠå¾„ä¸º0.2
+        [SerializeField] float cameraCollisionOffSet = 0.2f;    // ç›¸æœºç¢°æ’æ—¶çš„å‘è§’è‰²çš„ä½ç§»0.2
+        [SerializeField] float minCollisionOffSet = 0.2f;       // ç›¸æœºæœ€å°çš„ç§»åŠ¨è·ç¦»ä¸º0.2
 
-        [Header("Ïà»úÎ»ÖÃÆ«ÒÆ")]
-        [SerializeField] float defaultPivotHeight = 1.4f;       // Ïà»úÎ´Ëø¶¨Ê±ÖáµÄ¸ß¶ÈÎª1.4
-        [SerializeField] float lockedPivotHeight = 2.2f;        // Ïà»úËø¶¨Ê±µÄÖáµÄ¸ß¶ÈÎª2.0
-        [SerializeField] float aimingPivotHeight = 1.5f;        // Ïà»úÃé×¼Ê±µÄÖáµÄ¸ß¶ÈÎª1.5
-        [SerializeField][Tooltip("Ä¬ÈÏÏà»úÔÚÍæ¼ÒºóÃæµÄ¾àÀë(ÒÔÇ°ºóÎªÖá)")] float defaultCameraForwardDist = 4f;
-        [SerializeField][Tooltip("Ãé×¼Ê±Ïà»úÔÚÍæ¼ÒºóÃæµÄ¾àÀë(ÒÔÇ°ºóÎªÖá)")] float aimingCameraForwardDist = 1.2f;
-        [SerializeField][Tooltip("Ãé×¼Ê±Ïà»úÔÚÍæ¼Ò×ó±ßµÄ¾àÀë(ÒÔ×óÓÒÎªÖá)")] float aimingCameraRightDist = 0.6f;
+        [Header("ç›¸æœºä½ç½®åç§»")]
+        [SerializeField] float defaultPivotHeight = 1.4f;       // ç›¸æœºæœªé”å®šæ—¶è½´çš„é«˜åº¦ä¸º1.4
+        [SerializeField] float lockedPivotHeight = 2.2f;        // ç›¸æœºé”å®šæ—¶çš„è½´çš„é«˜åº¦ä¸º2.0
+        [SerializeField] float aimingPivotHeight = 1.5f;        // ç›¸æœºç„å‡†æ—¶çš„è½´çš„é«˜åº¦ä¸º1.5
+        [SerializeField][Tooltip("é»˜è®¤ç›¸æœºåœ¨ç©å®¶åé¢çš„è·ç¦»(ä»¥å‰åä¸ºè½´)")] float defaultCameraForwardDist = 4f;
+        [SerializeField][Tooltip("ç„å‡†æ—¶ç›¸æœºåœ¨ç©å®¶åé¢çš„è·ç¦»(ä»¥å‰åä¸ºè½´)")] float aimingCameraForwardDist = 1.2f;
+        [SerializeField][Tooltip("ç„å‡†æ—¶ç›¸æœºåœ¨ç©å®¶å·¦è¾¹çš„è·ç¦»(ä»¥å·¦å³ä¸ºè½´)")] float aimingCameraRightDist = 0.6f;
 
-        [Header("Ëø¶¨ÉèÖÃ")]
-        // Player¿ÉËø¶¨ÇøÓòÎª: ÒÔPlayer³¯ÏòÎª¶Ô³ÆÖá¡¢maxLockOnDistÎª°ë¾¶¡¢2 * maxlockAngle_halfÎªÔ²ĞÄ½ÇµÄÉÈĞÎÇøÓò
-        public bool lockOnFlag = false;                         // ÊÇ·ñÎªËø¶¨ÊÓ½ÇÄ£Ê½(ÒÑ¾­½øÈëÁËËø¶¨Ä£Ê½, curTarget²»Îª¿Õ)
-        public bool lockOnMode = false;                         // ÊÇ·ñÎªËø¶¨Ä£Ê½(player°´F½øĞĞÇĞ»»)
-        public ChangeLockOnTargetMode changeLockOnTargetMode = ChangeLockOnTargetMode.nearset; // ÇĞ»»Ëø¶¨Ä¿±êµÄÉèÖÃ(ÇĞ»»ÖÁ×î½üÄ¿±ê/ÇĞ»»ÖÁÑªÁ¿×îµÍÄ¿±ê)
-        [SerializeField] float maxLookOnAngle_Half = 50f;       // ×î´óËø¶¨·¶Î§½ÇµÄÒ»°ë
-        [SerializeField] float maxLookOnAngle_Half_AutoChangeLockOnTargetMode = 30f; // ¹´Ñ¡×Ô¶¯Ëø¶¨Ä¿±êÑ¡ÏîÊ±, ¼õĞ¡¿ÉËø¶¨Ëø¶¨½Ç¶È
-        [SerializeField] float autoChangeLockOnTargetTime = 2f;  // ×Ô¶¯ÇĞ»»Ëø¶¨Ä¿±êµÄÊ±¼ä¼ä¸ô
-        [SerializeField] float autoChangeLockOnTargetTimer = 1f; // ×Ô¶¯ÇĞ»»Ëø¶¨Ä¿±êµÄ¼ÆÊ±Æ÷
-        [SerializeField] float maxLockOnDist = 30.0f;           // ¿ÉËøµĞµÄ×î´ó¾àÀë
+        [Header("é”å®šè®¾ç½®")]
+        // Playerå¯é”å®šåŒºåŸŸä¸º: ä»¥Playeræœå‘ä¸ºå¯¹ç§°è½´ã€maxLockOnDistä¸ºåŠå¾„ã€2 * maxlockAngle_halfä¸ºåœ†å¿ƒè§’çš„æ‰‡å½¢åŒºåŸŸ
+        public bool lockOnFlag = false;                         // æ˜¯å¦ä¸ºé”å®šè§†è§’æ¨¡å¼(å·²ç»è¿›å…¥äº†é”å®šæ¨¡å¼, curTargetä¸ä¸ºç©º)
+        public bool lockOnMode = false;                         // æ˜¯å¦ä¸ºé”å®šæ¨¡å¼(playeræŒ‰Fè¿›è¡Œåˆ‡æ¢)
+        public ChangeLockOnTargetMode changeLockOnTargetMode = ChangeLockOnTargetMode.nearset; // åˆ‡æ¢é”å®šç›®æ ‡çš„è®¾ç½®(åˆ‡æ¢è‡³æœ€è¿‘ç›®æ ‡/åˆ‡æ¢è‡³è¡€é‡æœ€ä½ç›®æ ‡)
+        [SerializeField] float maxLookOnAngle_Half = 50f;       // æœ€å¤§é”å®šèŒƒå›´è§’çš„ä¸€åŠ
+        [SerializeField] float maxLookOnAngle_Half_AutoChangeLockOnTargetMode = 30f; // å‹¾é€‰è‡ªåŠ¨é”å®šç›®æ ‡é€‰é¡¹æ—¶, å‡å°å¯é”å®šé”å®šè§’åº¦
+        [SerializeField] float autoChangeLockOnTargetTime = 2f;  // è‡ªåŠ¨åˆ‡æ¢é”å®šç›®æ ‡çš„æ—¶é—´é—´éš”
+        [SerializeField] float autoChangeLockOnTargetTimer = 1f; // è‡ªåŠ¨åˆ‡æ¢é”å®šç›®æ ‡çš„è®¡æ—¶å™¨
+        [SerializeField] float maxLockOnDist = 30.0f;           // å¯é”æ•Œçš„æœ€å¤§è·ç¦»
 
-        [Header("Ëø¶¨Ä¿±êĞÅÏ¢")]
-        [SerializeField] List<CharacterManager> lockableTargets = new List<CharacterManager>(); // ¿ÉËø¶¨Ä¿±êÁĞ±í
-        public CharacterManager curLockOnTarget;                // µ±Ç°Ëø¶¨Ä¿±ê
-        public CharacterManager nearestLockableTarget;          // ×î½ü¿ÉËø¶¨Ä¿±ê
-        public CharacterManager leftLockableTarget;             // µ±Ç°Ëø¶¨Ä¿±êµÄ×ó±ß(PlayerµÄ×óÓÒ)×î½üµÄ¿ÉËø¶¨Ä¿±ê
-        public CharacterManager rightLockableTarget;            // µ±Ç°Ëø¶¨Ä¿±êµÄÓÒ±ß(PlayerµÄ×óÓÒ)×î½üµÄ¿ÉËø¶¨Ä¿±ê
+        [Header("é”å®šç›®æ ‡ä¿¡æ¯")]
+        [SerializeField] List<CharacterManager> lockableTargets = new List<CharacterManager>(); // å¯é”å®šç›®æ ‡åˆ—è¡¨
+        public CharacterManager curLockOnTarget;                // å½“å‰é”å®šç›®æ ‡
+        public CharacterManager nearestLockableTarget;          // æœ€è¿‘å¯é”å®šç›®æ ‡
+        public CharacterManager leftLockableTarget;             // å½“å‰é”å®šç›®æ ‡çš„å·¦è¾¹(Playerçš„å·¦å³)æœ€è¿‘çš„å¯é”å®šç›®æ ‡
+        public CharacterManager rightLockableTarget;            // å½“å‰é”å®šç›®æ ‡çš„å³è¾¹(Playerçš„å·¦å³)æœ€è¿‘çš„å¯é”å®šç›®æ ‡
         #endregion
 
         private void Awake()
@@ -75,7 +75,7 @@ namespace CatchMoon
             player = FindAnyObjectByType<PlayerManager>();
             cameraObject= GetComponentInChildren<Camera>();
 
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("playerManager is null.");
             if (cameraObject == null)
@@ -84,7 +84,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError($"{transform.name}: player == null");
             if (cameraObject == null)
@@ -105,7 +105,7 @@ namespace CatchMoon
             if (player.pStats.isDead) return;
 
             HandleCameraRotation();
-            SetCameraPosOffset(); // ÉèÖÃÏà»úÎ»ÖÃÆ«ÒÆ ¡¾mark, ×¼±¸ÖØ¹¹Ò»ÏÂ¡¿
+            SetCameraPosOffset(); // è®¾ç½®ç›¸æœºä½ç½®åç§» ã€mark, å‡†å¤‡é‡æ„ä¸€ä¸‹ã€‘
 
             FollowPlayer();
         }
@@ -116,9 +116,9 @@ namespace CatchMoon
             {
                 player.input.f_Input = false;
 
-                if (player.pInventory.leftWeapon.weaponType == WeaponType.bow) return; // ÄÃ¹­¼ıÊ±ÎŞ·¨Ëø¶¨ÊÓ½Ç
+                if (player.pInventory.leftWeapon.weaponType == WeaponType.bow) return; // æ‹¿å¼“ç®­æ—¶æ— æ³•é”å®šè§†è§’
 
-                if (!lockOnFlag) // Ëø¶¨Ä¿±ê(ÊÓ½Ç)
+                if (!lockOnFlag) // é”å®šç›®æ ‡(è§†è§’)
                     lockOnMode = true;
                 else
                     player.pCamera.Unlock();
@@ -128,7 +128,7 @@ namespace CatchMoon
             {
                 if (player.ui.escWin.GetSettingWin().gameSettingsData.autoChangeLockOnTarget) return;
 
-                if (player.input.one_Input) // Ëø¶¨µ±Ç°Ä¿±êµÄ×ó±ßÒ»¸öÄ¿±ê
+                if (player.input.one_Input) // é”å®šå½“å‰ç›®æ ‡çš„å·¦è¾¹ä¸€ä¸ªç›®æ ‡
                 {
                     player.input.one_Input = false;
                     if (leftLockableTarget != null)
@@ -137,7 +137,7 @@ namespace CatchMoon
                         UpdateLockOnTargets();
                     }
                 }
-                if (player.input.two_Input) // Ëø¶¨µ±Ç°Ä¿±êµÄÓÒ±ßÒ»¸öÄ¿±ê
+                if (player.input.two_Input) // é”å®šå½“å‰ç›®æ ‡çš„å³è¾¹ä¸€ä¸ªç›®æ ‡
                 {
                     player.input.two_Input = false;
                     if (rightLockableTarget != null)
@@ -150,7 +150,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Ïà»ú¸úËæÄ¿±ê
+        /// ç›¸æœºè·Ÿéšç›®æ ‡
         /// </summary>
         public void FollowPlayer()
         {
@@ -176,9 +176,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ´¦Àí[Ïà»úÅö×²] (Ïà»úÓë³¡¾°ÖĞÆäËûÎïÌå·¢ÉúÅö×²Ê±½«¿¿½üÄ¿±ê)
+        /// å¤„ç†[ç›¸æœºç¢°æ’] (ç›¸æœºä¸åœºæ™¯ä¸­å…¶ä»–ç‰©ä½“å‘ç”Ÿç¢°æ’æ—¶å°†é è¿‘ç›®æ ‡)
         /// </summary>
-        /// Ïà»úÅö×²´¦Àí2£º½«ÕÚµ²ÎïÉèÎªÍ¸Ã÷¡£(¿ÉÄÜ²»»áÕûÁË)
+        /// ç›¸æœºç¢°æ’å¤„ç†2ï¼šå°†é®æŒ¡ç‰©è®¾ä¸ºé€æ˜ã€‚(å¯èƒ½ä¸ä¼šæ•´äº†)
         void HandleCameraCollisions()
         {
             float targetCameraForwardDist;
@@ -209,10 +209,10 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ´¦Àí[Ïà»úĞı×ª]
+        /// å¤„ç†[ç›¸æœºæ—‹è½¬]
         /// </summary>
-        /// <param name="mouseXInput">Êó±êXÖáÊäÈë</param>
-        /// <param name="mouseYInput">Êó±êYÖáÊäÈë</param>
+        /// <param name="mouseXInput">é¼ æ ‡Xè½´è¾“å…¥</param>
+        /// <param name="mouseYInput">é¼ æ ‡Yè½´è¾“å…¥</param>
         void HandleCameraRotation()
         {
             if (!player.isInteracting && player.aimingMode)
@@ -268,7 +268,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¸üĞÂ[Ïà»úËø¶¨Ä¿±ê]
+        /// æ›´æ–°[ç›¸æœºé”å®šç›®æ ‡]
         /// </summary>
         ///   1. curLockOnTarget
         ///   2. nearsetLookableTarget
@@ -287,21 +287,21 @@ namespace CatchMoon
             float minDistOfLeftTarget = -Mathf.Infinity;
             float minDistOfRightTarget = Mathf.Infinity;
 
-            // ¼ì²âÒÔPlayerÎªÇòĞÄ¡¢×î´ó¿ÉËø¶¨·¶Î§Îª°ë¾¶µÄÇòÌåÄÚËù°üº¬µÄËùÓĞcollider
+            // æ£€æµ‹ä»¥Playerä¸ºçƒå¿ƒã€æœ€å¤§å¯é”å®šèŒƒå›´ä¸ºåŠå¾„çš„çƒä½“å†…æ‰€åŒ…å«çš„æ‰€æœ‰collider
             Collider[] colliders = Physics.OverlapSphere(player.transform.position, maxLockOnDist);
             for (int i = 0; i < colliders.Length; ++i)
             {
-                // °üº¬colliderµÄÎïÌåÊÇ·ñÎª½ÇÉ«(ÊÇ·ñ°üº¬CharacterManager)
+                // åŒ…å«colliderçš„ç‰©ä½“æ˜¯å¦ä¸ºè§’è‰²(æ˜¯å¦åŒ…å«CharacterManager)
                 CharacterManager lockableTarget = colliders[i].GetComponent<CharacterManager>();
                 if (lockableTarget == null || lockableTarget == player) continue;
-                // ¼ÆËãÒªÓÃµ½µÄÏà¹ØĞÅÏ¢
+                // è®¡ç®—è¦ç”¨åˆ°çš„ç›¸å…³ä¿¡æ¯
                 Vector3 dir = lockableTarget.transform.position - player.transform.position;
-                float fov = Vector3.SignedAngle(dir, cameraTransform.forward, Vector3.up); // player³¯ÏòÓëlockOnTarget·½ÏòµÄ¼Ğ½Ç
+                float fov = Vector3.SignedAngle(dir, cameraTransform.forward, Vector3.up); // playeræœå‘ä¸lockOnTargetæ–¹å‘çš„å¤¹è§’
                 float dist = Vector3.Distance(lockableTarget.transform.position, player.transform.position);
-                //  ÅĞ¶ÏÊÇ·ñÔÚ¿ÉËø¶¨·¶Î§ÄÚ(ÉÈĞÎÇøÓò)
+                //  åˆ¤æ–­æ˜¯å¦åœ¨å¯é”å®šèŒƒå›´å†…(æ‰‡å½¢åŒºåŸŸ)
                 if (player.ui.escWin.GetSettingWin().gameSettingsData.autoChangeLockOnTarget)
                 {
-                    // µ±¿ªÆô×Ô¶¯ÇĞ»»Ëø¶¨Ä¿±êÑ¡ÏîÊ±, ×Ô¶¯ÇĞ»»Ê¹ÓÃ¸üĞ¡µÄÉÈĞÎÔ²ĞÄ½Ç
+                    // å½“å¼€å¯è‡ªåŠ¨åˆ‡æ¢é”å®šç›®æ ‡é€‰é¡¹æ—¶, è‡ªåŠ¨åˆ‡æ¢ä½¿ç”¨æ›´å°çš„æ‰‡å½¢åœ†å¿ƒè§’
                     if (fov < -maxLookOnAngle_Half_AutoChangeLockOnTargetMode
                         || fov > maxLookOnAngle_Half_AutoChangeLockOnTargetMode || dist > maxLockOnDist) continue;
                 }
@@ -310,23 +310,23 @@ namespace CatchMoon
                     if (fov < -maxLookOnAngle_Half || fov > maxLookOnAngle_Half || dist > maxLockOnDist) continue;
                 }
                 
-                // ¼ì²âPlayerµ½targetÖ®¼äµÄÂ·¾¶ÊÇ·ñ±»×èµ²
+                // æ£€æµ‹Playeråˆ°targetä¹‹é—´çš„è·¯å¾„æ˜¯å¦è¢«é˜»æŒ¡
                 RaycastHit hit;
                 if (Physics.Linecast(player.lockOnTransform.position, lockableTarget.lockOnTransform.position, out hit, cameraCanDetectLayers)
                     && hit.transform.gameObject.layer == Layer.environment)
                     continue;
-                // ÅĞ¶Ï¿ÉËø¶¨Ä¿±êÊÇ·ñÒÑËÀÍö(Èô½ÇÉ«ËÀºó½ûÓÃcollider, ÔòÕâÀïÎŞĞèÅĞ¶Ï)
+                // åˆ¤æ–­å¯é”å®šç›®æ ‡æ˜¯å¦å·²æ­»äº¡(è‹¥è§’è‰²æ­»åç¦ç”¨collider, åˆ™è¿™é‡Œæ— éœ€åˆ¤æ–­)
                 if (lockableTarget.cStats.isDead) continue;
-                // Ìí¼Óµ½¿ÉËø¶¨ÁĞ±í
+                // æ·»åŠ åˆ°å¯é”å®šåˆ—è¡¨
                 lockableTargets.Add(lockableTarget);
-                // ¸üĞÂnearestLockOnTarget
+                // æ›´æ–°nearestLockOnTarget
                 if (dist < minDist)
                 {
                     minDist = dist;
                     nearestLockableTarget = lockableTarget;
                 }
             }
-            // ¸üĞÂleftLockTarget, rightLockTarget
+            // æ›´æ–°leftLockTarget, rightLockTarget
             foreach (CharacterManager lockableTarget in lockableTargets)
             {
                 if (curLockOnTarget != null)
@@ -337,7 +337,7 @@ namespace CatchMoon
                 {
                     if (lockableTarget == nearestLockableTarget) continue;
                 }
-                // ¼ÆËãµĞÈËÏà¶ÔÓÚÍæ¼ÒµÄÎ»ÖÃPos, ÓÃPos.xÅĞ¶ÏÔÚPlayerµÄ×ó±ß»¹ÊÇÓÒ±ß(Ğ¡ÓÚ0ÔÚ×ó±ß, ´óÓÚ0ÔÚÓÒ±ß)
+                // è®¡ç®—æ•Œäººç›¸å¯¹äºç©å®¶çš„ä½ç½®Pos, ç”¨Pos.xåˆ¤æ–­åœ¨Playerçš„å·¦è¾¹è¿˜æ˜¯å³è¾¹(å°äº0åœ¨å·¦è¾¹, å¤§äº0åœ¨å³è¾¹)
                 float relativePlayerPosX = player.transform.InverseTransformPoint(lockableTarget.transform.position).x;
                 if (relativePlayerPosX <= 0f)
                 {
@@ -360,14 +360,14 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] ¸Ä±äµ±Ç°Ëø¶¨Ä¿±ê
+        /// [å¤„ç†] æ”¹å˜å½“å‰é”å®šç›®æ ‡
         /// </summary>
-        ///    (À­ÍÑÇĞ»»¡¢×Ô¶¯ÇĞ»»)
+        ///    (æ‹‰è„±åˆ‡æ¢ã€è‡ªåŠ¨åˆ‡æ¢)
         public void HandleChangeLockOnTarget()
         {
             if (player.ui.escWin.GetSettingWin().gameSettingsData.autoChangeLockOnTarget)
             {
-                if (curLockOnTarget == null) // µ±Ç°ÎŞËø¶¨Ä¿±ê£¬ÔòÖ±½ÓËø¶¨×î½üÄ¿±ê
+                if (curLockOnTarget == null) // å½“å‰æ— é”å®šç›®æ ‡ï¼Œåˆ™ç›´æ¥é”å®šæœ€è¿‘ç›®æ ‡
                 {
                     if (nearestLockableTarget)
                     {
@@ -375,7 +375,7 @@ namespace CatchMoon
                         lockOnFlag = true;
                     }
                 }
-                else // Èôµ±Ç°ÒÑÓĞËø¶¨Ä¿±ê£¬ÔòÏÈÅĞ¶Ï×Ô¶¯ÇĞ»»Ä¿±êµÄCD£¬ÔÙÇĞ»»ÖÁ×î½üÄ¿±ê
+                else // è‹¥å½“å‰å·²æœ‰é”å®šç›®æ ‡ï¼Œåˆ™å…ˆåˆ¤æ–­è‡ªåŠ¨åˆ‡æ¢ç›®æ ‡çš„CDï¼Œå†åˆ‡æ¢è‡³æœ€è¿‘ç›®æ ‡
                 {
                     autoChangeLockOnTargetTimer += Time.deltaTime;
 
@@ -400,11 +400,11 @@ namespace CatchMoon
                 bool needChangeLockTarget = false;
                 if (curLockOnTarget != null)
                 {
-                    // ÅĞ¶Ïµ±Ç°Ëø¶¨Ä¿±êÊÇ·ñÀ­ÍÑ
+                    // åˆ¤æ–­å½“å‰é”å®šç›®æ ‡æ˜¯å¦æ‹‰è„±
                     float curTargetDist = Vector3.Distance(curLockOnTarget.transform.position, player.transform.position);
                     if (curTargetDist > maxLockOnDist)
                         needChangeLockTarget = true;
-                    // ÅĞ¶Ïµ±Ç°Ëø¶¨Ä¿±êÊÇ·ñ±»µ²×¡
+                    // åˆ¤æ–­å½“å‰é”å®šç›®æ ‡æ˜¯å¦è¢«æŒ¡ä½
                     RaycastHit hit;
                     if (Physics.Linecast(player.lockOnTransform.position, curLockOnTarget.lockOnTransform.position, out hit, cameraCanDetectLayers)
                         && hit.transform.gameObject.layer == Layer.environment)
@@ -432,7 +432,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// È¡ÏûÏà»úËø¶¨
+        /// å–æ¶ˆç›¸æœºé”å®š
         /// </summary>
         public void Unlock()
         {
@@ -442,7 +442,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÉèÖÃÏàÎ»ÖÃÆ«ÒÆ
+        /// è®¾ç½®ç›¸ä½ç½®åç§»
         /// </summary>
         void SetCameraPosOffset()
         {
@@ -461,7 +461,7 @@ namespace CatchMoon
 
         public void SetCameraPosOffset_AimingMode()
         {
-            // ¹ı¼çÊÓ½Ç, ÈËÎïÔÚÆÁÄ»ÓÒÏÂ½Ç
+            // è¿‡è‚©è§†è§’, äººç‰©åœ¨å±å¹•å³ä¸‹è§’
             Vector3 velocity = Vector3.zero;
             
             cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,

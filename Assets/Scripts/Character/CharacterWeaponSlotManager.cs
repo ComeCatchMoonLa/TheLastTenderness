@@ -6,17 +6,17 @@ namespace CatchMoon
     {
         CharacterManager character;
 
-        [Header("ÎäÆ÷²Û")]
-        public WeaponHolderSlot leftHandSlot;  // ×óÊÖÎäÆ÷²Û
-        public WeaponHolderSlot rightHandSlot; // ÓÒÊÖÎäÆ÷²Û
-        public WeaponHolderSlot backSlot;      // ±³²¿ÎäÆ÷²Û
+        [Header("æ­¦å™¨æ§½")]
+        public WeaponHolderSlot leftHandSlot;  // å·¦æ‰‹æ­¦å™¨æ§½
+        public WeaponHolderSlot rightHandSlot; // å³æ‰‹æ­¦å™¨æ§½
+        public WeaponHolderSlot backSlot;      // èƒŒéƒ¨æ­¦å™¨æ§½
 
         [Header("Hand IK Targets")]
         public LeftHandIKTarget leftHandIKTarget;
         public RightHandIKTarget rightHandIKTarget;
 
-        public DamageCollider leftHandDC;  // ×óÊÖÎäÆ÷ÉËº¦Åö×²Æ÷
-        public DamageCollider rightHandDC; // ÓÒÊÖÎäÆ÷ÉËº¦Åö×²Æ÷
+        public DamageCollider leftHandDC;  // å·¦æ‰‹æ­¦å™¨ä¼¤å®³ç¢°æ’å™¨
+        public DamageCollider rightHandDC; // å³æ‰‹æ­¦å™¨ä¼¤å®³ç¢°æ’å™¨
 
         protected virtual void Awake()
         {
@@ -25,7 +25,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¼ÓÔØÎäÆ÷²Û
+        /// åŠ è½½æ­¦å™¨æ§½
         /// </summary>
         protected virtual void LoadWeaponHolderSlots()
         {
@@ -46,9 +46,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¼ÓÔØ×óÊÖÓÒÊÖµÄÎäÆ÷
+        /// åŠ è½½å·¦æ‰‹å³æ‰‹çš„æ­¦å™¨
         /// </summary>
-        /// <param name="twoHandFlag">Ë«ÊÖ³ÖÎäÆ÷Ä£Ê½</param>
+        /// <param name="twoHandFlag">åŒæ‰‹æŒæ­¦å™¨æ¨¡å¼</param>
         public virtual void LoadWeaponsOnBothHands()
         {
             LoadWeaponOnSlot(character.cInventory.leftWeapon, true);
@@ -56,10 +56,10 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÔÚ²ÛÖĞ¼ÓÔØÎäÆ÷
+        /// åœ¨æ§½ä¸­åŠ è½½æ­¦å™¨
         /// </summary>
-        /// <param name="weaponItem">ÎäÆ÷Ïî</param>
-        /// <param name="isLeft">ÊÇ·ñÎª×óÊÖÎäÆ÷</param>
+        /// <param name="weaponItem">æ­¦å™¨é¡¹</param>
+        /// <param name="isLeft">æ˜¯å¦ä¸ºå·¦æ‰‹æ­¦å™¨</param>
         public virtual void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
             if (isLeft)
@@ -113,10 +113,10 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¼ÓÔØÎäÆ÷ÉËº¦´¥·¢Æ÷
+        /// åŠ è½½æ­¦å™¨ä¼¤å®³è§¦å‘å™¨
         /// </summary>
-        /// <param name="weaponItem">ÎäÆ÷Ïî</param>
-        /// <param name="isLeft">ÊÇ·ñÎª×óÊÖÎäÆ÷</param>
+        /// <param name="weaponItem">æ­¦å™¨é¡¹</param>
+        /// <param name="isLeft">æ˜¯å¦ä¸ºå·¦æ‰‹æ­¦å™¨</param>
         protected virtual void LoadWeaponDamageCollider(WeaponItem weaponItem, bool isLeft)
         {
             if (isLeft)
@@ -186,7 +186,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¼ÓÔØÁ½ÊÖIKµÄÄ¿±ê
+        /// åŠ è½½ä¸¤æ‰‹IKçš„ç›®æ ‡
         /// </summary>
         public virtual void LoadTwoHandIKTarget()
         {

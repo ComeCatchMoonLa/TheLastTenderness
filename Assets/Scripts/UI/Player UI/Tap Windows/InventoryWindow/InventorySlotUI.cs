@@ -16,7 +16,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (player == null)
                 Debug.LogError("player == null");
             if (icon == null)
@@ -28,7 +28,7 @@ namespace CatchMoon
 
         public void AddItem(Item newItem)
         {
-            #region ¼ì´í
+            #region æ£€é”™
             if (newItem == null)
             {
                 Debug.LogError("newItem is null.");
@@ -66,7 +66,7 @@ namespace CatchMoon
             PlayerInventoryManager pInventory = player.pInventory;
             EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
             EquipmentSlotType selectedSlotType = player.ui.tapWin.GetEquipmentWin().selectedSlotType;
-            // ÒÆ³ıµ±Ç°×°±¸µÄÎïÆ·
+            // ç§»é™¤å½“å‰è£…å¤‡çš„ç‰©å“
             if (selectedSlotType == EquipmentSlotType.weapon_RH_Slot_1)
             {
                 pInventory.AddItem(pInventory.weaponsInRightHandSlot[0]);
@@ -93,10 +93,10 @@ namespace CatchMoon
             }
             pInventory.RemoveItem(weapon);
 
-            // ¼ÓÔØÄ£ĞÍ
+            // åŠ è½½æ¨¡å‹
             pInventory.rightWeapon = pInventory.weaponsInRightHandSlot[pInventory.currentRightWeaponIdx];
             player.pWeaponSlot.LoadWeaponOnSlot(pInventory.rightWeapon, false);
-            // Èç¹ûÊÇË«ÊÖ³ÖÎäÆ÷, Ôò×°±¸ÎäÆ÷ÖÁÎäÆ÷²ÛÊ±²»ÔÙ¼ÓÔØ×óÊÖÎäÆ÷
+            // å¦‚æœæ˜¯åŒæ‰‹æŒæ­¦å™¨, åˆ™è£…å¤‡æ­¦å™¨è‡³æ­¦å™¨æ§½æ—¶ä¸å†åŠ è½½å·¦æ‰‹æ­¦å™¨
             if (!player.isTwoHandingWeapon)
             {
                 pInventory.leftWeapon = pInventory.weaponsInLeftHandSlot[pInventory.currentLeftWeaponIdx];
@@ -144,7 +144,7 @@ namespace CatchMoon
                 equipmentWin.GetHipArmorSlot().AddItem(pArmor.currentHipsArmor);
             }
 
-            // ¼ÓÔØÄ£ĞÍ
+            // åŠ è½½æ¨¡å‹
             pArmor.EquipAllArmorModels();
         }
     }

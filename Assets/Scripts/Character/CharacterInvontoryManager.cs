@@ -6,29 +6,29 @@ namespace CatchMoon
     {
         CharacterManager character;
 
-        [Header("µ±Ç°Ê¹ÓÃµÄÎïÆ·")]
+        [Header("å½“å‰ä½¿ç”¨çš„ç‰©å“")]
         public Item currentItemBeingUsed;
 
         [Header("Quik Slot Items")]
-        public SpellItem currentSpell;           // ·¨Êõ
-        public WeaponItem leftWeapon;            // ×óÊÖÎäÆ÷
-        public WeaponItem rightWeapon;           // ÓÒÊÖÎäÆ÷
-        public ConsumableItem currentConsumable; // µ±Ç°µÀ¾ß
+        public SpellItem currentSpell;           // æ³•æœ¯
+        public WeaponItem leftWeapon;            // å·¦æ‰‹æ­¦å™¨
+        public WeaponItem rightWeapon;           // å³æ‰‹æ­¦å™¨
+        public ConsumableItem currentConsumable; // å½“å‰é“å…·
 
-        [Header("µ¯Ò©")]
+        [Header("å¼¹è¯")]
         public AmmoItem currentAmmo;
 
-        [Header("ÎäÆ÷")] 
-        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];  // ×óÊÖÎäÆ÷²ÛÖĞµÄÎäÆ÷
-        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1]; // ÓÒÊÖÎäÆ÷²ÛÖĞµÄÎäÆ÷
+        [Header("æ­¦å™¨")] 
+        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];  // å·¦æ‰‹æ­¦å™¨æ§½ä¸­çš„æ­¦å™¨
+        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1]; // å³æ‰‹æ­¦å™¨æ§½ä¸­çš„æ­¦å™¨
         [HideInInspector] public int currentLeftWeaponIdx = 0;
         [HideInInspector] public int currentRightWeaponIdx = 0;
 
-        [Header("·¨Êõ & ÏûºÄÆ·")]
+        [Header("æ³•æœ¯ & æ¶ˆè€—å“")]
         public int currentSpellIdx = 0;
         public int currentComsumableIdx = 0;
 
-        [Header("Ä¬ÈÏÎäÆ÷")]
+        [Header("é»˜è®¤æ­¦å™¨")]
         public WeaponItem unaremd;
 
         protected virtual void Awake()

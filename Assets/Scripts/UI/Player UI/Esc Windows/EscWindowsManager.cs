@@ -16,7 +16,7 @@ namespace CatchMoon
         }
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (settingsWin == null)
                 Debug.LogError("settingsWin == null");
             if (achievenmentWin == null)
@@ -28,29 +28,29 @@ namespace CatchMoon
         {
             gameObject.SetActive(true);
 
-            // ½ûÓÃÓëEsc´°¿Ú²Ù×÷ÎŞ¹ØµÄÊäÈë, ²¢ÆôÓÃEsc´°¿Ú²Ù×÷Ïà¹ØµÄÊäÈë
+            // ç¦ç”¨ä¸Escçª—å£æ“ä½œæ— å…³çš„è¾“å…¥, å¹¶å¯ç”¨Escçª—å£æ“ä½œç›¸å…³çš„è¾“å…¥
             player.input.inputActions.Disable();
             player.input.inputActions.UIOperation.Enable();
             player.input.cameraRotateInput = Vector2.zero;
 
-            // Unfinished: ÔİÍ£ÓÎÏ·
+            // Unfinished: æš‚åœæ¸¸æˆ
             Time.timeScale = 0;
 
-            // ÉèÖÃµ±Ç°Ëù´¦µÄui²ã¼¶
+            // è®¾ç½®å½“å‰æ‰€å¤„çš„uiå±‚çº§
             player.ui.openedWin = EscWinOpenedWinType.escWin;
         }
         public void Close()
         {
             gameObject.SetActive(false);
 
-            // ½ûÓÃÓëEsc´°¿Ú²Ù×÷Ïà¹ØµÄÊäÈë, ²¢½ûÓÃEsc´°¿Ú²Ù×÷Ïà¹ØµÄÊäÈë
+            // ç¦ç”¨ä¸Escçª—å£æ“ä½œç›¸å…³çš„è¾“å…¥, å¹¶ç¦ç”¨Escçª—å£æ“ä½œç›¸å…³çš„è¾“å…¥
             player.input.inputActions.Enable();
             player.input.inputActions.UIOperation.Disable();
 
-            // Unfinished: È¡ÏûÔİÍ£
+            // Unfinished: å–æ¶ˆæš‚åœ
             Time.timeScale = 1;
 
-            // ÉèÖÃµ±Ç°Ëù´¦µÄui²ã¼¶
+            // è®¾ç½®å½“å‰æ‰€å¤„çš„uiå±‚çº§
             player.ui.openedWin = EscWinOpenedWinType.notEscWinMode;
         }
 
@@ -66,7 +66,7 @@ namespace CatchMoon
             achievenmentWin.gameObject.SetActive(true);
             player.ui.openedWin = EscWinOpenedWinType.achievementWin;
         }
-        // Ã¿¸öui²ã¼¶µÄ·µ»Ø°´Å¥¿ÉÄÜÑùÊ½²»Ò»Ñù
+        // æ¯ä¸ªuiå±‚çº§çš„è¿”å›æŒ‰é’®å¯èƒ½æ ·å¼ä¸ä¸€æ ·
         public void ColseSettingsWin()
         {
             selectButtons.SetActive(true);
@@ -81,7 +81,7 @@ namespace CatchMoon
         }
         public void BackToEscWin()
         {
-            // ¹Ø±Õ¸Ã²ãµÄui
+            // å…³é—­è¯¥å±‚çš„ui
             if (player.ui.openedWin == EscWinOpenedWinType.settingsWin)
                 ColseSettingsWin();
             else
@@ -90,7 +90,7 @@ namespace CatchMoon
 
         public SettingsWindowManager GetSettingWin()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (settingsWin == null)
                 Debug.LogError("settingsWin == null");
             #endregion
@@ -100,7 +100,7 @@ namespace CatchMoon
 
         public AchievementWinManager GetAchievementWin()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (achievenmentWin == null)
                 Debug.LogError("achievenmentWin == null");
             #endregion

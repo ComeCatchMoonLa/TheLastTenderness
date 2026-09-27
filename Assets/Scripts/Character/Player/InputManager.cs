@@ -7,24 +7,24 @@ namespace CatchMoon
         PlayerManager player;
         [System.NonSerialized] public InputAcitons inputActions;
 
-        public float horizontal; // Íæ¼Ò´¹Ö±Æ«ÒÆ
-        public float vertical;   // Íæ¼ÒË®Æ½Æ«ÒÆ
-        public float moveAmount; // Íæ¼ÒÆ«ÒÆÁ¿
-        public float mouseX;     // Êó±êºá×ø±ê
-        public float mouseY;     // Êó±ê×İ×ø±ê
+        public float horizontal; // ç©å®¶å‚ç›´åç§»
+        public float vertical;   // ç©å®¶æ°´å¹³åç§»
+        public float moveAmount; // ç©å®¶åç§»é‡
+        public float mouseX;     // é¼ æ ‡æ¨ªåæ ‡
+        public float mouseY;     // é¼ æ ‡çºµåæ ‡
 
-        [Header("Íæ¼ÒÊäÈë")]
-        // ÔË¶¯ÊäÈë
+        [Header("ç©å®¶è¾“å…¥")]
+        // è¿åŠ¨è¾“å…¥
         [HideInInspector] public Vector2 cameraRotateInput;
         Vector2 moveInput;
         bool leftShift_Input;
         [HideInInspector] public bool space_Input;
 
-        // ½»»¥ÊäÈë
+        // äº¤äº’è¾“å…¥
         [HideInInspector] public bool interacte_Tap_Input;
         [HideInInspector] public bool interacte_Hold_Input;
 
-        // Õ½¶·ÊäÈë
+        // æˆ˜æ–—è¾“å…¥
         [HideInInspector] public bool f_Input;
         [HideInInspector] public bool one_Input;
         [HideInInspector] public bool two_Input;
@@ -41,11 +41,11 @@ namespace CatchMoon
         [HideInInspector] public bool left_Arrow_Input;
         [HideInInspector] public bool right_Arrow_Input;
 
-        // UI¿ª¹ØÊäÈë
+        // UIå¼€å…³è¾“å…¥
         [HideInInspector] public bool ui_openEscWin_Input;
         [HideInInspector] public bool ui_tabWinSwitch_Input;
 
-        // UI²Ù×÷ÊäÈë
+        // UIæ“ä½œè¾“å…¥
         [HideInInspector] public bool ui_Back_Input;
         [HideInInspector] public bool ui_Confirm_Input;
         [HideInInspector] public bool ui_MoveSelectorToLeft_Input;
@@ -55,18 +55,18 @@ namespace CatchMoon
 
         [Header("Flags")]
         public bool backStepFlag;
-        public bool rollFlag;      // ÊÇ·ñÔÚ·­¹ö
-        public bool sprintFlag;    // ÊÇ·ñÔÚ³å´Ì
+        public bool rollFlag;      // æ˜¯å¦åœ¨ç¿»æ»š
+        public bool sprintFlag;    // æ˜¯å¦åœ¨å†²åˆº
 
-        float rollInputTimer; // ¹ö¶¯ÊäÈë¼ÆÊ±Æ÷
+        float rollInputTimer; // æ»šåŠ¨è¾“å…¥è®¡æ—¶å™¨
 
         private void OnEnable()
         {
-            if (inputActions == null) // ÈôÍæ¼Ò¿ØÖÆÆ÷Îª¿Õ£¬Ôò½«Æä³õÊ¼»¯
+            if (inputActions == null) // è‹¥ç©å®¶æ§åˆ¶å™¨ä¸ºç©ºï¼Œåˆ™å°†å…¶åˆå§‹åŒ–
             {
                 inputActions = new InputAcitons();
 
-                // ÔË¶¯ÊäÈë(Ïà»úĞı×ª¡¢ÈËÎïÔË¶¯)
+                // è¿åŠ¨è¾“å…¥(ç›¸æœºæ—‹è½¬ã€äººç‰©è¿åŠ¨)
                 inputActions.Locomotion.CameraRotate.performed += i => cameraRotateInput = i.ReadValue<Vector2>();
 
                 inputActions.Locomotion.Move.performed += i => moveInput = i.ReadValue<Vector2>();
@@ -74,12 +74,12 @@ namespace CatchMoon
                 inputActions.Locomotion.RollOrBackStepOrSprint.canceled += i => leftShift_Input = false;
                 inputActions.Locomotion.Jump.performed += i => space_Input = true;
 
-                // ½»»¥ÊäÈë(µã»÷»ò°´×¡)
+                // äº¤äº’è¾“å…¥(ç‚¹å‡»æˆ–æŒ‰ä½)
                 inputActions.Interacte.Tap.performed += i => interacte_Tap_Input = true;
                 inputActions.Interacte.Hold.performed += i => interacte_Hold_Input = true;
                 inputActions.Interacte.Hold.canceled += i => interacte_Hold_Input = false;
 
-                // Õ½¶·ÊäÈë
+                // æˆ˜æ–—è¾“å…¥
                 inputActions.Combat.SwitchCameraLockOnMode.performed += i => f_Input = true;
                 inputActions.Combat.LookOnTargetLeftOne.performed += i => one_Input = true;
                 inputActions.Combat.LookOnTargetRightOne.performed += i => two_Input = true;
@@ -99,11 +99,11 @@ namespace CatchMoon
                 inputActions.Combat.SwitchSpell.performed += i => up_arrow_Input = true;
                 inputActions.Combat.SwitchComsumable.performed += i => down_arrow_input = true;
 
-                // UI´°¿Ú¿ª¹Ø(´ò¿ª»ò¹Ø±Õ)ÊäÈë
+                // UIçª—å£å¼€å…³(æ‰“å¼€æˆ–å…³é—­)è¾“å…¥
                 inputActions.UISwitch.OpenEscWin.performed += i => ui_openEscWin_Input = true;
                 inputActions.UISwitch.TabWinSwitch.performed += i => ui_tabWinSwitch_Input = true;
 
-                // UI´°¿Ú²Ù×÷ÊäÈë(´ò¿ªUI´°¿Úºó, ¿ØÖÆUIµÄ°´¼ü²Ù×÷, Ñ¡ÔñÆ÷µÄÒÆ¶¯¡¢·µ»Ø¡¢È·ÈÏ)
+                // UIçª—å£æ“ä½œè¾“å…¥(æ‰“å¼€UIçª—å£å, æ§åˆ¶UIçš„æŒ‰é”®æ“ä½œ, é€‰æ‹©å™¨çš„ç§»åŠ¨ã€è¿”å›ã€ç¡®è®¤)
                 inputActions.UIOperation.Back.performed += i => ui_Back_Input = true;
                 inputActions.UIOperation.Confirm.performed += i => ui_Confirm_Input = true;
                 inputActions.UIOperation.MoveSelectorToLeft.performed += i => ui_MoveSelectorToLeft_Input = true;
@@ -140,20 +140,20 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ´¦Àí[ÒÆ¶¯]ÊäÈë
+        /// å¤„ç†[ç§»åŠ¨]è¾“å…¥
         /// </summary>
         void HandleMoveInput()
         {
             horizontal = moveInput.x;
             vertical = moveInput.y;
-            // ¶ÔÓÚ¼üÅÌºÍÒ¡¸ËÊÇÓĞ²î±ğµÄ, µ«ÊúÖ±Æ«ÒÆµÄÆ½·½+Ë®Æ½Æ«ÒÆµÄÆ½·½<=1, ÖÁÓÚÎªÊ²Ã´ĞèÒª½«Æä·¶Î§ÏŞÖÆµ½[0,1](µ¥´ÎÎ»ÒÆÆ«ÒÆÁ¿£¿£¿£¿)
+            // å¯¹äºé”®ç›˜å’Œæ‘‡æ†æ˜¯æœ‰å·®åˆ«çš„, ä½†ç«–ç›´åç§»çš„å¹³æ–¹+æ°´å¹³åç§»çš„å¹³æ–¹<=1, è‡³äºä¸ºä»€ä¹ˆéœ€è¦å°†å…¶èŒƒå›´é™åˆ¶åˆ°[0,1](å•æ¬¡ä½ç§»åç§»é‡ï¼Ÿï¼Ÿï¼Ÿ)
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = cameraRotateInput.x;
             mouseY = cameraRotateInput.y;
         }
 
         /// <summary>
-        /// ´¦Àí[·­¹ö]ÊäÈë
+        /// å¤„ç†[ç¿»æ»š]è¾“å…¥
         /// </summary>
         void HandleRollInput()
         {
@@ -178,11 +178,11 @@ namespace CatchMoon
                         player.isSprinting = false;
                 }
             }
-            else // ËÉ¿ª[×óshift]
+            else // æ¾å¼€[å·¦shift]
             {
                 player.isSprinting = false;
 
-                // ¶Ì°´[×óshift]¾ÍÊÇ·­¹ö([³å´Ì]Ê±¼äĞ¡ÓÚ0.5s, ÔòËÉ¿ª[×óshift]»á½øĞĞ·­¹ö)
+                // çŸ­æŒ‰[å·¦shift]å°±æ˜¯ç¿»æ»š([å†²åˆº]æ—¶é—´å°äº0.5s, åˆ™æ¾å¼€[å·¦shift]ä¼šè¿›è¡Œç¿»æ»š)
                 if (0 < rollInputTimer && rollInputTimer < 0.5f)
                 {
                     if (moveAmount > 0)
@@ -193,7 +193,7 @@ namespace CatchMoon
                 rollInputTimer = 0;
             }
 
-            // Ãé×¼µÄÊ±ºò²»ÄÜ³å´Ì
+            // ç„å‡†çš„æ—¶å€™ä¸èƒ½å†²åˆº
             if (player.pCombat.isAiming)
                 player.isSprinting = false;
         }

@@ -5,12 +5,12 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "Data/TextData/Dialogue")]
     public class DialogueTextData : TextData
     {
-        [Header("ÊÇ·ñÎªÍæ¼ÒËµµÄ")]
+        [Header("æ˜¯å¦ä¸ºç©å®¶è¯´çš„")]
         public bool isPlayerSaid;
 
-        [Header("Õâ¶ÎÎÄ±¾µÄ³ÖĞøÊ±¼ä")]
-        // = ²¥·ÅÎÄ±¾µÄÊ±¼ä + ²¥·ÅÍêÎÄ±¾ºóµÄÍ£Áô»º³åÊ±¼ä
-        // = ²¥·ÅÓïÒôµÄÊ±¼ä + ²¥·ÅÍêÓïÒôºóµÄÍ£Áô»º³åÊ±¼ä
-        [Min(0.8f)] public float duration; // minÎª<²¥·ÅÍêÎÄ±¾ºóµÄÍ£Áô»º³åÊ±¼ä>, ²Î¼ûtalkUIÖĞµÄwaitTime
+        [Header("è¿™æ®µæ–‡æœ¬çš„æŒç»­æ—¶é—´")]
+        // = æ’­æ”¾æ–‡æœ¬çš„æ—¶é—´ + æ’­æ”¾å®Œæ–‡æœ¬åçš„åœç•™ç¼“å†²æ—¶é—´
+        // = æ’­æ”¾è¯­éŸ³çš„æ—¶é—´ + æ’­æ”¾å®Œè¯­éŸ³åçš„åœç•™ç¼“å†²æ—¶é—´
+        [Min(0.8f)] public float duration; // minä¸º<æ’­æ”¾å®Œæ–‡æœ¬åçš„åœç•™ç¼“å†²æ—¶é—´>, å‚è§talkUIä¸­çš„waitTime
     }
 }

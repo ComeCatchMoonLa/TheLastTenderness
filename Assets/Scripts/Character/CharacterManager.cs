@@ -7,7 +7,7 @@ namespace CatchMoon
     {
         [HideInInspector] public Animator animator;
         [HideInInspector] public Rigidbody rigidBody;
-        [HideInInspector] public CapsuleCollider cCollider; // Ğü¸¡Åö×²Æ÷
+        [HideInInspector] public CapsuleCollider cCollider; // æ‚¬æµ®ç¢°æ’å™¨
 
         [HideInInspector] public CharacterAnimatorManager cAnimator;
         [HideInInspector] public CharacterCombatManager cCombat;
@@ -17,37 +17,37 @@ namespace CatchMoon
         [HideInInspector] public CharacterWeaponSlotManager cWeaponSlot;
         [HideInInspector] public CharacterSoundFXManager cSoundFX;
 
-        [Header("½ÇÉ«ÀàĞÍ")]
+        [Header("è§’è‰²ç±»å‹")]
         public CharacterType characterType;
 
         [Header("Transforms")]
         public Transform parentTransform;
         public Transform lockOnTransform;
 
-        [Header("Õ½¶· Flags")]
-        public bool canBeRiposted;              // ¿ÉÒÔ±»·´»÷
-        public bool canBeParried;               // ¿ÉÒÔ±»µ¯·´
-        public bool canDoCombo;                 // ¿ÉÒÔÁ¬»÷
+        [Header("æˆ˜æ–— Flags")]
+        public bool canBeRiposted;              // å¯ä»¥è¢«åå‡»
+        public bool canBeParried;               // å¯ä»¥è¢«å¼¹å
+        public bool canDoCombo;                 // å¯ä»¥è¿å‡»
 
-        public bool isUsingRightHand;           // Ê¹ÓÃÓÒÊÖÖĞ
-        public bool isUsingLeftHand;            // Ê¹ÓÃ×óÊÖÖĞ
-        public bool isTwoHandingWeapon;         // Ë«ÊÖ³ÖÎäÆ÷ÖĞ
+        public bool isUsingRightHand;           // ä½¿ç”¨å³æ‰‹ä¸­
+        public bool isUsingLeftHand;            // ä½¿ç”¨å·¦æ‰‹ä¸­
+        public bool isTwoHandingWeapon;         // åŒæ‰‹æŒæ­¦å™¨ä¸­
       
-        public bool isBeingBackStabbed;         // ÕıÔÚ±»±³´Ì
-        public bool isBeingRiposted;            // ÕıÔÚ±»·´»÷
-        public bool isPerformingBackSttbbed;    // ÕıÔÚ±³´Ì
-        public bool isPerformingRiposted;       // ÕıÔÚ·´»÷
+        public bool isBeingBackStabbed;         // æ­£åœ¨è¢«èƒŒåˆº
+        public bool isBeingRiposted;            // æ­£åœ¨è¢«åå‡»
+        public bool isPerformingBackSttbbed;    // æ­£åœ¨èƒŒåˆº
+        public bool isPerformingRiposted;       // æ­£åœ¨åå‡»
 
-        [Header("ÒÆ¶¯ Flags")]
-        public bool canRotate;          // ¿ÉÒÔĞı×ª
-        public bool isInAir;            // ÔÚ¿ÕÖĞ
-        public bool isInteracting;      // ÕıÔÚ½»»¥ÖĞ
-        public bool isJumping;          // ÌøÔ¾ÖĞ
-        public bool isRolling;          // ·­¹öÖĞ
-        public bool isRotatingWithRootMotion;   // ÓÃ¶¯»­¸ùÔË¶¯ÊµÏÖĞı×ª
-        public bool isSprinting;        // ³å´ÌÖĞ
+        [Header("ç§»åŠ¨ Flags")]
+        public bool canRotate;          // å¯ä»¥æ—‹è½¬
+        public bool isInAir;            // åœ¨ç©ºä¸­
+        public bool isInteracting;      // æ­£åœ¨äº¤äº’ä¸­
+        public bool isJumping;          // è·³è·ƒä¸­
+        public bool isRolling;          // ç¿»æ»šä¸­
+        public bool isRotatingWithRootMotion;   // ç”¨åŠ¨ç”»æ ¹è¿åŠ¨å®ç°æ—‹è½¬
+        public bool isSprinting;        // å†²åˆºä¸­
 
-        [Header("¶Ô»°")]
+        [Header("å¯¹è¯")]
         public bool talkWithSB;
         [SerializeField] List<string> talkAnimations;
         List<string> potentialTalkAnimations;
@@ -69,7 +69,7 @@ namespace CatchMoon
         }
         protected virtual void Start()
         {
-            #region ÅĞ¶Ï¿ÕÒıÓÃÒì³£
+            #region åˆ¤æ–­ç©ºå¼•ç”¨å¼‚å¸¸
             if (animator == null)
                 Debug.LogError($"{transform.name}: animator == null");
             if (rigidBody == null)

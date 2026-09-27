@@ -4,12 +4,12 @@ namespace CatchMoon
 {
     public class Item : ScriptableObject
     {
-        [Header("物品类型")]
+        [Header("鐗╁搧绫诲瀷")]
         public ItemType itemType;
-        [Header("物品信息")]
+        [Header("鐗╁搧淇℃伅")]
         public Sprite itemIcon;
         public string itemName;
-        [Header("item在Hierarchy窗口中的名称")]
-        [Tooltip("用于切换模型")] public string transformName;
+        [Header("item鍦℉ierarchy绐楀彛涓殑鍚嶇О")]
+        [Tooltip("鐢ㄤ簬鍒囨崲妯″瀷")] public string transformName;
     }
 }

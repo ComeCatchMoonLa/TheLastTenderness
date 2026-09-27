@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ս��״̬
+    /// 战斗状态
     /// </summary>
     public class CombatStanceState : State
     {
@@ -22,14 +22,14 @@ namespace CatchMoon
         }
 
         /**
-         *  ��⹥����Χ
-         *  if �ڹ�����Χ��:
-         *      if ������Ϊ����ȴ:
-         *          ���빥��״̬
+         *  检测攻击范围
+         *  if 在攻击范围内:
+         *      if 攻击行为已冷却:
+         *          进入攻击状态
          *      else: 
-         *          ��������ս����̬״̬
+         *          继续保持战斗姿态状态
          *  else:
-         *      �л�������Ŀ��״̬
+         *      切换至跟踪目标状态
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -47,7 +47,7 @@ namespace CatchMoon
 
             attackState.hasPerformedAttack = false;
 
-            //Debug.Log(string.Format($"����ҵľ���: {enemy.distanceFromTarget:N0}"));
+            //Debug.Log(string.Format($"到玩家的距离: {enemy.distanceFromTarget:N0}"));
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 return pursueTargetState;
 
@@ -61,11 +61,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [����] ����Ŀ��
+        /// [处理] 朝向目标
         /// </summary>
         protected void HandleRotateTowardsTarget(EnemyManager enemy)
         {
-            // �˹���ת
+            // 人工旋转
             if (enemy.isPreformingAction)
             {
                 if (enemy.targetDir == Vector3.zero)
@@ -74,10 +74,10 @@ namespace CatchMoon
                 Quaternion targetRotation = Quaternion.LookRotation(enemy.targetDir);
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, enemy.aiSettings.rotationSpeed * Time.deltaTime);
             }
-            // ����navmesh������ת
+            // 根据navmesh导航旋转
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // ��Է���
+                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // 相对方向
                 Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
 
                 enemy.navmeshAgent.enabled = true;
@@ -88,7 +88,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ������Ȧ����
+        /// 决定绕圈动画
         /// </summary>
         protected void DecideCirclingAction(EnemyManager enemy)
         {
@@ -96,7 +96,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Χ��Ŀ����
+        /// 围绕目标走
         /// </summary>
         protected void WalkAroundTarget(EnemyManager enemy)
         {
@@ -104,7 +104,7 @@ namespace CatchMoon
             {
                 if (!setAroundDirection)
                 {
-                    horizontalMovementValue = Random.Range(0, 2) - 0.5f; // ������������, 0.5f��-0.5f���ʶ԰�
+                    horizontalMovementValue = Random.Range(0, 2) - 0.5f; // 随机向左或向右, 0.5f与-0.5f概率对半
                     setAroundDirection = true;
                 }
             }
@@ -121,9 +121,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ��ȡ�µĹ�����Ϊ
+        /// 获取新的攻击行为
         /// </summary>
-        /// <param name="enemyManger">���˹�����</param>
+        /// <param name="enemyManger">敌人管理器</param>
         protected virtual void GetNewAttack(EnemyManager enemy)
         {
             int maxScore = 0;

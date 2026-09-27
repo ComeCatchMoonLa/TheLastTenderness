@@ -13,7 +13,7 @@ namespace CatchMoon
         }
         protected virtual void Start()
         {
-            #region ¼ì²â¿ÕÒýÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (slider == null)
                 Debug.LogError($"{transform.name}: slider == null");
             #endregion

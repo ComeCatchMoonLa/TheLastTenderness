@@ -5,15 +5,15 @@ namespace CatchMoon
 {
     public class TapWindowsManager : MonoBehaviour
     {
-        [Header("±»Ñ¡ÔñµÄ´°¿Ú")]
+        [Header("è¢«é€‰æ‹©çš„çª—å£")]
         [SerializeField] TapWinType selectedWin;
 
-        [Header("×Ó´°¿Ú")]
+        [Header("å­çª—å£")]
         [SerializeField] EquipmentWinManager equipmentWin;
         [SerializeField] InventoryWinManager inventoryWin;
         [SerializeField] ItemStatsWinManager itemStatsWin;
 
-        [Header("×Ó´°¿Ú±êÌâÎÄ±¾(ÓÃÓÚ¼Ó´ÖÎÄ±¾, Í¹ÏÔµ±Ç°Ñ¡ÔñÏî)")]
+        [Header("å­çª—å£æ ‡é¢˜æ–‡æœ¬(ç”¨äºåŠ ç²—æ–‡æœ¬, å‡¸æ˜¾å½“å‰é€‰æ‹©é¡¹)")]
         [SerializeField] TextMeshProUGUI selectButton_Equipment_Text;
         [SerializeField] TextMeshProUGUI selectButton_Inventory_Text;
         [SerializeField] TextMeshProUGUI selectButton_Skill_Text;
@@ -21,7 +21,7 @@ namespace CatchMoon
 
         private void Start()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (equipmentWin == null)
                 Debug.LogError("equipmentWin == null");
             if (inventoryWin == null)
@@ -71,7 +71,7 @@ namespace CatchMoon
 
         public EquipmentWinManager GetEquipmentWin()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (equipmentWin == null)
                 Debug.LogError("equipmentWin == null");
             #endregion
@@ -79,7 +79,7 @@ namespace CatchMoon
         }
         public InventoryWinManager GetInventoryWin()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (inventoryWin == null)
                 Debug.LogError("inventoryWin == null");
             #endregion
@@ -87,7 +87,7 @@ namespace CatchMoon
         }
         public ItemStatsWinManager GetItemStatsWin()
         {
-            #region ¼ì²â¿ÕÒıÓÃÒì³£
+            #region æ£€æµ‹ç©ºå¼•ç”¨å¼‚å¸¸
             if (itemStatsWin == null)
                 Debug.LogError("itemStatsWin == null");
             #endregion

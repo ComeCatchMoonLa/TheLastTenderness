@@ -12,35 +12,35 @@ namespace CatchMoon
         [HideInInspector] public EnemyStatsManager eStats;
         [HideInInspector] public EnemyWeaponSlotManager eWeaponSlot;
 
-        [Header("npcÀàĞÍÉèÖÃ")]
+        [Header("npcç±»å‹è®¾ç½®")]
         public bool isStoryNpc;
         public bool isCombatNpc;
 
-        [Header("A.I ÉèÖÃ")]
-        public bool enableAI = true; // ÊÇ·ñÆôÓÃAI
-        public EnemyAISettings aiSettings; // AIÉèÖÃ
+        [Header("A.I è®¾ç½®")]
+        public bool enableAI = true; // æ˜¯å¦å¯ç”¨AI
+        public EnemyAISettings aiSettings; // AIè®¾ç½®
 
-        [Header("A.I µ¼º½")]
+        [Header("A.I å¯¼èˆª")]
         public NavMeshAgent navmeshAgent;
 
-        [Header("A.I ×´Ì¬")]
+        [Header("A.I çŠ¶æ€")]
         [SerializeField] State currentState;
 
         [Header("A.I Flags")]
-        public bool isPreformingAction;             // ĞĞÎª×¼±¸ÖĞ
-        public bool isPhaseShifting;                // ÕıÔÚ±ä»»½×¶Î
+        public bool isPreformingAction;             // è¡Œä¸ºå‡†å¤‡ä¸­
+        public bool isPhaseShifting;                // æ­£åœ¨å˜æ¢é˜¶æ®µ
 
         [Header("A.I Timer")]
         public float currentRecoveryTime = 0;
 
-        [Header("Ä¿±êĞÅÏ¢")]
+        [Header("ç›®æ ‡ä¿¡æ¯")]
         public CharacterManager currentTarget;
-        public float distFromTarget; // µ½Ä¿±êµÄ¾àÀë
-        public Vector3 targetDir;    // Ä¿±ê·½Ïò
-        public float targetDirAngle; // Ä¿±ê·½ÏòÓëÕıÇ°·½µÄ¼Ğ½Ç
+        public float distFromTarget; // åˆ°ç›®æ ‡çš„è·ç¦»
+        public Vector3 targetDir;    // ç›®æ ‡æ–¹å‘
+        public float targetDirAngle; // ç›®æ ‡æ–¹å‘ä¸æ­£å‰æ–¹çš„å¤¹è§’
 
-        [HideInInspector] public float turnAngle;   // Ğı×ª½Ç¶È(Ô­µØĞı×ª)
-        [HideInInspector] public bool hadTurned;    // ÒÑ¾­Íê³ÉÁËĞı×ª
+        [HideInInspector] public float turnAngle;   // æ—‹è½¬è§’åº¦(åŸåœ°æ—‹è½¬)
+        [HideInInspector] public bool hadTurned;    // å·²ç»å®Œæˆäº†æ—‹è½¬
 
         protected override void Awake()
         {
@@ -59,7 +59,7 @@ namespace CatchMoon
         {
             base.Start();
 
-            #region ÅĞ¶Ï¿ÕÒıÓÃÒì³£
+            #region åˆ¤æ–­ç©ºå¼•ç”¨å¼‚å¸¸
             if (eAnimator == null)
                 Debug.LogError($"{transform.name}: eAnimator == null");
             if (eCombat == null)
@@ -79,8 +79,8 @@ namespace CatchMoon
                 Debug.LogError($"{transform.name}: aiSettings == null");
             #endregion
 
-            navmeshAgent.enabled = false;       // ½ûÓÃµ¼º½
-            rigidBody.isKinematic = false;      // ²»ÆôÓÃÎïÀíÏµÍ³
+            navmeshAgent.enabled = false;       // ç¦ç”¨å¯¼èˆª
+            rigidBody.isKinematic = false;      // ä¸å¯ç”¨ç‰©ç†ç³»ç»Ÿ
         }
         protected override void Update()
         {
@@ -99,7 +99,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] ×´Ì¬»ú
+        /// [å¤„ç†] çŠ¶æ€æœº
         /// </summary>
         private void HandleStateMachine()
         {
@@ -113,7 +113,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ÇĞ»»µ½ÏÂÒ»¸ö×´Ì¬
+        /// åˆ‡æ¢åˆ°ä¸‹ä¸€ä¸ªçŠ¶æ€
         /// </summary>
         void SwitchToNextState(State state)
         {
@@ -121,7 +121,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] »Ö¸´¼ÆÊ±Æ÷
+        /// [å¤„ç†] æ¢å¤è®¡æ—¶å™¨
         /// </summary>
         void HandleRecoveryTimer()
         {

@@ -12,7 +12,7 @@ namespace CatchMoon
 
         CharacterStatsManager spellTarget;
 
-        Vector3 impactNormal; // 用来旋转<碰撞粒子系统>
+        Vector3 impactNormal; // 鐢ㄦ潵鏃嬭浆<纰版挒绮掑瓙绯荤粺>
 
         protected override void Start()
         {
