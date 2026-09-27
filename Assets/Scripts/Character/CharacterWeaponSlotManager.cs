@@ -160,7 +160,10 @@ namespace CatchMoon
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.spellCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.bow
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.melee_OH_Shield)
+                {
+                    character.cEffects.leftWeaponFX = null;
                     return;
+                }
 
                 leftHandDC = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 if (leftHandDC == null)
