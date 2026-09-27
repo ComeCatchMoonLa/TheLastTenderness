@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.23 已完成。
-- [ ] 读过技术设计：只封顶两处 `RegenerateStamina`。
+- [x] 0.23 已完成。
+- [x] 读过技术设计：只封顶两处 `RegenerateStamina`。
 
 **阶段门槛：** 知道回复速度和 1 秒间隔不在本版。
 
 ## 1. 回复结果封顶
 
-- [ ] `CharacterStatsManager.RegenerateStamina` 加上之后不超过 `maxStamina`。
-- [ ] `PlayerStatsManager.RegenerateStamina` 同样封顶，体力条用封顶后的数。
-- [ ] `AddStamina` 和回复量不改。
+- [x] `CharacterStatsManager.RegenerateStamina` 加上之后不超过 `maxStamina`。
+- [x] `PlayerStatsManager.RegenerateStamina` 同样封顶，体力条用封顶后的数。
+- [x] `AddStamina` 和回复量不改。
 
 **阶段门槛：** 玩家覆写仍不调用基类。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。格挡回复更慢不重测成另一档。
-- [ ] 大纲里的 0.24 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。格挡回复更慢不重测成另一档。
+- [x] 大纲里的 0.24 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

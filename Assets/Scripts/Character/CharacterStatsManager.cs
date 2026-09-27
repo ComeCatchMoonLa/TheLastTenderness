@@ -243,10 +243,10 @@ namespace CatchMoon
                 staminaRegenTimer += Time.deltaTime;
                 if (currentStamina < maxStamina && staminaRegenTimer > 1f)
                 {
-                    if (character.cCombat.isBlocking)
-                        currentStamina += staminaRegenerationAmountWhilstBlocking * Time.deltaTime;
-                    else
-                        currentStamina += staminaRegenerationAmount * Time.deltaTime;
+                    float amount = character.cCombat.isBlocking
+                        ? staminaRegenerationAmountWhilstBlocking
+                        : staminaRegenerationAmount;
+                    currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
                 }
             }
         }

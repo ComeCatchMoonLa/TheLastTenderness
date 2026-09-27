@@ -138,16 +138,11 @@ namespace CatchMoon
                 staminaRegenTimer += Time.deltaTime;
                 if (currentStamina < maxStamina && staminaRegenTimer > 1f)
                 {
-                    if (player.pCombat.isBlocking)
-                    {
-                        currentStamina += staminaRegenerationAmountWhilstBlocking * Time.deltaTime;
-                        player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
-                    }
-                    else
-                    {
-                        currentStamina += staminaRegenerationAmount * Time.deltaTime;
-                        player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
-                    }
+                    float amount = player.pCombat.isBlocking
+                        ? staminaRegenerationAmountWhilstBlocking
+                        : staminaRegenerationAmount;
+                    currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
+                    player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
                 }
             }
         }
