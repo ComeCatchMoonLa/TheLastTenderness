@@ -46,9 +46,6 @@ namespace CatchMoon
             { Debug.LogError("leftWeapon is null."); }
             if (rightWeapon == null)
             { Debug.LogError("rightWeapon is null."); }
-
-            if (currentAmmo != null)
-                currentAmmo.cnt = currentAmmo.maxCnt;
         }
     }
 }

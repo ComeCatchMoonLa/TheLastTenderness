@@ -21,9 +21,8 @@ namespace CatchMoon
         {
             if (player.pCombat.isUsingConsumable) return;
             
-            if (currentItemAmount > 0)
+            if (player.pInventory.TrySpendConsumable(this))
             {
-                --currentItemAmount;
 
                 if (player.pCamera.lockOnFlag)
                 {

@@ -18,15 +18,18 @@ namespace CatchMoon
             if (!player.pCombat.isAiming || player.pStats.currentStamina <= 0)
                 return;
 
+            if (!player.pInventory.TrySpendAmmo(player.pInventory.currentAmmo))
+            {
+                player.pInventory.currentAmmo = null;
+                return;
+            }
+
             // 播放射箭动画
             player.animator.Play("Shoot Arrow");
 
             // 销毁loadModel
             Destroy(player.pEffects.Ammo);
             player.pEffects.Ammo = null;
-
-            // 减少玩家的库存
-            --(player.pInventory.currentAmmo.cnt);
 
             // 生成liveModel
             GameObject liveArrow = Instantiate(player.pInventory.currentAmmo.liveItemModel, player.pWeaponSlot.rightHandSlot.overrideParentWhileHolding);
@@ -56,7 +59,7 @@ namespace CatchMoon
             arrowDamageCollider.ammoItem = player.pInventory.currentAmmo;
             arrowDamageCollider.pd = player.pInventory.currentAmmo.physicalDamage;
 
-            if (player.pInventory.currentAmmo.cnt == 0)
+            if (player.pInventory.AmmoRemaining(player.pInventory.currentAmmo) == 0)
                 player.pInventory.currentAmmo = null;
         }
 

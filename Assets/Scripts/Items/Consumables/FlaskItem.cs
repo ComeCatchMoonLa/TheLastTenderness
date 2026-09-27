@@ -19,9 +19,8 @@ namespace CatchMoon
         {
             if (player.pCombat.isUsingConsumable) return;
 
-            if (currentItemAmount > 0)
+            if (player.pInventory.TrySpendConsumable(this))
             {
-                --currentItemAmount;
 
                 player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, true);
 

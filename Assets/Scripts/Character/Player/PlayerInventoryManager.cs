@@ -17,10 +17,60 @@ namespace CatchMoon
         public List<SpellItem> spells;
         public List<ConsumableItem> consumables;
 
+        Dictionary<ConsumableItem, int> consumableLeft;
+        Dictionary<AmmoItem, int> ammoLeft;
+
         protected override void Awake()
         {
             base.Awake();
             player = GetComponent<PlayerManager>();
+            consumableLeft = new Dictionary<ConsumableItem, int>();
+            ammoLeft = new Dictionary<AmmoItem, int>();
+        }
+        protected override void Start()
+        {
+            base.Start();
+
+            if (consumables != null)
+            {
+                for (int i = 0; i < consumables.Count; i++)
+                    RememberConsumable(consumables[i]);
+            }
+            RememberConsumable(currentConsumable);
+            RememberAmmo(currentAmmo);
+        }
+
+        public bool TrySpendConsumable(ConsumableItem item)
+        {
+            if (item == null) return false;
+            RememberConsumable(item);
+            if (consumableLeft[item] <= 0) return false;
+            consumableLeft[item]--;
+            return true;
+        }
+        public bool TrySpendAmmo(AmmoItem item)
+        {
+            if (item == null) return false;
+            RememberAmmo(item);
+            if (ammoLeft[item] <= 0) return false;
+            ammoLeft[item]--;
+            return true;
+        }
+        public int AmmoRemaining(AmmoItem item)
+        {
+            if (item == null) return 0;
+            RememberAmmo(item);
+            return ammoLeft[item];
+        }
+        void RememberConsumable(ConsumableItem item)
+        {
+            if (item == null || consumableLeft.ContainsKey(item)) return;
+            consumableLeft[item] = item.maxItemAmount;
+        }
+        void RememberAmmo(AmmoItem item)
+        {
+            if (item == null || ammoLeft.ContainsKey(item)) return;
+            ammoLeft[item] = item.maxCnt;
         }
         protected virtual void Update()
         {

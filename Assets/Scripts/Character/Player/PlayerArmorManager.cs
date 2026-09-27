@@ -43,10 +43,18 @@ namespace CatchMoon
             {
                 headModelChanger.EquipModelByName(currentHeadArmor.transformName);
                 player.pStats.headArmorPDA = currentHeadArmor.physicalDA;
+                player.pStats.headArmorFDA = currentHeadArmor.fireDA;
+                player.pStats.headArmorMDA = currentHeadArmor.magicDA;
+                player.pStats.headArmorLDA = currentHeadArmor.lightningDA;
+                player.pStats.headArmorDDA = currentHeadArmor.darkDA;
             }
             else
             {
                 player.pStats.headArmorPDA = 0;
+                player.pStats.headArmorFDA = 0;
+                player.pStats.headArmorMDA = 0;
+                player.pStats.headArmorLDA = 0;
+                player.pStats.headArmorDDA = 0;
             }
             // Torso 盔甲
             torsoModelChanger.UnEquipAllModels();
@@ -54,11 +62,19 @@ namespace CatchMoon
             {
                 torsoModelChanger.EquipModelByName(currentTorsoArmor.transformName);
                 player.pStats.torsoArmorPDA = currentTorsoArmor.physicalDA;
+                player.pStats.torsoArmorFDA = currentTorsoArmor.fireDA;
+                player.pStats.torsoArmorMDA = currentTorsoArmor.magicDA;
+                player.pStats.torsoArmorLDA = currentTorsoArmor.lightningDA;
+                player.pStats.torsoArmorDDA = currentTorsoArmor.darkDA;
             }
             else
             {
                 torsoModelChanger.EquipModelByName(nakedTorsoModelName);
                 player.pStats.torsoArmorPDA = 0;
+                player.pStats.torsoArmorFDA = 0;
+                player.pStats.torsoArmorMDA = 0;
+                player.pStats.torsoArmorLDA = 0;
+                player.pStats.torsoArmorDDA = 0;
             }
             // Hip 盔甲
             hipModelChanger.UnEquipAllModels();
@@ -66,11 +82,19 @@ namespace CatchMoon
             {
                 hipModelChanger.EquipModelByName(currentHipsArmor.transformName);
                 player.pStats.hipsArmorPDA = currentHipsArmor.physicalDA;
+                player.pStats.hipsArmorFDA = currentHipsArmor.fireDA;
+                player.pStats.hipsArmorMDA = currentHipsArmor.magicDA;
+                player.pStats.hipsArmorLDA = currentHipsArmor.lightningDA;
+                player.pStats.hipsArmorDDA = currentHipsArmor.darkDA;
             }
             else
             {
                 hipModelChanger.EquipModelByName(nakedHipsModelName);
                 player.pStats.hipsArmorPDA = 0;
+                player.pStats.hipsArmorFDA = 0;
+                player.pStats.hipsArmorMDA = 0;
+                player.pStats.hipsArmorLDA = 0;
+                player.pStats.hipsArmorDDA = 0;
             }
         }
     }
