@@ -41,7 +41,12 @@ namespace CatchMoon
         }
         private void Update()
         {
-            if (player.pStats.isDead) return;
+            if (player.pStats.isDead)
+            {
+                if (openedWin != EscWinOpenedWinType.notEscWinMode)
+                    HandleOpenedEscWindow();
+                return;
+            }
 
             HandleTabInput();
             hud.UpdateCrosshair();
@@ -54,12 +59,17 @@ namespace CatchMoon
             }
             else
             {
-                HandleEscWinBackInput();
-                HandleEscWinMoveSelectorToLeftInput();
-                HandleEscWinMoveSelectorToRightInput();
-                HandleEscWinMoveSelectorToUpInput();
-                HandleEscWinMoveSelectorToDownInput();
+                HandleOpenedEscWindow();
             }
+        }
+
+        void HandleOpenedEscWindow()
+        {
+            HandleEscWinBackInput();
+            HandleEscWinMoveSelectorToLeftInput();
+            HandleEscWinMoveSelectorToRightInput();
+            HandleEscWinMoveSelectorToUpInput();
+            HandleEscWinMoveSelectorToDownInput();
         }
 
         void HandleTabInput()

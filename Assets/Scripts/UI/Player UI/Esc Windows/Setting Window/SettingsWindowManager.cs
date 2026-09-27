@@ -6,6 +6,8 @@ namespace CatchMoon
 {
     public class SettingsWindowManager : MonoBehaviour
     {
+        PlayerManager player;
+
         [Header("游戏设置数据")]
         public GameSettingsData gameSettingsData;
 
@@ -39,6 +41,11 @@ namespace CatchMoon
         [SerializeField] TextMeshProUGUI selectButton_Display_Text;
         [SerializeField] TextMeshProUGUI selectButton_Sound_Text;
         [SerializeField] TextMeshProUGUI selectButton_Control_Text;
+
+        private void Awake()
+        {
+            player = transform.root.GetComponent<PlayerManager>();
+        }
 
         private void Start()
         {
@@ -213,10 +220,12 @@ namespace CatchMoon
         public void SaveCameraLeftAndRightSpeedSetting()
         {
             gameSettingsData.cameraLeftAndRightSpeed = float.Parse(cameraLeftAndRightSpeed.text);
+            ApplyCameraSpeedSetting(player);
         }
         public void SaveCameraUpAndDownSpeedSetting()
         {
             gameSettingsData.cameraUpAndDownSpeed = float.Parse(cameraUpAndDownSpeed.text);
+            ApplyCameraSpeedSetting(player);
         }
         void ApplyCameraSpeedSetting(PlayerManager player)
         {
@@ -243,32 +252,25 @@ namespace CatchMoon
             switch (gameSettingsData.vsync_Options)
             {
                 case VSYNC_Options.enable:
-                    {
-                        gameSettingsData.vsync_Options = VSYNC_Options.disable;
-                        vsync_Option_Text.text = "禁用";
-                    }
+                    gameSettingsData.vsync_Options = VSYNC_Options.disable;
                     break;
                 case VSYNC_Options.disable:
-                    {
-                        gameSettingsData.vsync_Options = VSYNC_Options.enable;
-                        vsync_Option_Text.text = "启用";
-                    }
+                    gameSettingsData.vsync_Options = VSYNC_Options.enable;
                     break;
             }
+            VSYNC_ApplyCurrentOption();
         }
         void VSYNC_ApplyCurrentOption()
         {
             switch (gameSettingsData.vsync_Options)
             {
                 case VSYNC_Options.enable:
-                    {
-                        vsync_Option_Text.text = "启用";
-                    }
+                    vsync_Option_Text.text = "启用";
+                    QualitySettings.vSyncCount = 1;
                     break;
                 case VSYNC_Options.disable:
-                    {
-                        vsync_Option_Text.text = "禁用";
-                    }
+                    vsync_Option_Text.text = "禁用";
+                    QualitySettings.vSyncCount = 0;
                     break;
             }
         }
