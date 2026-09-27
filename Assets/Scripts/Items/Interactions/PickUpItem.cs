@@ -4,11 +4,11 @@ namespace CatchMoon
 {
     public class PickUpItem : Interactable
     {
-        public Item item; // ÎäÆ÷
+        public Item item; // ï¿½ï¿½ï¿½ï¿½
 
         private void Start()
         {
-            #region ¼ì´í
+            #region ï¿½ï¿½ï¿½
             if (item == null)
             {
                 Debug.LogError("weapon is null.");
@@ -18,17 +18,17 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Íæ¼Ò½»»¥[ÖØÐ´]
+        /// ï¿½ï¿½Ò½ï¿½ï¿½ï¿½[ï¿½ï¿½Ð´]
         /// </summary>
         public override void Interact(PlayerManager player)
         {
-            // Ê°ÆðÎïÆ·²Ù×÷´ò¶ÏÍæ¼ÒÒÆ¶¯
-            player.rigidBody.velocity = Vector3.zero;
+            // Ê°ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+            player.rigidBody.linearVelocity = Vector3.zero;
             player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             player.pInventory.AddItem(item);
             player.ui.popUps.interactUI.SetInteractionInfo(item);
 
-            player.ui.popUps.interactUI.PopUpInteractionInfoUI(); // ½«ÌáÊ¾ÎïÆ·ÐÅÏ¢µÄUI¼¤»î
+            player.ui.popUps.interactUI.PopUpInteractionInfoUI(); // ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½UIï¿½ï¿½ï¿½ï¿½
             Destroy(gameObject);
         }
     }

@@ -8,12 +8,12 @@ namespace CatchMoon
 
         private void Awake()
         {
-            bossHealthBar = FindObjectOfType<UIBossHealthBar>();
+            bossHealthBar = FindAnyObjectByType<UIBossHealthBar>();
 
             if (bossHealthBar == null)
                 Debug.LogError("bossHealthBar == null");
         }
-        
+
         public void ActivateBossBar(EnemyStatsManager eStats)
         {
             bossHealthBar.SetBossName(eStats.cName);

@@ -36,7 +36,7 @@ namespace CatchMoon
             base.Awake();
 
             input = GetComponent<InputManager>();
-            pCamera = FindObjectOfType<PlayerCameraManager>();
+            pCamera = FindAnyObjectByType<PlayerCameraManager>();
             ui = GetComponentInChildren<PlayerUIManager>();
 
             pAnimator = GetComponent<PlayerAnimatorManager>();
@@ -150,7 +150,7 @@ namespace CatchMoon
         {
             if (isInteracting) return;
 
-            rigidBody.velocity = Vector3.zero; // 防止角色打滑
+            rigidBody.linearVelocity = Vector3.zero; // 防止角色打滑
             transform.position = playerStandingHereWhenOpeningChest.position;
 
             Vector3 targetDirection = chestPosition - playerStandingHereWhenOpeningChest.position;

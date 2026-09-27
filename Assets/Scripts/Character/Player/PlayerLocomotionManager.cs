@@ -6,32 +6,32 @@ namespace CatchMoon
     {
         PlayerManager player;
 
-        Vector3 normalVector = Vector3.up;  // ·¨ÏòÁ¿(ÓÃÓÚµ÷ÕûÉÏÏÂÆÂµÄËÙ¶È, ÉÏÆÂËÙ¶È¼õÐ¡, ÏÂÆÂËÙ¶ÈÔö´ó)
-        public Vector3 moveDir;             // ÒÆ¶¯·½Ïò
+        Vector3 normalVector = Vector3.up;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½Ù¶ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È¼ï¿½Ð¡, ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½)
+        public Vector3 moveDir;             // ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 
         [Header("Ground & Air Detection Stats")]
-        // ÏÈFallÔÙLand, »òÖ±½ÓLand, »òÊ²Ã´¶¼²»×ö
-        // PlayerÅö×²Æ÷×îÏÂ·½µÄ¸ß¶È¾ö¶¨ÁË
-        float rayStartPointHeight;                              // ÂäµØ¼ì²âÉäÏßµÄÆðµã¸ß¶È
-        [SerializeField] float HeightToBeginLand = 0.8f;        // ¿ªÊ¼×ÅÂ½µÄ¸ß¶È
-        float minHeightNeedToLand;                              // ÏÂÄ³¸öÆ½Ì¨²¥·ÅLand¶¯»­µÄ×îÐ¡Æ½Ì¨¸ß¶È
-        [SerializeField] float rayStartPointOffsetDist = 0.2f;  // ÂäµØ¼ì²âÉäÏßÆðµãµÄÆ«ÒÆ(PlayerÒÆ¶¯Ê±)
-        [SerializeField] UnityEngine.LayerMask GroundCheckLayer;            // ÂäµØ¼ì²àµÄ²ã
+        // ï¿½ï¿½Fallï¿½ï¿½Land, ï¿½ï¿½Ö±ï¿½ï¿½Land, ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // Playerï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ä¸ß¶È¾ï¿½ï¿½ï¿½ï¿½ï¿½
+        float rayStartPointHeight;                              // ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ß¶ï¿½
+        [SerializeField] float HeightToBeginLand = 0.8f;        // ï¿½ï¿½Ê¼ï¿½ï¿½Â½ï¿½Ä¸ß¶ï¿½
+        float minHeightNeedToLand;                              // ï¿½ï¿½Ä³ï¿½ï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½Landï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Æ½Ì¨ï¿½ß¶ï¿½
+        [SerializeField] float rayStartPointOffsetDist = 0.2f;  // ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½(Playerï¿½Æ¶ï¿½Ê±)
+        [SerializeField] UnityEngine.LayerMask GroundCheckLayer;            // ï¿½ï¿½Ø¼ï¿½ï¿½Ä²ï¿½
 
-        [Header("Íæ¼ÒËÙ¶È")]
-        [SerializeField] float rotateSpeed = 10; // Ðý×ªËÙ¶È
-        [SerializeField] float runSpeed = 5;     // ±¼ÅÜËÙ¶È
-        [SerializeField] float sprintSpeed = 7;  // ³å´ÌËÙ¶È
-        [SerializeField] float fallSpeed = 200;  // ½µÂäËÙ¶È
+        [Header("ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½")]
+        [SerializeField] float rotateSpeed = 10; // ï¿½ï¿½×ªï¿½Ù¶ï¿½
+        [SerializeField] float runSpeed = 5;     // ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        [SerializeField] float sprintSpeed = 7;  // ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        [SerializeField] float fallSpeed = 200;  // ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
 
-        [Header("ÌåÁ¦ÏûºÄ")]
-        [SerializeField] float rollCost = 10;     // ·­¹öÏûºÄµÄÌåÁ¦Öµ
-        [SerializeField] float backStepCost = 5;  // ºóÌø²½ÏûºÄµÄÌåÁ¦Öµ
-        public float sprintCost = 0.2f;           // ³å´ÌÏûºÄ
-        public float sprintNeedMinStamina = 10f;  // ³å´ÌÐèÒªµÄ×îÉÙÌåÁ¦Öµ
-        [SerializeField] float jumpCost = 10;     // ÌøÔ¾ÏûºÄµÄÌåÁ¦Öµ
+        [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+        [SerializeField] float rollCost = 10;     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        [SerializeField] float backStepCost = 5;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        public float sprintCost = 0.2f;           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        public float sprintNeedMinStamina = 10f;  // ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+        [SerializeField] float jumpCost = 10;     // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 
-        [Header("²»Í¬×´Ì¬ÏÂµÄCollider")]
+        [Header("ï¿½ï¿½Í¬×´Ì¬ï¿½Âµï¿½Collider")]
         public Vector3 defaultColliderCenter = new Vector3(0f, 1.2f, 0f);
         public float defaultColliderRadius = 0.3f;
         public float defaultColliderHeight = 1.2f;
@@ -46,8 +46,8 @@ namespace CatchMoon
         }
         private void Start()
         {
-            rayStartPointHeight = player.cCollider.center.y - player.cCollider.height * 0.5f; //(ÓëPlayerÅö×²Æ÷×îÏÂ·½Í¬¸ß)
-            minHeightNeedToLand = rayStartPointHeight; // ÄÜÖ±½ÓÉÏµÄÆ½Ì¨¸ß¶È¾ÍÄÜÖ±½ÓÏÂ
+            rayStartPointHeight = player.cCollider.center.y - player.cCollider.height * 0.5f; //(ï¿½ï¿½Playerï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½Í¬ï¿½ï¿½)
+            minHeightNeedToLand = rayStartPointHeight; // ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Ïµï¿½Æ½Ì¨ï¿½ß¶È¾ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
 
             GroundCheckLayer = (LayerMask.environment | LayerMask.npc | LayerMask.player);
         }
@@ -70,26 +70,26 @@ namespace CatchMoon
 
             UpdateMoveDir();
             float speed = runSpeed;
-            if (player.isSprinting) // ³å´Ì
+            if (player.isSprinting) // ï¿½ï¿½ï¿½
             {
                 speed = sprintSpeed;
                 player.pStats.DeductStamina(sprintCost);
             }
 
-            // normalVector±íÊ¾Playerµ±Ç°ËùÕ¾µÄÎ»ÖÃ´¦µØÐÎÆ½ÃæµÄ´¹Ö±ÏòÁ¿
-            // ½«PlayerµÄËÙ¶ÈÊ¸Á¿Í¶Ó°µ½·¨ÏòÁ¿Ëù¾ö¶¨µÄÆ½ÃæÉÏ, ²¢½«ÆäÉèÖÃÎªPlayerµÄ¸ÕÌåµÄËÙ¶È(Õâ¸öÊÇÉÏÆÂÊ±µÄËÙ¶È)
+            // normalVectorï¿½ï¿½Ê¾Playerï¿½ï¿½Ç°ï¿½ï¿½Õ¾ï¿½ï¿½Î»ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ä´ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½Playerï¿½ï¿½ï¿½Ù¶ï¿½Ê¸ï¿½ï¿½Í¶Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªPlayerï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ù¶ï¿½)
             Vector3 projectVelocity = Vector3.ProjectOnPlane(moveDir * speed, normalVector);
-            // ÅÐ¶ÏÊÇÏÂÆÂÊ±£¬ÎÒÃÇÔö¼ÓPlayerµÄÒÆËÙ
+            // ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Playerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (moveDir != Vector3.zero)
             {
-                float theta = Vector3.Angle(moveDir, normalVector); // ¼´Íæ¼ÒÒÆ¶¯·½ÏòÓëËùÔÚµØÐÎÆ½ÃæµÄ¼Ð½ÇµÄ²¹½Ç, 0µÄÖµÓòÔÚ(0, 180)
+                float theta = Vector3.Angle(moveDir, normalVector); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ä¼Ð½ÇµÄ²ï¿½ï¿½ï¿½, 0ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½(0, 180)
 
-                if (theta < 90) // ÏÂÆÂ
+                if (theta < 90) // ï¿½ï¿½ï¿½ï¿½
                     projectVelocity *= (2f / Mathf.Sin(theta * Mathf.Deg2Rad) - 1);
             }
-            player.rigidBody.velocity = projectVelocity;
+            player.rigidBody.linearVelocity = projectVelocity;
 
-            // ¸ù¾ÝÏà»úÊÇ·ñËø¶¨ÓëÍæ¼ÒÊÇ·ñ³å´Ì¾ö¶¨Íæ¼ÒÒÆ¶¯µÄ·½Ê½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ä·ï¿½Ê½
             if (player.pCamera.lockOnFlag && !player.isSprinting)
                 player.pAnimator.UpdateAnimatorValues(player.input.vertical, player.input.horizontal, player.isSprinting, true);
             else
@@ -128,21 +128,21 @@ namespace CatchMoon
 
             RaycastHit hit;
 
-            /// ÉèÖÃ´¥µØÉäÏß¼ì²âµÄÉäÏßÆðµã
+            /// ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Vector3 origin = transform.position;
             origin.y += rayStartPointHeight;
 
-            // ÈôÇ°·½ÓÐÕÏ°­Îï, Ôò²»½øÐÐ¼ì²âÉäÏßÆðµãµÄÆ«ÒÆ
+            // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½, ï¿½ò²»½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½
             if (!Physics.Raycast(origin, transform.forward, out hit, rayStartPointOffsetDist))
                 origin += moveDir.normalized * rayStartPointOffsetDist;
 
-            //  Èç¹ûÔÚ¿ÕÖÐÎÒÃÇ¾Í¸øËûÊ©¼ÓÁ½¸öÁ¦(Ò»¸ö³¯ÒÆ¶¯·½Ïò, Ò»¸ö³¯ÏÂ)
+            //  ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾Í¸ï¿½ï¿½ï¿½Ê©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½, Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             if (player.isInAir)
                 player.rigidBody.AddForce((Vector3.down + moveDir * 0.1f) * fallSpeed * player.rigidBody.mass);
 
-            Vector3 targetPosition = transform.position; // ÓÃÓÚÉèÖÃPlayerµÄ¸ß¶È
+            Vector3 targetPosition = transform.position; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Playerï¿½Ä¸ß¶ï¿½
 
-            // ÅÐ¶ÏÊÇ·ñ×ÅÂ½(½øÈëLand×´Ì¬»òÔÚµØÃæÉÏ)
+            // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Â½(ï¿½ï¿½ï¿½ï¿½Land×´Ì¬ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½)
             Debug.DrawRay(origin, Vector3.down * (rayStartPointHeight +  HeightToBeginLand), Color.red, 0.1f, false);
             if (Physics.Raycast(origin, Vector3.down, out hit, (rayStartPointHeight + HeightToBeginLand), GroundCheckLayer))
             {
@@ -164,7 +164,7 @@ namespace CatchMoon
                 }
             }
             
-            // ½«PlayerÉèÖÃµ½targetPosition(±ÜÃâÍæ¼ÒµÄÏÝÈëµØÃæ»òÐü¿Õ)
+            // ï¿½ï¿½Playerï¿½ï¿½ï¿½Ãµï¿½targetPosition(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             if (!player.isInAir)
                 transform.position = targetPosition;
         }

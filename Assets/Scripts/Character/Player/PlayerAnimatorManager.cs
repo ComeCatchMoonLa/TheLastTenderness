@@ -3,14 +3,14 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// ¶¯»­´¦ÀíÆ÷
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public class PlayerAnimatorManager : CharacterAnimatorManager
     {
         PlayerManager player;
 
-        int vertical;           // Ç°ºó
-        int horizontal;         // ×óÓÒ
+        int vertical;           // Ç°ï¿½ï¿½
+        int horizontal;         // ï¿½ï¿½ï¿½ï¿½
 
         protected override void Awake()
         {
@@ -24,11 +24,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¸üÐÂ¶¯»­²ÎÊý
+        /// ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// </summary>
-        /// <param name="verticalMovement">Ç°ºóÆ«ÒÆÁ¿</param>
-        /// <param name="horizontalMovement">×óÓÒÆ«ÒÆÁ¿</param>
-        /// <param name="isSprinting">ÊÇ·ñÔÚ³å´Ì</param>
+        /// <param name="verticalMovement">Ç°ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="horizontalMovement">ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½</param>
+        /// <param name="isSprinting">ï¿½Ç·ï¿½ï¿½Ú³ï¿½ï¿½</param>
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting, bool lockOnFlagAndNoSprint)
         {
             #region Vertical
@@ -87,19 +87,19 @@ namespace CatchMoon
         }
       
         /// <summary>
-        /// ²¥·Å¶¯»­Ê±Ö´ÐÐµÄ²Ù×÷
+        /// ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ê±Ö´ï¿½ÐµÄ²ï¿½ï¿½ï¿½
         /// </summary>
         private void OnAnimatorMove()
         {
             if (!player.isInteracting) return;
 
-            player.rigidBody.drag = 0;
-            Vector3 deltaPosition = player.animator.deltaPosition; // ½ÇÉ«Ä£ÐÍ´ËÊ±µÄÎ»ÖÃµ½¸Ã½ÇÉ«Ä£ÐÍÉÏÒ»Ö¡µÄ¾àÀë
+            player.rigidBody.linearDamping = 0;
+            Vector3 deltaPosition = player.animator.deltaPosition; // ï¿½ï¿½É«Ä£ï¿½Í´ï¿½Ê±ï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½Ã½ï¿½É«Ä£ï¿½ï¿½ï¿½ï¿½Ò»Ö¡ï¿½Ä¾ï¿½ï¿½ï¿½
             //deltaPosition.y = 0;
             if (Time.deltaTime > 0)
             {
-                Vector3 velocity = deltaPosition / Time.deltaTime; // ¼ÆËã¶¯»­ÖÐ½ÇÉ«Ä£ÐÍµÄËÙÂÊ
-                player.rigidBody.velocity = velocity;     // Ê¹¸ÕÌå¼´½ÇÉ«Ä£ÐÍµÄËÙÂÊÓë¶¯»­ÖÐ½ÇÉ«Ä£ÐÍµÄËÙÂÊÏàµÈ
+                Vector3 velocity = deltaPosition / Time.deltaTime; // ï¿½ï¿½ï¿½ã¶¯ï¿½ï¿½ï¿½Ð½ï¿½É«Ä£ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½
+                player.rigidBody.linearVelocity = velocity;     // Ê¹ï¿½ï¿½ï¿½å¼´ï¿½ï¿½É«Ä£ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½Ð½ï¿½É«Ä£ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             }
         }
 

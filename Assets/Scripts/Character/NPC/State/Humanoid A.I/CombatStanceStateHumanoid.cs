@@ -14,9 +14,9 @@ namespace CatchMoon
 
         [Header("×´Ì¬ Flags")]
         [SerializeField] bool hadRollForChance = false;
-        [SerializeField] bool willPerformBlock = false;     // will·ÀÓù
-        [SerializeField] bool willPerformDodge = false;     // willÉÁ±Ü(·­¹ö)
-        [SerializeField] bool willPerformParry = false;     // willµ¯·´
+        [SerializeField] bool willPerformBlock = false;     // willï¿½ï¿½ï¿½ï¿½
+        [SerializeField] bool willPerformDodge = false;     // willï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+        [SerializeField] bool willPerformParry = false;     // willï¿½ï¿½ï¿½ï¿½
 
         private void Awake()
         {
@@ -25,14 +25,14 @@ namespace CatchMoon
         }
 
         /**
-         *  ¼ì²â¹¥»÷·¶Î§
-         *  if ÔÚ¹¥»÷·¶Î§ÄÚ:
-         *      if ¹¥»÷ÐÐÎªÒÑÀäÈ´:
-         *          ½øÈë¹¥»÷×´Ì¬
+         *  ï¿½ï¿½â¹¥ï¿½ï¿½ï¿½ï¿½Î§
+         *  if ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½:
+         *      if ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½È´:
+         *          ï¿½ï¿½ï¿½ë¹¥ï¿½ï¿½×´Ì¬
          *      else: 
-         *          ¼ÌÐø±£³ÖÕ½¶·×ËÌ¬×´Ì¬
+         *          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½Ì¬×´Ì¬
          *  else:
-         *      ÇÐ»»ÖÁ¸ú×ÙÄ¿±ê×´Ì¬
+         *      ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½×´Ì¬
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -48,7 +48,7 @@ namespace CatchMoon
 
         State ProcessMeleeCombatStyle(EnemyManager enemy)
         {
-            // ½»»¥ÖÐ, Í£Ö¹ËùÓÐÔË¶¯
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
             if (enemy.isInteracting)
             {
                 enemy.animator.SetFloat("Vertical", 0);
@@ -59,21 +59,21 @@ namespace CatchMoon
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
-            // ÔÚaggroRadiusÍâ²ì¾õ°ë¾¶ÄÚÊ±×·ÏòÍæ¼Ò
+            // ï¿½ï¿½aggroRadiusï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶ï¿½ï¿½Ê±×·ï¿½ï¿½ï¿½ï¿½ï¿½
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
             {
                 ResetStateFlags();
                 return pursueTargetState;
             }
 
-            // ¹¥»÷ÀäÈ´Ê±Î§ÈÆPlayer×ªÈ¦(Ëæ»ú×óÓÒ)
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±Î§ï¿½ï¿½Player×ªÈ¦(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             DecideCirclingAction(enemy);
 
             HandleRotateTowardsTarget(enemy);
             
             if (!hadRollForChance)
                 RollForChance(enemy);
-            // µ¯·´¼Ó·´»÷
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ó·ï¿½ï¿½ï¿½
             if (enemy.distFromTarget < enemy.cCombat.criticalAttackRange)
             {
                 if (willPerformParry)
@@ -81,10 +81,10 @@ namespace CatchMoon
                 if (enemy.currentTarget.canBeRiposted)
                     Riposte(enemy);
             }
-            // ÉÁ±Ü
+            // ï¿½ï¿½ï¿½ï¿½
             if (willPerformDodge && enemy.distFromTarget < 2f)
                 Dodge(enemy);
-            // ¸ñµ²
+            // ï¿½ï¿½
             if (willPerformBlock)
                 Block(enemy);
             else if (enemy.cCombat.isBlocking)
@@ -92,7 +92,7 @@ namespace CatchMoon
                 enemy.cCombat.isBlocking = false;
                 enemy.eAnimator.PlayTargetAnimation("Block - End", false, true);
             }
-            // ¹¥»÷
+            // ï¿½ï¿½ï¿½ï¿½
             if (enemy.currentRecoveryTime <= 0)
             {
                 if (attackState.currentAttack == null)
@@ -112,7 +112,7 @@ namespace CatchMoon
         {
             enemy.animator.SetBool("aimingMode", true);
 
-            // ½»»¥ÖÐ,Í£Ö¹ËùÓÐÔË¶¯
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
             if (enemy.isInteracting)
             {
                 enemy.animator.SetFloat("Vertical", 0);
@@ -123,11 +123,11 @@ namespace CatchMoon
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
-            // ÔÚaggroRadiusÍâ²ì¾õ°ë¾¶ÄÚÊ±×·ÏòÍæ¼Ò
+            // ï¿½ï¿½aggroRadiusï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶ï¿½ï¿½Ê±×·ï¿½ï¿½ï¿½ï¿½ï¿½
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 return pursueTargetState;
 
-            // ÔÚÍæ¼Ò±È½Ï½üµÄÊ±ºò, Àë¿ªÍæ¼Ò
+            // ï¿½ï¿½ï¿½ï¿½Ò±È½Ï½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½, ï¿½ë¿ªï¿½ï¿½ï¿½
             if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
             {
                 return attackState;
@@ -144,7 +144,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] ³¯ÏòÄ¿±ê
+        /// [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
         /// </summary>
         protected void HandleRotateTowardsTarget(EnemyManager enemy)
         {
@@ -156,7 +156,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ¾ö¶¨ÔõÃ´À­³¶
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         protected void DecideCirclingAction(EnemyManager enemy)
         {
@@ -164,7 +164,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Î§ÈÆÄ¿±ê×ß
+        /// Î§ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         protected void WalkAroundTarget(EnemyManager enemy)
         {
@@ -173,10 +173,10 @@ namespace CatchMoon
                 if (!attackState.setAroundDirection)
                 {
                     attackState.setAroundDirection = true;
-                    // Ëæ»úÏò×ó»òÏòÓÒ, 0.5fÓë-0.5f¸ÅÂÊ¶Ô°ë
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 0.5fï¿½ï¿½-0.5fï¿½ï¿½ï¿½Ê¶Ô°ï¿½
                     horizontalMovementValue = Random.Range(0, 2) - 0.5f;
                 }
-                // ¹¥»÷ÀäÈ´ÖÐ£¬À­¿ªÓëÍæ¼ÒµÄ¾àÀë
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ¾ï¿½ï¿½ï¿½
                 if (enemy.distFromTarget < 3f)
                     verticalMovementValue = -0.5f;
                 else
@@ -185,7 +185,7 @@ namespace CatchMoon
             else
             {
                 horizontalMovementValue = 0f;
-                // ¹¥»÷ÀäÈ´ºÃÁËÈ´´ò²»µ½£¬½Ó½üPlayer
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½È´ï¿½ò²»µï¿½ï¿½ï¿½ï¿½Ó½ï¿½Player
                 if (enemy.distFromTarget > 1.4f)
                     verticalMovementValue = 0.5f;
                 else
@@ -194,9 +194,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// »ñÈ¡ÐÂµÄ¹¥»÷ÐÐÎª
+        /// ï¿½ï¿½È¡ï¿½ÂµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½Îª
         /// </summary>
-        /// <param name="enemyManger">µÐÈË¹ÜÀíÆ÷</param>
+        /// <param name="enemyManger">ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½</param>
         protected virtual void GetNewAttack(EnemyManager enemy)
         {
             int maxScore = 0;
@@ -232,7 +232,7 @@ namespace CatchMoon
             }
         }
 
-        // ¸ù¾Ý¸ÅÂÊ¾ö¶¨ÊÇ·ñ·¢Éú¸ÃÐÐÎª
+        // ï¿½ï¿½ï¿½Ý¸ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª
         void RollForChance(EnemyManager enemy)
         {
             if (!enemy.isInteracting && enemy.currentTarget.cCombat.isAttacking)
@@ -268,7 +268,7 @@ namespace CatchMoon
             if (player.aimingMode)
             {
                 enemy.transform.LookAt(player.transform);
-                // ÏòµÐÈË·½ÏòµÄ×ó·½»òÓÒ·½ÉÁ±Ü
+                // ï¿½ï¿½ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ó·½»ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
                 int randomDir = Random.Range(0, 2) * 180 - 90;
                 enemy.transform.Rotate(new Vector3(0, randomDir, 0));
             }
@@ -291,7 +291,7 @@ namespace CatchMoon
                 {
                     willPerformParry = false;
 
-                    // ×ªÏòÍæ¼Ò
+                    // ×ªï¿½ï¿½ï¿½ï¿½ï¿½
                     enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation,
                         Quaternion.LookRotation(enemy.targetDir), enemy.aiSettings.rotationSpeed * Time.deltaTime);
                     enemy.eAnimator.PlayTargetAnimation("Parry", true);
@@ -305,7 +305,7 @@ namespace CatchMoon
         {
             if (!enemy.currentTarget.isBeingRiposted && !enemy.isPerformingRiposted)
             {
-                enemy.rigidBody.velocity = Vector3.zero;
+                enemy.rigidBody.linearVelocity = Vector3.zero;
                 enemy.animator.SetFloat("Vertical", 0);
                 enemy.eInventory.rightWeapon.oh_hold_e_action.PerformAction(enemy);
             }

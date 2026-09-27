@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CatchMoon
 {
     /// <summary>
-    /// Õ½¶·×´Ì¬
+    /// Õ½ï¿½ï¿½×´Ì¬
     /// </summary>
     public class CombatStanceState : State
     {
@@ -22,14 +22,14 @@ namespace CatchMoon
         }
 
         /**
-         *  ¼ì²â¹¥»÷·¶Î§
-         *  if ÔÚ¹¥»÷·¶Î§ÄÚ:
-         *      if ¹¥»÷ÐÐÎªÒÑÀäÈ´:
-         *          ½øÈë¹¥»÷×´Ì¬
+         *  ï¿½ï¿½â¹¥ï¿½ï¿½ï¿½ï¿½Î§
+         *  if ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½:
+         *      if ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½È´:
+         *          ï¿½ï¿½ï¿½ë¹¥ï¿½ï¿½×´Ì¬
          *      else: 
-         *          ¼ÌÐø±£³ÖÕ½¶·×ËÌ¬×´Ì¬
+         *          ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½Ì¬×´Ì¬
          *  else:
-         *      ÇÐ»»ÖÁ¸ú×ÙÄ¿±ê×´Ì¬
+         *      ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½×´Ì¬
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -47,7 +47,7 @@ namespace CatchMoon
 
             attackState.hasPerformedAttack = false;
 
-            //Debug.Log(string.Format($"µ½Íæ¼ÒµÄ¾àÀë: {enemy.distanceFromTarget:N0}"));
+            //Debug.Log(string.Format($"ï¿½ï¿½ï¿½ï¿½ÒµÄ¾ï¿½ï¿½ï¿½: {enemy.distanceFromTarget:N0}"));
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 return pursueTargetState;
 
@@ -61,11 +61,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] ³¯ÏòÄ¿±ê
+        /// [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
         /// </summary>
         protected void HandleRotateTowardsTarget(EnemyManager enemy)
         {
-            // ÈË¹¤Ðý×ª
+            // ï¿½Ë¹ï¿½ï¿½ï¿½×ª
             if (enemy.isPreformingAction)
             {
                 if (enemy.targetDir == Vector3.zero)
@@ -74,21 +74,21 @@ namespace CatchMoon
                 Quaternion targetRotation = Quaternion.LookRotation(enemy.targetDir);
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, enemy.aiSettings.rotationSpeed * Time.deltaTime);
             }
-            // ¸ù¾Ýnavmeshµ¼º½Ðý×ª
+            // ï¿½ï¿½ï¿½ï¿½navmeshï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // Ïà¶Ô·½Ïò
-                Vector3 targetVelocity = enemy.rigidBody.velocity;
+                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // ï¿½ï¿½Ô·ï¿½ï¿½ï¿½
+                Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
 
                 enemy.navmeshAgent.enabled = true;
                 enemy.navmeshAgent.SetDestination(enemy.currentTarget.transform.position);
-                enemy.rigidBody.velocity = targetVelocity;
+                enemy.rigidBody.linearVelocity = targetVelocity;
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed * Time.deltaTime);
             }
         }
 
         /// <summary>
-        /// ¾ö¶¨ÈÆÈ¦¶¯»­
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¦ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         protected void DecideCirclingAction(EnemyManager enemy)
         {
@@ -96,7 +96,7 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// Î§ÈÆÄ¿±ê×ß
+        /// Î§ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         protected void WalkAroundTarget(EnemyManager enemy)
         {
@@ -104,7 +104,7 @@ namespace CatchMoon
             {
                 if (!setAroundDirection)
                 {
-                    horizontalMovementValue = Random.Range(0, 2) - 0.5f; // Ëæ»úÏò×ó»òÏòÓÒ, 0.5fÓë-0.5f¸ÅÂÊ¶Ô°ë
+                    horizontalMovementValue = Random.Range(0, 2) - 0.5f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 0.5fï¿½ï¿½-0.5fï¿½ï¿½ï¿½Ê¶Ô°ï¿½
                     setAroundDirection = true;
                 }
             }
@@ -121,9 +121,9 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// »ñÈ¡ÐÂµÄ¹¥»÷ÐÐÎª
+        /// ï¿½ï¿½È¡ï¿½ÂµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½Îª
         /// </summary>
-        /// <param name="enemyManger">µÐÈË¹ÜÀíÆ÷</param>
+        /// <param name="enemyManger">ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½</param>
         protected virtual void GetNewAttack(EnemyManager enemy)
         {
             int maxScore = 0;

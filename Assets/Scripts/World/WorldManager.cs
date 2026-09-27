@@ -11,7 +11,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = FindObjectOfType<PlayerManager>();
+            player = FindAnyObjectByType<PlayerManager>();
 
             wEvent = GetComponentInChildren<WorldEventManager>();
             wUI = GetComponentInChildren<WorldUIManager>();

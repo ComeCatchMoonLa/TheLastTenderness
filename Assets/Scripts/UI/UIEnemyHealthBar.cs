@@ -9,7 +9,7 @@ namespace CatchMoon
         protected override void Awake()
         {
             base.Awake();
-            player = FindObjectOfType<PlayerManager>();
+            player = FindAnyObjectByType<PlayerManager>();
         }
 
         public float timeUntilBarIsHidden = 0f;

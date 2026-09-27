@@ -5,7 +5,7 @@ namespace CatchMoon
     public class InputManager : MonoBehaviour
     {
         PlayerManager player;
-        public InputAcitons inputActions;
+        [System.NonSerialized] public InputAcitons inputActions;
 
         public float horizontal; // 玩家垂直偏移
         public float vertical;   // 玩家水平偏移

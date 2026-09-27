@@ -12,9 +12,9 @@ namespace CatchMoon
         }
 
         /**
-         *  ¸ú×ÙÄ¿±ê
-         *  if Ä¿±êÔÚµÐ¶Ô·¶Î§ÄÚ:
-         *      ÇÐ»»ÖÁ¸úÕ½¶·×´Ì¬
+         *  ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
+         *  if Ä¿ï¿½ï¿½ï¿½ÚµÐ¶Ô·ï¿½Î§ï¿½ï¿½:
+         *      ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½×´Ì¬
          */
         public override State Tick(EnemyManager enemy)
         {
@@ -28,11 +28,11 @@ namespace CatchMoon
                 return this;
             }
 
-            // Ö´ÐÐ¶¯×÷Ê±Í£Ö¹ÒÆ¶¯
+            // Ö´ï¿½Ð¶ï¿½ï¿½ï¿½Ê±Í£Ö¹ï¿½Æ¶ï¿½
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
                 enemy.animator.SetFloat("Vertical", 1f, 0.1f, Time.deltaTime);
 
-            // ÔÚ¹¥»÷·¶Î§ÄÚ
+            // ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½
             if (enemy.distFromTarget <= enemy.aiSettings.aggroRadius)
                 return combatStanceState;
             else
@@ -40,11 +40,11 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// [´¦Àí] ³¯ÏòÄ¿±ê
+        /// [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
         /// </summary>
         private void HandleRotateTowardsTarget(EnemyManager enemy)
         {
-            // ÈË¹¤Ðý×ª
+            // ï¿½Ë¹ï¿½ï¿½ï¿½×ª
             if (enemy.isPreformingAction)
             {
                 if (enemy.targetDir == Vector3.zero)
@@ -53,15 +53,15 @@ namespace CatchMoon
                 Quaternion targetRotation = Quaternion.LookRotation(enemy.targetDir);
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
             }
-            // ¸ù¾Ýnavmeshµ¼º½Ðý×ª
+            // ï¿½ï¿½ï¿½ï¿½navmeshï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // Ïà¶Ô·½Ïò
-                Vector3 targetVelocity = enemy.rigidBody.velocity;
+                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // ï¿½ï¿½Ô·ï¿½ï¿½ï¿½
+                Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
 
                 enemy.navmeshAgent.enabled = true;
                 enemy.navmeshAgent.SetDestination(enemy.currentTarget.transform.position);
-                enemy.rigidBody.velocity = targetVelocity;
+                enemy.rigidBody.linearVelocity = targetVelocity;
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
             }
         }

@@ -21,7 +21,7 @@ namespace CatchMoon
         [Header("当前句子已播放完整(文字+语音)")]
         [SerializeField] bool sentenceIsComplete;
 
-        public Coroutine talkCoroutine;
+        [System.NonSerialized] public Coroutine talkCoroutine;
 
         private void Awake()
         {

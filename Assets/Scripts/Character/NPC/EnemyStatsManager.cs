@@ -25,7 +25,7 @@ namespace CatchMoon
             enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
             bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
 
-            world = FindObjectOfType<WorldManager>();
+            world = FindAnyObjectByType<WorldManager>();
 
             #region ¼ì´í
             if (enemy.aiSettings.isBoss)
@@ -80,7 +80,7 @@ namespace CatchMoon
 
         public void HandleEnemyDeathEvent()
         {
-            PlayerManager player = FindObjectOfType<PlayerManager>();
+            PlayerManager player = FindAnyObjectByType<PlayerManager>();
             if (player == null)
             {
                 Debug.LogError("player is null.");

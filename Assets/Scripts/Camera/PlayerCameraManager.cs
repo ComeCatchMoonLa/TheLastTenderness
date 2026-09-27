@@ -72,7 +72,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = FindObjectOfType<PlayerManager>();
+            player = FindAnyObjectByType<PlayerManager>();
             cameraObject= GetComponentInChildren<Camera>();
 
             #region ºÏ≤‚ø’“˝”√“Ï≥£

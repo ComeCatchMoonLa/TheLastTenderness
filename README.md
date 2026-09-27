@@ -1,6 +1,6 @@
 # TheLastTenderness
 
-Unity **2022.3.17f1c1** 的第三人称动作游戏。现有玩法代码是基线，之后按切片做。
+Unity **6000.5.9f1** 的第三人称动作游戏。现有玩法代码是基线，之后按切片做。
 
 **打开。** 用 Unity Hub 打开本目录，版本与 `ProjectSettings/ProjectVersion.txt` 一致。场景文件在 `Assets/Scenes/Game.unity`。Build Settings 里目前没有场景。
 

@@ -14,20 +14,20 @@ namespace CatchMoon
         }
 
         /// <summary>
-        /// ²¥·Å¶¯»­Ê±Ö´ÐÐµÄ²Ù×÷
+        /// ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ê±Ö´ï¿½ÐµÄ²ï¿½ï¿½ï¿½
         /// </summary>
         private void OnAnimatorMove()
         {
-            // ÉèÖÃ¸ÕÌåµÄËÙ¶ÈÎª¶¯»­ÔÚË®Æ½ÃæÉÏµÄËÙ¶È
-            enemy.rigidBody.drag = 0;
+            // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ù¶ï¿½
+            enemy.rigidBody.linearDamping = 0;
             Vector3 deltaPosition = enemy.animator.deltaPosition;
             deltaPosition.y = 0;
             if (Time.deltaTime > 0f)
             {
                 Vector3 velocity = deltaPosition / Time.deltaTime;
-                enemy.rigidBody.velocity = velocity;
+                enemy.rigidBody.linearVelocity = velocity;
             }
-            // ÅÐ¶ÏÊÇ·ñÐèÒªÓ¦ÓÃ¶¯»­µÄ¸ùÔË¶¯¾ö¶¨Ðý×ª(Ðý×ªÖ®ÍâµÄÐÎ±äÒÀÈ»Í¨¹ýisInteracting¾ö¶¨)
+            // ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ÒªÓ¦ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª(ï¿½ï¿½×ªÖ®ï¿½ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½È»Í¨ï¿½ï¿½isInteractingï¿½ï¿½ï¿½ï¿½)
             if (enemy.isRotatingWithRootMotion)
                 enemy.transform.rotation = enemy.animator.deltaRotation;
         }

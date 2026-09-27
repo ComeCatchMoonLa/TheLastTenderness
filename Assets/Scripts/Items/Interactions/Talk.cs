@@ -5,31 +5,31 @@ namespace CatchMoon
 {
     public class Talk : Interactable
     {
-        [Header("¶Ô»°¶ÔÏó")]
+        [Header("ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½")]
         [SerializeField] EnemyManager npc;
 
-        [Header("Player¶Ô»°Ê±Õ¾µÄÎ»ÖÃ")]
+        [Header("Playerï¿½Ô»ï¿½Ê±Õ¾ï¿½ï¿½Î»ï¿½ï¿½")]
         [SerializeField] Transform playerStandingPoint;
 
-        [Header("¶Ô»°ÄÚÈÝ")]
+        [Header("ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½")]
         public List<DialogueTextData> talkContent;
 
         public override void Interact(PlayerManager player)
         {
             npc.gameObject.tag = "Untagged";
-            // ÉèÖÃPlayerµÄTransform
-            player.rigidBody.velocity = Vector3.zero;
+            // ï¿½ï¿½ï¿½ï¿½Playerï¿½ï¿½Transform
+            player.rigidBody.linearVelocity = Vector3.zero;
             player.transform.position = playerStandingPoint.position;
             player.transform.LookAt(npc.transform, Vector3.up);
-            // ÉèÖÃPlayerµÄUI
+            // ï¿½ï¿½ï¿½ï¿½Playerï¿½ï¿½UI
             player.ui.hud.Hide();
             player.ui.popUps.talkUI.PopUp();
             player.ui.popUps.talkUI.SetTalkContent(talkContent);
-            // ½ûÓÃÍæ¼ÒÊäÈë
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             player.input.inputActions.Disable();
             player.input.inputActions.Interacte.Enable();
             player.input.inputActions.Locomotion.CameraRotate.Enable();
-            // ´¦Àí¶Ô»°(¸üÐÂÎÄ±¾¼°¶¯»­)
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
             player.storyNpc = npc;
             if (player.ui.escWin.GetSettingWin().gameSettingsData.auto)
             {
