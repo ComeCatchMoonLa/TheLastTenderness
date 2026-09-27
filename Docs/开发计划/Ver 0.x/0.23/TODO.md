@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.22 已完成。
-- [ ] 读过技术设计：只改伤害体在举盾时传入的动画名。
+- [x] 0.22 已完成。
+- [x] 读过技术设计：只改伤害体在举盾时传入的动画名。
 
 **阶段门槛：** 知道点积阈值、正面受伤音、破防动画不在本版。
 
 ## 1. 侧面和背后传入方向受击
 
-- [ ] `DamageCollider.OnTriggerEnter` 的举盾分支用和 `ResolveIncomingHit` 相同的点积。
-- [ ] 正面仍传入 `"Block - Hit"`。侧面和背后传入 `ChooseWhichDirectionDamageCameFrom` 的结果。
-- [ ] `ResolveIncomingHit` 的比较和 `playHurtSound` 不改。
+- [x] `DamageCollider.OnTriggerEnter` 的举盾分支用和 `ResolveIncomingHit` 相同的点积。
+- [x] 正面仍传入 `"Block - Hit"`。侧面和背后传入 `ChooseWhichDirectionDamageCameFrom` 的结果。
+- [x] `ResolveIncomingHit` 的比较和 `playHurtSound` 不改。
 
 **阶段门槛：** 不新加类型。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。正面挡住且精力还够时不重测成会播肉体受伤音。
-- [ ] 大纲里的 0.23 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。正面挡住且精力还够时不重测成会播肉体受伤音。
+- [x] 大纲里的 0.23 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

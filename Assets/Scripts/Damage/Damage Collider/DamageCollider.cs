@@ -87,10 +87,17 @@ namespace CatchMoon
                     character.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
                     character.canBeRiposted = true;
                 }
-                // 防御成功
-                else if (damageTarget.cCombat.isBlocking) 
+                // 举着盾。正面才传盾击；侧面和背后传方向受击，破韧时才播。
+                else if (damageTarget.cCombat.isBlocking)
                 {
-                    DealDamage(damageTarget, "Block - Hit", pd, fd, md, ld, dd);
+                    if (HitComesFromFront(damageTarget))
+                        DealDamage(damageTarget, "Block - Hit", pd, fd, md, ld, dd);
+                    else
+                    {
+                        float directionHitFrom = Vector3.SignedAngle(character.transform.forward, damageTarget.transform.forward, Vector3.up);
+                        ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+                        DealDamage(damageTarget, currentDamageAnimation, pd, fd, md, ld, dd);
+                    }
                 }
                 // 没有弹反也没有防御成功(例如, 头部受到攻击, 以及受到来自侧面或后面的攻击)
                 else
@@ -140,6 +147,17 @@ namespace CatchMoon
 
             damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, multiplier, true, poiseBreak, guardBreakModifider,
                 pd, fd, md, ld, dd);
+        }
+
+        // 与 ResolveIncomingHit 同一段点积：攻击者位置减去被打的人，再点被打的人的 forward。
+        bool HitComesFromFront(CharacterManager damageTarget)
+        {
+            Vector3 fromDefenderToAttacker = character.transform.position - damageTarget.transform.position;
+            if (fromDefenderToAttacker.sqrMagnitude <= 0.0001f)
+                return false;
+
+            float dotValue = Vector3.Dot(fromDefenderToAttacker.normalized, damageTarget.transform.forward);
+            return dotValue > 0.3f;
         }
 
         protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)
