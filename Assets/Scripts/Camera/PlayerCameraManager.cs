@@ -149,17 +149,39 @@ namespace CatchMoon
             }
         }
 
+        enum CameraPose
+        {
+            Aim,
+            Lock,
+            Default
+        }
+
+        CameraPose CurrentCameraPose()
+        {
+            if (player.aimingMode)
+                return CameraPose.Aim;
+            if (lockOnFlag)
+                return CameraPose.Lock;
+            return CameraPose.Default;
+        }
+
         /// <summary>
         /// 相机跟随目标
         /// </summary>
         public void FollowPlayer()
         {
-            if (player.aimingMode)
-                SetCameraPos_AimingMode();
-            else if (lockOnFlag)
-                SetCameraPos_LockedMode();
-            else
-                SetCameraPos_DefaultMode();
+            switch (CurrentCameraPose())
+            {
+                case CameraPose.Aim:
+                    SetCameraPos_AimingMode();
+                    break;
+                case CameraPose.Lock:
+                    SetCameraPos_LockedMode();
+                    break;
+                default:
+                    SetCameraPos_DefaultMode();
+                    break;
+            }
             HandleCameraCollisions();
         }
         public void SetCameraPos_LockedMode()
@@ -182,7 +204,7 @@ namespace CatchMoon
         void HandleCameraCollisions()
         {
             float targetCameraForwardDist;
-            if (player.aimingMode)
+            if (CurrentCameraPose() == CameraPose.Aim)
             {
                 targetCameraForwardDist = aimingCameraForwardDist;
             }
@@ -215,12 +237,18 @@ namespace CatchMoon
         /// <param name="mouseYInput">鼠标Y轴输入</param>
         void HandleCameraRotation()
         {
-            if (!player.isInteracting && player.aimingMode)
-                HandleAimingCameraRotation();
-            else if (lockOnFlag)
-                HandleLockedCameraRotation();
-            else
-                HandleDefaultCameraRotation();
+            switch (CurrentCameraPose())
+            {
+                case CameraPose.Aim:
+                    HandleAimingCameraRotation();
+                    break;
+                case CameraPose.Lock:
+                    HandleLockedCameraRotation();
+                    break;
+                default:
+                    HandleDefaultCameraRotation();
+                    break;
+            }
         }
 
         void HandleDefaultCameraRotation()
@@ -446,16 +474,17 @@ namespace CatchMoon
         /// </summary>
         void SetCameraPosOffset()
         {
-            if (player.aimingMode)
+            switch (CurrentCameraPose())
             {
-                SetCameraPosOffset_AimingMode();
-            }
-            else
-            {
-                if (curLockOnTarget != null)
+                case CameraPose.Aim:
+                    SetCameraPosOffset_AimingMode();
+                    break;
+                case CameraPose.Lock:
                     SetCameraPosOffset_LockedMode();
-                else
+                    break;
+                default:
                     SetCameraPosOffset_DefaultMode();
+                    break;
             }
         }
 

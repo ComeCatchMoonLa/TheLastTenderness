@@ -11,11 +11,11 @@ public class HandleJumpState : StateMachineBehaviour
             character = animator.GetComponent<CharacterManager>();
 
         character.isJumping = true;
-        character.cCombat.isAiming = false;
-        
+
         if (character.characterType == CharacterType.player)
         {
             PlayerManager player = character as PlayerManager;
+            player.aimingMode = false;
             player.cCollider.center = player.pLocomotion.jumpingColliderCenter;
             player.cCollider.height = player.pLocomotion.jumpingColliderHeight;
             player.cCollider.radius = player.pLocomotion.defaultColliderRadius;

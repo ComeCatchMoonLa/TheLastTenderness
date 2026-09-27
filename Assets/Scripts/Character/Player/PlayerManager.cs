@@ -19,6 +19,8 @@ namespace CatchMoon
 
         [Header("Player Flags")]
         public bool aimingMode = false;
+        [System.NonSerialized] public float colliderRadiusBeforeAim;
+        [System.NonSerialized] public bool aimingRadiusApplied;
         public bool noArmor = false; // 无装备系统
 
          
@@ -165,7 +167,7 @@ namespace CatchMoon
 
         void ResetCollider()
         {
-            if (!(isRolling || isJumping || pCombat.isAiming))
+            if (!(isRolling || isJumping))
             {
                 cCollider.center = pLocomotion.defaultColliderCenter;
                 cCollider.height = pLocomotion.defaultColliderHeight;

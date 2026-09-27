@@ -67,7 +67,7 @@ namespace CatchMoon
 
         public void UpdateCrosshair()
         {
-            if (player.pCombat.isAiming && player.aimingMode)
+            if (player.aimingMode)
             {
                 if (!crosshair.activeSelf)
                     crosshair.SetActive(true);

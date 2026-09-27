@@ -17,7 +17,7 @@ namespace CatchMoon
         }
         private void Update()
         {
-            if (Ammo != null && !player.pCombat.isAiming && !player.animator.GetCurrentAnimatorStateInfo(4).IsName("Get Arrow")
+            if (Ammo != null && !player.aimingMode && !player.animator.GetCurrentAnimatorStateInfo(4).IsName("Get Arrow")
                 && !player.animator.GetCurrentAnimatorStateInfo(4).IsName("Aiming - Start"))
             {
                 Destroy(Ammo);

@@ -15,7 +15,7 @@ namespace CatchMoon
         
         void PerformActionForPlayer(PlayerManager player)
         {
-            if (!player.pCombat.isAiming || player.pStats.currentStamina <= 0)
+            if (!player.aimingMode || player.pStats.currentStamina <= 0)
                 return;
 
             if (!player.pInventory.TrySpendAmmo(player.pInventory.currentAmmo))

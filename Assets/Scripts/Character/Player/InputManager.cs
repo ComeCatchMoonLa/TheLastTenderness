@@ -194,7 +194,7 @@ namespace CatchMoon
             }
 
             // 瞄准的时候不能冲刺
-            if (player.pCombat.isAiming)
+            if (player.aimingMode)
                 player.isSprinting = false;
         }
     }
