@@ -5,21 +5,32 @@ namespace CatchMoon
     public class IdleStateHumanoid : State
     {
         PursueTargetStateHumanoid pursueTargetState;
+        Collider[] detectionOverlapResults = new Collider[16];
 
         private void Awake()
         {
             pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
         }
 
+        int CollectOverlaps(Vector3 position, float radius, int layerMask, ref Collider[] results)
+        {
+            int count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
+            while (count == results.Length)
+            {
+                results = new Collider[results.Length * 2];
+                count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
+            }
+            return count;
+        }
+
         public override State Tick(EnemyManager enemy)
         {
             if (!enemy.enableAI || enemy.eStats.isDead || enemy.isInteracting) return this;
 
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemy.aiSettings.detectionRadius, LayerMask.player);
-
-            for (int i = 0; i < colliders.Length; ++i)
+            int detectionCount = CollectOverlaps(transform.position, enemy.aiSettings.detectionRadius, LayerMask.player, ref detectionOverlapResults);
+            for (int i = 0; i < detectionCount; ++i)
             {
-                CharacterManager targetcharacter = colliders[i].transform.GetComponent<CharacterManager>();
+                CharacterManager targetcharacter = detectionOverlapResults[i].transform.GetComponent<CharacterManager>();
 
                 if (targetcharacter != null && targetcharacter.cStats.teamID != enemy.eStats.teamID)
                 {

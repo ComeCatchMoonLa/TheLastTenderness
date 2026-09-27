@@ -4,23 +4,23 @@
 
 ## 0. 开始前
 
-- [ ] 0.28 已完成。
-- [ ] 读过技术设计：三处查询改非分配，装满才加大数组。
+- [x] 0.28 已完成。
+- [x] 读过技术设计：三处查询改非分配，装满才加大数组。
 
 **阶段门槛：** 知道伏击、半径和层不在本版。
 
 ## 1. 改成非分配查询
 
-- [ ] `UpdateLockOnTargets` 复用数组，层遮罩为 `~0`，半径仍是 `maxLockOnDist`。
-- [ ] `IdleState` 和 `IdleStateHumanoid` 复用数组，层仍是 `LayerMask.player`，半径仍是 `detectionRadius`。
-- [ ] 返回个数等于数组长度时加倍再查。循环只走到这次的个数。
-- [ ] `AmbushState` 不改。
+- [x] `UpdateLockOnTargets` 复用数组，层遮罩为 `~0`，半径仍是 `maxLockOnDist`。
+- [x] `IdleState` 和 `IdleStateHumanoid` 复用数组，层仍是 `LayerMask.player`，半径仍是 `detectionRadius`。
+- [x] 返回个数等于数组长度时加倍再查。循环只走到这次的个数。
+- [x] `AmbushState` 不改。
 
 **阶段门槛：** 少装导致的人消失不算完成。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 0.29 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 0.29 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

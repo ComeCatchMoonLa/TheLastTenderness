@@ -10,6 +10,7 @@ namespace CatchMoon
         
         Vector3 cameraCurrentVelocity = Vector3.zero; // 相机跟随速度(用于平滑过度)
         Vector3 pivotOffsetVelocity = Vector3.zero;
+        Collider[] lockOnOverlapResults = new Collider[32];
 
         [Header("相机支架")]
         public Transform cameraPivotTransform; // 相机支架Transform
@@ -295,13 +296,25 @@ namespace CatchMoon
             cameraPivotTransform.localRotation = Quaternion.Euler(upAndDownAngle, 0f, 0f);
         }
 
+        // 装满就说明这一下可能被截掉，加大后再查，避免少锁到人。平时不分配。
+        int CollectOverlaps(Vector3 position, float radius, int layerMask, ref Collider[] results)
+        {
+            int count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
+            while (count == results.Length)
+            {
+                results = new Collider[results.Length * 2];
+                count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
+            }
+            return count;
+        }
+
         /// <summary>
         /// 更新[相机锁定目标]
         /// </summary>
         ///   1. curLockOnTarget
         ///   2. nearsetLookableTarget
         ///   3. leftLookableTarget
-        ///   4. rightLookableTarget
+        ///   4. rightLockableTarget
         public void UpdateLockOnTargets()
         {
             if (!lockOnMode) return;
@@ -315,12 +328,12 @@ namespace CatchMoon
             float minDistOfLeftTarget = -Mathf.Infinity;
             float minDistOfRightTarget = Mathf.Infinity;
 
-            // 检测以Player为球心、最大可锁定范围为半径的球体内所包含的所有collider
-            Collider[] colliders = Physics.OverlapSphere(player.transform.position, maxLockOnDist);
-            for (int i = 0; i < colliders.Length; ++i)
+            // 检测以Player为球心、最大可锁定范围为半径的球体内所包含的所有collider。不传层，和原来的 OverlapSphere 一样。
+            int lockOnCount = CollectOverlaps(player.transform.position, maxLockOnDist, ~0, ref lockOnOverlapResults);
+            for (int i = 0; i < lockOnCount; ++i)
             {
                 // 包含collider的物体是否为角色(是否包含CharacterManager)
-                CharacterManager lockableTarget = colliders[i].GetComponent<CharacterManager>();
+                CharacterManager lockableTarget = lockOnOverlapResults[i].GetComponent<CharacterManager>();
                 if (lockableTarget == null || lockableTarget == player) continue;
                 // 计算要用到的相关信息
                 Vector3 dir = lockableTarget.transform.position - player.transform.position;
