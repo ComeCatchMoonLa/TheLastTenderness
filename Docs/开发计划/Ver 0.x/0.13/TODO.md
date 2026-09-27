@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.12 已完成。
-- [ ] 读过技术设计：三个偏移方法共用 `pivotOffsetVelocity`，不碰跟随速度。
+- [x] 0.12 已完成。
+- [x] 读过技术设计：三个偏移方法共用 `pivotOffsetVelocity`，不碰跟随速度。
 
 **阶段门槛：** 知道锁定扫描和相机速度数值不在本版。
 
 ## 1. 偏移速度留在相机上
 
-- [ ] `PlayerCameraManager` 增加 `pivotOffsetVelocity`。
-- [ ] 三个 `SetCameraPosOffset_*` 改用这一份。方法内不再 `new` 零速度。
-- [ ] 切换 `CameraPose` 时不清这份速度。
+- [x] `PlayerCameraManager` 增加 `pivotOffsetVelocity`。
+- [x] 三个 `SetCameraPosOffset_*` 改用这一份。方法内不再 `new` 零速度。
+- [x] 切换 `CameraPose` 时不清这份速度。
 
 **阶段门槛：** `cameraCurrentVelocity` 仍只出现在跟随那次 `SmoothDamp`。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 0.13 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 0.13 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

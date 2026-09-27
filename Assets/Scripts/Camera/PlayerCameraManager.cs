@@ -10,6 +10,7 @@ namespace CatchMoon
         PlayerManager player;
         
         Vector3 cameraCurrentVelocity = Vector3.zero; // 相机跟随速度(用于平滑过度)
+        Vector3 pivotOffsetVelocity = Vector3.zero;
 
         [Header("相机支架")]
         public Transform cameraPivotTransform; // 相机支架Transform
@@ -491,22 +492,18 @@ namespace CatchMoon
         public void SetCameraPosOffset_AimingMode()
         {
             // 过肩视角, 人物在屏幕右下角
-            Vector3 velocity = Vector3.zero;
-            
             cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-              new Vector3(-aimingCameraRightDist, aimingPivotHeight), ref velocity, changeModeFadeTime);
+              new Vector3(-aimingCameraRightDist, aimingPivotHeight), ref pivotOffsetVelocity, changeModeFadeTime);
         }
         public void SetCameraPosOffset_LockedMode()
         {
-            Vector3 velocity = Vector3.zero;
             cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-                        Vector3.up * lockedPivotHeight, ref velocity, changeModeFadeTime);
+                        Vector3.up * lockedPivotHeight, ref pivotOffsetVelocity, changeModeFadeTime);
         }
         public void SetCameraPosOffset_DefaultMode()
         {
-            Vector3 velocity = Vector3.zero;
             cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-                       Vector3.up * defaultPivotHeight, ref velocity, changeModeFadeTime);
+                       Vector3.up * defaultPivotHeight, ref pivotOffsetVelocity, changeModeFadeTime);
         }
     }
 }
