@@ -1,0 +1,19 @@
+{
+    "name": "CatchMoon",
+    "rootNamespace": "CatchMoon",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.Animation.Rigging",
+        "UnityEngine.UI",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
