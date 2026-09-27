@@ -14,10 +14,12 @@ namespace CatchMoon
         /// <summary>
         /// 在武器槽中加载武器
         /// </summary>
-        public override void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+        public override bool LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
-            base.LoadWeaponOnSlot(weaponItem, isLeft);
+            if (!base.LoadWeaponOnSlot(weaponItem, isLeft))
+                return false;
             player.ui.hud.quickSlotsUI.UpdateCurrentWeaponIcon(isLeft, weaponItem);
+            return true;
         }
     }
 }

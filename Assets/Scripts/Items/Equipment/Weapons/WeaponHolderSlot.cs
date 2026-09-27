@@ -49,14 +49,15 @@ namespace CatchMoon
         /// 加载武器模型
         /// </summary>
         /// <param name="weaponItem">武器预制件</param>
-        public void LoadWeaponModel(WeaponItem weaponItem)
+        public bool LoadWeaponModel(WeaponItem weaponItem)
         {
-            UnloadWeaponAndDestroy();
-            if (weaponItem.modelPrefab == null)
+            if (weaponItem == null || weaponItem.modelPrefab == null)
             {
                 Debug.LogError("model is null.");
-                return;
+                return false;
             }
+
+            UnloadWeaponAndDestroy();
 
             GameObject model = Instantiate(weaponItem.modelPrefab);
             model.transform.parent = overrideParentWhileHolding;
@@ -64,6 +65,7 @@ namespace CatchMoon
             model.transform.ResetLocal();
             // 指定当前模型
             currentWeaponModel = model;
+            return true;
         }
     }
 }

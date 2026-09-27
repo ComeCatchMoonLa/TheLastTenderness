@@ -60,56 +60,89 @@ namespace CatchMoon
         /// </summary>
         /// <param name="weaponItem">武器项</param>
         /// <param name="isLeft">是否为左手武器</param>
-        public virtual void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+        public virtual bool LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
-            if (isLeft)
+            if (weaponItem == null || weaponItem.modelPrefab == null)
             {
-                leftHandSlot.currentWeapon = weaponItem;
-                leftHandSlot.LoadWeaponModel(weaponItem);
-                LoadWeaponDamageCollider(weaponItem, true);
+                Debug.LogError("model is null.");
+                return false;
+            }
 
-                if (weaponItem.weaponType == WeaponType.unaremd)
-                    character.animator.Play("Left Arm Empty");
-                else
-                    character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+            if (isLeft)
+                return LoadLeftHandWeapon(weaponItem);
+            if (leftHandSlot.currentWeapon != null && leftHandSlot.currentWeapon.weaponType == WeaponType.bow)
+                return StowRightWeaponOnBack(weaponItem);
+            return LoadRightHandWeapon(weaponItem);
+        }
 
-                if (weaponItem.weaponType == WeaponType.bow)
-                {
-                    character.animator.Play("Left Arm Empty");
-                    character.animator.runtimeAnimatorController = weaponItem.weaponController;
-                }
+        bool LoadLeftHandWeapon(WeaponItem weaponItem)
+        {
+            if (!PlaceModel(leftHandSlot, weaponItem))
+                return false;
+
+            LoadWeaponDamageCollider(weaponItem, true);
+            if (weaponItem.weaponType == WeaponType.unaremd)
+            {
+                character.animator.Play("Left Arm Empty");
+            }
+            else if (weaponItem.weaponType == WeaponType.bow)
+            {
+                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+                character.animator.Play("Left Arm Empty");
+                character.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
             else
             {
-                if (leftHandSlot.currentWeapon != null && leftHandSlot.currentWeapon.weaponType == WeaponType.bow)
-                {
-                    backSlot.currentWeapon = rightHandSlot.currentWeapon = weaponItem;
-                    backSlot.LoadWeaponModel(weaponItem);
-                    rightHandSlot.UnloadWeaponAndDestroy();
-                    character.animator.Play("Right Arm Empty");
-                }
-                else
-                {
-                    rightHandSlot.currentWeapon = weaponItem;
-                    rightHandSlot.LoadWeaponModel(weaponItem);
-                    LoadWeaponDamageCollider(weaponItem, false);
-                    LoadTwoHandIKTarget();
-
-                    if (character.isTwoHandingWeapon)
-                    {
-                        backSlot.currentWeapon = leftHandSlot.currentWeapon;
-                        leftHandSlot.currentWeapon = character.cInventory.unaremd;
-                        backSlot.LoadWeaponModel(backSlot.currentWeapon);
-                        leftHandSlot.UnloadWeaponAndDestroy();
-                        character.animator.Play("Left Arm Empty");
-                    }
-                    else
-                    {
-                        backSlot.UnloadWeaponAndDestroy();
-                    }
-                    character.animator.runtimeAnimatorController = weaponItem.weaponController;
-                }
+                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
             }
+            return true;
+        }
+
+        bool StowRightWeaponOnBack(WeaponItem weaponItem)
+        {
+            if (!backSlot.LoadWeaponModel(weaponItem))
+                return false;
+
+            backSlot.currentWeapon = weaponItem;
+            rightHandSlot.currentWeapon = weaponItem;
+            rightHandSlot.UnloadWeaponAndDestroy();
+            character.animator.Play("Right Arm Empty");
+            return true;
+        }
+
+        bool LoadRightHandWeapon(WeaponItem weaponItem)
+        {
+            if (!PlaceModel(rightHandSlot, weaponItem))
+                return false;
+
+            LoadWeaponDamageCollider(weaponItem, false);
+            LoadTwoHandIKTarget();
+            if (character.isTwoHandingWeapon)
+                MoveLeftWeaponToBack();
+            else
+                backSlot.UnloadWeaponAndDestroy();
+            character.animator.runtimeAnimatorController = weaponItem.weaponController;
+            return true;
+        }
+
+        bool PlaceModel(WeaponHolderSlot slot, WeaponItem weaponItem)
+        {
+            if (!slot.LoadWeaponModel(weaponItem))
+                return false;
+            slot.currentWeapon = weaponItem;
+            return true;
+        }
+
+        void MoveLeftWeaponToBack()
+        {
+            WeaponItem moving = leftHandSlot.currentWeapon;
+            if (moving == null || !backSlot.LoadWeaponModel(moving))
+                return;
+
+            backSlot.currentWeapon = moving;
+            leftHandSlot.currentWeapon = character.cInventory.unaremd;
+            leftHandSlot.UnloadWeaponAndDestroy();
+            character.animator.Play("Left Arm Empty");
         }
 
         /// <summary>
