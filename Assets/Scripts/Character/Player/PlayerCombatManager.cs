@@ -41,7 +41,7 @@ namespace CatchMoon
             if (player.input.tap_e_Input)
             {
                 player.input.tap_e_Input = false;
-                if (leftWeapon.weaponType == WeaponType.bow)
+                if (leftWeapon != null && leftWeapon.weaponType == WeaponType.bow)
                 {
                     if (leftWeapon != null && leftWeapon.oh_tap_e_action != null)
                     {
@@ -63,10 +63,11 @@ namespace CatchMoon
         }
         void Handle_Hold_E_Input(WeaponItem rightWeapon)
         {
-            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
+            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon != null && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
 
             if (player.input.hold_e_Input)
             {
+                player.input.hold_e_Input = false;
                 if (rightWeapon != null && rightWeapon.oh_hold_e_action != null)
                 {
                     player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
@@ -77,7 +78,7 @@ namespace CatchMoon
         }
         void Handle_Tap_R_Input(WeaponItem rightWeapon)
         {
-            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
+            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon != null && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
 
             if (player.input.tap_r_Input)
             {
@@ -92,7 +93,7 @@ namespace CatchMoon
         }
         void Handle_Tap_Q_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)
         {
-            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
+            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon != null && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
 
             if (player.input.tap_q_Input)
             {
@@ -121,7 +122,7 @@ namespace CatchMoon
         {
             if (player.input.hold_q_Input)
             {
-                if (player.isTwoHandingWeapon && leftWeapon.weaponType != WeaponType.bow)
+                if (player.isTwoHandingWeapon && leftWeapon != null && leftWeapon.weaponType != WeaponType.bow)
                 {
                     if (rightWeapon != null && rightWeapon.oh_hold_q_action != null)
                     {
@@ -135,7 +136,7 @@ namespace CatchMoon
                     if (leftWeapon != null && leftWeapon.oh_hold_q_action != null)
                     {
                         if (leftWeapon.weaponType == WeaponType.melee_OH_Shield)
-                            player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
+                            player.UpdateWhichHandCharacterIsUsing(usingRightHand: false);
                         else
                             player.UpdateWhichHandCharacterIsUsing(usingRightHand: false);
                         
@@ -154,7 +155,7 @@ namespace CatchMoon
         }
         void Handle_Tap_Z_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)
         {
-            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
+            if (player.isTwoHandingWeapon && player.pInventory.leftWeapon != null && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
 
             if (player.input.tap_z_Input)
             {

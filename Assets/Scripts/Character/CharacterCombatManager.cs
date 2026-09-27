@@ -50,7 +50,7 @@ namespace CatchMoon
                 character.cStats.blockingLDA = character.cInventory.leftWeapon.lightningDA;
                 character.cStats.blockingDDA = character.cInventory.leftWeapon.darkDA;
 
-                character.cStats.blockingStabilityRating = character.cInventory.rightWeapon.blockingStabilityRating;
+                character.cStats.blockingStabilityRating = character.cInventory.leftWeapon.blockingStabilityRating;
             }
         }
         public virtual void ResetBlockingAbsorption()
@@ -87,7 +87,7 @@ namespace CatchMoon
             {
                 character.cCombat.isBlocking = false;
                 character.cCombat.ResetBlockingAbsorption();
-                character.cAnimator.PlayTargetAnimation("Guard_Break_01", true);
+                character.cAnimator.PlayTargetAnimation("Guard_Break", true);
             }
             else
             {
@@ -126,7 +126,8 @@ namespace CatchMoon
             // 1.调整位置与角度
             StartCoroutine(ForceMoveCharacterToEnemyBackStabPosition(characterPerformingBackStab, dist));
             // 2.处理受伤
-            WeaponItem weapon = character.cInventory.rightWeapon;
+            WeaponItem weapon = characterPerformingBackStab.cInventory.rightWeapon;
+            if (weapon == null) return;
             character.cStats.TakeDamage("Back Stabbed", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
                 weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);
         }
@@ -138,7 +139,8 @@ namespace CatchMoon
             // 1.调整位置与角度
             StartCoroutine(ForceMoveCharacterToEnemyRipostePosition(characterPerformingRiposte, dist));
             // 2.处理受伤
-            WeaponItem weapon = character.cInventory.rightWeapon;
+            WeaponItem weapon = characterPerformingRiposte.cInventory.rightWeapon;
+            if (weapon == null) return;
             character.cStats.TakeDamage("Riposted", weapon.pd * weapon.criticalAttackDM, weapon.fd * weapon.criticalAttackDM,
                 weapon.md * weapon.criticalAttackDM, weapon.ld * weapon.criticalAttackDM, weapon.dd * weapon.criticalAttackDM);
         }

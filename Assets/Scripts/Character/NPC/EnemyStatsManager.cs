@@ -108,7 +108,7 @@ namespace CatchMoon
         /// </summary>
         public void BreakGuard()
         {
-            enemy.eAnimator.PlayTargetAnimation("Break Guard", true);
+            enemy.eAnimator.PlayTargetAnimation("Guard_Break", true);
         }
 
         /// <summary>

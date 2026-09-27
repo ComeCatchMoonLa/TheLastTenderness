@@ -39,13 +39,17 @@ namespace CatchMoon
             {
                 hasCollided = true;
 
+                CharacterStatsManager directHit = null;
                 if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
                 {
                     CharacterStatsManager characterStatsManager = collision.transform.GetComponent<CharacterStatsManager>();
                     if (characterStatsManager != null && characterStatsManager.teamID != teamID)
+                    {
                         characterStatsManager.TakeDamage("Damage_ForwardRight_01", fd: explosionDamage);
+                        directHit = characterStatsManager;
+                    }
                 }
-                Explode();
+                Explode(directHit);
 
                 impactParticles = Instantiate(impactParticles, transform.position,Quaternion.identity);
                 
@@ -55,14 +59,14 @@ namespace CatchMoon
             }
         }
 
-        void Explode()
+        void Explode(CharacterStatsManager directHit)
         {
             Collider[] characters = Physics.OverlapSphere(transform.position, explosiveRadius);
 
             foreach(Collider objectsInExplosion in characters)
             {
                 CharacterStatsManager characterStatsManager = objectsInExplosion.GetComponent<CharacterStatsManager>();
-                if (characterStatsManager == null || characterStatsManager.teamID == teamID) continue;
+                if (characterStatsManager == null || characterStatsManager == directHit || characterStatsManager.teamID == teamID) continue;
 
                 characterStatsManager.TakeDamage(damageAnimation: null, fd: explosionSplashDamage);
             }

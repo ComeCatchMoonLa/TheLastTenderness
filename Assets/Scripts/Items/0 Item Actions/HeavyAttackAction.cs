@@ -61,11 +61,13 @@ namespace CatchMoon
                         {
                             character.cAnimator.PlayTargetAnimation(character.cAnimator.thHeavyAttack2, isInteracting: true, mirrorAnim: false);
                             character.cAnimator.lastAttack = character.cAnimator.thHeavyAttack2;
+                            character.cCombat.attackType = AttackType.heavy_2;
                         }
                         else
                         {
                             character.cAnimator.PlayTargetAnimation(character.cAnimator.thHeavyAttack1, isInteracting: true, mirrorAnim: false);
                             character.cAnimator.lastAttack = character.cAnimator.thHeavyAttack1;
+                            character.cCombat.attackType = AttackType.heavy_1;
                         }
                     }
                     else
@@ -74,11 +76,13 @@ namespace CatchMoon
                         {
                             character.cAnimator.PlayTargetAnimation(character.cAnimator.ohHeavyAttack2, isInteracting: true, mirrorAnim: false);
                             character.cAnimator.lastAttack = character.cAnimator.ohHeavyAttack2;
+                            character.cCombat.attackType = AttackType.heavy_2;
                         }
                         else
                         {
                             character.cAnimator.PlayTargetAnimation(character.cAnimator.ohHeavyAttack1, isInteracting: true, mirrorAnim: false);
                             character.cAnimator.lastAttack = character.cAnimator.ohHeavyAttack1;
+                            character.cCombat.attackType = AttackType.heavy_1;
                         }
                     }
                 }
@@ -88,16 +92,16 @@ namespace CatchMoon
                     {
                         character.cAnimator.PlayTargetAnimation(character.cAnimator.ohHeavyAttack2, isInteracting: true, mirrorAnim: true);
                         character.cAnimator.lastAttack = character.cAnimator.ohHeavyAttack2;
+                        character.cCombat.attackType = AttackType.heavy_2;
                     }
                     else
                     {
                         character.cAnimator.PlayTargetAnimation(character.cAnimator.ohHeavyAttack1, isInteracting: true, mirrorAnim: true);
                         character.cAnimator.lastAttack = character.cAnimator.ohHeavyAttack1;
+                        character.cCombat.attackType = AttackType.heavy_1;
                     }
                 }
             }
-
-            character.cCombat.attackType = AttackType.heavy_2;
         }
     }
 }

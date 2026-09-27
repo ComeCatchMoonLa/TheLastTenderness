@@ -44,10 +44,6 @@ namespace CatchMoon
             character.cStats.isInvulnerable = true;
             character.cAnimator.PlayTargetAnimation("Riposte", true, false, true);
 
-            WeaponItem rightWeapon = character.cInventory.rightWeapon;
-            attackTarget.cCombat.pendingCriticalDamage = rightWeapon.criticalAttackDM
-                * (rightWeapon.pd + rightWeapon.fd + rightWeapon.md + rightWeapon.ld + rightWeapon.dd);
-
             float dist = character.cCollider.radius + attackTarget.cCollider.radius;
             attackTarget.cCombat.GetRiposte(character, dist);
 
@@ -61,10 +57,6 @@ namespace CatchMoon
             character.cStats.isInvulnerable = true;
             character.cAnimator.PlayTargetAnimation("Back Stab", true, false, true);
 
-            WeaponItem rightWeapon = character.cInventory.rightWeapon;
-            attackTarget.cCombat.pendingCriticalDamage = rightWeapon.criticalAttackDM
-                * (rightWeapon.pd + rightWeapon.fd + rightWeapon.md + rightWeapon.ld + rightWeapon.dd); 
-            
             float dist = character.cCollider.radius + attackTarget.cCollider.radius;
             attackTarget.cCombat.GetBackStabbed(character,dist);
         }

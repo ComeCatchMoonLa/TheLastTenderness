@@ -198,6 +198,7 @@ namespace CatchMoon
 
         void ApplyPendingDamage()
         {
+            if (character.cCombat.pendingCriticalDamage == 0) return;
             character.cStats.TakeDamage(damageAnimation: null, pd: character.cCombat.pendingCriticalDamage);
         }
 
