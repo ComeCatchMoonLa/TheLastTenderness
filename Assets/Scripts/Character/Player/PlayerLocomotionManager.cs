@@ -128,6 +128,7 @@ namespace CatchMoon
         {
             if (player.isJumping) return;
 
+            bool wasInAir = player.isInAir;
             RaycastHit hit;
 
             /// 设置触地射线检测的射线起点
@@ -154,8 +155,13 @@ namespace CatchMoon
                 targetPosition.y = hit.point.y;
 
                 //Debug.Log($"{Mathf.Abs(origin.y-targetPosition.y - rayStartPointHeight):N2}");
-                if (Mathf.Abs(targetPosition.y - origin.y) >= (rayStartPointHeight + minHeightNeedToLand))
-                    player.pAnimator.PlayTargetAnimation("Land", true);
+                if (wasInAir)
+                {
+                    if (Mathf.Abs(targetPosition.y - origin.y) >= (rayStartPointHeight + minHeightNeedToLand))
+                        player.pAnimator.PlayTargetAnimation("Land", true);
+                    else
+                        player.pAnimator.PlayTargetAnimation("NonCombat Whole Body Empty", false);
+                }
             }
             else
             {

@@ -56,12 +56,35 @@ namespace CatchMoon
             bool mirrorAnim = false,
             bool isRotatingWithRootMotion = false)
         {
+            if (!AnimatorHasState(targetAnim))
+            {
+                Debug.LogError($"{name}: Animator 没有状态 {targetAnim}");
+                return;
+            }
+
             character.animator.applyRootMotion = isInteracting;
             character.isInteracting = isInteracting;
             character.canRotate = canRotate;
             character.animator.SetBool("isMirrored", mirrorAnim);
             character.isRotatingWithRootMotion = isRotatingWithRootMotion;
             character.animator.CrossFade(targetAnim, 0.2f);
+        }
+
+        bool AnimatorHasState(string stateName)
+        {
+            Animator animator = character.animator;
+            int shortHash = Animator.StringToHash(stateName);
+            for (int i = 0; i < animator.layerCount; i++)
+            {
+                if (animator.HasState(i, shortHash))
+                    return true;
+
+                int fullPathHash = Animator.StringToHash($"{animator.GetLayerName(i)}.{stateName}");
+                if (animator.HasState(i, fullPathHash))
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>

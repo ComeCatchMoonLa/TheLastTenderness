@@ -13,11 +13,14 @@ namespace CatchMoon
         }
         protected override void Start()
         {
+            WeaponItem startingRightWeapon = weaponsInRightHandSlot[currentRightWeaponIdx];
+            if (startingRightWeapon != null &&
+                (startingRightWeapon.weaponType == WeaponType.melee_TH || startingRightWeapon.weaponType == WeaponType.melee_THL))
+                enemy.isTwoHandingWeapon = true;
+
             base.Start();
 
             currentItemBeingUsed = rightWeapon;
-            if (rightWeapon.weaponType == WeaponType.melee_TH  || rightWeapon.weaponType == WeaponType.melee_THL)
-                enemy.isTwoHandingWeapon = true;
         }
     }
 }

@@ -10,6 +10,9 @@ public class HandleEmptyState : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (animator.GetLayerName(layerIndex) == "Upper Body")
+            return;
+
         if (character == null)
             character = animator.GetComponent<CharacterManager>();
 
