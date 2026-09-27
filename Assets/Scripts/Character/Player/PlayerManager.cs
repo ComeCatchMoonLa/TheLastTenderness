@@ -29,6 +29,7 @@ namespace CatchMoon
 
         [Header("交互")]
         public float interactRadius = 2f;
+        readonly Collider[] interactColliders = new Collider[1];
 
         [Header("对话对象(剧情npc)")]
         public EnemyManager storyNpc = null;
@@ -116,13 +117,12 @@ namespace CatchMoon
         {
             InteractUI interactUI = ui.popUps.interactUI;
 
-            // 目前只能一个个处理   
-            Collider[] colliders = new Collider[1];
-            int iColliderCnt = Physics.OverlapSphereNonAlloc(transform.position, interactRadius, colliders, LayerMask.interactable | LayerMask.npc);
+            // 目前只能一个个处理
+            int iColliderCnt = Physics.OverlapSphereNonAlloc(transform.position, interactRadius, interactColliders, LayerMask.interactable | LayerMask.npc);
 
-            if (iColliderCnt > 0 && colliders[0].tag == "Interactable")
+            if (iColliderCnt > 0 && interactColliders[0].tag == "Interactable")
             {
-                Interactable interaction = colliders[0].GetComponent<Interactable>(); // 通过其子类WeaponPickUp获取Interactable的
+                Interactable interaction = interactColliders[0].GetComponent<Interactable>(); // 通过其子类WeaponPickUp获取Interactable的
 
                 if (interaction != null)
                 {
@@ -131,7 +131,7 @@ namespace CatchMoon
 
                     if (input.interacte_Tap_Input) // 按Enter键交互
                     {
-                        colliders[0].GetComponent<Interactable>().Interact(this);
+                        interactColliders[0].GetComponent<Interactable>().Interact(this);
                         input.interacte_Tap_Input = false;
                     }
                 }

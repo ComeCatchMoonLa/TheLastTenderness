@@ -4,22 +4,22 @@
 
 ## 0. 开始前
 
-- [ ] 0.24 已完成。
-- [ ] 读过技术设计：只去掉方法里的 `new Collider[1]`。
+- [x] 0.24 已完成。
+- [x] 读过技术设计：只去掉方法里的 `new Collider[1]`。
 
 **阶段门槛：** 知道半径、层和只处理第一个不在本版。
 
 ## 1. 复用数组
 
-- [ ] `PlayerManager` 上留着长度为 1 的 `interactColliders`。
-- [ ] `CheckForInteractableObject` 把 `OverlapSphereNonAlloc` 写进这块数组。
-- [ ] 半径、层、Tag 和只处理第 0 个不改。
+- [x] `PlayerManager` 上留着长度为 1 的 `interactColliders`。
+- [x] `CheckForInteractableObject` 把 `OverlapSphereNonAlloc` 写进这块数组。
+- [x] 半径、层、Tag 和只处理第 0 个不改。
 
 **阶段门槛：** 方法里不再 `new Collider[1]`。
 
 ## 2. Play 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 0.25 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 0.25 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
