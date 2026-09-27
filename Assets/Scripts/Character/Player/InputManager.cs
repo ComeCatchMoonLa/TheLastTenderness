@@ -157,6 +157,9 @@ namespace CatchMoon
         /// </summary>
         void HandleRollInput()
         {
+            if (player.cCombat.isBlocking)
+                player.isSprinting = false;
+
             if (player.isInteracting) return;
 
             if (leftShift_Input)

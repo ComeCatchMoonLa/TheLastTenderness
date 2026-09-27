@@ -55,13 +55,13 @@ Build Settings 只登记 `Game`。要激活的玩家是名为 Player 的物体�
 
 **证明的边界**：这三份的 guid 回到工程里，打开 `Game` 不再报它们缺失。
 
-### 0.5 移动旗标只有一个写入方（未细化）
+### 0.5 移动旗标只有一个写入方（已实现，待 Play）
 
-`isRolling`、`isJumping`、`isSprinting`、`isInAir` 各只有一个写入类型，其他脚本只读。战斗旗标先不动。进入前把写入点查全，写进技术设计。
+文档：[`0.5/游戏设计.md`](0.5/游戏设计.md) / [`0.5/技术设计.md`](0.5/技术设计.md) / [`0.5/TODO.md`](0.5/TODO.md)。
 
-**证明的边界**：移动状态不再是谁都能改的公共袋子。人只 Play 验收翻滚、跳跃、冲刺。
+`isRolling` 只由 `HandleRollState` 写，`isJumping` 只由 `HandleJumpState` 写，`isInAir` 只由 `PlayerLocomotionManager` 写。`isSprinting` 只由 `InputManager` 写，`BlockAction` 不再改它。
 
-不做：拆七个 Manager，加事件总线。
+**证明的边界**：这四个移动状态不再是谁都能改的公共袋子。
 
 ## 靠后：要改场景，或要先点名路径
 
