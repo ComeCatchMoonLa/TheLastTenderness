@@ -172,7 +172,7 @@ namespace CatchMoon
                 }
                 else
                 {
-                    if (moveAmount > 0 && !player.aimingMode)
+                    if (moveAmount > 0 && !player.aimingMode && !player.cCombat.isBlocking)
                         player.isSprinting = true;
                     else
                         player.isSprinting = false;
