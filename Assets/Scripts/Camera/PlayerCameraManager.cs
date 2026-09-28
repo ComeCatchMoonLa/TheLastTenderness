@@ -296,18 +296,6 @@ namespace CatchMoon
             cameraPivotTransform.localRotation = Quaternion.Euler(upAndDownAngle, 0f, 0f);
         }
 
-        // 装满就说明这一下可能被截掉，加大后再查，避免少锁到人。平时不分配。
-        int CollectOverlaps(Vector3 position, float radius, int layerMask, ref Collider[] results)
-        {
-            int count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
-            while (count == results.Length)
-            {
-                results = new Collider[results.Length * 2];
-                count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
-            }
-            return count;
-        }
-
         /// <summary>
         /// 更新[相机锁定目标]
         /// </summary>
@@ -329,7 +317,7 @@ namespace CatchMoon
             float minDistOfRightTarget = Mathf.Infinity;
 
             // 检测以Player为球心、最大可锁定范围为半径的球体内所包含的所有collider。不传层，和原来的 OverlapSphere 一样。
-            int lockOnCount = CollectOverlaps(player.transform.position, maxLockOnDist, ~0, ref lockOnOverlapResults);
+            int lockOnCount = OverlapQuery.CollectOverlaps(player.transform.position, maxLockOnDist, ~0, ref lockOnOverlapResults);
             for (int i = 0; i < lockOnCount; ++i)
             {
                 // 包含collider的物体是否为角色(是否包含CharacterManager)

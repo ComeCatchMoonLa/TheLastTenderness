@@ -12,22 +12,11 @@ namespace CatchMoon
             pursueTargetState = GetComponent<PursueTargetState>();
         }
 
-        int CollectOverlaps(Vector3 position, float radius, int layerMask, ref Collider[] results)
-        {
-            int count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
-            while (count == results.Length)
-            {
-                results = new Collider[results.Length * 2];
-                count = Physics.OverlapSphereNonAlloc(position, radius, results, layerMask);
-            }
-            return count;
-        }
-
         public override State Tick(EnemyManager enemy)
         {
             if (enemy.eStats.isDead || enemy.isInteracting) return this;
 
-            int detectionCount = CollectOverlaps(transform.position, enemy.aiSettings.detectionRadius, LayerMask.player, ref detectionOverlapResults);
+            int detectionCount = OverlapQuery.CollectOverlaps(transform.position, enemy.aiSettings.detectionRadius, LayerMask.player, ref detectionOverlapResults);
             for (int i = 0; i < detectionCount; ++i)
             {
                 CharacterManager targetcharacter = detectionOverlapResults[i].transform.GetComponent<CharacterManager>();
