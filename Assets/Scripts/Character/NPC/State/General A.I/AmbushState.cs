@@ -13,6 +13,7 @@ namespace CatchMoon
         public string wakeAnimation;        // 苏醒动画
 
         PursueTargetState pursueTargetState;
+        Collider[] detectionOverlapResults = new Collider[16];
 
         private void Awake()
         {
@@ -24,11 +25,11 @@ namespace CatchMoon
             if (isSleeping && !enemy.isInteracting)
                 enemy.eAnimator.PlayTargetAnimation(sleepAnimation, true);
 
-            Collider[] colliders = Physics.OverlapSphere(enemy.transform.position, detectionRadius, LayerMask.player);
+            int detectionCount = OverlapQuery.CollectOverlaps(enemy.transform.position, detectionRadius, LayerMask.player, ref detectionOverlapResults);
 
-            foreach(Collider collider in colliders)
+            for (int i = 0; i < detectionCount; ++i)
             {
-                CharacterManager targetCharacter = collider.gameObject.GetComponent<CharacterManager>();
+                CharacterManager targetCharacter = detectionOverlapResults[i].gameObject.GetComponent<CharacterManager>();
 
                 if (targetCharacter != null)
                 {
