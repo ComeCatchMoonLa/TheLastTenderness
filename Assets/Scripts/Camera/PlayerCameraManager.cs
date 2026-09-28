@@ -316,8 +316,8 @@ namespace CatchMoon
             float minDistOfLeftTarget = -Mathf.Infinity;
             float minDistOfRightTarget = Mathf.Infinity;
 
-            // 检测以Player为球心、最大可锁定范围为半径的球体内所包含的所有collider。不传层，和原来的 OverlapSphere 一样。
-            int lockOnCount = OverlapQuery.CollectOverlaps(player.transform.position, maxLockOnDist, ~0, ref lockOnOverlapResults);
+            // 能锁的角色碰撞体都在 npc 层。半径仍是 maxLockOnDist。
+            int lockOnCount = OverlapQuery.CollectOverlaps(player.transform.position, maxLockOnDist, LayerMask.npc, ref lockOnOverlapResults);
             for (int i = 0; i < lockOnCount; ++i)
             {
                 // 包含collider的物体是否为角色(是否包含CharacterManager)
