@@ -24,6 +24,9 @@ namespace CatchMoon
         public bool isUsingConsumable;          // 正在使用消耗品
         public bool isBlocking;                 // 正在防御
         public bool isAiming;                   // 正在瞄准
+        public bool lastHitWasBlocked;
+        public bool lastHitBrokePoise;
+        public float lastHitDamageTotal;
 
         protected virtual void Awake()
         {
@@ -154,6 +157,7 @@ namespace CatchMoon
 
             if (!applyBlockAndPoise)
             {
+                RecordIncomingHit(false, false, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
                 return;
             }
@@ -177,6 +181,7 @@ namespace CatchMoon
                 md *= (1 - character.cStats.blockingMDA);
                 ld *= (1 - character.cStats.blockingLDA);
                 dd *= (1 - character.cStats.blockingDDA);
+                RecordIncomingHit(true, false, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(null, pd, fd, md, ld, dd, playHurtSound: character.cStats.currentStamina <= 0);
                 return;
             }
@@ -184,9 +189,22 @@ namespace CatchMoon
             character.cStats.poiseResetTimer = character.cStats.totalPoiseResetTime;
             character.cStats.totalPoiseDefence -= poiseDamage;
             if (character.cStats.totalPoiseDefence > poiseDamage)
+            {
+                RecordIncomingHit(false, false, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(null, pd, fd, md, ld, dd);
+            }
             else
+            {
+                RecordIncomingHit(false, true, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
+            }
+        }
+
+        void RecordIncomingHit(bool blocked, bool brokePoise, float pd, float fd, float md, float ld, float dd)
+        {
+            lastHitWasBlocked = blocked;
+            lastHitBrokePoise = brokePoise;
+            lastHitDamageTotal = pd + fd + md + ld + dd;
         }
 
         public void GetBackStabbed(CharacterManager characterPerformingBackStab, float dist)
