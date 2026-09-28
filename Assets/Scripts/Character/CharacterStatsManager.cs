@@ -97,22 +97,26 @@ namespace CatchMoon
             HandlePoiseResetTimer();
         }
 
+        public static float LevelTimesTen(int level)
+        {
+            return level * 10;
+        }
         float SetMaxHealthFromHealthLevel()
         {
             // 最大血量与血条等级的转换公式
-            maxHP = healthLevel * 10;
+            maxHP = LevelTimesTen(healthLevel);
             return maxHP;
         }
         float SetMaxStaminaFromStaminaLevel()
         {
             // 体力上线与体力条等级的转换公式
-            maxStamina = staminaLevel * 10;
+            maxStamina = LevelTimesTen(staminaLevel);
             return maxStamina;
         }
         float SetMaxFocusPointsFromFocusLevel()
         {
             // 蓝量上线与蓝条等级的转换公式
-            maxMP = focusLevel * 10;
+            maxMP = LevelTimesTen(focusLevel);
             return maxMP;
         }
         public static int MemorySlotCount(int focusLevel)
