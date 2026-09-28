@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CatchMoon
@@ -7,10 +6,10 @@ namespace CatchMoon
     {
         #region 变量
         PlayerManager player;
+        LockOnQuery lockOnQuery;
         
         Vector3 cameraCurrentVelocity = Vector3.zero; // 相机跟随速度(用于平滑过度)
         Vector3 pivotOffsetVelocity = Vector3.zero;
-        Collider[] lockOnOverlapResults = new Collider[32];
 
         [Header("相机支架")]
         public Transform cameraPivotTransform; // 相机支架Transform
@@ -57,14 +56,6 @@ namespace CatchMoon
         public bool lockOnFlag = false;                         // 是否为锁定视角模式(已经进入了锁定模式, curTarget不为空)
         public bool lockOnMode = false;                         // 是否为锁定模式(player按F进行切换)
         public ChangeLockOnTargetMode changeLockOnTargetMode = ChangeLockOnTargetMode.nearest; // 切换锁定目标的设置(切换至最近目标/切换至血量最低目标)
-        [SerializeField] float maxLookOnAngle_Half = 50f;       // 最大锁定范围角的一半
-        [SerializeField] float maxLookOnAngle_Half_AutoChangeLockOnTargetMode = 30f; // 勾选自动锁定目标选项时, 减小可锁定锁定角度
-        [SerializeField] float autoChangeLockOnTargetTime = 2f;  // 自动切换锁定目标的时间间隔
-        [SerializeField] float autoChangeLockOnTargetTimer = 1f; // 自动切换锁定目标的计时器
-        [SerializeField] float maxLockOnDist = 30.0f;           // 可锁敌的最大距离
-
-        [Header("锁定目标信息")]
-        [SerializeField] List<CharacterManager> lockableTargets = new List<CharacterManager>(); // 可锁定目标列表
         public CharacterManager curLockOnTarget;                // 当前锁定目标
         public CharacterManager nearestLockableTarget;          // 最近可锁定目标
         public CharacterManager leftLockableTarget;             // 当前锁定目标的左边(Player的左右)最近的可锁定目标
@@ -75,12 +66,15 @@ namespace CatchMoon
         {
             player = FindAnyObjectByType<PlayerManager>();
             cameraObject= GetComponentInChildren<Camera>();
+            lockOnQuery = GetComponent<LockOnQuery>();
 
             #region 检测空引用异常
             if (player == null)
                 Debug.LogError("playerManager is null.");
             if (cameraObject == null)
                 Debug.LogError("cameraObject == null");
+            if (lockOnQuery == null)
+                Debug.LogError("lockOnQuery == null");
             #endregion
         }
         private void Start()
@@ -296,173 +290,13 @@ namespace CatchMoon
             cameraPivotTransform.localRotation = Quaternion.Euler(upAndDownAngle, 0f, 0f);
         }
 
-        /// <summary>
-        /// 更新[相机锁定目标]
-        /// </summary>
-        ///   1. curLockOnTarget
-        ///   2. nearsetLookableTarget
-        ///   3. leftLookableTarget
-        ///   4. rightLockableTarget
+        public PlayerManager Player => player;
+
         public void UpdateLockOnTargets()
         {
-            if (!lockOnMode) return;
-
-            lockableTargets.Clear();
-            nearestLockableTarget = null;
-            leftLockableTarget = null;
-            rightLockableTarget = null;
-
-            float minDist = Mathf.Infinity;
-            float minDistOfLeftTarget = -Mathf.Infinity;
-            float minDistOfRightTarget = Mathf.Infinity;
-
-            // 能锁的角色碰撞体都在 npc 层。半径仍是 maxLockOnDist。
-            int lockOnCount = OverlapQuery.CollectOverlaps(player.transform.position, maxLockOnDist, LayerMask.npc, ref lockOnOverlapResults);
-            for (int i = 0; i < lockOnCount; ++i)
-            {
-                // 包含collider的物体是否为角色(是否包含CharacterManager)
-                CharacterManager lockableTarget = lockOnOverlapResults[i].GetComponent<CharacterManager>();
-                if (lockableTarget == null || lockableTarget == player) continue;
-                // 计算要用到的相关信息
-                Vector3 dir = lockableTarget.transform.position - player.transform.position;
-                float fov = Vector3.SignedAngle(dir, cameraTransform.forward, Vector3.up); // player朝向与lockOnTarget方向的夹角
-                float dist = Vector3.Distance(lockableTarget.transform.position, player.transform.position);
-                //  判断是否在可锁定范围内(扇形区域)
-                if (player.ui.escWin.GetSettingWin().gameSettingsData.autoChangeLockOnTarget)
-                {
-                    // 当开启自动切换锁定目标选项时, 自动切换使用更小的扇形圆心角
-                    if (fov < -maxLookOnAngle_Half_AutoChangeLockOnTargetMode
-                        || fov > maxLookOnAngle_Half_AutoChangeLockOnTargetMode || dist > maxLockOnDist) continue;
-                }
-                else
-                {
-                    if (fov < -maxLookOnAngle_Half || fov > maxLookOnAngle_Half || dist > maxLockOnDist) continue;
-                }
-                
-                // 检测Player到target之间的路径是否被阻挡
-                RaycastHit hit;
-                if (Physics.Linecast(player.lockOnTransform.position, lockableTarget.lockOnTransform.position, out hit, cameraCanDetectLayers)
-                    && hit.transform.gameObject.layer == Layer.environment)
-                    continue;
-                // 判断可锁定目标是否已死亡(若角色死后禁用collider, 则这里无需判断)
-                if (lockableTarget.cStats.isDead) continue;
-                // 添加到可锁定列表
-                lockableTargets.Add(lockableTarget);
-                // 更新nearestLockOnTarget
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    nearestLockableTarget = lockableTarget;
-                }
-            }
-            // 更新leftLockTarget, rightLockTarget
-            foreach (CharacterManager lockableTarget in lockableTargets)
-            {
-                if (curLockOnTarget != null)
-                {
-                    if (lockableTarget == curLockOnTarget) continue;
-                }
-                else
-                {
-                    if (lockableTarget == nearestLockableTarget) continue;
-                }
-                // 计算敌人相对于玩家的位置Pos, 用Pos.x判断在Player的左边还是右边(小于0在左边, 大于0在右边)
-                float relativePlayerPosX = player.transform.InverseTransformPoint(lockableTarget.transform.position).x;
-                if (relativePlayerPosX <= 0f)
-                {
-                    if (relativePlayerPosX > minDistOfLeftTarget)
-                    {
-                        minDistOfLeftTarget = relativePlayerPosX;
-                        leftLockableTarget = lockableTarget;
-                    }
-                }
-                else
-                {
-                    if (relativePlayerPosX < minDistOfRightTarget)
-                    {
-                        minDistOfRightTarget = relativePlayerPosX;
-                        rightLockableTarget = lockableTarget;
-                    }
-                }
-            }
-            HandleChangeLockOnTarget();
+            lockOnQuery.UpdateLockOnTargets();
         }
 
-        /// <summary>
-        /// [处理] 改变当前锁定目标
-        /// </summary>
-        ///    (拉脱切换、自动切换)
-        public void HandleChangeLockOnTarget()
-        {
-            if (player.ui.escWin.GetSettingWin().gameSettingsData.autoChangeLockOnTarget)
-            {
-                if (curLockOnTarget == null) // 当前无锁定目标，则直接锁定最近目标
-                {
-                    if (nearestLockableTarget)
-                    {
-                        curLockOnTarget = nearestLockableTarget;
-                        lockOnFlag = true;
-                    }
-                }
-                else // 若当前已有锁定目标，则先判断自动切换目标的CD，再切换至最近目标
-                {
-                    autoChangeLockOnTargetTimer += Time.deltaTime;
-
-                    if (autoChangeLockOnTargetTimer > autoChangeLockOnTargetTime)
-                    {
-                        autoChangeLockOnTargetTimer = 0f;
-
-                        if (nearestLockableTarget)
-                        {
-                            curLockOnTarget = nearestLockableTarget;
-                            lockOnFlag = true;
-                        }
-                        else
-                        {
-                            Unlock();
-                        }
-                    }
-                }
-            }
-            else
-            {
-                bool needChangeLockTarget = false;
-                if (curLockOnTarget != null)
-                {
-                    // 判断当前锁定目标是否拉脱
-                    float curTargetDist = Vector3.Distance(curLockOnTarget.transform.position, player.transform.position);
-                    if (curTargetDist > maxLockOnDist)
-                        needChangeLockTarget = true;
-                    // 判断当前锁定目标是否被挡住
-                    RaycastHit hit;
-                    if (Physics.Linecast(player.lockOnTransform.position, curLockOnTarget.lockOnTransform.position, out hit, cameraCanDetectLayers)
-                        && hit.transform.gameObject.layer == Layer.environment)
-                        needChangeLockTarget = true;
-                }
-                else
-                {
-                    needChangeLockTarget = true;
-                }
-
-                if (needChangeLockTarget)
-                {
-                    if (nearestLockableTarget != null)
-                    {
-                        if (changeLockOnTargetMode == ChangeLockOnTargetMode.nearest)
-                            curLockOnTarget = nearestLockableTarget;
-                        lockOnFlag = true;
-                    }
-                    else
-                    {
-                        Unlock();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 取消相机锁定
-        /// </summary>
         public void Unlock()
         {
             curLockOnTarget = null;

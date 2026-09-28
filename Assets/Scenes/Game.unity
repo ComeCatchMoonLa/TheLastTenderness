@@ -844,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414647245}
   - component: {fileID: 1124139260}
+  - component: {fileID: 5902847163051827461}
   m_Layer: 0
   m_Name: Player Camera
   m_TagString: Untagged
@@ -7666,16 +7667,28 @@ MonoBehaviour:
   lockOnFlag: 0
   lockOnMode: 0
   changeLockOnTargetMode: 0
+  curLockOnTarget: {fileID: 0}
+  nearestLockableTarget: {fileID: 0}
+  leftLockableTarget: {fileID: 0}
+  rightLockableTarget: {fileID: 0}
+--- !u!114 &5902847163051827461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414647243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c3a9b24d1f4e6a8b0c5d7f19284631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxLookOnAngle_Half: 50
   maxLookOnAngle_Half_AutoChangeLockOnTargetMode: 30
   autoChangeLockOnTargetTime: 2
   autoChangeLockOnTargetTimer: 0
   maxLockOnDist: 30
   lockableTargets: []
-  curLockOnTarget: {fileID: 0}
-  nearestLockableTarget: {fileID: 0}
-  leftLockableTarget: {fileID: 0}
-  rightLockableTarget: {fileID: 0}
 --- !u!1 &1178411242
 GameObject:
   m_ObjectHideFlags: 0

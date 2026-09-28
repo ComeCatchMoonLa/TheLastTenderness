@@ -9,9 +9,9 @@ namespace CatchMoon.Tests
         [Test]
         public void LockOverlapUsesNpcLayer_RadiusStays_MeleeRootIsNpc()
         {
-            string camera = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts", "Camera", "PlayerCameraManager.cs"));
-            Assert.IsTrue(camera.Contains("CollectOverlaps(player.transform.position, maxLockOnDist, LayerMask.npc, ref lockOnOverlapResults)"));
-            Assert.IsFalse(camera.Contains("~0"));
+            string query = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts", "Camera", "LockOnQuery.cs"));
+            Assert.IsTrue(query.Contains("CollectOverlaps(camera.Player.transform.position, maxLockOnDist, LayerMask.npc, ref lockOnOverlapResults)"));
+            Assert.IsFalse(query.Contains("~0"));
 
             string melee = File.ReadAllText(Path.Combine(Application.dataPath, "Prefabs", "Humanoid A.I - Melee.prefab"));
             int nameAt = melee.IndexOf("m_Name: Humanoid A.I - Melee");
