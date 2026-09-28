@@ -112,6 +112,8 @@ namespace CatchMoon
         public void AddSouls(int souls)
         {
             soulCount += souls;
+            if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.soulCountUI != null)
+                player.ui.hud.soulCountUI.SetSoulCountText(soulCount);
         }
 
         protected override void HandlePoiseResetTimer()

@@ -100,7 +100,6 @@ namespace CatchMoon
         public void AwardSoulsOnDeath(PlayerManager player)
         {
             player.pStats.AddSouls(soulsAwardedDeath);
-            player.ui.hud.soulCountUI.SetSoulCountText(player.pStats.soulCount);
         }
 
         /// <summary>
