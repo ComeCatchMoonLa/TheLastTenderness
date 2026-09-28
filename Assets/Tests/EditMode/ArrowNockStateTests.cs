@@ -17,7 +17,9 @@ namespace CatchMoon.Tests
             Assert.IsFalse(effects.Contains("IsName"));
 
             string animator = File.ReadAllText(Path.Combine(Application.dataPath, "Scripts", "Character", "CharacterAnimatorManager.cs"));
-            Assert.IsTrue(animator.Contains("void SucessfullyGetArrow()"));
+            Assert.IsTrue(animator.Contains("void SuccessfullyGetArrow()"));
+            Assert.IsFalse(animator.Contains("SucessfullyGetArrow"));
+            Assert.IsTrue(animator.Contains("void EndGetArrow()"));
         }
     }
 }

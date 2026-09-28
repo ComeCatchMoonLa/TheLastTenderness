@@ -200,7 +200,7 @@ namespace CatchMoon
                 character.cWeaponSlot.rightHandDC.DisableDamageCollider();
         }
 
-        void SucessfullyGetArrow()
+        void SuccessfullyGetArrow()
         {
             GameObject loadedArrow = Instantiate(character.cInventory.currentAmmo.loadedItemModel, character.cWeaponSlot.rightHandSlot.overrideParentWhileGetting);
             character.cEffects.Ammo = loadedArrow;
