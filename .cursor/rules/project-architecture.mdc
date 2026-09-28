@@ -13,7 +13,7 @@ Unity 2022.3 + C# 的第三人称动作游戏。现有代码已经在跑：玩�
 
 现有结构是 MonoBehaviour、Animator 的 `StateMachineBehaviour`、以及 ScriptableObject。不要把它改写成另一套纯 C# 战斗核心，也不要按别的项目的终态图预建 Core / Effect / Rule / Buff 之类的空目录。未进入的版本对应的模块不要提前搭空壳。
 
-更新日志见 [`Docs/更新日志.md`](Docs/更新日志.md)。
+更新日志见 [`Docs/更新日志/更新日志.md`](Docs/更新日志/更新日志.md)，写法见 [`Docs/更新日志/README.md`](Docs/更新日志/README.md)。
 
 # 目录约定
 
