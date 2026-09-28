@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CatchMoon
@@ -13,11 +12,9 @@ namespace CatchMoon
 
         [Header("人物受伤的音效")]
         public AudioClip[] takingDamageSounds;
-        List<AudioClip> potentialDamageSounds;
         AudioClip lastDamageSoundPlayed;
 
         [Header("武器挥动的音效")]
-        List<AudioClip> potentialWeaponWhooshSounds;
         AudioClip lastWeaponWhooshPlayed;
         // 脚步音效
 
@@ -37,14 +34,9 @@ namespace CatchMoon
             }
             else
             {
-                potentialDamageSounds = new List<AudioClip>();
-
-                foreach (AudioClip sound in takingDamageSounds)
-                    if (sound != lastDamageSoundPlayed)
-                        potentialDamageSounds.Add(sound);
-
-                int randomValue = Random.Range(0, potentialDamageSounds.Count);
-                lastDamageSoundPlayed = potentialDamageSounds[randomValue];
+                int remaining = CountClipsOtherThan(takingDamageSounds, lastDamageSoundPlayed);
+                int index = remaining <= 1 ? 0 : Random.Range(0, remaining);
+                lastDamageSoundPlayed = PickClipAvoidingPrevious(takingDamageSounds, lastDamageSoundPlayed, index);
                 audioSource.PlayOneShot(lastDamageSoundPlayed, 0.4f);
             }
         }
@@ -66,16 +58,42 @@ namespace CatchMoon
             }
             else
             {
-                potentialWeaponWhooshSounds = new List<AudioClip>();
-
-                foreach (AudioClip sound in weapWhooshSFX)
-                    if (sound != lastWeaponWhooshPlayed)
-                        potentialWeaponWhooshSounds.Add(sound);
-
-                int random = Random.Range(0, potentialWeaponWhooshSounds.Count);
-                lastWeaponWhooshPlayed = potentialWeaponWhooshSounds[random];
+                int remaining = CountClipsOtherThan(weapWhooshSFX, lastWeaponWhooshPlayed);
+                int index = remaining <= 1 ? 0 : Random.Range(0, remaining);
+                lastWeaponWhooshPlayed = PickClipAvoidingPrevious(weapWhooshSFX, lastWeaponWhooshPlayed, index);
                 audioSource.PlayOneShot(lastWeaponWhooshPlayed);
             }
+        }
+
+        public static AudioClip PickClipAvoidingPrevious(AudioClip[] clips, AudioClip previous, int indexAmongRemaining)
+        {
+            if (clips == null || clips.Length == 0) return null;
+            if (clips.Length == 1) return clips[0];
+
+            int remaining = CountClipsOtherThan(clips, previous);
+            if (remaining == 0) return clips[0];
+            if (indexAmongRemaining < 0) indexAmongRemaining = 0;
+            if (indexAmongRemaining >= remaining) indexAmongRemaining = remaining - 1;
+
+            for (int i = 0; i < clips.Length; i++)
+            {
+                if (clips[i] == previous) continue;
+                if (indexAmongRemaining == 0) return clips[i];
+                indexAmongRemaining--;
+            }
+
+            return clips[0];
+        }
+
+        static int CountClipsOtherThan(AudioClip[] clips, AudioClip previous)
+        {
+            int remaining = 0;
+            for (int i = 0; i < clips.Length; i++)
+            {
+                if (clips[i] != previous)
+                    remaining++;
+            }
+            return remaining;
         }
     }
 }

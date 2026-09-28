@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.16 已收尾。
-- [ ] 读过技术设计：选段只留 `PickClipAvoidingPrevious`，播放和音量留在原方法。
+- [x] 1.16 已收尾。
+- [x] 读过技术设计：选段只留 `PickClipAvoidingPrevious`，播放和音量留在原方法。
 
 **阶段门槛：** 知道两手都空时仍直接返回。
 
 ## 1. 一处选段
 
-- [ ] 增加 `PickClipAvoidingPrevious`。
-- [ ] `PlayRandomDamageSoundsFX` 和 `PlayRandomWeaponWhoosh` 在多于一首时都调用它。
-- [ ] 两处都不再 `new List<AudioClip>`。
+- [x] 增加 `PickClipAvoidingPrevious`。
+- [x] `PlayRandomDamageSoundsFX` 和 `PlayRandomWeaponWhoosh` 在多于一首时都调用它。
+- [x] 两处都不再 `new List<AudioClip>`。
 
 **阶段门槛：** 长度为 1 时仍播第 0 首。受伤音多于一首时音量仍是 0.4。
 
 ## 2. 单元测试
 
-- [ ] `ClipSelectionTests` 覆盖游戏设计第 3 节。
-- [ ] 测试不调用 `PlayRandomDamageSoundsFX` 和 `PlayRandomWeaponWhoosh`。
+- [x] `ClipSelectionTests` 覆盖游戏设计第 3 节。
+- [x] 测试不调用 `PlayRandomDamageSoundsFX` 和 `PlayRandomWeaponWhoosh`。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.17 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.17 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
