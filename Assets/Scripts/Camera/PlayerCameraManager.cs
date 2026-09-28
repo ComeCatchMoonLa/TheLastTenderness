@@ -485,6 +485,21 @@ namespace CatchMoon
         /// <summary>
         /// 设置相位置偏移
         /// </summary>
+        public static Vector3 AimingCameraOffsetTarget(float aimingCameraRightDist, float aimingPivotHeight)
+        {
+            return new Vector3(-aimingCameraRightDist, aimingPivotHeight, 0f);
+        }
+
+        public static Vector3 LockedCameraOffsetTarget(float lockedPivotHeight)
+        {
+            return Vector3.up * lockedPivotHeight;
+        }
+
+        public static Vector3 DefaultCameraOffsetTarget(float defaultPivotHeight)
+        {
+            return Vector3.up * defaultPivotHeight;
+        }
+
         void SetCameraPosOffset()
         {
             switch (CurrentCameraPose())
@@ -504,18 +519,23 @@ namespace CatchMoon
         public void SetCameraPosOffset_AimingMode()
         {
             // 过肩视角, 人物在屏幕右下角
-            cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-              new Vector3(-aimingCameraRightDist, aimingPivotHeight), ref pivotOffsetVelocity, changeModeFadeTime);
+            ApplyPivotOffset(AimingCameraOffsetTarget(aimingCameraRightDist, aimingPivotHeight));
         }
+
         public void SetCameraPosOffset_LockedMode()
         {
-            cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-                        Vector3.up * lockedPivotHeight, ref pivotOffsetVelocity, changeModeFadeTime);
+            ApplyPivotOffset(LockedCameraOffsetTarget(lockedPivotHeight));
         }
+
         public void SetCameraPosOffset_DefaultMode()
         {
-            cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition,
-                       Vector3.up * defaultPivotHeight, ref pivotOffsetVelocity, changeModeFadeTime);
+            ApplyPivotOffset(DefaultCameraOffsetTarget(defaultPivotHeight));
+        }
+
+        void ApplyPivotOffset(Vector3 target)
+        {
+            cameraPivotTransform.localPosition = Vector3.SmoothDamp(
+                cameraPivotTransform.localPosition, target, ref pivotOffsetVelocity, changeModeFadeTime);
         }
     }
 }
