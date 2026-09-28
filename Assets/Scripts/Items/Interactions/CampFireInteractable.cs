@@ -37,7 +37,8 @@ namespace CatchMoon
         {
             if (hasBeenActived)
             {
-                // 打开篝火菜单
+                player.pStats.RestoreVitalsToMax();
+                player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             }
             else
             {

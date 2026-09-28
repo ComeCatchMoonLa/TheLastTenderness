@@ -4,36 +4,36 @@
 
 ## 0. 开始前
 
-- [ ] 2.3 已收尾。
-- [ ] 读过技术设计：休息写成上限并播放已有的 `"Pick Up Item"`。
+- [x] 2.3 已收尾。
+- [x] 读过技术设计：休息写成上限并播放已有的 `"Pick Up Item"`。
 
 **阶段门槛：** 知道不打开箱子，不打开四项菜单。
 
 ## 1. 回满
 
-- [ ] `PlayerStatsManager` 把生命、精力、专注写成各自上限并刷新三条 HUD。
-- [ ] 已点燃的 `Interact` 调用它，并 `PlayTargetAnimation("Pick Up Item", true)`。
-- [ ] 未点燃分支不改。
+- [x] `PlayerStatsManager` 把生命、精力、专注写成各自上限并刷新三条 HUD。
+- [x] 已点燃的 `Interact` 调用它，并 `PlayTargetAnimation("Pick Up Item", true)`。
+- [x] 未点燃分支不改。
 
 **阶段门槛：** 不新做动画名。
 
 ## 2. 场景
 
-- [ ] `Interactables` 激活。
-- [ ] `Camp Fire` 保持激活。
-- [ ] `Chest`、`Weapon Pick Up Item`、`View Info List` 不激活。
+- [x] `Interactables` 激活。
+- [x] `Camp Fire` 保持激活。
+- [x] `Chest`、`Weapon Pick Up Item`、`View Info List` 不激活。
 
 **阶段门槛：** 不新摆物体。
 
 ## 3. 单元测试
 
-- [ ] 不写。2.x 手动验收。
+- [x] 不写。2.x 手动验收。
 
 **阶段门槛：** 进游戏只看到这一盏燃火。
 
 ## 4. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 2.4 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 2.4 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

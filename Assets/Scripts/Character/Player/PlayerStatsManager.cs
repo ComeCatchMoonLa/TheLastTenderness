@@ -116,6 +116,16 @@ namespace CatchMoon
                 player.ui.hud.soulCountUI.SetSoulCountText(soulCount);
         }
 
+        public void RestoreVitalsToMax()
+        {
+            currentHP = maxHP;
+            currentStamina = maxStamina;
+            currentMP = maxMP;
+            player.ui.hud.healthBar.SetCurrentHP(currentHP);
+            player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
+            player.ui.hud.manaBar.SetCurrentMP(currentMP);
+        }
+
         protected override void HandlePoiseResetTimer()
         {
             if (poiseResetTimer > 0)
