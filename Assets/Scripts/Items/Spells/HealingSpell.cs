@@ -11,7 +11,9 @@ namespace CatchMoon
         {
             if (character.cCombat.isUsingSpell) return;
 
-            character.cStats.DeductMP(focusPointCost);
+            if (!character.cStats.DeductMP(focusPointCost))
+                return;
+
             GameObject instantiatedWarmUpSpellFx = Instantiate(spellWarmUpFX, character.cAnimator.transform);
             character.cAnimator.PlayTargetAnimation(spellAnimation, true, false, mirrorAnim: character.isUsingLeftHand);
         }
