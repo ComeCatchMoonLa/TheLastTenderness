@@ -63,6 +63,12 @@ namespace CatchMoon
             RememberAmmo(item);
             return ammoLeft[item];
         }
+        public int ConsumableRemaining(ConsumableItem item)
+        {
+            if (item == null) return 0;
+            RememberConsumable(item);
+            return consumableLeft[item];
+        }
         void RememberConsumable(ConsumableItem item)
         {
             if (item == null || consumableLeft.ContainsKey(item)) return;

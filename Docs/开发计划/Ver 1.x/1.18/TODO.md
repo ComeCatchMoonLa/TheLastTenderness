@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.17 已收尾。
-- [ ] 读过技术设计：只加读取，扣次仍走 `TrySpendConsumable`。
+- [x] 1.17 已收尾。
+- [x] 读过技术设计：只加读取，扣次仍走 `TrySpendConsumable`。
 
 **阶段门槛：** 知道不改快捷栏。
 
 ## 1. 读取
 
-- [ ] 增加 `ConsumableRemaining`。
-- [ ] 空引用返回 0。
-- [ ] 未记过的物品按 `maxItemAmount` 记入后再返回。
+- [x] 增加 `ConsumableRemaining`。
+- [x] 空引用返回 0。
+- [x] 未记过的物品按 `maxItemAmount` 记入后再返回。
 
 **阶段门槛：** `TrySpendConsumable` 的方法体不改。
 
 ## 2. 单元测试
 
-- [ ] `ConsumableRemainingTests` 覆盖游戏设计第 3 节。
-- [ ] 测试不创建 HUD。
+- [x] `ConsumableRemainingTests` 覆盖游戏设计第 3 节。
+- [x] 测试不创建 HUD。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.18 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.18 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
