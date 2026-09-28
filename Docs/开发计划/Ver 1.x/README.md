@@ -219,6 +219,12 @@
 
 `isPerformingBackSttbbed`、`unaremd`、`noramalWeaponTrial` 改成和含义一致，预制体上的 fileID 不变。目录、枚举、类名和动画方法名不在这一版。大约 2 小时。
 
+## 1.30 瞄准旗标的清零收成一处
+
+文档：[`1.30/游戏设计.md`](1.30/游戏设计.md) / [`1.30/技术设计.md`](1.30/技术设计.md) / [`1.30/TODO.md`](1.30/TODO.md)。
+
+跳跃进入、翻滚进入、松开瞄准这三处把 `aimingMode` 清成 false，清零只写一次。拉弓结果仍按 1.2。Edit Mode 断言这三处之后都为 false。
+
 ## 先不做
 
 | 项 | 原因 |
