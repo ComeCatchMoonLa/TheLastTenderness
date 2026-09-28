@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CatchMoon
@@ -10,6 +11,7 @@ namespace CatchMoon
         [HideInInspector] public CharacterManager character;
         protected Collider damageCollider;
         public bool enabledDamageColliderOnStartUp = false;
+        readonly List<CharacterManager> hitThisWindow = new List<CharacterManager>();
 
         [Header("队伍ID")]
         public int teamID = 0;
@@ -53,6 +55,7 @@ namespace CatchMoon
         /// </summary>
         public void EnableDamageCollider()
         {
+            hitThisWindow.Clear();
             damageCollider.enabled = true;
         }
 
@@ -62,6 +65,7 @@ namespace CatchMoon
         public void DisableDamageCollider()
         {
             damageCollider.enabled = false;
+            hitThisWindow.Clear();
         }
 
         /// <summary>
@@ -80,6 +84,8 @@ namespace CatchMoon
                 }
 
                 if (character == damageTarget || damageTarget.cStats.teamID == teamID) return;
+                if (hitThisWindow.Contains(damageTarget)) return;
+                hitThisWindow.Add(damageTarget);
 
                 // 正在弹反
                 if (damageTarget.cCombat.isParrying)
