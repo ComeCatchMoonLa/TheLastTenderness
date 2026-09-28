@@ -4,28 +4,28 @@
 
 ## 0. 开始前
 
-- [ ] 1.32 已收尾。
-- [ ] 读过技术设计：只改类名和文件名，guid 和等待秒数不动。
+- [x] 1.32 已收尾。
+- [x] 读过技术设计：只改类名和文件名，guid 和等待秒数不动。
 
 **阶段门槛：** 知道不改 `timeUntilDestoryed`，不改预制体文本。
 
 ## 1. 改名
 
-- [ ] `DestoryAuto.cs` 改成 `DestroyAuto.cs`，类名跟着改，guid 仍是 `f8ce2664a73f11840a0fe2731eec1cf5`。
-- [ ] `构架设计.md` 里的文件名改成 `DestroyAuto.cs`。
+- [x] `DestoryAuto.cs` 改成 `DestroyAuto.cs`，类名跟着改，guid 仍是 `f8ce2664a73f11840a0fe2731eec1cf5`。
+- [x] `构架设计.md` 里的文件名改成 `DestroyAuto.cs`。
 
 **阶段门槛：** 两份特效预制体没有被这一版改写。
 
 ## 2. 单元测试
 
-- [ ] `DestroyAutoRenameTests` 断言类名、guid 和两份预制体的等待秒数。
-- [ ] 测试不创建角色。
+- [x] `DestroyAutoRenameTests` 断言类名、guid 和两份预制体的等待秒数。
+- [x] 测试不创建角色。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.33 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.33 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

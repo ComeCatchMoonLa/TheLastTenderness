@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CatchMoon
 {
-    public class DestoryAuto : MonoBehaviour
+    public class DestroyAuto : MonoBehaviour
     {
         public float timeUntilDestoryed = 1f; // 销毁前等待的时间
 
