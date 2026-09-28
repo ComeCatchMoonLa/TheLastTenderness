@@ -149,15 +149,9 @@ namespace CatchMoon
             return 1f;
         }
 
-        // 与 ResolveIncomingHit 同一段点积：攻击者位置减去被打的人，再点被打的人的 forward。
         bool HitComesFromFront(CharacterManager damageTarget)
         {
-            Vector3 fromDefenderToAttacker = character.transform.position - damageTarget.transform.position;
-            if (fromDefenderToAttacker.sqrMagnitude <= 0.0001f)
-                return false;
-
-            float dotValue = Vector3.Dot(fromDefenderToAttacker.normalized, damageTarget.transform.forward);
-            return dotValue > 0.3f;
+            return CharacterCombatManager.ComesFromFront(character.transform.position, damageTarget.transform.position, damageTarget.transform.forward);
         }
 
         protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)

@@ -140,6 +140,15 @@ namespace CatchMoon
             }
         }
 
+        public static bool ComesFromFront(Vector3 attackerPosition, Vector3 defenderPosition, Vector3 defenderForward)
+        {
+            Vector3 fromDefenderToAttacker = attackerPosition - defenderPosition;
+            if (fromDefenderToAttacker.sqrMagnitude <= 0.0001f)
+                return false;
+
+            return Vector3.Dot(fromDefenderToAttacker.normalized, defenderForward) > 0.3f;
+        }
+
         public void ResolveIncomingHit(
             CharacterManager attacker,
             string damageAnimation,
@@ -164,14 +173,7 @@ namespace CatchMoon
 
             bool successfulBlocked = false;
             if (attacker != null && character.cCombat.isBlocking)
-            {
-                Vector3 directionFromAttackerToTarget = attacker.transform.position - character.transform.position;
-                if (directionFromAttackerToTarget.sqrMagnitude > 0.0001f)
-                {
-                    float dotValue = Vector3.Dot(directionFromAttackerToTarget.normalized, character.transform.forward);
-                    successfulBlocked = dotValue > 0.3f;
-                }
-            }
+                successfulBlocked = ComesFromFront(attacker.transform.position, character.transform.position, character.transform.forward);
 
             if (successfulBlocked)
             {
