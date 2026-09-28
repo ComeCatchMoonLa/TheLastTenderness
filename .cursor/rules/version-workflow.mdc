@@ -28,7 +28,7 @@ alwaysApply: true
 
 这一节只约束还没写进 `Docs/开发计划/README.md` 的候选怎么排序。已经写进开发计划的顺序不在这里重排。
 
-新增，或把已经写好但未激活的旧功能重新用起来，用 2.x。0.x 仍是纠错。1.x 仍是行为不变的收拢。
+还没写进开发计划的候选，按 [`Docs/更新日志/README.md`](Docs/更新日志/README.md) 的类型选段：`fix` 用 0.x，`refactor` 和 `optimize` 用 1.x，`new` 和 `add` 用 2.x，`change` 和 `change!` 用 3.x，`remove!` 和 `delete!` 用 4.x。已经写进开发计划的号不在这里重排。
 
 按这个顺序比较。后面的档不能盖过前面的档。
 
