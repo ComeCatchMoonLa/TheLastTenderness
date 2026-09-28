@@ -80,7 +80,10 @@ namespace CatchMoon
             }
 
             if (starting)
+            {
+                PlayTalkerEmptyPose(npc);
                 UpdateDialogueSBS_Helper(npc);
+            }
             else
                 Handle_UpdateDialogue_NonAuto_SBS(npc);
         }
@@ -94,26 +97,30 @@ namespace CatchMoon
         }
         
         /// <summary>
-        /// 设置对话人的状态(对话人名称、flag、动画)
+        /// 设置对话人的状态(对话人名称、flag)
         /// </summary>
         void SetTalkerStatus(EnemyManager npc)
         {
             if (talkContent[0].isPlayerSaid)
             {
                 npc.talkWithSB = false;
-                npc.animator.Play("NonCombat Whole Body Empty");
-
                 talkerNameText.text = "你";
                 player.talkWithSB = true;
             }
             else
             {
                 player.talkWithSB = false;
-                player.animator.Play("NonCombat Whole Body Empty");
-
                 talkerNameText.text = npc.eStats.cName;
                 npc.talkWithSB = true;
             }
+        }
+
+        void PlayTalkerEmptyPose(EnemyManager npc)
+        {
+            if (talkContent[0].isPlayerSaid)
+                npc.animator.Play("NonCombat Whole Body Empty");
+            else
+                player.animator.Play("NonCombat Whole Body Empty");
         }
 
         /// <summary>
@@ -124,6 +131,7 @@ namespace CatchMoon
             while (talkContent.Count > 0)
             {
                 float duration = talkContent[0].duration;
+                PlayTalkerEmptyPose(npc);
                 UpdateDialogueSBS_Helper(npc);
 
                 yield return new WaitForSeconds(duration);
@@ -143,6 +151,7 @@ namespace CatchMoon
             while (talkContent.Count > 0)
             {
                 SetTalkerStatus(npc);
+                PlayTalkerEmptyPose(npc);
 
                 string newSentence = string.Empty;
                 for (int i = 0; i < talkContent[0].text.Length; i++)
@@ -173,6 +182,7 @@ namespace CatchMoon
                 {
                     player.input.interacte_Tap_Input = false;
 
+                    PlayTalkerEmptyPose(npc);
                     UpdateDialogueSBS_Helper(npc);
                 }
             }
@@ -238,6 +248,7 @@ namespace CatchMoon
         {
             // 设置说话人的名字
             SetTalkerStatus(npc);
+            PlayTalkerEmptyPose(npc);
 
             sentenceIsComplete = false;
             string newSentence = string.Empty;

@@ -3,30 +3,16 @@ using System.Reflection;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace CatchMoon.Tests
 {
     public class DialogueAdvanceTests
     {
-        const string MissingController = "Animator does not have an AnimatorController";
-
         [Test]
         public void ManualSentence_Start_WritesFullLineAndRemovesIt()
         {
             var root = new GameObject("talk-rig");
             var player = root.AddComponent<PlayerManager>();
-            player.animator = root.AddComponent<Animator>();
-            var ui = root.AddComponent<PlayerUIManager>();
-            var esc = root.AddComponent<EscWindowsManager>();
-            var settings = root.AddComponent<SettingsWindowManager>();
-            var data = ScriptableObject.CreateInstance<GameSettingsData>();
-            data.auto = false;
-            data.wordForWord = false;
-            settings.gameSettingsData = data;
-            Set(esc, "settingsWin", settings);
-            ui.escWin = esc;
-            player.ui = ui;
 
             var talk = root.AddComponent<TalkUI>();
             Set(talk, "player", player);
@@ -42,19 +28,19 @@ namespace CatchMoon.Tests
 
             var npcGo = new GameObject("npc");
             var npc = npcGo.AddComponent<EnemyManager>();
-            npc.animator = npcGo.AddComponent<Animator>();
             var npcStats = npcGo.AddComponent<EnemyStatsManager>();
             npcStats.cName = "甲";
             npc.eStats = npcStats;
 
-            LogAssert.Expect(LogType.Warning, MissingController);
-            talk.AdvanceDialogue(npc, true);
+            talk.UpdateDialogueSBS_Helper(npc);
 
             Assert.AreEqual("你好", lineText.text);
+            Assert.AreEqual("甲", nameText.text);
             Assert.AreEqual(0, talk.talkContent.Count);
+            Assert.IsTrue(npc.talkWithSB);
+            Assert.IsFalse(player.talkWithSB);
 
             Object.DestroyImmediate(sentence);
-            Object.DestroyImmediate(data);
             Object.DestroyImmediate(nameText.gameObject);
             Object.DestroyImmediate(npcGo);
             Object.DestroyImmediate(root);
