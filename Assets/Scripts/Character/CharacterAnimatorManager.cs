@@ -134,7 +134,7 @@ namespace CatchMoon
             AttackType attackType = character.cCombat.attackType;
             if (attackType == AttackType.light_1 || attackType == AttackType.light_2
                 || attackType == AttackType.heavy_1 || attackType == AttackType.heavy_2)
-                character.cStats.DeductStamina(AttackStaminaCost(weapon, attackType));
+                character.cStats.DeductAttackStamina(AttackStaminaCost(weapon, attackType));
         }
 
         void GrantWeaponAttackingPoiseBonus()

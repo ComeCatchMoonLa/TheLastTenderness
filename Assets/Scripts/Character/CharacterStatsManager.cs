@@ -227,6 +227,11 @@ namespace CatchMoon
             else return false;
         }
 
+        public virtual void DeductAttackStamina(float deductAmount)
+        {
+            currentStamina = Mathf.Max(currentStamina - deductAmount, -60f);
+        }
+
         public virtual void EmptyStamina()
         {
             currentStamina = 0;

@@ -4,23 +4,23 @@
 
 ## 0. 开始前
 
-- [ ] 2.8 已收尾。
-- [ ] 读过技术设计：轻击和重击走 `DeductAttackStamina`，最低 -60。
+- [x] 2.8 已收尾。
+- [x] 读过技术设计：轻击和重击走 `DeductAttackStamina`，最低 -60。
 
 **阶段门槛：** 知道不改 `DeductStamina`，不写 Edit Mode 测试。
 
 ## 1. 扣进负数
 
-- [ ] `DeductAttackStamina` 把精力减去花费，最低 -60。
-- [ ] `PlayerStatsManager` 扣完后刷新精力条。
-- [ ] `DrainStamina` 对四段轻重击调用它，花费仍是 `AttackStaminaCost`。
-- [ ] 轻击和重击在精力小于等于 0 时仍返回。
+- [x] `DeductAttackStamina` 把精力减去花费，最低 -60。
+- [x] `PlayerStatsManager` 扣完后刷新精力条。
+- [x] `DrainStamina` 对四段轻重击调用它，花费仍是 `AttackStaminaCost`。
+- [x] 轻击和重击在精力小于等于 0 时仍返回。
 
 **阶段门槛：** `DeductStamina` 仍是当前精力大于等于花费才扣。
 
 ## 2. 验收
 
-- [ ] 游戏设计第 3 节对照过出手和扣精力。
-- [ ] 大纲里的 0.36 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节对照过出手和扣精力。
+- [x] 大纲里的 0.36 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。没有单元测试要跑。
