@@ -199,37 +199,17 @@ namespace CatchMoon
         /// <param name="enemyManger">敌人管理器</param>
         protected virtual void GetNewAttack(EnemyManager enemy)
         {
-            int maxScore = 0;
-
-            for (int i = 0; i < enemyAttacks.Length; ++i)
-            {
-                ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
-
-                if (enemy.distFromTarget <= enemyAttackAction.maxDistNeededToAttack && enemy.distFromTarget >= enemyAttackAction.minDistNeededToAttack)
-                    if (enemy.targetDirAngle <= enemyAttackAction.maxAttackAngle && enemy.targetDirAngle >= enemyAttackAction.minAttackAngle)
-                        maxScore += enemyAttackAction.attackScore;
-            }
-
-            int randomValue = Random.Range(0, maxScore);
-            int temporaryScore = 0;
-
-            for (int i = 0; i < enemyAttacks.Length; ++i)
-            {
-                ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
-                if (enemy.distFromTarget <= enemyAttackAction.maxDistNeededToAttack && enemy.distFromTarget >= enemyAttackAction.minDistNeededToAttack)
-                {
-                    if (enemy.targetDirAngle <= enemyAttackAction.maxAttackAngle && enemy.targetDirAngle >= enemyAttackAction.minAttackAngle)
-                    {
-                        temporaryScore += enemyAttackAction.attackScore;
-
-                        if (temporaryScore > randomValue)
-                        {
-                            attackState.currentAttack = enemyAttackAction;
-                            return;
-                        }
-                    }
-                }
-            }
+            ItemAttackWindows windows = new ItemAttackWindows { Attacks = enemyAttacks };
+            int index = AttackScore.PickIndex(
+                enemyAttacks.Length,
+                enemy.distFromTarget,
+                enemy.targetDirAngle,
+                attackState.currentAttack != null,
+                abortIfHasCurrent: false,
+                stopAfterAssign: true,
+                windows);
+            if (index >= 0)
+                attackState.currentAttack = enemyAttacks[index];
         }
 
         // 根据概率决定是否发生该行为
