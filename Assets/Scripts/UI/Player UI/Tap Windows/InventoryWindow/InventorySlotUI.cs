@@ -51,6 +51,16 @@ namespace CatchMoon
 
         public void EquipThisItem()
         {
+            if (item.itemType == ItemType.spell)
+            {
+                SelectSpell(item as SpellItem);
+                return;
+            }
+            if (item.itemType == ItemType.consumable)
+            {
+                SelectConsumable(item as ConsumableItem);
+                return;
+            }
             if (item.itemType != ItemType.equipment) return;
 
             EquipmentItem equipment = item as EquipmentItem;
@@ -59,6 +69,28 @@ namespace CatchMoon
                 EquipWeapon(equipment as WeaponItem);
             else if (equipment.equipmentType == EquipmentType.armor)
                 EquipArmor(equipment as ArmorItem);
+        }
+
+        void SelectSpell(SpellItem spell)
+        {
+            if (spell == null) return;
+            PlayerInventoryManager pInventory = player.pInventory;
+            pInventory.currentSpell = spell;
+            int index = pInventory.spells.IndexOf(spell);
+            if (index >= 0)
+                pInventory.currentSpellIdx = index;
+            player.ui.hud.quickSlotsUI.UpdateCurrentSpellIcon(spell);
+        }
+
+        void SelectConsumable(ConsumableItem consumable)
+        {
+            if (consumable == null) return;
+            PlayerInventoryManager pInventory = player.pInventory;
+            pInventory.currentConsumable = consumable;
+            int index = pInventory.consumables.IndexOf(consumable);
+            if (index >= 0)
+                pInventory.currentComsumableIdx = index;
+            player.ui.hud.quickSlotsUI.UpdateCurrentConsumableIcon(consumable);
         }
 
         void EquipWeapon(WeaponItem weapon)
