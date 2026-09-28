@@ -51,6 +51,12 @@ namespace CatchMoon
 
         public void AdvanceDialogue(EnemyManager npc, bool starting)
         {
+            // 窗口未激活时 Awake 还没跑，Update 仍会每帧进来。
+            if (player == null)
+                player = transform.root.GetComponent<PlayerManager>();
+            if (player == null)
+                return;
+
             bool auto = player.ui.escWin.GetSettingWin().gameSettingsData.auto;
             bool wordForWord = player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord;
             if (auto)
