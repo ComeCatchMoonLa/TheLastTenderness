@@ -121,6 +121,8 @@ namespace CatchMoon
             currentHP = maxHP;
             currentStamina = maxStamina;
             currentMP = maxMP;
+            if (player != null && player.pInventory != null)
+                player.pInventory.RefillConsumablesToMax();
             player.ui.hud.healthBar.SetCurrentHP(currentHP);
             player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
             player.ui.hud.manaBar.SetCurrentMP(currentMP);

@@ -69,6 +69,17 @@ namespace CatchMoon
             RememberConsumable(item);
             return consumableLeft[item];
         }
+        public void RefillConsumablesToMax()
+        {
+            if (consumableLeft == null || consumableLeft.Count == 0) return;
+            var items = new List<ConsumableItem>(consumableLeft.Keys);
+            for (int i = 0; i < items.Count; i++)
+            {
+                ConsumableItem item = items[i];
+                if (item == null) continue;
+                consumableLeft[item] = item.maxItemAmount;
+            }
+        }
         void RememberConsumable(ConsumableItem item)
         {
             if (item == null || consumableLeft.ContainsKey(item)) return;
