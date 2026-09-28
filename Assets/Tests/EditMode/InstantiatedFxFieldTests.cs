@@ -14,7 +14,7 @@ namespace CatchMoon.Tests
             Assert.IsNotNull(typeof(PlayerEffectsManager).GetField("instantiatedFXModel", flags));
             Assert.IsNull(typeof(PlayerEffectsManager).GetField("instantialtedFXModel", flags));
 
-            AssertYaml("Perfabs/Player/Player.prefab", 1);
+            AssertYaml("Prefabs/Player/Player.prefab", 1);
             AssertYaml("Scenes/Game_Before_0.7.unity", 3);
         }
 

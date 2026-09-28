@@ -16,9 +16,9 @@ Edit Mode 测试：`Tests/EditMode`。
 
 ## 预制体
 
-`Perfabs/`（拼写保持）。当前玩家是 `Perfabs/Player/Player.prefab`。开着的近战敌人是 `Perfabs/Humanoid A.I - Melee.prefab`。
+`Prefabs/`。当前玩家是 `Prefabs/Player/Player.prefab`。开着的近战敌人是 `Prefabs/Humanoid A.I - Melee.prefab`。
 
-`Perfabs/1 Old/` 是旧玩家，不是当前玩家。`Perfabs/0 Resource/` 是商店预制体，不进 git。
+`Prefabs/1 Old/` 是旧玩家，不是当前玩家。`Prefabs/0 Resource/` 是商店预制体，不进 git。
 
 ## 数据
 
