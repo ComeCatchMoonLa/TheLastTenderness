@@ -1,0 +1,17 @@
+---
+description: README 里的索引怎么查、怎么改。不管索引以外的正文
+alwaysApply: true
+---
+
+# 索引使用与维护
+
+本规则只约束 README 里的索引。索引只回答「去哪找」。这些 README 里索引以外的正文，不在这里定。
+
+查一份索引，只打开表里那一个 README。索引进了新条目，或某条入口换了，只改那一个 README。不要把同一份索引的条目抄进另一份 README。
+
+| 索引 | README |
+| --- | --- |
+| `Docs/` 有哪些入口 | [`Docs/README.md`](Docs/README.md)。子文件夹 README 里的索引只覆盖该文件夹，条目不抄进这份 |
+| 场景、预制体、数据、美术、代码在哪，哪一类不进 git | [`Assets/README.md`](Assets/README.md) |
+
+根 [`README.md`](README.md) 是 GitHub 页，不是这两份索引的存放处。可以链到索引，不抄索引条目。
