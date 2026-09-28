@@ -12,7 +12,6 @@ namespace CatchMoon
 
         [Header("背刺与弹反的判定范围")]
         public float criticalAttackRange = 0.9f;
-        public float pendingCriticalDamage;
 
         [Header("Transforms")]
         public Transform criticalAttackRayCastStartPoint;
