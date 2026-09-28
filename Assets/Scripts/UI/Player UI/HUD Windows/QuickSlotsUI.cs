@@ -40,39 +40,33 @@ namespace CatchMoon
 
         public void UpdateCurrentWeaponIcon(bool isLeft, WeaponItem weapon)
         {
-            if (weapon.itemIcon == null)
-                return;
-
-            if (isLeft)
-            {
-                leftWeaponIcon.sprite = weapon.itemIcon;
-                leftWeaponIcon.enabled = true;
-            }
-            else
-            {
-                rightWeaponIcon.sprite = weapon.itemIcon;
-                rightWeaponIcon.enabled = true;      
-            }
+            if (weapon == null) return;
+            ShowIcon(isLeft ? leftWeaponIcon : rightWeaponIcon, weapon.itemIcon);
         }
 
         public void UpdateCurrentSpellIcon(SpellItem spell)
         {
             if (spell == null) return;
-            if (spell.itemIcon == null)
-                return;
-
-            currentSpellIcon.sprite = spell.itemIcon;
-            currentSpellIcon.enabled = true;
+            ShowIcon(currentSpellIcon, spell.itemIcon);
         }
 
         public void UpdateCurrentConsumableIcon(ConsumableItem consumable)
         {
             if (consumable == null) return;
-            if (consumable.itemIcon == null)
-                return;
+            ShowIcon(currentConsumableIcon, consumable.itemIcon);
+        }
 
-            currentConsumableIcon.sprite = consumable.itemIcon;
-            currentConsumableIcon.enabled = true;
+        static void ShowIcon(Image icon, Sprite sprite)
+        {
+            if (sprite == null)
+            {
+                icon.sprite = null;
+                icon.enabled = false;
+                return;
+            }
+
+            icon.sprite = sprite;
+            icon.enabled = true;
         }
     }
 }
