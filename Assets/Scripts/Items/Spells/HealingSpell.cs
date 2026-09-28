@@ -15,7 +15,7 @@ namespace CatchMoon
                 return;
 
             GameObject instantiatedWarmUpSpellFx = Instantiate(spellWarmUpFX, character.cAnimator.transform);
-            character.cAnimator.PlayTargetAnimation(spellAnimation, true, false, mirrorAnim: character.isUsingLeftHand);
+            character.cAnimator.PlayTargetAnimation(spellAnimation, true, new AnimationOptions { Mirror = character.isUsingLeftHand });
         }
         public override void SuccessfullyCastSpell(CharacterManager character)
         {

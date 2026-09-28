@@ -3,6 +3,13 @@ using UnityEngine.Animations.Rigging;
 
 namespace CatchMoon
 {
+    public struct AnimationOptions
+    {
+        public bool CanRotate;
+        public bool Mirror;
+        public bool RootMotion;
+    }
+
     public class CharacterAnimatorManager : MonoBehaviour
     {
         CharacterManager character;
@@ -49,12 +56,7 @@ namespace CatchMoon
         /// </summary>
         /// <param name="targetAnim">目标动画</param>
         /// <param name="isInteracting">是否交互</param>
-        public void PlayTargetAnimation(
-            string targetAnim,
-            bool isInteracting,
-            bool canRotate = false,
-            bool mirrorAnim = false,
-            bool isRotatingWithRootMotion = false)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, AnimationOptions options = default)
         {
             if (!AnimatorHasState(targetAnim))
             {
@@ -64,9 +66,9 @@ namespace CatchMoon
 
             character.animator.applyRootMotion = isInteracting;
             character.isInteracting = isInteracting;
-            character.canRotate = canRotate;
-            character.animator.SetBool("isMirrored", mirrorAnim);
-            character.isRotatingWithRootMotion = isRotatingWithRootMotion;
+            character.canRotate = options.CanRotate;
+            character.animator.SetBool("isMirrored", options.Mirror);
+            character.isRotatingWithRootMotion = options.RootMotion;
             character.animator.CrossFade(targetAnim, 0.2f);
         }
 

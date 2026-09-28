@@ -87,13 +87,13 @@ namespace CatchMoon
             }
             else if (weaponItem.weaponType == WeaponType.bow)
             {
-                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, new AnimationOptions { CanRotate = true });
                 character.animator.Play("Left Arm Empty");
                 character.animator.runtimeAnimatorController = weaponItem.weaponController;
             }
             else
             {
-                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+                character.cAnimator.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, new AnimationOptions { CanRotate = true });
             }
             return true;
         }

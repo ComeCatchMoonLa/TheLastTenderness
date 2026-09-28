@@ -42,7 +42,7 @@ namespace CatchMoon
 
             character.isPerformingRiposted = true;
             character.cStats.isInvulnerable = true;
-            character.cAnimator.PlayTargetAnimation("Riposte", true, false, true);
+            character.cAnimator.PlayTargetAnimation("Riposte", true, new AnimationOptions { Mirror = true });
 
             float dist = character.cCollider.radius + attackTarget.cCollider.radius;
             attackTarget.cCombat.GetRiposte(character, dist);
@@ -55,7 +55,7 @@ namespace CatchMoon
 
             character.isPerformingBackStabbed = true;
             character.cStats.isInvulnerable = true;
-            character.cAnimator.PlayTargetAnimation("Back Stab", true, false, true);
+            character.cAnimator.PlayTargetAnimation("Back Stab", true, new AnimationOptions { Mirror = true });
 
             float dist = character.cCollider.radius + attackTarget.cCollider.radius;
             attackTarget.cCombat.GetBackStabbed(character,dist);

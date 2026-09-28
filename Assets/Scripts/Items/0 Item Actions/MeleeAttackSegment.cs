@@ -33,7 +33,7 @@ namespace CatchMoon
 
             bool playSecond = combo && character.cAnimator.lastAttack == first;
             string anim = playSecond ? second : first;
-            character.cAnimator.PlayTargetAnimation(anim, isInteracting: true, mirrorAnim: mirror);
+            character.cAnimator.PlayTargetAnimation(anim, true, new AnimationOptions { Mirror = mirror });
             character.cAnimator.lastAttack = anim;
             character.cCombat.attackType = playSecond ? secondType : firstType;
         }

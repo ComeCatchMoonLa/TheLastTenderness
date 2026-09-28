@@ -90,7 +90,7 @@ namespace CatchMoon
             else if (enemy.cCombat.isBlocking)
             {
                 enemy.cCombat.isBlocking = false;
-                enemy.eAnimator.PlayTargetAnimation("Block - End", false, true);
+                enemy.eAnimator.PlayTargetAnimation("Block - End", false, new AnimationOptions { CanRotate = true });
             }
             // 攻击
             if (enemy.currentRecoveryTime <= 0)

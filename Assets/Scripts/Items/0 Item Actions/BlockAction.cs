@@ -11,7 +11,7 @@ namespace CatchMoon
 
             character.cCombat.isBlocking = true;
             character.cCombat.SetBlockingAbsorptionFromBlockingWeapon();
-            character.cAnimator.PlayTargetAnimation("Block - Start", false, true);
+            character.cAnimator.PlayTargetAnimation("Block - Start", false, new AnimationOptions { CanRotate = true });
         }
     }
 }

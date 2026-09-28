@@ -43,7 +43,7 @@ namespace CatchMoon
                 {
                     GameObject instantiatedWarmUpSpellFx = Instantiate(spellWarmUpFX, player.pWeaponSlot.rightHandSlot.currentWeaponModel.transform.GetChild(0));
                 }
-                player.pAnimator.PlayTargetAnimation(spellAnimation, true, mirrorAnim: player.isUsingLeftHand);
+                player.pAnimator.PlayTargetAnimation(spellAnimation, true, new AnimationOptions { Mirror = player.isUsingLeftHand });
             }
         }
         void AttempToCastSpellWithAI(EnemyManager enemy)
@@ -64,7 +64,7 @@ namespace CatchMoon
                 {
                     GameObject instantiatedWarmUpSpellFx = Instantiate(spellWarmUpFX, enemy.eWeaponSlot.rightHandSlot.currentWeaponModel.transform.GetChild(0));
                 }
-                enemy.eAnimator.PlayTargetAnimation(spellAnimation, true, mirrorAnim: enemy.isUsingLeftHand);
+                enemy.eAnimator.PlayTargetAnimation(spellAnimation, true, new AnimationOptions { Mirror = enemy.isUsingLeftHand });
             }
         }
 

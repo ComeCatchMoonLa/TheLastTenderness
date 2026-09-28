@@ -23,7 +23,7 @@ namespace CatchMoon
             {
                 player.pInventory.consumableBeingUsed = this;
 
-                player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, true);
+                player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, new AnimationOptions { CanRotate = true });
 
                 GameObject flask = Instantiate(itemModel, player.pWeaponSlot.rightHandSlot.overrideParentWhileHolding);
                 player.pEffects.currentParticleFX = recoveryFX;
