@@ -125,34 +125,28 @@ namespace CatchMoon
 
         protected virtual void DealDamage(CharacterManager damageTarget, string damageAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            float multiplier = 1f;
-            if (character.isUsingRightHand)
-            {
-                WeaponItem rightWeapon = character.cInventory.rightWeapon;
-                if (character.cCombat.attackType == AttackType.light_1)
-                    multiplier = rightWeapon.laFirstPhaseDM;
-                else if (character.cCombat.attackType == AttackType.light_2)
-                    multiplier = rightWeapon.laSecondPhaseDM;
-                else if (character.cCombat.attackType == AttackType.heavy_1)
-                    multiplier = rightWeapon.haFirstPhaseDM;
-                else if (character.cCombat.attackType == AttackType.heavy_2)
-                    multiplier = rightWeapon.haSecondPhasDM;
-            }
-            else if (character.isUsingLeftHand)
-            {
-                WeaponItem leftWeapon = character.cInventory.leftWeapon;
-                if (character.cCombat.attackType == AttackType.light_1)
-                    multiplier = leftWeapon.laFirstPhaseDM;
-                else if (character.cCombat.attackType == AttackType.light_2)
-                    multiplier = leftWeapon.laSecondPhaseDM;
-                else if (character.cCombat.attackType == AttackType.heavy_1)
-                    multiplier = leftWeapon.haFirstPhaseDM;
-                else if (character.cCombat.attackType == AttackType.heavy_2)
-                    multiplier = leftWeapon.haSecondPhasDM;
-            }
+            float multiplier = PhaseDamageMultiplier(character.isUsingRightHand, character.isUsingLeftHand,
+                character.cInventory.rightWeapon, character.cInventory.leftWeapon, character.cCombat.attackType);
 
             damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, multiplier, true, poiseBreak, guardBreakModifider,
                 pd, fd, md, ld, dd);
+        }
+
+        public static float PhaseDamageMultiplier(bool usingRightHand, bool usingLeftHand, WeaponItem rightWeapon, WeaponItem leftWeapon, AttackType attackType)
+        {
+            if (!usingRightHand && !usingLeftHand)
+                return 1f;
+
+            WeaponItem weapon = usingRightHand ? rightWeapon : leftWeapon;
+            if (attackType == AttackType.light_1)
+                return weapon.laFirstPhaseDM;
+            if (attackType == AttackType.light_2)
+                return weapon.laSecondPhaseDM;
+            if (attackType == AttackType.heavy_1)
+                return weapon.haFirstPhaseDM;
+            if (attackType == AttackType.heavy_2)
+                return weapon.haSecondPhasDM;
+            return 1f;
         }
 
         // 与 ResolveIncomingHit 同一段点积：攻击者位置减去被打的人，再点被打的人的 forward。

@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 2.6 已收尾。
-- [ ] 读过技术设计：四档只在 `PhaseDamageMultiplier` 里读。
+- [x] 2.6 已收尾。
+- [x] 读过技术设计：四档只在 `PhaseDamageMultiplier` 里读。
 
 **阶段门槛：** 知道两手都不用时仍是 1，`critical` 不进四档。
 
 ## 1. 系数
 
-- [ ] `PhaseDamageMultiplier` 按技术设计返回。
-- [ ] `DealDamage` 左右手都调用它。
-- [ ] `ResolveIncomingHit` 的参数不改。
+- [x] `PhaseDamageMultiplier` 按技术设计返回。
+- [x] `DealDamage` 左右手都调用它。
+- [x] `ResolveIncomingHit` 的参数不改。
 
 **阶段门槛：** 四档字段名仍是原来的四个。
 
 ## 2. 单元测试
 
-- [ ] `PhaseDamageMultiplierTests` 断言左右手四档相同，两手都不用时是 1，`critical` 是 1。
-- [ ] 测试不创建 `DamageCollider`，不创建 Animator。
+- [x] `PhaseDamageMultiplierTests` 断言左右手四档相同，两手都不用时是 1，`critical` 是 1。
+- [x] 测试不创建 `DamageCollider`，不创建 Animator。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.21 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.21 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
