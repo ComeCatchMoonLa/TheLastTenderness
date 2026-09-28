@@ -150,7 +150,7 @@ namespace CatchMoon
                 player.pCombat.isBlocking = false;
 
                 player.pCombat.ResetBlockingAbsorption();
-                player.aimingMode = false;
+                player.ClearAimingMode();
             }
         }
         void Handle_Tap_Z_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)

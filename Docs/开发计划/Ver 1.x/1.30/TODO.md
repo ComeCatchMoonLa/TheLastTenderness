@@ -4,28 +4,28 @@
 
 ## 0. 开始前
 
-- [ ] 2.10 已收尾。
-- [ ] 读过技术设计：清零只由 `ClearAimingMode` 写入。
+- [x] 2.10 已收尾。
+- [x] 读过技术设计：清零只由 `ClearAimingMode` 写入。
 
 **阶段门槛：** 知道不改 `AimAction`。
 
 ## 1. 清零
 
-- [ ] `PlayerManager.ClearAimingMode` 把 `aimingMode` 写成 false。
-- [ ] 跳跃进入、翻滚进入、松开瞄准改为调用它。
+- [x] `PlayerManager.ClearAimingMode` 把 `aimingMode` 写成 false。
+- [x] 跳跃进入、翻滚进入、松开瞄准改为调用它。
 
 **阶段门槛：** 这三处不再各自赋值。
 
 ## 2. 单元测试
 
-- [ ] `AimingClearTests` 对这三处各断言一次 false。
-- [ ] 测试不创建 Animator 控制器。
+- [x] `AimingClearTests` 对这三处各断言一次 false。
+- [x] 测试不创建 Animator 控制器。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.30 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.30 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

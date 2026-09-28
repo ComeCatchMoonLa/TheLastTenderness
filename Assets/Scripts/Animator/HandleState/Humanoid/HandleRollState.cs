@@ -15,7 +15,7 @@ public class HandleRollState : StateMachineBehaviour
         if (character.characterType == CharacterType.player)
         {
             PlayerManager player = character as PlayerManager;
-            player.aimingMode = false;
+            player.ClearAimingMode();
             player.cCollider.center = player.pLocomotion.rollingColliderCenter;
             player.cCollider.height = player.pLocomotion.rollingColliderHeight;
             player.cCollider.radius = player.pLocomotion.defaultColliderRadius;

@@ -15,7 +15,7 @@ public class HandleJumpState : StateMachineBehaviour
         if (character.characterType == CharacterType.player)
         {
             PlayerManager player = character as PlayerManager;
-            player.aimingMode = false;
+            player.ClearAimingMode();
             player.cCollider.center = player.pLocomotion.jumpingColliderCenter;
             player.cCollider.height = player.pLocomotion.jumpingColliderHeight;
             player.cCollider.radius = player.pLocomotion.defaultColliderRadius;

@@ -19,6 +19,11 @@ namespace CatchMoon
 
         [Header("Player Flags")]
         public bool aimingMode = false;
+
+        public void ClearAimingMode()
+        {
+            aimingMode = false;
+        }
         [System.NonSerialized] public float colliderRadiusBeforeAim;
         [System.NonSerialized] public bool aimingRadiusApplied;
         public bool noArmor = false; // 无装备系统
