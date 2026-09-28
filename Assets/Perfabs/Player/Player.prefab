@@ -7714,6 +7714,11 @@ MonoBehaviour:
   consumables:
   - {fileID: 11400000, guid: 777683338fe7a36499f84982b838b2ee, type: 2}
   - {fileID: 11400000, guid: 1abac5fd608874c46bcc939472e21442, type: 2}
+  flaskTotal: 3
+  estusShare: 3
+  ashShare: 0
+  boneTier: 0
+  recoveryTable: {fileID: 11400000, guid: e3f8a1c64d2b4e90a7c5b8d1f0e24613, type: 2}
 --- !u!114 &7624863673522782392
 MonoBehaviour:
   m_ObjectHideFlags: 0

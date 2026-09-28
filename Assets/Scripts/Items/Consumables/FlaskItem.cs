@@ -37,10 +37,13 @@ namespace CatchMoon
         }
         public override void SucessfullyUsedConsumable(PlayerManager player)
         {
-            if (healthRecoverAmount > 0)
-                player.pStats.AddHP(healthRecoverAmount);
-            if (focusPointsRecoverAmount > 0)
-                player.pStats.AddMP(focusPointsRecoverAmount);
+            if (player.pInventory.TryGetFlaskSip(flaskType, out int amount))
+            {
+                if (flaskType == FlaskType.ashen)
+                    player.pStats.AddMP(amount);
+                else
+                    player.pStats.AddHP(amount);
+            }
             GameObject healParticles = Instantiate(player.pEffects.currentParticleFX, player.pStats.transform);
             Destroy(player.pEffects.instantialtedFXModel.gameObject);
             player.pEffects.instantialtedFXModel = null;

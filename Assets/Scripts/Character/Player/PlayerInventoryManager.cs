@@ -21,6 +21,12 @@ namespace CatchMoon
         Dictionary<AmmoItem, int> ammoLeft;
         public ConsumableItem consumableBeingUsed;
 
+        public int flaskTotal = 3;
+        public int estusShare = 3;
+        public int ashShare = 0;
+        public int boneTier = 0;
+        public FlaskRecoveryTable recoveryTable;
+
         protected override void Awake()
         {
             base.Awake();
@@ -92,6 +98,59 @@ namespace CatchMoon
             if (currentConsumable == null)
                 return;
             player.ui.hud.quickSlotsUI.SetConsumableCount(ConsumableRemaining(currentConsumable));
+        }
+
+        public void ObtainAshFlask()
+        {
+            if (ashShare > 0) return;
+            if (flaskTotal >= 15) return;
+            flaskTotal++;
+            ashShare = 1;
+        }
+
+        public void AddFlaskShard()
+        {
+            if (flaskTotal >= 15) return;
+            flaskTotal++;
+        }
+
+        public void AddBoneShard()
+        {
+            if (boneTier >= 10) return;
+            boneTier++;
+        }
+
+        public bool TryGetFlaskSip(FlaskType flaskType, out int amount)
+        {
+            amount = 0;
+            if (recoveryTable == null)
+            {
+                Debug.LogError("PlayerInventoryManager.recoveryTable 未填");
+                return false;
+            }
+
+            FlaskSipRow[] rows = recoveryTable.rows;
+            if (rows == null || rows.Length != 11 || boneTier < 0 || boneTier >= rows.Length)
+            {
+                Debug.LogError(recoveryTable.name + ".rows 未填");
+                return false;
+            }
+
+            FlaskSipRow row = rows[boneTier];
+            if (row.health <= 0)
+            {
+                Debug.LogError(recoveryTable.name + ".rows[" + boneTier + "].health 未填");
+                return false;
+            }
+
+            if (row.focus <= 0)
+            {
+                Debug.LogError(recoveryTable.name + ".rows[" + boneTier + "].focus 未填");
+                return false;
+            }
+
+            amount = flaskType == FlaskType.ashen ? row.focus : row.health;
+            return true;
         }
         void RememberConsumable(ConsumableItem item)
         {
