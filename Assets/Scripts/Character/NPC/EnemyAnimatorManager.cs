@@ -13,21 +13,30 @@ namespace CatchMoon
             enemy = GetComponent<EnemyManager>();
         }
 
+        public static readonly int LocomotionState = Animator.StringToHash("Locomotion");
+
+        public static bool WritesHorizontalRootVelocity(bool isInteracting, int baseLayerShortNameHash)
+        {
+            return isInteracting || baseLayerShortNameHash == LocomotionState;
+        }
+
         /// <summary>
         /// 播放动画时执行的操作
         /// </summary>
         private void OnAnimatorMove()
         {
-            // 设置刚体的速度为动画在水平面上的速度
-            enemy.rigidBody.linearDamping = 0;
-            Vector3 deltaPosition = enemy.animator.deltaPosition;
-            deltaPosition.y = 0;
-            if (Time.deltaTime > 0f)
+            if (WritesHorizontalRootVelocity(enemy.isInteracting, enemy.animator.GetCurrentAnimatorStateInfo(0).shortNameHash))
             {
-                Vector3 velocity = deltaPosition / Time.deltaTime;
-                enemy.rigidBody.linearVelocity = velocity;
+                enemy.rigidBody.linearDamping = 0;
+                Vector3 deltaPosition = enemy.animator.deltaPosition;
+                deltaPosition.y = 0;
+                if (Time.deltaTime > 0f)
+                {
+                    Vector3 velocity = deltaPosition / Time.deltaTime;
+                    enemy.rigidBody.linearVelocity = velocity;
+                }
             }
-            // 判断是否需要应用动画的根运动决定旋转(旋转之外的形变依然通过isInteracting决定)
+            // 朝向仍只看这个旗标，不跟水平速度绑在一起
             if (enemy.isRotatingWithRootMotion)
                 enemy.transform.rotation = enemy.animator.deltaRotation;
         }
