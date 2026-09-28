@@ -5,7 +5,7 @@ namespace CatchMoon
     public class InputManager : MonoBehaviour
     {
         PlayerManager player;
-        [System.NonSerialized] public InputAcitons inputActions;
+        [System.NonSerialized] public InputActions inputActions;
 
         public float horizontal; // 水平偏移
         public float vertical;   // 垂直偏移
@@ -64,7 +64,7 @@ namespace CatchMoon
         {
             if (inputActions == null) // 若玩家控制器为空，则将其初始化
             {
-                inputActions = new InputAcitons();
+                inputActions = new InputActions();
 
                 // 运动输入(相机旋转、人物运动)
                 inputActions.Locomotion.CameraRotate.performed += i => cameraRotateInput = i.ReadValue<Vector2>();
