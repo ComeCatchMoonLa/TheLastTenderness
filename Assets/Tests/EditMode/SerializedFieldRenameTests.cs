@@ -18,7 +18,7 @@ namespace CatchMoon.Tests
             Assert.IsNull(typeof(CharacterInventoryManager).GetField("unaremd", flags));
             Assert.IsNotNull(typeof(WeaponFX).GetField("normalWeaponTrail", flags));
             Assert.IsNull(typeof(WeaponFX).GetField("noramalWeaponTrial", flags));
-            Assert.IsTrue(Enum.IsDefined(typeof(WeaponType), "unaremd"));
+            Assert.IsFalse(Enum.IsDefined(typeof(WeaponType), "unaremd"));
 
             AssertPrefab("Perfabs/Humanoid A.I - Melee.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 0}");
             AssertPrefab("Perfabs/Player/Player.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}");

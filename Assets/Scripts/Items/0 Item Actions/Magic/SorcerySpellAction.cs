@@ -7,7 +7,7 @@ namespace CatchMoon
     {
         public override void PerformAction(CharacterManager character)
         {
-            PerformSpellAction(character, SpellType.sorvery);
+            PerformSpellAction(character, SpellType.sorcery);
         }
     }
 }

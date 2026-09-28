@@ -13,7 +13,7 @@ namespace CatchMoon
     }
     public enum WeaponType
     {
-        unaremd,
+        unarmed,
         melee_OH_DualWield,
         melee_OH_LH,
         melee_OH_RH,
@@ -35,7 +35,7 @@ namespace CatchMoon
     {
         miracle,
         pyromancy,
-        sorvery,
+        sorcery,
     }
     public enum AmmoType
     {
@@ -54,7 +54,7 @@ namespace CatchMoon
         weapon_LH_Slot_1,
         weapon_LH_Slot_2,
         armor_Head_Slot,
-        armor_Toros_Slot,
+        armor_Torso_Slot,
         armor_Hips_Slot,
         weapon_RH_Slot_3,
         weapon_RH_Slot_4,
@@ -140,7 +140,7 @@ namespace CatchMoon
 
     public enum ChangeLockOnTargetMode
     {
-        nearset, // 最近
+        nearest, // 最近
         minHP,   // 血量最低
     }
 }

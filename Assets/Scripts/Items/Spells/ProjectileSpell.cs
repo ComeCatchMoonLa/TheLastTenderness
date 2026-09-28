@@ -100,7 +100,7 @@ namespace CatchMoon
                 case SpellType.pyromancy:
                     spellDC.fd = baseDamage;
                     break;
-                case SpellType.sorvery:
+                case SpellType.sorcery:
                     spellDC.md = baseDamage;
                     break;
                 case SpellType.miracle:

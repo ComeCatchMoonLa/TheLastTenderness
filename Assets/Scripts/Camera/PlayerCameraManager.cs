@@ -56,7 +56,7 @@ namespace CatchMoon
         // Player可锁定区域为: 以Player朝向为对称轴、maxLockOnDist为半径、2 * maxlockAngle_half为圆心角的扇形区域
         public bool lockOnFlag = false;                         // 是否为锁定视角模式(已经进入了锁定模式, curTarget不为空)
         public bool lockOnMode = false;                         // 是否为锁定模式(player按F进行切换)
-        public ChangeLockOnTargetMode changeLockOnTargetMode = ChangeLockOnTargetMode.nearset; // 切换锁定目标的设置(切换至最近目标/切换至血量最低目标)
+        public ChangeLockOnTargetMode changeLockOnTargetMode = ChangeLockOnTargetMode.nearest; // 切换锁定目标的设置(切换至最近目标/切换至血量最低目标)
         [SerializeField] float maxLookOnAngle_Half = 50f;       // 最大锁定范围角的一半
         [SerializeField] float maxLookOnAngle_Half_AutoChangeLockOnTargetMode = 30f; // 勾选自动锁定目标选项时, 减小可锁定锁定角度
         [SerializeField] float autoChangeLockOnTargetTime = 2f;  // 自动切换锁定目标的时间间隔
@@ -448,7 +448,7 @@ namespace CatchMoon
                 {
                     if (nearestLockableTarget != null)
                     {
-                        if (changeLockOnTargetMode == ChangeLockOnTargetMode.nearset)
+                        if (changeLockOnTargetMode == ChangeLockOnTargetMode.nearest)
                             curLockOnTarget = nearestLockableTarget;
                         lockOnFlag = true;
                     }

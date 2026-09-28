@@ -81,7 +81,7 @@ namespace CatchMoon
                 return false;
 
             LoadWeaponDamageCollider(weaponItem, true);
-            if (weaponItem.weaponType == WeaponType.unaremd)
+            if (weaponItem.weaponType == WeaponType.unarmed)
             {
                 character.animator.Play("Left Arm Empty");
             }
@@ -154,7 +154,7 @@ namespace CatchMoon
         {
             if (isLeft)
             {
-                if (leftHandSlot.currentWeapon.weaponType == WeaponType.unaremd
+                if (leftHandSlot.currentWeapon.weaponType == WeaponType.unarmed
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.pyromancyCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.spellCaster
@@ -190,7 +190,7 @@ namespace CatchMoon
             }
             else
             {
-                if (rightHandSlot.currentWeapon.weaponType == WeaponType.unaremd
+                if (rightHandSlot.currentWeapon.weaponType == WeaponType.unarmed
                     || rightHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
                     || rightHandSlot.currentWeapon.weaponType == WeaponType.pyromancyCaster
                     || rightHandSlot.currentWeapon.weaponType == WeaponType.spellCaster)
