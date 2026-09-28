@@ -7662,7 +7662,7 @@ MonoBehaviour:
   leftWeaponFX: {fileID: 0}
   rightWeaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
-  instantialtedFXModel: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
 --- !u!114 &8189054979652004575
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12999,7 +12999,7 @@ MonoBehaviour:
   leftWeaponFX: {fileID: 0}
   rightWeaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
-  instantialtedFXModel: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
 --- !u!114 &1046131765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20816,7 +20816,7 @@ MonoBehaviour:
   leftWeaponFX: {fileID: 0}
   rightWeaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
-  instantialtedFXModel: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
 --- !u!82 &1407484208
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22293,7 +22293,7 @@ MonoBehaviour:
   leftWeaponFX: {fileID: 0}
   rightWeaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
-  instantialtedFXModel: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
 --- !u!114 &1588172654
 MonoBehaviour:
   m_ObjectHideFlags: 0

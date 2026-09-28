@@ -35,7 +35,7 @@ namespace CatchMoon
                 player.pAnimator.PlayTargetAnimation(consumeAnimation, true);
                 player.pWeaponSlot.rightHandSlot.UnloadWeapon();
                 GameObject bombModel = Instantiate(itemModel, player.pWeaponSlot.rightHandSlot.overrideParentWhileHolding);
-                player.pEffects.instantialtedFXModel = bombModel;
+                player.pEffects.instantiatedFXModel = bombModel;
             }
             else
             {
@@ -44,8 +44,8 @@ namespace CatchMoon
         }
         public override void SucessfullyUsedConsumable(PlayerManager player)
         {
-            Destroy(player.pEffects.instantialtedFXModel.gameObject);
-            player.pEffects.instantialtedFXModel = null;
+            Destroy(player.pEffects.instantiatedFXModel.gameObject);
+            player.pEffects.instantiatedFXModel = null;
             GameObject activeModelBomb = Instantiate(liveBombModel, player.pWeaponSlot.rightHandSlot.transform.position, player.pCamera.cameraPivotTransform.rotation);
             if (player.pCamera.curLockOnTarget != null)
                 activeModelBomb.transform.LookAt(player.pCamera.curLockOnTarget.transform);

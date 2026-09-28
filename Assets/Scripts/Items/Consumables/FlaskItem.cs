@@ -27,7 +27,7 @@ namespace CatchMoon
 
                 GameObject flask = Instantiate(itemModel, player.pWeaponSlot.rightHandSlot.overrideParentWhileHolding);
                 player.pEffects.currentParticleFX = recoveryFX;
-                player.pEffects.instantialtedFXModel = flask;
+                player.pEffects.instantiatedFXModel = flask;
                 player.pWeaponSlot.rightHandSlot.UnloadWeapon();
             }
             else
@@ -45,8 +45,8 @@ namespace CatchMoon
                     player.pStats.AddHP(amount);
             }
             GameObject healParticles = Instantiate(player.pEffects.currentParticleFX, player.pStats.transform);
-            Destroy(player.pEffects.instantialtedFXModel.gameObject);
-            player.pEffects.instantialtedFXModel = null;
+            Destroy(player.pEffects.instantiatedFXModel.gameObject);
+            player.pEffects.instantiatedFXModel = null;
             player.pWeaponSlot.LoadWeaponsOnBothHands();
         }
     }
