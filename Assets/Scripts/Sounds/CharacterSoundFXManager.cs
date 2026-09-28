@@ -54,8 +54,10 @@ namespace CatchMoon
             AudioClip[] weapWhooshSFX;
             if (character.isUsingRightHand)
                 weapWhooshSFX = character.cInventory.rightWeapon.weaponWhooshesSound;
-            else
+            else if (character.isUsingLeftHand)
                 weapWhooshSFX = character.cInventory.leftWeapon.weaponWhooshesSound;
+            else
+                return;
 
             if (weapWhooshSFX.Length == 0) return;
             else if (weapWhooshSFX.Length == 1)
