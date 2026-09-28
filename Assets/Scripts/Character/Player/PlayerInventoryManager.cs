@@ -47,6 +47,8 @@ namespace CatchMoon
             RememberConsumable(item);
             if (consumableLeft[item] <= 0) return false;
             consumableLeft[item]--;
+            if (item == currentConsumable)
+                RefreshCurrentConsumableCount();
             return true;
         }
         public bool TrySpendAmmo(AmmoItem item)
@@ -79,6 +81,17 @@ namespace CatchMoon
                 if (item == null) continue;
                 consumableLeft[item] = item.maxItemAmount;
             }
+
+            if (currentConsumable != null)
+                RefreshCurrentConsumableCount();
+        }
+        void RefreshCurrentConsumableCount()
+        {
+            if (player == null || player.ui == null || player.ui.hud == null || player.ui.hud.quickSlotsUI == null)
+                return;
+            if (currentConsumable == null)
+                return;
+            player.ui.hud.quickSlotsUI.SetConsumableCount(ConsumableRemaining(currentConsumable));
         }
         void RememberConsumable(ConsumableItem item)
         {

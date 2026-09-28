@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace CatchMoon
         [SerializeField] Image rightWeaponIcon;
         [SerializeField] Image currentSpellIcon;
         [SerializeField] Image currentConsumableIcon;
+        [SerializeField] TextMeshProUGUI consumableCountText;
 
         private void Awake()
         {
@@ -27,6 +29,8 @@ namespace CatchMoon
                 Debug.LogError("spellSlotIcon == null");
             if (currentConsumableIcon == null)
                 Debug.LogError("consumableSlotIcon == null");
+            if (consumableCountText == null)
+                Debug.LogError("consumableCountText == null");
             #endregion
 
             UpdateCurrentSpellIcon(player.pInventory.currentSpell);
@@ -54,6 +58,19 @@ namespace CatchMoon
         {
             if (consumable == null) return;
             ShowIcon(currentConsumableIcon, consumable.itemIcon);
+            if (player != null && player.pInventory != null)
+                SetConsumableCount(player.pInventory.ConsumableRemaining(consumable));
+        }
+
+        public void SetConsumableCount(int remaining)
+        {
+            if (consumableCountText == null)
+            {
+                Debug.LogError("consumableCountText == null");
+                return;
+            }
+
+            consumableCountText.text = remaining.ToString();
         }
 
         static void ShowIcon(Image icon, Sprite sprite)
