@@ -42,7 +42,7 @@ namespace CatchMoon
                 player.pAnimator.PlayTargetAnimation("Shrug", true);
             }
         }
-        public override void SucessfullyUsedConsumable(PlayerManager player)
+        public override void SuccessfullyUsedConsumable(PlayerManager player)
         {
             Destroy(player.pEffects.instantiatedFXModel.gameObject);
             player.pEffects.instantiatedFXModel = null;

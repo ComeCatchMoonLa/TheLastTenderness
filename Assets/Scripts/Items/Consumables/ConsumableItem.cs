@@ -16,6 +16,6 @@ namespace CatchMoon
         public bool isInteracting;
 
         abstract public void AttemptToConsumableItem(PlayerManager player);
-        abstract public void SucessfullyUsedConsumable(PlayerManager player);
+        abstract public void SuccessfullyUsedConsumable(PlayerManager player);
     }
 }

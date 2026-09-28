@@ -35,7 +35,7 @@ namespace CatchMoon
                 player.pAnimator.PlayTargetAnimation("Shrug", true);
             }
         }
-        public override void SucessfullyUsedConsumable(PlayerManager player)
+        public override void SuccessfullyUsedConsumable(PlayerManager player)
         {
             if (player.pInventory.TryGetFlaskSip(flaskType, out int amount))
             {
