@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace CatchMoon
@@ -126,14 +125,11 @@ namespace CatchMoon
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
-            /// 计算最终伤害占原始伤害的比率(head承受60%伤害, torso承受30%伤害, hips承受10%伤害)
-            Func<float, float, float, float> TotalDamageRate = (headDA, torsoDA, hipsDA) =>  (1 - headDA) * 0.6f + (1 - torsoDA) * 0.3f + (1 - hipsDA) * 0.1f;
-
-            pd *= TotalDamageRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
-            fd *= TotalDamageRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA);
-            md *= TotalDamageRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA);
-            ld *= TotalDamageRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
-            dd *= TotalDamageRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
+            pd *= CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
+            fd *= CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA);
+            md *= CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA);
+            ld *= CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
+            dd *= CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
 
             float finalDamage = pd + fd + md + ld + dd;
             //Debug.Log($"最终伤害: {finalDamage:N0}.");
@@ -146,6 +142,11 @@ namespace CatchMoon
                 character.cAnimator.PlayTargetAnimation(damageAnimation, true);
 
             return true;
+        }
+
+        static float CombinedArmorRate(float head, float torso, float hips)
+        {
+            return (1f - head) * 0.6f + (1f - torso) * 0.3f + (1f - hips) * 0.1f;
         }
 
         /// <summary>

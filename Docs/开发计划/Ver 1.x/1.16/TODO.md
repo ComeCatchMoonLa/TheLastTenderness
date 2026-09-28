@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 2.4 已收尾。
-- [ ] 读过技术设计：权重只留在 `CharacterStatsManager` 的一处，五段仍各乘一次。
+- [x] 2.4 已收尾。
+- [x] 读过技术设计：权重只留在 `CharacterStatsManager` 的一处，五段仍各乘一次。
 
 **阶段门槛：** 知道不改 0.6、0.3、0.1，也不改玩家和敌人的覆盖方法。
 
 ## 1. 一处计算
 
-- [ ] `TakeDamage` 不再在方法里写 `Func`。
-- [ ] 三部位权重在私有静态方法里算完。
-- [ ] 物理、火、魔、雷、暗仍各乘一次。
+- [x] `TakeDamage` 不再在方法里写 `Func`。
+- [x] 三部位权重在私有静态方法里算完。
+- [x] 物理、火、魔、雷、暗仍各乘一次。
 
 **阶段门槛：** `PlayerStatsManager` 和 `EnemyStatsManager` 仍调用 `base.TakeDamage`。
 
 ## 2. 单元测试
 
-- [ ] `ArmorAbsorptionWeightTests` 覆盖游戏设计第 3 节的三组数字。
-- [ ] 测试传入空动画名且 `playHurtSound` 为假。不创建 Animator。
+- [x] `ArmorAbsorptionWeightTests` 覆盖游戏设计第 3 节的三组数字。
+- [x] 测试传入空动画名且 `playHurtSound` 为假。不创建 Animator。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.16 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.16 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
