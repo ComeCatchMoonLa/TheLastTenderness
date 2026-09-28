@@ -3,6 +3,20 @@ namespace CatchMoon
     public class PlayerCombatManager : CharacterCombatManager
     {
         PlayerManager player;
+        bool holdQEntered;
+
+        public static bool ShouldEnterHoldAction(bool held, ref bool alreadyEntered)
+        {
+            if (!held)
+            {
+                alreadyEntered = false;
+                return false;
+            }
+            if (alreadyEntered)
+                return false;
+            alreadyEntered = true;
+            return true;
+        }
 
         protected override void Awake()
         {
@@ -120,37 +134,34 @@ namespace CatchMoon
         }
         void Handle_Hold_Q_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)
         {
-            if (player.input.hold_q_Input)
+            if (!ShouldEnterHoldAction(player.input.hold_q_Input, ref holdQEntered))
             {
-                if (player.isTwoHandingWeapon && leftWeapon != null && leftWeapon.weaponType != WeaponType.bow)
+                if (!player.input.hold_q_Input)
                 {
-                    if (rightWeapon != null && rightWeapon.oh_hold_q_action != null)
-                    {
-                        player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
-                        player.pInventory.currentItemBeingUsed = rightWeapon;
-                        rightWeapon.oh_hold_q_action.PerformAction(player);
-                    }
+                    player.pCombat.isBlocking = false;
+                    player.pCombat.ResetBlockingAbsorption();
+                    player.ClearAimingMode();
                 }
-                else
+                return;
+            }
+
+            if (player.isTwoHandingWeapon && leftWeapon != null && leftWeapon.weaponType != WeaponType.bow)
+            {
+                if (rightWeapon != null && rightWeapon.oh_hold_q_action != null)
                 {
-                    if (leftWeapon != null && leftWeapon.oh_hold_q_action != null)
-                    {
-                        if (leftWeapon.weaponType == WeaponType.melee_OH_Shield)
-                            player.UpdateWhichHandCharacterIsUsing(usingRightHand: false);
-                        else
-                            player.UpdateWhichHandCharacterIsUsing(usingRightHand: false);
-                        
-                        player.pInventory.currentItemBeingUsed = leftWeapon;
-                        leftWeapon.oh_hold_q_action.PerformAction(player);
-                    }
+                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
+                    player.pInventory.currentItemBeingUsed = rightWeapon;
+                    rightWeapon.oh_hold_q_action.PerformAction(player);
                 }
             }
             else
             {
-                player.pCombat.isBlocking = false;
-
-                player.pCombat.ResetBlockingAbsorption();
-                player.ClearAimingMode();
+                if (leftWeapon != null && leftWeapon.oh_hold_q_action != null)
+                {
+                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: false);
+                    player.pInventory.currentItemBeingUsed = leftWeapon;
+                    leftWeapon.oh_hold_q_action.PerformAction(player);
+                }
             }
         }
         void Handle_Tap_Z_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)
