@@ -412,39 +412,33 @@ namespace CatchMoon
         }
 
         // 后处理品质
-        public void PostTreatmentQuality_SwitchOption()
+        public static string PostTreatmentQualityLabel(PostTreatmentQuality_Options option)
         {
-            switch (gameSettingsData.postTreatmentQuality_Options)
+            switch (option)
             {
-                case PostTreatmentQuality_Options.low:
-                    {
-                        gameSettingsData.postTreatmentQuality_Options = PostTreatmentQuality_Options.high;
-                        postTreatmentQuality_text.text = "高";
-                    }
-                    break;
-                case PostTreatmentQuality_Options.high:
-                    {
-                        gameSettingsData.postTreatmentQuality_Options = PostTreatmentQuality_Options.low;
-                        postTreatmentQuality_text.text = "低";
-                    }
-                    break;
+                case PostTreatmentQuality_Options.low: return "低";
+                default: return "高";
             }
         }
+
+        public static PostTreatmentQuality_Options NextPostTreatmentQuality(PostTreatmentQuality_Options option)
+        {
+            switch (option)
+            {
+                case PostTreatmentQuality_Options.low: return PostTreatmentQuality_Options.high;
+                default: return PostTreatmentQuality_Options.low;
+            }
+        }
+
+        public void PostTreatmentQuality_SwitchOption()
+        {
+            gameSettingsData.postTreatmentQuality_Options = NextPostTreatmentQuality(gameSettingsData.postTreatmentQuality_Options);
+            PostTreatmentQuality_ApplyCurrentOption();
+        }
+
         void PostTreatmentQuality_ApplyCurrentOption()
         {
-            switch (gameSettingsData.postTreatmentQuality_Options)
-            {
-                case PostTreatmentQuality_Options.low:
-                    {
-                        postTreatmentQuality_text.text = "低";
-                    }
-                    break;
-                case PostTreatmentQuality_Options.high:
-                    {
-                        postTreatmentQuality_text.text = "高";
-                    }
-                    break;
-            }
+            postTreatmentQuality_text.text = PostTreatmentQualityLabel(gameSettingsData.postTreatmentQuality_Options);
         }
 
         // 特效质量
