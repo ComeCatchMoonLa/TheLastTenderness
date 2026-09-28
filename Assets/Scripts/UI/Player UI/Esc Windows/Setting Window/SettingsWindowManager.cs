@@ -276,104 +276,67 @@ namespace CatchMoon
         }
 
         // 帧率限制
+        public static string FrameRateLimitLabel(FrameRateLimit_Options option)
+        {
+            switch (option)
+            {
+                case FrameRateLimit_Options.max60: return "60";
+                case FrameRateLimit_Options.max90: return "90";
+                case FrameRateLimit_Options.max120: return "120";
+                default: return "无限制";
+            }
+        }
+
+        public static int FrameRateLimitValue(FrameRateLimit_Options option)
+        {
+            switch (option)
+            {
+                case FrameRateLimit_Options.max60: return 60;
+                case FrameRateLimit_Options.max90: return 90;
+                case FrameRateLimit_Options.max120: return 120;
+                default: return -1;
+            }
+        }
+
+        public static FrameRateLimit_Options NextFrameRateLimit(FrameRateLimit_Options option)
+        {
+            switch (option)
+            {
+                case FrameRateLimit_Options.max60: return FrameRateLimit_Options.max90;
+                case FrameRateLimit_Options.max90: return FrameRateLimit_Options.max120;
+                case FrameRateLimit_Options.max120: return FrameRateLimit_Options.unlimited;
+                default: return FrameRateLimit_Options.max60;
+            }
+        }
+
+        public static FrameRateLimit_Options PreviousFrameRateLimit(FrameRateLimit_Options option)
+        {
+            switch (option)
+            {
+                case FrameRateLimit_Options.max60: return FrameRateLimit_Options.unlimited;
+                case FrameRateLimit_Options.max90: return FrameRateLimit_Options.max60;
+                case FrameRateLimit_Options.max120: return FrameRateLimit_Options.max90;
+                default: return FrameRateLimit_Options.max120;
+            }
+        }
+
         public void FrameRateLimit_SetNextOption()
         {
-            switch (gameSettingsData.frameRateLimit_Options)
-            {
-                case FrameRateLimit_Options.max60:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max90;
-                        frameRateLimit_Option_text.text = "90";
-                        Application.targetFrameRate = 90;
-                    }
-                    break;
-                case FrameRateLimit_Options.max90:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max120;
-                        frameRateLimit_Option_text.text = "120";
-                        Application.targetFrameRate = 120;
-                    }
-                    break;
-                case FrameRateLimit_Options.max120:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.unlimited;
-                        frameRateLimit_Option_text.text = "无限制";
-                        Application.targetFrameRate = -1;
-                    }
-                    break;
-                case FrameRateLimit_Options.unlimited:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max60;
-                        frameRateLimit_Option_text.text = "60";
-                        Application.targetFrameRate = 60;
-                    }
-                    break;
-            }
+            gameSettingsData.frameRateLimit_Options = NextFrameRateLimit(gameSettingsData.frameRateLimit_Options);
+            FrameRateLimit_ApplyCurrentOption();
         }
+
         public void FrameRateLimit_SetPreviousOption()
         {
-            switch (gameSettingsData.frameRateLimit_Options)
-            {
-                case FrameRateLimit_Options.max60:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.unlimited;
-                        frameRateLimit_Option_text.text = "无限制";
-                        Application.targetFrameRate = -1;
-                    }
-                    break;
-                case FrameRateLimit_Options.max90:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max60;
-                        frameRateLimit_Option_text.text = "60";
-                        Application.targetFrameRate = 60;
-                    }
-                    break;
-                case FrameRateLimit_Options.max120:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max90;
-                        frameRateLimit_Option_text.text = "90";
-                        Application.targetFrameRate = 90;
-                    }
-                    break;
-                case FrameRateLimit_Options.unlimited:
-                    {
-                        gameSettingsData.frameRateLimit_Options = FrameRateLimit_Options.max120;
-                        frameRateLimit_Option_text.text = "120";
-                        Application.targetFrameRate = 120;
-                    }
-                    break;
-            }
+            gameSettingsData.frameRateLimit_Options = PreviousFrameRateLimit(gameSettingsData.frameRateLimit_Options);
+            FrameRateLimit_ApplyCurrentOption();
         }
+
         void FrameRateLimit_ApplyCurrentOption()
         {
-            switch (gameSettingsData.frameRateLimit_Options)
-            {
-                
-                case FrameRateLimit_Options.max60:
-                    {
-                        frameRateLimit_Option_text.text = "60";
-                        Application.targetFrameRate = 60;
-                    }
-                    break;
-                case FrameRateLimit_Options.max90:
-                    {
-                        frameRateLimit_Option_text.text = "90";
-                        Application.targetFrameRate = 90;
-                    }
-                    break;
-                case FrameRateLimit_Options.max120:
-                    {
-                        frameRateLimit_Option_text.text = "120";
-                        Application.targetFrameRate = 120;
-                    }
-                    break;
-                case FrameRateLimit_Options.unlimited:
-                    {
-                        frameRateLimit_Option_text.text = "无限制";
-                        Application.targetFrameRate = -1;
-                    }
-                    break;
-            }
+            FrameRateLimit_Options option = gameSettingsData.frameRateLimit_Options;
+            frameRateLimit_Option_text.text = FrameRateLimitLabel(option);
+            Application.targetFrameRate = FrameRateLimitValue(option);
         }
 
         // 画质
