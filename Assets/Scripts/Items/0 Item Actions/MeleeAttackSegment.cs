@@ -2,15 +2,20 @@ using UnityEngine;
 
 namespace CatchMoon
 {
+    public struct MeleeAnimations
+    {
+        public string OneHandFirst;
+        public string OneHandSecond;
+        public string TwoHandFirst;
+        public string TwoHandSecond;
+    }
+
     public static class MeleeAttackSegment
     {
         public static void Play(
             CharacterManager character,
             bool combo,
-            string oneHandFirst,
-            string oneHandSecond,
-            string twoHandFirst,
-            string twoHandSecond,
+            MeleeAnimations animations,
             AttackType firstType,
             AttackType secondType)
         {
@@ -21,21 +26,49 @@ namespace CatchMoon
                 return;
             }
 
-            string first = oneHandFirst;
-            string second = oneHandSecond;
-            bool mirror = character.isUsingLeftHand;
-            if (character.isUsingRightHand && character.isTwoHandingWeapon)
+            Select(
+                character.isUsingRightHand,
+                character.isUsingLeftHand,
+                character.isTwoHandingWeapon,
+                combo,
+                character.cAnimator.lastAttack,
+                animations,
+                firstType,
+                secondType,
+                out string anim,
+                out bool mirror,
+                out AttackType attackType);
+            character.cAnimator.PlayTargetAnimation(anim, true, new AnimationOptions { Mirror = mirror });
+            character.cAnimator.lastAttack = anim;
+            character.cCombat.attackType = attackType;
+        }
+
+        public static void Select(
+            bool usingRightHand,
+            bool usingLeftHand,
+            bool twoHanding,
+            bool combo,
+            string lastAttack,
+            MeleeAnimations animations,
+            AttackType firstType,
+            AttackType secondType,
+            out string anim,
+            out bool mirror,
+            out AttackType attackType)
+        {
+            string first = animations.OneHandFirst;
+            string second = animations.OneHandSecond;
+            mirror = usingLeftHand;
+            if (usingRightHand && twoHanding)
             {
-                first = twoHandFirst;
-                second = twoHandSecond;
+                first = animations.TwoHandFirst;
+                second = animations.TwoHandSecond;
                 mirror = false;
             }
 
-            bool playSecond = combo && character.cAnimator.lastAttack == first;
-            string anim = playSecond ? second : first;
-            character.cAnimator.PlayTargetAnimation(anim, true, new AnimationOptions { Mirror = mirror });
-            character.cAnimator.lastAttack = anim;
-            character.cCombat.attackType = playSecond ? secondType : firstType;
+            bool playSecond = combo && lastAttack == first;
+            anim = playSecond ? second : first;
+            attackType = playSecond ? secondType : firstType;
         }
     }
 }

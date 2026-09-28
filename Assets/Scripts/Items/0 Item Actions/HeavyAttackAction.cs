@@ -28,10 +28,13 @@ namespace CatchMoon
             MeleeAttackSegment.Play(
                 character,
                 combo,
-                character.cAnimator.ohHeavyAttack1,
-                character.cAnimator.ohHeavyAttack2,
-                character.cAnimator.thHeavyAttack1,
-                character.cAnimator.thHeavyAttack2,
+                new MeleeAnimations
+                {
+                    OneHandFirst = character.cAnimator.ohHeavyAttack1,
+                    OneHandSecond = character.cAnimator.ohHeavyAttack2,
+                    TwoHandFirst = character.cAnimator.thHeavyAttack1,
+                    TwoHandSecond = character.cAnimator.thHeavyAttack2
+                },
                 AttackType.heavy_1,
                 AttackType.heavy_2);
         }

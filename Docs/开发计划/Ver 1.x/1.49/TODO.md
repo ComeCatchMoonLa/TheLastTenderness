@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.48 已收尾。
-- [ ] 读过技术设计：只收四段动画名。两段 `AttackType` 仍单独传。
+- [x] 1.48 已收尾。
+- [x] 读过技术设计：只收四段动画名。两段 `AttackType` 仍单独传。
 
 **阶段门槛：** 知道左手镜像，右手双手不镜像。连击只在 `lastAttack` 等于第一段名时进第二段。
 
 ## 1. 收成一组
 
-- [ ] 加上 `MeleeAnimations` 和 `Select`，`Play` 改读这一组。
-- [ ] 轻击和重击的调用改成传入这一组。
+- [x] 加上 `MeleeAnimations` 和 `Select`，`Play` 改读这一组。
+- [x] 轻击和重击的调用改成传入这一组。
 
 **阶段门槛：** 双手都空时仍不播动画。`PlayTargetAnimation` 的签名不改。
 
 ## 2. 单元测试
 
-- [ ] `MeleeAttackSegmentTests` 断言技术设计第 3 节的五条。
-- [ ] 测试不创建角色，不调用 `PlayTargetAnimation`。
+- [x] `MeleeAttackSegmentTests` 断言技术设计第 3 节的五条。
+- [x] 测试不创建角色，不调用 `PlayTargetAnimation`。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
-- [ ] 大纲里的 1.49 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
+- [x] 大纲里的 1.49 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。
