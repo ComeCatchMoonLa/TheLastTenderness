@@ -56,7 +56,16 @@ namespace CatchMoon
 
         public void SelectThisSlot()
         {
-            player.ui.tapWin.GetEquipmentWin().SelectCurrentSlot(slotType);
+            EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
+            equipmentWin.SelectCurrentSlot(slotType);
+            if (EquipmentWinManager.TryHandIndex(slotType, out bool isLeft, out int index)
+                && player.pInventory.SelectHandWeapon(isLeft, index)
+                && player.pWeaponSlot != null)
+            {
+                WeaponItem weapon = isLeft ? player.pInventory.leftWeapon : player.pInventory.rightWeapon;
+                if (weapon != null)
+                    player.pWeaponSlot.LoadWeaponOnSlot(weapon, isLeft);
+            }
             player.ui.tapWin.GetItemStatsWin().UpdateEquipmentItemStats(equipment);
         }
     }

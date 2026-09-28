@@ -281,6 +281,24 @@ namespace CatchMoon
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
         }
+        public bool SelectHandWeapon(bool isLeft, int index)
+        {
+            WeaponItem[] hand = isLeft ? weaponsInLeftHandSlot : weaponsInRightHandSlot;
+            if (hand == null || index < 0 || index >= hand.Length)
+                return false;
+            if (isLeft)
+            {
+                currentLeftWeaponIdx = index;
+                leftWeapon = hand[index];
+            }
+            else
+            {
+                currentRightWeaponIdx = index;
+                rightWeapon = hand[index];
+            }
+            return true;
+        }
+
         void ChangeRightWeapon()
         {
             if (player.isInteracting) return;

@@ -56,6 +56,10 @@ namespace CatchMoon
         armor_Head_Slot,
         armor_Toros_Slot,
         armor_Hips_Slot,
+        weapon_RH_Slot_3,
+        weapon_RH_Slot_4,
+        weapon_LH_Slot_3,
+        weapon_LH_Slot_4,
     }
     public enum AttackType
     {

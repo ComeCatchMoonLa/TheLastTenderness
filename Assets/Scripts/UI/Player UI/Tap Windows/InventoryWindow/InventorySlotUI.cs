@@ -98,35 +98,24 @@ namespace CatchMoon
             PlayerInventoryManager pInventory = player.pInventory;
             EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
             EquipmentSlotType selectedSlotType = player.ui.tapWin.GetEquipmentWin().selectedSlotType;
-            bool placed = true;
-            // 移除当前装备的物品
-            if (selectedSlotType == EquipmentSlotType.weapon_RH_Slot_1)
+            bool placed = false;
+            if (EquipmentWinManager.TryHandIndex(selectedSlotType, out bool isLeft, out int index))
             {
-                pInventory.AddItem(pInventory.weaponsInRightHandSlot[0]);
-                pInventory.weaponsInRightHandSlot[0] = weapon;
-                equipmentWin.GetRightHandSlot_1().AddItem(pInventory.weaponsInRightHandSlot[0]);
-            }
-            else if (selectedSlotType == EquipmentSlotType.weapon_RH_Slot_2)
-            {
-                pInventory.AddItem(pInventory.weaponsInRightHandSlot[1]);
-                pInventory.weaponsInRightHandSlot[1] = weapon;
-                equipmentWin.GetRightHandSlot_2().AddItem(pInventory.weaponsInRightHandSlot[1]);
-            }
-            else if (selectedSlotType == EquipmentSlotType.weapon_LH_Slot_1)
-            {
-                pInventory.AddItem(pInventory.weaponsInLeftHandSlot[0]);
-                pInventory.weaponsInLeftHandSlot[0] = weapon;
-                equipmentWin.GetLeftHandSlot_1().AddItem(pInventory.weaponsInLeftHandSlot[0]);
-            }
-            else if (selectedSlotType == EquipmentSlotType.weapon_LH_Slot_2)
-            {
-                pInventory.AddItem(pInventory.weaponsInLeftHandSlot[1]);
-                pInventory.weaponsInLeftHandSlot[1] = weapon;
-                equipmentWin.GetLeftHandSlot_2().AddItem(pInventory.weaponsInLeftHandSlot[1]);
-            }
-            else
-            {
-                placed = false;
+                WeaponItem[] hand = isLeft ? pInventory.weaponsInLeftHandSlot : pInventory.weaponsInRightHandSlot;
+                if (hand != null && index >= 0 && index < hand.Length)
+                {
+                    if (hand[index] != null)
+                        pInventory.AddItem(hand[index]);
+                    hand[index] = weapon;
+                    if (isLeft)
+                        pInventory.currentLeftWeaponIdx = index;
+                    else
+                        pInventory.currentRightWeaponIdx = index;
+                    EquipmentSlotUI slot = equipmentWin.FindHandSlot(selectedSlotType);
+                    if (slot != null)
+                        slot.AddItem(weapon);
+                    placed = true;
+                }
             }
 
             if (!placed)
