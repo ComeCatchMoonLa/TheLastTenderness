@@ -10,6 +10,8 @@ namespace CatchMoon
 
         WorldManager world;
 
+        PlayerManager player;
+
         [Header("Souls Awarde Death")]
         public int soulsAwardedDeath = 50; // 死亡后生成的灵魂数量
 
@@ -26,6 +28,7 @@ namespace CatchMoon
             bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
 
             world = FindAnyObjectByType<WorldManager>();
+            player = FindAnyObjectByType<PlayerManager>();
 
             #region 检错
             if (enemy.aiSettings.isBoss)
@@ -80,7 +83,6 @@ namespace CatchMoon
 
         public void HandleEnemyDeathEvent()
         {
-            PlayerManager player = FindAnyObjectByType<PlayerManager>();
             if (player == null)
             {
                 Debug.LogError("player is null.");
