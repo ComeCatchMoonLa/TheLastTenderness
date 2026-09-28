@@ -36,48 +36,34 @@ namespace CatchMoon
         public virtual void SetBlockingAbsorptionFromBlockingWeapon()
         {
             if (character.isUsingRightHand)
-            {
-                character.cStats.blockingPDA = character.cInventory.rightWeapon.physicalDA;
-                character.cStats.blockingFDA = character.cInventory.rightWeapon.fireDA;
-                character.cStats.blockingMDA = character.cInventory.rightWeapon.magicDA;
-                character.cStats.blockingLDA = character.cInventory.rightWeapon.lightningDA;
-                character.cStats.blockingDDA = character.cInventory.rightWeapon.darkDA;
-
-                character.cStats.blockingStabilityRating = character.cInventory.rightWeapon.blockingStabilityRating;
-            }
+                CopyBlockingAbsorption(character.cStats, character.cInventory.rightWeapon);
             else if (character.isUsingLeftHand)
-            {
-                character.cStats.blockingPDA = character.cInventory.leftWeapon.physicalDA;
-                character.cStats.blockingFDA = character.cInventory.leftWeapon.fireDA;
-                character.cStats.blockingMDA = character.cInventory.leftWeapon.magicDA;
-                character.cStats.blockingLDA = character.cInventory.leftWeapon.lightningDA;
-                character.cStats.blockingDDA = character.cInventory.leftWeapon.darkDA;
-
-                character.cStats.blockingStabilityRating = character.cInventory.leftWeapon.blockingStabilityRating;
-            }
+                CopyBlockingAbsorption(character.cStats, character.cInventory.leftWeapon);
         }
         public virtual void ResetBlockingAbsorption()
         {
             if (character.isUsingRightHand)
-            {
-                character.cStats.blockingPDA = 0;
-                character.cStats.blockingFDA = 0;
-                character.cStats.blockingMDA = 0;
-                character.cStats.blockingLDA = 0;
-                character.cStats.blockingDDA = 0;
-
-                character.cStats.blockingStabilityRating = 0;
-            }
+                ClearBlockingAbsorption(character.cStats);
             else if (character.isUsingLeftHand)
-            {
-                character.cStats.blockingPDA = 0;
-                character.cStats.blockingFDA = 0;
-                character.cStats.blockingMDA = 0;
-                character.cStats.blockingLDA = 0;
-                character.cStats.blockingDDA = 0;
-
-                character.cStats.blockingStabilityRating = 0;
-            }
+                ClearBlockingAbsorption(character.cStats);
+        }
+        public static void CopyBlockingAbsorption(CharacterStatsManager stats, WeaponItem weapon)
+        {
+            stats.blockingPDA = weapon.physicalDA;
+            stats.blockingFDA = weapon.fireDA;
+            stats.blockingMDA = weapon.magicDA;
+            stats.blockingLDA = weapon.lightningDA;
+            stats.blockingDDA = weapon.darkDA;
+            stats.blockingStabilityRating = weapon.blockingStabilityRating;
+        }
+        public static void ClearBlockingAbsorption(CharacterStatsManager stats)
+        {
+            stats.blockingPDA = 0;
+            stats.blockingFDA = 0;
+            stats.blockingMDA = 0;
+            stats.blockingLDA = 0;
+            stats.blockingDDA = 0;
+            stats.blockingStabilityRating = 0;
         }
 
         float BlockingWeaponStability()
