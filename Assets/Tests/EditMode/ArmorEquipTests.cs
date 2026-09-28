@@ -81,9 +81,9 @@ namespace CatchMoon.Tests
                 torsoNaked = new GameObject("naked-torso");
                 headHelm = new GameObject("helm");
                 var hipsNaked = new GameObject("naked-hips");
-                var head = Changer(headHelm);
-                var torso = Changer(torsoPlate, torsoNaked);
-                var hips = Changer(hipsNaked);
+                var head = Changer<HeadModelChanger>(headHelm);
+                var torso = Changer<TorsoModelChanger>(torsoPlate, torsoNaked);
+                var hips = Changer<HipModelChanger>(hipsNaked);
 
                 var player = root.AddComponent<PlayerManager>();
                 var playerStats = root.AddComponent<PlayerStatsManager>();
@@ -106,13 +106,13 @@ namespace CatchMoon.Tests
                 Object.DestroyImmediate(root);
             }
 
-            ModelChanger Changer(params GameObject[] models)
+            T Changer<T>(params GameObject[] models) where T : ModelChanger
             {
                 var go = new GameObject("changer");
                 go.transform.SetParent(root.transform);
                 foreach (GameObject model in models)
                     model.transform.SetParent(go.transform);
-                var changer = go.AddComponent<ModelChanger>();
+                var changer = go.AddComponent<T>();
                 changer.models = new List<GameObject>(models);
                 return changer;
             }
