@@ -5,7 +5,7 @@ namespace CatchMoon
 {
     public class ModelChanger : MonoBehaviour
     {
-        public List<GameObject> models;
+        public List<GameObject> models = new List<GameObject>();
 
         private void Awake()
         {

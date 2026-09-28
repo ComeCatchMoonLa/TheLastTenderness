@@ -77,20 +77,24 @@ namespace CatchMoon.Tests
             public ArmorRig()
             {
                 root = new GameObject("armor-rig");
-                var player = root.AddComponent<PlayerManager>();
-                stats = root.AddComponent<CharacterStatsManager>();
-                player.pStats = stats;
-                armor = root.AddComponent<PlayerArmorManager>();
-
                 torsoPlate = new GameObject("plate");
                 torsoNaked = new GameObject("naked-torso");
                 headHelm = new GameObject("helm");
                 var hipsNaked = new GameObject("naked-hips");
+                var head = Changer(headHelm);
+                var torso = Changer(torsoPlate, torsoNaked);
+                var hips = Changer(hipsNaked);
+
+                var player = root.AddComponent<PlayerManager>();
+                var playerStats = root.AddComponent<PlayerStatsManager>();
+                stats = playerStats;
+                player.pStats = playerStats;
+                armor = root.AddComponent<PlayerArmorManager>();
 
                 Set(armor, "player", player);
-                Set(armor, "headModelChanger", Changer(headHelm));
-                Set(armor, "torsoModelChanger", Changer(torsoPlate, torsoNaked));
-                Set(armor, "hipModelChanger", Changer(hipsNaked));
+                Set(armor, "headModelChanger", head);
+                Set(armor, "torsoModelChanger", torso);
+                Set(armor, "hipModelChanger", hips);
                 Set(armor, "nakedTorsoModelName", "naked-torso");
                 Set(armor, "nakedHipsModelName", "naked-hips");
             }
