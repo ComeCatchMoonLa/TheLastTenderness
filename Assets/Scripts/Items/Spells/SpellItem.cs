@@ -15,6 +15,10 @@ namespace CatchMoon
         [Header("Spell Type")]
         public SpellType spellType;
 
+        [Header("Attribute Requirement")]
+        public int requiredIntelligence;
+        public int requiredFaith;
+
         [Header("Spell Description")]
         [TextArea] public string spellDescription;
 

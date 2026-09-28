@@ -11,13 +11,28 @@ namespace CatchMoon
         {
             if (character.isInteracting) return;
 
-            if (character.cInventory.currentSpell != null && character.cInventory.currentSpell.spellType == spellType)
+            SpellItem spell = character.cInventory.currentSpell;
+            if (spell != null && spell.spellType == spellType)
             {
-                if (character.cStats.currentMP >= character.cInventory.currentSpell.focusPointCost)
-                    character.cInventory.currentSpell.AttemptToCastSpell(character);
+                if (!AttributesAllowCast(spell, character.cStats.intelligenceLevel, character.cStats.faithLevel))
+                {
+                    character.cAnimator.PlayTargetAnimation("Shrug", true);
+                    return;
+                }
+
+                if (character.cStats.currentMP >= spell.focusPointCost)
+                    spell.AttemptToCastSpell(character);
                 else
                     character.cAnimator.PlayTargetAnimation("Shrug", true);
             }
+        }
+
+        public static bool AttributesAllowCast(SpellItem spell, int intelligence, int faith)
+        {
+            if (spell == null) return false;
+            if (spell.requiredIntelligence > 0 && intelligence < spell.requiredIntelligence) return false;
+            if (spell.requiredFaith > 0 && faith < spell.requiredFaith) return false;
+            return true;
         }
     }
 }

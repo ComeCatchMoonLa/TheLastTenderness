@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 0.36 已收尾。
-- [ ] 读过技术设计：门槛在法术资产上，0 表示不看这项。
+- [x] 0.36 已收尾。
+- [x] 读过技术设计：门槛在法术资产上，0 表示不看这项。
 
 **阶段门槛：** 知道不改学派判断，不改扣蓝。
 
 ## 1. 门槛
 
-- [ ] `SpellItem` 增加 `requiredIntelligence` 和 `requiredFaith`，初值 0。
-- [ ] `AttributesAllowCast` 按技术设计返回。
-- [ ] `PerformSpellAction` 在看蓝之前调用它。不够时耸肩并返回。
+- [x] `SpellItem` 增加 `requiredIntelligence` 和 `requiredFaith`，初值 0。
+- [x] `AttributesAllowCast` 按技术设计返回。
+- [x] `PerformSpellAction` 在看蓝之前调用它。不够时耸肩并返回。
 
 **阶段门槛：** 蓝不够的耸肩和蓝够时的施放仍在属性通过之后。
 
 ## 2. 单元测试
 
-- [ ] `SpellAttributeGateTests` 覆盖智力不够、信仰不够、两项都是 0。
-- [ ] 测试不创建 Animator，不调用 `PerformSpellAction`。
+- [x] `SpellAttributeGateTests` 覆盖智力不够、信仰不够、两项都是 0。
+- [x] 测试不创建 Animator，不调用 `PerformSpellAction`。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 2.9 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 2.9 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
