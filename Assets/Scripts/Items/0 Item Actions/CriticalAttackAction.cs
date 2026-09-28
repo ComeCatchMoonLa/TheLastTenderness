@@ -51,9 +51,9 @@ namespace CatchMoon
 
         void AttempBackStab(CharacterManager character, CharacterManager attackTarget)
         {
-            if (character.isPerformingBackSttbbed || attackTarget.isBeingBackStabbed) return;
+            if (character.isPerformingBackStabbed || attackTarget.isBeingBackStabbed) return;
 
-            character.isPerformingBackSttbbed = true;
+            character.isPerformingBackStabbed = true;
             character.cStats.isInvulnerable = true;
             character.cAnimator.PlayTargetAnimation("Back Stab", true, false, true);
 

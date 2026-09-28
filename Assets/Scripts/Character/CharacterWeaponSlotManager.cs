@@ -140,7 +140,7 @@ namespace CatchMoon
                 return;
 
             backSlot.currentWeapon = moving;
-            leftHandSlot.currentWeapon = character.cInventory.unaremd;
+            leftHandSlot.currentWeapon = character.cInventory.unarmed;
             leftHandSlot.UnloadWeaponAndDestroy();
             character.animator.Play("Left Arm Empty");
         }

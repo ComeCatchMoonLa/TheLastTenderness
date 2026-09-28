@@ -29,7 +29,7 @@ namespace CatchMoon
         public int currentComsumableIdx = 0;
 
         [Header("默认武器")]
-        public WeaponItem unaremd;
+        public WeaponItem unarmed;
 
         protected virtual void Awake()
         {

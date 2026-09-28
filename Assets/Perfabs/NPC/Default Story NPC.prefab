@@ -18173,7 +18173,7 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isBeingBackStabbed: 0
   isBeingRiposted: 0
-  isPerformingBackSttbbed: 0
+  isPerformingBackStabbed: 0
   isPerformingRiposted: 0
   canRotate: 0
   isInAir: 0
@@ -18296,7 +18296,7 @@ MonoBehaviour:
   currentRightWeaponIdx: 0
   currentSpellIdx: 0
   currentComsumableIdx: 0
-  unaremd: {fileID: 0}
+  unarmed: {fileID: 0}
 --- !u!114 &2259920249061459165
 MonoBehaviour:
   m_ObjectHideFlags: 0

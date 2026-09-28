@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e84c53a7f656e459ba4b7b33298969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noramalWeaponTrial: {fileID: 347222509994406306}
+  normalWeaponTrail: {fileID: 347222509994406306}
 --- !u!1001 &7022968259378934342
 PrefabInstance:
   m_ObjectHideFlags: 0

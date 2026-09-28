@@ -7505,7 +7505,7 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isBeingBackStabbed: 0
   isBeingRiposted: 0
-  isPerformingBackSttbbed: 0
+  isPerformingBackStabbed: 0
   isPerformingRiposted: 0
   canRotate: 0
   isInAir: 0
@@ -7695,7 +7695,7 @@ MonoBehaviour:
   currentRightWeaponIdx: 0
   currentSpellIdx: 0
   currentComsumableIdx: 0
-  unaremd: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}
+  unarmed: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}
   items:
   - {fileID: 11400000, guid: c29ed8fd9b302ec4688ae3b28318a084, type: 2}
   - {fileID: 11400000, guid: 1824fb4fc0b76764f8bc6d5dff0626eb, type: 2}

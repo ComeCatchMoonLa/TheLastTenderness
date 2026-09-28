@@ -5,17 +5,17 @@ namespace CatchMoon
     public class WeaponFX : MonoBehaviour
     {
         [Header("Weapon FX")]
-        public ParticleSystem noramalWeaponTrial;
+        public ParticleSystem normalWeaponTrail;
 
         public void PlayWeaponTrialFX()
         {
-            noramalWeaponTrial.Play(); // 应该在攻击动画结束时, 执行Stop()
+            normalWeaponTrail.Play(); // 应该在攻击动画结束时, 执行Stop()
         }
 
         public void StopWeaponTrialFX()
         {
-            noramalWeaponTrial.Stop();
-            noramalWeaponTrial.Clear();
+            normalWeaponTrail.Stop();
+            normalWeaponTrail.Clear();
         }
     }
 }

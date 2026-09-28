@@ -26,7 +26,7 @@ public class HandleEmptyState : StateMachineBehaviour
         character.cCombat.isAttacking = false;
         character.isBeingBackStabbed = false;
         character.isBeingRiposted = false;
-        character.isPerformingBackSttbbed = false;
+        character.isPerformingBackStabbed = false;
         character.isPerformingRiposted = false;
         character.canBeParried = false;
 

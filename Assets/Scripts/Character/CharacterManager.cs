@@ -35,7 +35,7 @@ namespace CatchMoon
       
         public bool isBeingBackStabbed;         // 正在被背刺
         public bool isBeingRiposted;            // 正在被反击
-        public bool isPerformingBackSttbbed;    // 正在背刺
+        public bool isPerformingBackStabbed;    // 正在背刺
         public bool isPerformingRiposted;       // 正在反击
 
         [Header("移动 Flags")]
