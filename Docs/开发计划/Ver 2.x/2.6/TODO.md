@@ -4,30 +4,30 @@
 
 ## 0. 开始前
 
-- [ ] 2.5 已收尾。
-- [ ] 读过技术设计：格数只由 `MemorySlotCount` 按门槛返回。
+- [x] 2.5 已收尾。
+- [x] 读过技术设计：格数只由 `MemorySlotCount` 按门槛返回。
 
 **阶段门槛：** 知道不改 `maxMP = focusLevel * 10`，不改 `spells`。
 
 ## 1. 格数
 
-- [ ] `MemorySlotCount` 按技术设计的表返回。
-- [ ] 方法不写 `maxMP`。
-- [ ] `SetMaxFocusPointsFromFocusLevel` 仍是等级乘 10。
+- [x] `MemorySlotCount` 按技术设计的表返回。
+- [x] 方法不写 `maxMP`。
+- [x] `SetMaxFocusPointsFromFocusLevel` 仍是等级乘 10。
 
 **阶段门槛：** 没有第二个地方再算一遍格数。
 
 ## 2. 单元测试
 
-- [ ] `MemorySlotCountTests` 对 9、10、13、14、80、98、99 断言 0、1、1、2、9、9、10。
-- [ ] 集中力 14 时 `maxMP` 为 140。
-- [ ] 测试不创建界面。
+- [x] `MemorySlotCountTests` 对 9、10、13、14、80、98、99 断言 0、1、1、2、9、9、10。
+- [x] 集中力 14 时 `maxMP` 为 140。
+- [x] 测试不创建界面。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 2.6 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 2.6 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

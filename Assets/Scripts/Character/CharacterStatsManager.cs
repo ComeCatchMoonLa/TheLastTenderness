@@ -115,6 +115,20 @@ namespace CatchMoon
             maxMP = focusLevel * 10;
             return maxMP;
         }
+        public static int MemorySlotCount(int focusLevel)
+        {
+            if (focusLevel >= 99) return 10;
+            if (focusLevel >= 80) return 9;
+            if (focusLevel >= 60) return 8;
+            if (focusLevel >= 50) return 7;
+            if (focusLevel >= 40) return 6;
+            if (focusLevel >= 30) return 5;
+            if (focusLevel >= 24) return 4;
+            if (focusLevel >= 18) return 3;
+            if (focusLevel >= 14) return 2;
+            if (focusLevel >= 10) return 1;
+            return 0;
+        }
 
         /// <summary>
         /// 受伤
