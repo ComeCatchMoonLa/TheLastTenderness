@@ -1,6 +1,6 @@
 # Ver 0.x：先把旧工程的债清掉
 
-> **这一大版本不开发玩法。** 0.1–0.33 已完成。0.34 的施工文档已写，代码还没核对。1.0–1.14 已完成，见 [`../Ver 1.x/README.md`](../Ver%201.x/README.md)。2.x 见 [`../Ver 2.x/README.md`](../Ver%202.x/README.md)。
+> **这一大版本不开发玩法。** 0.1–0.34 已完成。1.0–1.14 已完成，见 [`../Ver 1.x/README.md`](../Ver%201.x/README.md)。2.x 见 [`../Ver 2.x/README.md`](../Ver%202.x/README.md)。
 >
 > 前排仍是 AI 改文件、人工验收。要在 Unity 里改场景、或必须先点名路径才能删磁盘的，靠后。耦合按现有入口拆开，不另起一套框架。
 >
@@ -281,8 +281,8 @@ Build Settings 只登记 `Game`。要激活的玩家是名为 Player 的物体�
 
 ### 0.34 血瓶次数在这名玩家身上
 
-文档：[`0.34/游戏设计.md`](0.34/游戏设计.md) / [`0.34/技术设计.md`](0.34/技术设计.md) / [`0.34/TODO.md`](0.34/TODO.md)。
+文档：[`0.34/游戏设计.md`](0.34/游戏设计.md) / [`0.34/技术设计.md`](0.34/技术设计.md) / [`0.34/TODO.md`](0.34/TODO.md)。已完成。
 
-剩余次数只在 `consumableLeft`，从 `maxItemAmount` 记起。不读不写 `currentItemAmount`。不写单元测试。大约 2 小时。
+剩余次数只在 `consumableLeft`，从 `maxItemAmount` 记起。不读不写 `currentItemAmount`。脚本不改。不写单元测试。大约 2 小时。
 
 

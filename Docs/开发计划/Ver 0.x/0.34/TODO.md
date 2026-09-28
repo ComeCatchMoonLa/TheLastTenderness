@@ -4,28 +4,28 @@
 
 ## 0. 开始前
 
-- [ ] 0.33 已完成。
-- [ ] 读过技术设计：次数在 `consumableLeft`，不读不写 `currentItemAmount`。
+- [x] 0.33 已完成。
+- [x] 读过技术设计：次数在 `consumableLeft`，不读不写 `currentItemAmount`。
 
 **阶段门槛：** 知道不把资产上的 82 接进运行时。
 
 ## 1. 核对写入点
 
-- [ ] `Assets/Scripts` 里 `currentItemAmount` 只有字段声明。
-- [ ] `TrySpendConsumable` 仍只改 `consumableLeft`，起点仍是 `maxItemAmount`。
-- [ ] 没有别的写入时，不改脚本。
+- [x] `Assets/Scripts` 里 `currentItemAmount` 只有字段声明。
+- [x] `TrySpendConsumable` 仍只改 `consumableLeft`，起点仍是 `maxItemAmount`。
+- [x] 没有别的写入时，不改脚本。
 
 **阶段门槛：** 不新增第二套次数字段。
 
 ## 2. 单元测试
 
-- [ ] 不写。0.x 不补用例。
+- [x] 不写。0.x 不补用例。
 
 **阶段门槛：** 喝药和再进播放靠人看。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 0.34 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 0.34 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
