@@ -2,7 +2,8 @@
     "name": "CatchMoon.Tests",
     "rootNamespace": "CatchMoon.Tests",
     "references": [
-        "CatchMoon"
+        "CatchMoon",
+        "Unity.TextMeshPro"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

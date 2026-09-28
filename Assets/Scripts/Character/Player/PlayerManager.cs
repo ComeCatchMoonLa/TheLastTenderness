@@ -93,12 +93,7 @@ namespace CatchMoon
             ui.popUps.HandleCloseViewInfoWindow();
 
             if (!ui.escWin.GetSettingWin().gameSettingsData.auto)
-            {
-                if (ui.escWin.GetSettingWin().gameSettingsData.wordForWord)
-                    ui.popUps.talkUI.Handle_UpdateDialogue_NonAuto_WFW(storyNpc);
-                else
-                    ui.popUps.talkUI.Handle_UpdateDialogue_NonAuto_SBS(storyNpc);
-            }
+                ui.popUps.talkUI.AdvanceDialogue(storyNpc, false);
 
             if (ui.escWin.GetSettingWin().gameSettingsData.skip)
                 ui.popUps.talkUI.Handle_SkipTalk_Input(storyNpc);
