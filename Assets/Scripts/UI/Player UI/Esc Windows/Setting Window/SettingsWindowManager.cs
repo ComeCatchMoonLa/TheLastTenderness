@@ -442,39 +442,33 @@ namespace CatchMoon
         }
 
         // 特效质量
-        public void SpecialEffectQuality_SwitchOption()
+        public static string SpecialEffectQualityLabel(SpecialEffectQuality_Options option)
         {
-            switch (gameSettingsData.specialEffectQuality_Options)
+            switch (option)
             {
-                case SpecialEffectQuality_Options.low:
-                    {
-                        gameSettingsData.specialEffectQuality_Options = SpecialEffectQuality_Options.high;
-                        specialEffectQuality_text.text = "高";
-                    }
-                    break;
-                case SpecialEffectQuality_Options.high:
-                    {
-                        gameSettingsData.specialEffectQuality_Options = SpecialEffectQuality_Options.low;
-                        specialEffectQuality_text.text = "低";
-                    }
-                    break;
+                case SpecialEffectQuality_Options.low: return "低";
+                default: return "高";
             }
         }
+
+        public static SpecialEffectQuality_Options NextSpecialEffectQuality(SpecialEffectQuality_Options option)
+        {
+            switch (option)
+            {
+                case SpecialEffectQuality_Options.low: return SpecialEffectQuality_Options.high;
+                default: return SpecialEffectQuality_Options.low;
+            }
+        }
+
+        public void SpecialEffectQuality_SwitchOption()
+        {
+            gameSettingsData.specialEffectQuality_Options = NextSpecialEffectQuality(gameSettingsData.specialEffectQuality_Options);
+            SpecialEffectQuality_ApplyCurrentOption();
+        }
+
         void SpecialEffectQuality_ApplyCurrentOption()
         {
-            switch (gameSettingsData.specialEffectQuality_Options)
-            {
-                case SpecialEffectQuality_Options.low:
-                    {
-                        specialEffectQuality_text.text = "低";
-                    }
-                    break;
-                case SpecialEffectQuality_Options.high:
-                    {
-                        specialEffectQuality_text.text = "高";
-                    }
-                    break;
-            }
+            specialEffectQuality_text.text = SpecialEffectQualityLabel(gameSettingsData.specialEffectQuality_Options);
         }
         
         /// [未完成] 亮度调节(准确来说是伽马值)
