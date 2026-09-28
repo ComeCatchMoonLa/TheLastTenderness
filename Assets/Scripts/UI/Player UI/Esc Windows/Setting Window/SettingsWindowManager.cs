@@ -276,199 +276,64 @@ namespace CatchMoon
         }
 
         // 帧率限制
-        public static string FrameRateLimitLabel(FrameRateLimit_Options option)
-        {
-            switch (option)
-            {
-                case FrameRateLimit_Options.max60: return "60";
-                case FrameRateLimit_Options.max90: return "90";
-                case FrameRateLimit_Options.max120: return "120";
-                default: return "无限制";
-            }
-        }
-
-        public static int FrameRateLimitValue(FrameRateLimit_Options option)
-        {
-            switch (option)
-            {
-                case FrameRateLimit_Options.max60: return 60;
-                case FrameRateLimit_Options.max90: return 90;
-                case FrameRateLimit_Options.max120: return 120;
-                default: return -1;
-            }
-        }
-
-        public static FrameRateLimit_Options NextFrameRateLimit(FrameRateLimit_Options option)
-        {
-            switch (option)
-            {
-                case FrameRateLimit_Options.max60: return FrameRateLimit_Options.max90;
-                case FrameRateLimit_Options.max90: return FrameRateLimit_Options.max120;
-                case FrameRateLimit_Options.max120: return FrameRateLimit_Options.unlimited;
-                default: return FrameRateLimit_Options.max60;
-            }
-        }
-
-        public static FrameRateLimit_Options PreviousFrameRateLimit(FrameRateLimit_Options option)
-        {
-            switch (option)
-            {
-                case FrameRateLimit_Options.max60: return FrameRateLimit_Options.unlimited;
-                case FrameRateLimit_Options.max90: return FrameRateLimit_Options.max60;
-                case FrameRateLimit_Options.max120: return FrameRateLimit_Options.max90;
-                default: return FrameRateLimit_Options.max120;
-            }
-        }
-
         public void FrameRateLimit_SetNextOption()
         {
-            gameSettingsData.frameRateLimit_Options = NextFrameRateLimit(gameSettingsData.frameRateLimit_Options);
+            gameSettingsData.frameRateLimit_Options = FrameRateLimitTable.Next(gameSettingsData.frameRateLimit_Options);
             FrameRateLimit_ApplyCurrentOption();
         }
 
         public void FrameRateLimit_SetPreviousOption()
         {
-            gameSettingsData.frameRateLimit_Options = PreviousFrameRateLimit(gameSettingsData.frameRateLimit_Options);
+            gameSettingsData.frameRateLimit_Options = FrameRateLimitTable.Previous(gameSettingsData.frameRateLimit_Options);
             FrameRateLimit_ApplyCurrentOption();
         }
 
         void FrameRateLimit_ApplyCurrentOption()
         {
             FrameRateLimit_Options option = gameSettingsData.frameRateLimit_Options;
-            frameRateLimit_Option_text.text = FrameRateLimitLabel(option);
-            Application.targetFrameRate = FrameRateLimitValue(option);
-        }
-
-        // 画质
-        public static string DisplayQualityLabel(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return "非常低";
-                case DisplayQuality_Options.low: return "低";
-                case DisplayQuality_Options.medium: return "中等";
-                case DisplayQuality_Options.high: return "高";
-                case DisplayQuality_Options.veryHigh: return "非常高";
-                default: return "最高";
-            }
-        }
-
-        public static int DisplayQualityLevel(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return 0;
-                case DisplayQuality_Options.low: return 1;
-                case DisplayQuality_Options.medium: return 2;
-                case DisplayQuality_Options.high: return 3;
-                case DisplayQuality_Options.veryHigh: return 4;
-                default: return 5;
-            }
-        }
-
-        public static DisplayQuality_Options NextDisplayQuality(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return DisplayQuality_Options.low;
-                case DisplayQuality_Options.low: return DisplayQuality_Options.medium;
-                case DisplayQuality_Options.medium: return DisplayQuality_Options.high;
-                case DisplayQuality_Options.high: return DisplayQuality_Options.veryHigh;
-                case DisplayQuality_Options.veryHigh: return DisplayQuality_Options.Ultra;
-                default: return DisplayQuality_Options.veryLow;
-            }
-        }
-
-        public static DisplayQuality_Options PreviousDisplayQuality(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return DisplayQuality_Options.Ultra;
-                case DisplayQuality_Options.low: return DisplayQuality_Options.veryLow;
-                case DisplayQuality_Options.medium: return DisplayQuality_Options.low;
-                case DisplayQuality_Options.high: return DisplayQuality_Options.medium;
-                case DisplayQuality_Options.veryHigh: return DisplayQuality_Options.high;
-                default: return DisplayQuality_Options.veryHigh;
-            }
+            frameRateLimit_Option_text.text = FrameRateLimitTable.Label(option);
+            Application.targetFrameRate = FrameRateLimitTable.Value(option);
         }
 
         public void DisplayQuality_SetNextOption()
         {
-            gameSettingsData.displayQuality_Options = NextDisplayQuality(gameSettingsData.displayQuality_Options);
+            gameSettingsData.displayQuality_Options = DisplayQualityTable.Next(gameSettingsData.displayQuality_Options);
             DisplayQuality_ApplyCurrentOption();
         }
 
         public void DisplayQuality_SetPreviousOption()
         {
-            gameSettingsData.displayQuality_Options = PreviousDisplayQuality(gameSettingsData.displayQuality_Options);
+            gameSettingsData.displayQuality_Options = DisplayQualityTable.Previous(gameSettingsData.displayQuality_Options);
             DisplayQuality_ApplyCurrentOption();
         }
 
         void DisplayQuality_ApplyCurrentOption()
         {
             DisplayQuality_Options option = gameSettingsData.displayQuality_Options;
-            displayQuality_Option_text.text = DisplayQualityLabel(option);
-            QualitySettings.SetQualityLevel(DisplayQualityLevel(option));
-        }
-
-        // 后处理品质
-        public static string PostTreatmentQualityLabel(PostTreatmentQuality_Options option)
-        {
-            switch (option)
-            {
-                case PostTreatmentQuality_Options.low: return "低";
-                default: return "高";
-            }
-        }
-
-        public static PostTreatmentQuality_Options NextPostTreatmentQuality(PostTreatmentQuality_Options option)
-        {
-            switch (option)
-            {
-                case PostTreatmentQuality_Options.low: return PostTreatmentQuality_Options.high;
-                default: return PostTreatmentQuality_Options.low;
-            }
+            displayQuality_Option_text.text = DisplayQualityTable.Label(option);
+            QualitySettings.SetQualityLevel(DisplayQualityTable.Level(option));
         }
 
         public void PostTreatmentQuality_SwitchOption()
         {
-            gameSettingsData.postTreatmentQuality_Options = NextPostTreatmentQuality(gameSettingsData.postTreatmentQuality_Options);
+            gameSettingsData.postTreatmentQuality_Options = PostTreatmentQualityTable.Next(gameSettingsData.postTreatmentQuality_Options);
             PostTreatmentQuality_ApplyCurrentOption();
         }
 
         void PostTreatmentQuality_ApplyCurrentOption()
         {
-            postTreatmentQuality_text.text = PostTreatmentQualityLabel(gameSettingsData.postTreatmentQuality_Options);
-        }
-
-        // 特效质量
-        public static string SpecialEffectQualityLabel(SpecialEffectQuality_Options option)
-        {
-            switch (option)
-            {
-                case SpecialEffectQuality_Options.low: return "低";
-                default: return "高";
-            }
-        }
-
-        public static SpecialEffectQuality_Options NextSpecialEffectQuality(SpecialEffectQuality_Options option)
-        {
-            switch (option)
-            {
-                case SpecialEffectQuality_Options.low: return SpecialEffectQuality_Options.high;
-                default: return SpecialEffectQuality_Options.low;
-            }
+            postTreatmentQuality_text.text = PostTreatmentQualityTable.Label(gameSettingsData.postTreatmentQuality_Options);
         }
 
         public void SpecialEffectQuality_SwitchOption()
         {
-            gameSettingsData.specialEffectQuality_Options = NextSpecialEffectQuality(gameSettingsData.specialEffectQuality_Options);
+            gameSettingsData.specialEffectQuality_Options = SpecialEffectQualityTable.Next(gameSettingsData.specialEffectQuality_Options);
             SpecialEffectQuality_ApplyCurrentOption();
         }
 
         void SpecialEffectQuality_ApplyCurrentOption()
         {
-            specialEffectQuality_text.text = SpecialEffectQualityLabel(gameSettingsData.specialEffectQuality_Options);
+            specialEffectQuality_text.text = SpecialEffectQualityTable.Label(gameSettingsData.specialEffectQuality_Options);
         }
         
         /// [未完成] 亮度调节(准确来说是伽马值)

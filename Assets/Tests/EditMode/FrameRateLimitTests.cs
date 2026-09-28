@@ -18,7 +18,7 @@ namespace CatchMoon.Tests
         {
             FrameRateLimit_Options option = FrameRateLimit_Options.max60;
             for (int i = 0; i < 4; i++)
-                option = SettingsWindowManager.NextFrameRateLimit(option);
+                option = FrameRateLimitTable.Next(option);
             Assert.AreEqual(FrameRateLimit_Options.max60, option);
         }
 
@@ -27,14 +27,14 @@ namespace CatchMoon.Tests
         {
             FrameRateLimit_Options option = FrameRateLimit_Options.max60;
             for (int i = 0; i < 4; i++)
-                option = SettingsWindowManager.PreviousFrameRateLimit(option);
+                option = FrameRateLimitTable.Previous(option);
             Assert.AreEqual(FrameRateLimit_Options.max60, option);
         }
 
         static void AssertTier(FrameRateLimit_Options option, string label, int value)
         {
-            Assert.AreEqual(label, SettingsWindowManager.FrameRateLimitLabel(option));
-            Assert.AreEqual(value, SettingsWindowManager.FrameRateLimitValue(option));
+            Assert.AreEqual(label, FrameRateLimitTable.Label(option));
+            Assert.AreEqual(value, FrameRateLimitTable.Value(option));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CatchMoon.Tests
         {
             DisplayQuality_Options option = DisplayQuality_Options.veryLow;
             for (int i = 0; i < 6; i++)
-                option = SettingsWindowManager.NextDisplayQuality(option);
+                option = DisplayQualityTable.Next(option);
             Assert.AreEqual(DisplayQuality_Options.veryLow, option);
         }
 
@@ -29,14 +29,14 @@ namespace CatchMoon.Tests
         {
             DisplayQuality_Options option = DisplayQuality_Options.veryLow;
             for (int i = 0; i < 6; i++)
-                option = SettingsWindowManager.PreviousDisplayQuality(option);
+                option = DisplayQualityTable.Previous(option);
             Assert.AreEqual(DisplayQuality_Options.veryLow, option);
         }
 
         static void AssertTier(DisplayQuality_Options option, string label, int level)
         {
-            Assert.AreEqual(label, SettingsWindowManager.DisplayQualityLabel(option));
-            Assert.AreEqual(level, SettingsWindowManager.DisplayQualityLevel(option));
+            Assert.AreEqual(label, DisplayQualityTable.Label(option));
+            Assert.AreEqual(level, DisplayQualityTable.Level(option));
         }
     }
 }
