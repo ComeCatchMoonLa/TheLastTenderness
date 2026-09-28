@@ -7,8 +7,8 @@ namespace CatchMoon
         PlayerManager player;
         [System.NonSerialized] public InputAcitons inputActions;
 
-        public float horizontal; // 玩家垂直偏移
-        public float vertical;   // 玩家水平偏移
+        public float horizontal; // 水平偏移
+        public float vertical;   // 垂直偏移
         public float moveAmount; // 玩家偏移量
         public float mouseX;     // 鼠标横坐标
         public float mouseY;     // 鼠标纵坐标
@@ -55,7 +55,7 @@ namespace CatchMoon
 
         [Header("Flags")]
         public bool backStepFlag;
-        public bool rollFlag;      // 是否在翻滚
+        public bool rollFlag;      // 左 Shift 按下不足 0.5 秒后松开、且有移动时的一次性标记
         public bool sprintFlag;    // 是否在冲刺
 
         float rollInputTimer; // 滚动输入计时器

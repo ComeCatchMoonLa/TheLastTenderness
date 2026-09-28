@@ -7,7 +7,7 @@ namespace CatchMoon
         CharacterManager character;
 
         [Header("Ammo FX")]
-        [Tooltip("飞行中的弹药")]
+        [Tooltip("拉弓时手上的 loadedItemModel，不是飞出去的 liveItemModel")]
         public GameObject Ammo;
 
         [Header("Damage FX")]
