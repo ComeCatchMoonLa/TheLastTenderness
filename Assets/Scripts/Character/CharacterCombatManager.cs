@@ -152,7 +152,7 @@ namespace CatchMoon
             if (!applyBlockAndPoise)
             {
                 RecordIncomingHit(false, false, pd, fd, md, ld, dd);
-                character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
+                character.cStats.TakeDamage(damageAnimation, DamageOf(pd, fd, md, ld, dd));
                 return;
             }
 
@@ -169,7 +169,7 @@ namespace CatchMoon
                 ld *= (1 - character.cStats.blockingLDA);
                 dd *= (1 - character.cStats.blockingDDA);
                 RecordIncomingHit(true, false, pd, fd, md, ld, dd);
-                character.cStats.TakeDamage(null, pd, fd, md, ld, dd, playHurtSound: character.cStats.currentStamina <= 0);
+                character.cStats.TakeDamage(null, DamageOf(pd, fd, md, ld, dd), playHurtSound: character.cStats.currentStamina <= 0);
                 return;
             }
 
@@ -178,13 +178,25 @@ namespace CatchMoon
             if (character.cStats.totalPoiseDefence > poiseDamage)
             {
                 RecordIncomingHit(false, false, pd, fd, md, ld, dd);
-                character.cStats.TakeDamage(null, pd, fd, md, ld, dd);
+                character.cStats.TakeDamage(null, DamageOf(pd, fd, md, ld, dd));
             }
             else
             {
                 RecordIncomingHit(false, true, pd, fd, md, ld, dd);
-                character.cStats.TakeDamage(damageAnimation, pd, fd, md, ld, dd);
+                character.cStats.TakeDamage(damageAnimation, DamageOf(pd, fd, md, ld, dd));
             }
+        }
+
+        static DamageSegments DamageOf(float pd, float fd, float md, float ld, float dd)
+        {
+            return new DamageSegments
+            {
+                Physical = pd,
+                Fire = fd,
+                Magic = md,
+                Lightning = ld,
+                Dark = dd
+            };
         }
 
         void RecordIncomingHit(bool blocked, bool brokePoise, float pd, float fd, float md, float ld, float dd)

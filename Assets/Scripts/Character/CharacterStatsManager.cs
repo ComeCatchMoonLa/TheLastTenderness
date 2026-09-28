@@ -137,17 +137,17 @@ namespace CatchMoon
         /// <summary>
         /// 受伤
         /// </summary>
-        /// <param name="pd">物理伤害</param>
+        /// <param name="damage">五段伤害</param>
         /// <param name="damageAnimation">受伤动画</param>
-        public virtual bool TakeDamage(string damageAnimation, float pd = 0f, float fd = 0f, float md = 0f, float ld = 0f, float dd = 0f, bool playHurtSound = true)
+        public virtual bool TakeDamage(string damageAnimation, DamageSegments damage, bool playHurtSound = true)
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
-            pd *= CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
-            fd *= CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA);
-            md *= CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA);
-            ld *= CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
-            dd *= CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
+            float pd = damage.Physical * CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
+            float fd = damage.Fire * CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA);
+            float md = damage.Magic * CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA);
+            float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
+            float dd = damage.Dark * CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
 
             float finalDamage = pd + fd + md + ld + dd;
             //Debug.Log($"最终伤害: {finalDamage:N0}.");

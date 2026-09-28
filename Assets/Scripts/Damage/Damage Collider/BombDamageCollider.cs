@@ -45,7 +45,7 @@ namespace CatchMoon
                     CharacterStatsManager characterStatsManager = collision.transform.GetComponent<CharacterStatsManager>();
                     if (characterStatsManager != null && characterStatsManager.teamID != teamID)
                     {
-                        characterStatsManager.TakeDamage("Damage_ForwardRight_01", fd: explosionDamage);
+                        characterStatsManager.TakeDamage("Damage_ForwardRight_01", new DamageSegments { Fire = explosionDamage });
                         directHit = characterStatsManager;
                     }
                 }
@@ -68,7 +68,7 @@ namespace CatchMoon
                 CharacterStatsManager characterStatsManager = objectsInExplosion.GetComponent<CharacterStatsManager>();
                 if (characterStatsManager == null || characterStatsManager == directHit || characterStatsManager.teamID == teamID) continue;
 
-                characterStatsManager.TakeDamage(damageAnimation: null, fd: explosionSplashDamage);
+                characterStatsManager.TakeDamage(null, new DamageSegments { Fire = explosionSplashDamage });
             }
         }
     }

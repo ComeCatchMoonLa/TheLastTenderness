@@ -12,7 +12,7 @@ namespace CatchMoon.Tests
             CharacterStatsManager stats = NewStats(100f);
             stats.headArmorPDA = 0.5f;
 
-            stats.TakeDamage(null, 100f, 0f, 0f, 0f, 0f, false);
+            stats.TakeDamage(null, new DamageSegments { Physical = 100f }, false);
 
             Assert.AreEqual(30f, stats.currentHP, 0.001f);
         }
@@ -22,7 +22,7 @@ namespace CatchMoon.Tests
         {
             CharacterStatsManager stats = NewStats(100f);
 
-            stats.TakeDamage(null, 40f, 0f, 0f, 0f, 0f, false);
+            stats.TakeDamage(null, new DamageSegments { Physical = 40f }, false);
 
             Assert.AreEqual(60f, stats.currentHP, 0.001f);
         }
@@ -35,7 +35,7 @@ namespace CatchMoon.Tests
             stats.torsoArmorPDA = 1f;
             stats.hipsArmorPDA = 1f;
 
-            stats.TakeDamage(null, 40f, 0f, 0f, 0f, 0f, false);
+            stats.TakeDamage(null, new DamageSegments { Physical = 40f }, false);
 
             Assert.AreEqual(100f, stats.currentHP, 0.001f);
         }

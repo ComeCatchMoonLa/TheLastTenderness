@@ -21,7 +21,7 @@ namespace CatchMoon
 
                 if (playerStatsManager != null)
                 {
-                    playerStatsManager.TakeDamage("Damage_ForwardRight_01", fd: damage);
+                    playerStatsManager.TakeDamage("Damage_ForwardRight_01", new DamageSegments { Fire = damage });
                 }
             }
         }

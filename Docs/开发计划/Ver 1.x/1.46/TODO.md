@@ -4,30 +4,30 @@
 
 ## 0. 开始前
 
-- [ ] 1.45 已收尾。
-- [ ] 读过技术设计：只收 `TakeDamage` 的五段。`ResolveIncomingHit` 的参数列表不动。
+- [x] 1.45 已收尾。
+- [x] 读过技术设计：只收 `TakeDamage` 的五段。`ResolveIncomingHit` 的参数列表不动。
 
 **阶段门槛：** 知道护甲权重仍是 60/30/10，受伤音仍由 `playHurtSound` 决定。
 
 ## 1. 收成一组
 
-- [ ] 加上 `DamageSegments`，三处 `TakeDamage` 改读它。
-- [ ] 技术设计点名的调用处改成传入这一组。炸弹和环境伤害只填 `Fire`。
+- [x] 加上 `DamageSegments`，三处 `TakeDamage` 改读它。
+- [x] 技术设计点名的调用处改成传入这一组。炸弹和环境伤害只填 `Fire`。
 
 **阶段门槛：** 扣血仍是五段各乘吸收后相加。血条写法不变。
 
 ## 2. 单元测试
 
-- [ ] `ArmorAbsorptionWeightTests` 改走 `DamageSegments`，原来的三条血量断言不变。
-- [ ] `DamageSegmentsTests` 断言五段相加，以及死亡或无敌时不扣血。
-- [ ] 测试不创建音源，不播动画。
+- [x] `ArmorAbsorptionWeightTests` 改走 `DamageSegments`，原来的三条血量断言不变。
+- [x] `DamageSegmentsTests` 断言五段相加，以及死亡或无敌时不扣血。
+- [x] 测试不创建音源，不播动画。
 
 **阶段门槛：** Test Runner 里这两个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
-- [ ] 大纲里的 1.46 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
+- [x] 大纲里的 1.46 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。
