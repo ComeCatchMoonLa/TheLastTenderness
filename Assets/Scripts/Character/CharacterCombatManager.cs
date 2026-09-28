@@ -137,17 +137,16 @@ namespace CatchMoon
         public void ResolveIncomingHit(
             CharacterManager attacker,
             string damageAnimation,
-            float multiplier,
+            IncomingDamage incoming,
             bool applyBlockAndPoise,
             float poiseDamage,
-            float guardBreakModifider,
-            float pd, float fd, float md, float ld, float dd)
+            float guardBreakModifider)
         {
-            pd *= multiplier;
-            fd *= multiplier;
-            md *= multiplier;
-            ld *= multiplier;
-            dd *= multiplier;
+            float pd = incoming.Segments.Physical * incoming.Multiplier;
+            float fd = incoming.Segments.Fire * incoming.Multiplier;
+            float md = incoming.Segments.Magic * incoming.Multiplier;
+            float ld = incoming.Segments.Lightning * incoming.Multiplier;
+            float dd = incoming.Segments.Dark * incoming.Multiplier;
 
             if (!applyBlockAndPoise)
             {
@@ -187,6 +186,15 @@ namespace CatchMoon
             }
         }
 
+        static IncomingDamage WeaponIncoming(WeaponItem weapon)
+        {
+            return new IncomingDamage
+            {
+                Multiplier = weapon.criticalAttackDM,
+                Segments = DamageOf(weapon.pd, weapon.fd, weapon.md, weapon.ld, weapon.dd)
+            };
+        }
+
         static DamageSegments DamageOf(float pd, float fd, float md, float ld, float dd)
         {
             return new DamageSegments
@@ -215,8 +223,8 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingBackStab.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cCombat.ResolveIncomingHit(characterPerformingBackStab, "Back Stabbed", weapon.criticalAttackDM,
-                false, 0f, 0f, weapon.pd, weapon.fd, weapon.md, weapon.ld, weapon.dd);
+            character.cCombat.ResolveIncomingHit(characterPerformingBackStab, "Back Stabbed", WeaponIncoming(weapon),
+                false, 0f, 0f);
         }
 
         public void GetRiposte(CharacterManager characterPerformingRiposte, float dist)
@@ -228,8 +236,8 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingRiposte.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cCombat.ResolveIncomingHit(characterPerformingRiposte, "Riposted", weapon.criticalAttackDM,
-                false, 0f, 0f, weapon.pd, weapon.fd, weapon.md, weapon.ld, weapon.dd);
+            character.cCombat.ResolveIncomingHit(characterPerformingRiposte, "Riposted", WeaponIncoming(weapon),
+                false, 0f, 0f);
         }
     }
 }

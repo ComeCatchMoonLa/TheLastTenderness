@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.46 已收尾。
-- [ ] 读过技术设计：只收 `ResolveIncomingHit` 的倍率和五段。`AttemptBlock` 的参数列表不动。
+- [x] 1.46 已收尾。
+- [x] 读过技术设计：只收 `ResolveIncomingHit` 的倍率和五段。`AttemptBlock` 的参数列表不动。
 
 **阶段门槛：** 知道五段仍先乘倍率，再进格挡或韧性。
 
 ## 1. 收成一组
 
-- [ ] 加上 `IncomingDamage`，`ResolveIncomingHit` 改读它。
-- [ ] `DealDamage`、背刺、反击和测试的调用改成传入这一组。
+- [x] 加上 `IncomingDamage`，`ResolveIncomingHit` 改读它。
+- [x] `DealDamage`、背刺、反击和测试的调用改成传入这一组。
 
 **阶段门槛：** 破防动画名仍是 `"Guard_Break"`。`TakeDamage` 的签名不改。
 
 ## 2. 单元测试
 
-- [ ] `IncomingHitResultTests` 的两条旧断言保持数字不变，并加上倍率 2 扣 20。
-- [ ] 测试不创建相机。
+- [x] `IncomingHitResultTests` 的两条旧断言保持数字不变，并加上倍率 2 扣 20。
+- [x] 测试不创建相机。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
-- [ ] 大纲里的 1.47 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
+- [x] 大纲里的 1.47 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。

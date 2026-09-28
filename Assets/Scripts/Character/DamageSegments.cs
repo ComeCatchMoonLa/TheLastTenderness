@@ -8,4 +8,10 @@ namespace CatchMoon
         public float Lightning;
         public float Dark;
     }
+
+    public struct IncomingDamage
+    {
+        public float Multiplier;
+        public DamageSegments Segments;
+    }
 }

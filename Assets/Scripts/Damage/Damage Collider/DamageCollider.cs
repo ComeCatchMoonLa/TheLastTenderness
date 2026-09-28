@@ -128,8 +128,18 @@ namespace CatchMoon
             float multiplier = PhaseDamageMultiplier(character.isUsingRightHand, character.isUsingLeftHand,
                 character.cInventory.rightWeapon, character.cInventory.leftWeapon, character.cCombat.attackType);
 
-            damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, multiplier, true, poiseBreak, guardBreakModifider,
-                pd, fd, md, ld, dd);
+            damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, new IncomingDamage
+            {
+                Multiplier = multiplier,
+                Segments = new DamageSegments
+                {
+                    Physical = pd,
+                    Fire = fd,
+                    Magic = md,
+                    Lightning = ld,
+                    Dark = dd
+                }
+            }, true, poiseBreak, guardBreakModifider);
         }
 
         public static float PhaseDamageMultiplier(bool usingRightHand, bool usingLeftHand, WeaponItem rightWeapon, WeaponItem leftWeapon, AttackType attackType)

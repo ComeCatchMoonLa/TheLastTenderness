@@ -12,7 +12,7 @@ namespace CatchMoon.Tests
             CharacterCombatManager combat = NewCombat(out CharacterStatsManager stats);
             stats.currentHP = 100f;
 
-            combat.ResolveIncomingHit(null, null, 1f, false, 0f, 0f, 10f, 0f, 0f, 0f, 0f);
+            combat.ResolveIncomingHit(null, null, Physical(1f, 10f), false, 0f, 0f);
 
             Assert.IsFalse(combat.lastHitWasBlocked);
             Assert.IsFalse(combat.lastHitBrokePoise);
@@ -27,11 +27,32 @@ namespace CatchMoon.Tests
             stats.currentHP = 100f;
             stats.totalPoiseDefence = 0f;
 
-            combat.ResolveIncomingHit(null, null, 1f, true, 5f, 0f, 10f, 0f, 0f, 0f, 0f);
+            combat.ResolveIncomingHit(null, null, Physical(1f, 10f), true, 5f, 0f);
 
             Assert.IsFalse(combat.lastHitWasBlocked);
             Assert.IsTrue(combat.lastHitBrokePoise);
             Assert.AreEqual(10f, combat.lastHitDamageTotal, 0.001f);
+        }
+
+        [Test]
+        public void Multiplier_ScalesDamageBeforeTheTotal()
+        {
+            CharacterCombatManager combat = NewCombat(out CharacterStatsManager stats);
+            stats.currentHP = 100f;
+
+            combat.ResolveIncomingHit(null, null, Physical(2f, 10f), false, 0f, 0f);
+
+            Assert.AreEqual(20f, combat.lastHitDamageTotal, 0.001f);
+            Assert.AreEqual(80f, stats.currentHP, 0.001f);
+        }
+
+        static IncomingDamage Physical(float multiplier, float physical)
+        {
+            return new IncomingDamage
+            {
+                Multiplier = multiplier,
+                Segments = new DamageSegments { Physical = physical }
+            };
         }
 
         static CharacterCombatManager NewCombat(out CharacterStatsManager stats)
