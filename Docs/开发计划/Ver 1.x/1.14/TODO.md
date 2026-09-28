@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.13 已完成。
-- [ ] 读过技术设计：消耗数字在静态方法里，`DrainStamina` 只选武器。
+- [x] 1.13 已完成。
+- [x] 读过技术设计：消耗数字在静态方法里，`DrainStamina` 只选武器。
 
 **阶段门槛：** 知道默认系数和 `DeductStamina` 不在本版。
 
 ## 1. 四段共用一个公式
 
-- [ ] `AttackStaminaCost` 对轻击两段乘 `laStaminaCostM`，对重击两段乘 `haStaminaCostM`，`critical` 为 0。
-- [ ] `DrainStamina` 右手优先，否则左手，两手都不用则返回。
-- [ ] 只有四段轻重击才调用 `DeductStamina`。
+- [x] `AttackStaminaCost` 对轻击两段乘 `laStaminaCostM`，对重击两段乘 `haStaminaCostM`，`critical` 为 0。
+- [x] `DrainStamina` 右手优先，否则左手，两手都不用则返回。
+- [x] 只有四段轻重击才调用 `DeductStamina`。
 
 **阶段门槛：** 同一把武器、同一种攻击，扣掉的数与改之前相同。
 
 ## 2. 单元测试
 
-- [ ] 四段轻重击和 `critical` 的返回值与公式相同。
-- [ ] 不创建 Animator，不调用 `DrainStamina`。
+- [x] 四段轻重击和 `critical` 的返回值与公式相同。
+- [x] 不创建 Animator，不调用 `DrainStamina`。
 
 **阶段门槛：** 测试在 Edit Mode。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过，含其中的单元测试。
-- [ ] 大纲里的 1.14 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过，含其中的单元测试。
+- [x] 大纲里的 1.14 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

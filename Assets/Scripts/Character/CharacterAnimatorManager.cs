@@ -106,38 +106,35 @@ namespace CatchMoon
                 leftHandConstraint.weight = rightHandConstraint.weight = 0;
         }
 
+        public static float AttackStaminaCost(WeaponItem weapon, AttackType attackType)
+        {
+            if (weapon == null)
+                return 0f;
+
+            if (attackType == AttackType.light_1 || attackType == AttackType.light_2)
+                return weapon.baseStaminaCost * weapon.laStaminaCostM;
+
+            if (attackType == AttackType.heavy_1 || attackType == AttackType.heavy_2)
+                return weapon.baseStaminaCost * weapon.haStaminaCostM;
+
+            return 0f;
+        }
+
         void DrainStamina()
         {
+            WeaponItem weapon = null;
             if (character.isUsingRightHand)
-            {
-                WeaponItem rightWeapon = character.cInventory.rightWeapon;
-                if (character.cCombat.attackType == AttackType.light_1
-                    || character.cCombat.attackType == AttackType.light_2)
-                {
-                    character.cStats.DeductStamina(rightWeapon.baseStaminaCost * rightWeapon.laStaminaCostM);
-                }
-                else if (character.cCombat.attackType == AttackType.heavy_1
-                    || character.cCombat.attackType == AttackType.heavy_2)
-                {
-                    character.cStats.DeductStamina(character.cInventory.rightWeapon.baseStaminaCost
-                        * character.cInventory.rightWeapon.haStaminaCostM);
-                }
-            }
+                weapon = character.cInventory.rightWeapon;
             else if (character.isUsingLeftHand)
-            {
-                WeaponItem leftWeapon = character.cInventory.leftWeapon;
-                if (character.cCombat.attackType == AttackType.light_1
-                    || character.cCombat.attackType == AttackType.light_2)
-                {
-                    character.cStats.DeductStamina(leftWeapon.baseStaminaCost
-                        * leftWeapon.laStaminaCostM);
-                }
-                else if (character.cCombat.attackType == AttackType.heavy_1
-                    || character.cCombat.attackType == AttackType.heavy_2)
-                {
-                    character.cStats.DeductStamina(leftWeapon.baseStaminaCost * leftWeapon.haStaminaCostM);
-                }
-            }
+                weapon = character.cInventory.leftWeapon;
+
+            if (weapon == null)
+                return;
+
+            AttackType attackType = character.cCombat.attackType;
+            if (attackType == AttackType.light_1 || attackType == AttackType.light_2
+                || attackType == AttackType.heavy_1 || attackType == AttackType.heavy_2)
+                character.cStats.DeductStamina(AttackStaminaCost(weapon, attackType));
         }
 
         void GrantWeaponAttackingPoiseBonus()
