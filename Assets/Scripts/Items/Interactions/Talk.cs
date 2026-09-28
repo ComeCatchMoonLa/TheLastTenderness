@@ -31,7 +31,20 @@ namespace CatchMoon
             player.input.inputActions.Locomotion.CameraRotate.Enable();
             // 处理对话(更新文本及动画)
             player.storyNpc = npc;
-            player.ui.popUps.talkUI.AdvanceDialogue(npc, true);
+            if (player.ui.escWin.GetSettingWin().gameSettingsData.auto)
+            {
+                if (player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord)
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_Auto_WFW(npc);
+                else
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_Auto_SBS(npc);
+            }
+            else
+            {
+                if (player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord)
+                    player.ui.popUps.talkUI.Start_UpdateDialogue_WFW_Helper(npc);
+                else
+                    player.ui.popUps.talkUI.UpdateDialogueSBS_Helper(npc);
+            }
         }
     }
 }

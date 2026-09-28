@@ -52,36 +52,6 @@ namespace CatchMoon
         /// <summary>
         /// 设置对话内容(将npc对应的对话内容添加到对话内容列表)
         /// </summary>
-        public void AdvanceDialogue(EnemyManager npc, bool starting)
-        {
-            bool auto = player.ui.escWin.GetSettingWin().gameSettingsData.auto;
-            bool wordForWord = player.ui.escWin.GetSettingWin().gameSettingsData.wordForWord;
-            if (auto)
-            {
-                if (!starting)
-                    return;
-                if (wordForWord)
-                    Start_UpdateDialogue_Auto_WFW(npc);
-                else
-                    Start_UpdateDialogue_Auto_SBS(npc);
-                return;
-            }
-
-            if (wordForWord)
-            {
-                if (starting)
-                    Start_UpdateDialogue_WFW_Helper(npc);
-                else
-                    Handle_UpdateDialogue_NonAuto_WFW(npc);
-                return;
-            }
-
-            if (starting)
-                UpdateDialogueSBS_Helper(npc);
-            else
-                Handle_UpdateDialogue_NonAuto_SBS(npc);
-        }
-
         public void SetTalkContent(List<DialogueTextData> talkContent)
         {
             // 设置npc对话内容

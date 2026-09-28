@@ -377,75 +377,143 @@ namespace CatchMoon
         }
 
         // 画质
-        public static string DisplayQualityLabel(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return "非常低";
-                case DisplayQuality_Options.low: return "低";
-                case DisplayQuality_Options.medium: return "中等";
-                case DisplayQuality_Options.high: return "高";
-                case DisplayQuality_Options.veryHigh: return "非常高";
-                default: return "最高";
-            }
-        }
-
-        public static int DisplayQualityLevel(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return 0;
-                case DisplayQuality_Options.low: return 1;
-                case DisplayQuality_Options.medium: return 2;
-                case DisplayQuality_Options.high: return 3;
-                case DisplayQuality_Options.veryHigh: return 4;
-                default: return 5;
-            }
-        }
-
-        public static DisplayQuality_Options NextDisplayQuality(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return DisplayQuality_Options.low;
-                case DisplayQuality_Options.low: return DisplayQuality_Options.medium;
-                case DisplayQuality_Options.medium: return DisplayQuality_Options.high;
-                case DisplayQuality_Options.high: return DisplayQuality_Options.veryHigh;
-                case DisplayQuality_Options.veryHigh: return DisplayQuality_Options.Ultra;
-                default: return DisplayQuality_Options.veryLow;
-            }
-        }
-
-        public static DisplayQuality_Options PreviousDisplayQuality(DisplayQuality_Options option)
-        {
-            switch (option)
-            {
-                case DisplayQuality_Options.veryLow: return DisplayQuality_Options.Ultra;
-                case DisplayQuality_Options.low: return DisplayQuality_Options.veryLow;
-                case DisplayQuality_Options.medium: return DisplayQuality_Options.low;
-                case DisplayQuality_Options.high: return DisplayQuality_Options.medium;
-                case DisplayQuality_Options.veryHigh: return DisplayQuality_Options.high;
-                default: return DisplayQuality_Options.veryHigh;
-            }
-        }
-
         public void DisplayQuality_SetNextOption()
         {
-            gameSettingsData.displayQuality_Options = NextDisplayQuality(gameSettingsData.displayQuality_Options);
-            DisplayQuality_ApplyCurrentOption();
+            switch (gameSettingsData.displayQuality_Options)
+            {
+                case DisplayQuality_Options.veryLow:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.low;
+                        displayQuality_Option_text.text = "低";
+                        QualitySettings.SetQualityLevel(1);
+                    }
+                    break;
+                case DisplayQuality_Options.low:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.medium;
+                        displayQuality_Option_text.text = "中";
+                        QualitySettings.SetQualityLevel(2);
+                    }
+                    break;
+                case DisplayQuality_Options.medium:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.high;
+                        displayQuality_Option_text.text = "高";
+                        QualitySettings.SetQualityLevel(3);
+                    }
+                    break;
+                case DisplayQuality_Options.high:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryHigh;
+                        displayQuality_Option_text.text = "非常高";
+                        QualitySettings.SetQualityLevel(4);
+                    }
+                    break;
+                case DisplayQuality_Options.veryHigh:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.Ultra;
+                        displayQuality_Option_text.text = "最高";
+                        QualitySettings.SetQualityLevel(5);
+                    }
+                    break;
+                case DisplayQuality_Options.Ultra:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryLow;
+                        displayQuality_Option_text.text = "非常低";
+                        QualitySettings.SetQualityLevel(0);
+                    }
+                    break;
+            }
         }
-
         public void DisplayQuality_SetPreviousOption()
         {
-            gameSettingsData.displayQuality_Options = PreviousDisplayQuality(gameSettingsData.displayQuality_Options);
-            DisplayQuality_ApplyCurrentOption();
+            switch (gameSettingsData.displayQuality_Options)
+            {
+                case DisplayQuality_Options.veryLow:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.Ultra;
+                        displayQuality_Option_text.text = "最高"; 
+                        QualitySettings.SetQualityLevel(5);
+                    }
+                    break;
+                case DisplayQuality_Options.low:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryLow;
+                        displayQuality_Option_text.text = "非常低";
+                        QualitySettings.SetQualityLevel(0);
+                    }
+                    break;
+                case DisplayQuality_Options.medium:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.low;
+                        displayQuality_Option_text.text = "低";
+                        QualitySettings.SetQualityLevel(1);
+                    }
+                    break;
+                case DisplayQuality_Options.high:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.medium;
+                        displayQuality_Option_text.text = "中等";
+                        QualitySettings.SetQualityLevel(2);
+                    }
+                    break;
+                case DisplayQuality_Options.veryHigh:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.high;
+                        displayQuality_Option_text.text = "高"; 
+                        QualitySettings.SetQualityLevel(3);
+                    }
+                    break;
+                case DisplayQuality_Options.Ultra:
+                    {
+                        gameSettingsData.displayQuality_Options = DisplayQuality_Options.veryHigh;
+                        displayQuality_Option_text.text = "非常高"; 
+                        QualitySettings.SetQualityLevel(4);
+                    }
+                    break;
+            }
         }
-
         void DisplayQuality_ApplyCurrentOption()
         {
-            DisplayQuality_Options option = gameSettingsData.displayQuality_Options;
-            displayQuality_Option_text.text = DisplayQualityLabel(option);
-            QualitySettings.SetQualityLevel(DisplayQualityLevel(option));
+            switch (gameSettingsData.displayQuality_Options)
+            {
+                case DisplayQuality_Options.veryLow:
+                    {
+                        displayQuality_Option_text.text = "非常低";
+                        QualitySettings.SetQualityLevel(0);
+                    }
+                    break;
+                case DisplayQuality_Options.low:
+                    {
+                        displayQuality_Option_text.text = "低";
+                        QualitySettings.SetQualityLevel(1);
+                    }
+                    break;
+                case DisplayQuality_Options.medium:
+                    {
+                        displayQuality_Option_text.text = "中等";
+                        QualitySettings.SetQualityLevel(2);
+                    }
+                    break;
+                case DisplayQuality_Options.high:
+                    {
+                        displayQuality_Option_text.text = "高";
+                        QualitySettings.SetQualityLevel(3);
+                    }
+                    break;
+                case DisplayQuality_Options.veryHigh:
+                    {
+                        displayQuality_Option_text.text = "非常高";
+                        QualitySettings.SetQualityLevel(4);
+                    }
+                    break;
+                case DisplayQuality_Options.Ultra:
+                    {
+                        displayQuality_Option_text.text = "最高";
+                        QualitySettings.SetQualityLevel(5);
+                    }
+                    break;
+            }
         }
 
         // 后处理品质
