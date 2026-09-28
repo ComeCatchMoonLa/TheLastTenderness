@@ -98,6 +98,11 @@ namespace CatchMoon
             navmeshAgent.transform.localRotation = Quaternion.identity;
         }
 
+        public State CurrentState
+        {
+            get { return currentState; }
+        }
+
         /// <summary>
         /// [处理] 状态机
         /// </summary>
@@ -115,7 +120,7 @@ namespace CatchMoon
         /// <summary>
         /// 切换到下一个状态
         /// </summary>
-        void SwitchToNextState(State state)
+        public void SwitchToNextState(State state)
         {
             currentState = state;
         }

@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 1.19 已收尾。
-- [ ] 读过技术设计：写入仍只在 `SwitchToNextState`，外面读 `CurrentState`。
+- [x] 1.19 已收尾。
+- [x] 读过技术设计：写入仍只在 `SwitchToNextState`，外面读 `CurrentState`。
 
 **阶段门槛：** 知道不改 `Tick` 的选态。
 
 ## 1. 读取
 
-- [ ] `SwitchToNextState` 公开，方法体仍只赋值。
-- [ ] `CurrentState` 返回 `currentState`。
-- [ ] `HandleStateMachine` 仍调用 `SwitchToNextState`。
+- [x] `SwitchToNextState` 公开，方法体仍只赋值。
+- [x] `CurrentState` 返回 `currentState`。
+- [x] `HandleStateMachine` 仍调用 `SwitchToNextState`。
 
 **阶段门槛：** 不新增第二种写入。
 
 ## 2. 单元测试
 
-- [ ] `EnemyCurrentStateTests` 断言换上的状态与读到的是同一个对象。
-- [ ] 测试不调用 `Update`。
+- [x] `EnemyCurrentStateTests` 断言换上的状态与读到的是同一个对象。
+- [x] 测试不调用 `Update`。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 1.20 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 1.20 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
