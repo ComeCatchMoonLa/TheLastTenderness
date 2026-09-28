@@ -4,7 +4,7 @@
 >
 > 不换一套战斗核心，不加事件总线或依赖注入。不删除 General / Boss 状态脚本。不改已经写进场景和预制体的拼写。
 >
-> 1.0–1.35 已完成，调用链在各版技术设计里。2.x 见 [`../Ver 2.x/README.md`](../Ver%202.x/README.md)。
+> 1.0–1.35 已完成。1.36 的施工文档已写下，代码还没改。调用链在各版技术设计里。2.x 见 [`../Ver 2.x/README.md`](../Ver%202.x/README.md)。
 
 ## 版本顺序
 
@@ -254,6 +254,12 @@
 文档：[`1.35/游戏设计.md`](1.35/游戏设计.md) / [`1.35/技术设计.md`](1.35/技术设计.md) / [`1.35/TODO.md`](1.35/TODO.md)。已完成。
 
 `InputAcitons` 改成 `InputActions`。资产 guid 不变。目录和两个方法名仍留在候选池。
+
+## 1.36 消耗品成功回调拼写
+
+文档：[`1.36/游戏设计.md`](1.36/游戏设计.md) / [`1.36/技术设计.md`](1.36/技术设计.md) / [`1.36/TODO.md`](1.36/TODO.md)。
+
+`SucessfullyUsedConsumable` 改成 `SuccessfullyUsedConsumable`。动画事件名不动。目录和 `SucessfullyGetArrow` 仍留在候选池。
 
 ## 先不做
 
