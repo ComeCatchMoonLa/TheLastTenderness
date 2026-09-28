@@ -122,39 +122,32 @@ namespace CatchMoon
             if (armor.armorType == ArmorType.head)
             {
                 HeadArmorItem headArmor = armor as HeadArmorItem;
-
-                if (pArmor.currentHeadArmor != null)
-                    pInventory.AddItem(pArmor.currentHeadArmor);
-
-                pArmor.currentHeadArmor = headArmor;
-                pInventory.RemoveItem(headArmor);
-                equipmentWin.GetHeadArmorSlot().AddItem(pArmor.currentHeadArmor);
+                ReplaceEquippedArmor(headArmor, ref pArmor.currentHeadArmor, equipmentWin.GetHeadArmorSlot(), pInventory);
             }
             if (armor.armorType == ArmorType.torso)
             {
                 TorsoArmorItem toroArmor = armor as TorsoArmorItem;
-
-                if (pArmor.currentTorsoArmor != null)
-                    pInventory.AddItem(pArmor.currentTorsoArmor);
-
-                pArmor.currentTorsoArmor = toroArmor;
-                pInventory.RemoveItem(toroArmor);
-                equipmentWin.GetTorsoArmorSlot().AddItem(pArmor.currentTorsoArmor);
+                ReplaceEquippedArmor(toroArmor, ref pArmor.currentTorsoArmor, equipmentWin.GetTorsoArmorSlot(), pInventory);
             }
             if (armor.armorType == ArmorType.hips)
             {
                 HipsArmorItem hipsArmor = armor as HipsArmorItem;
-
-                if (pArmor.currentHipsArmor != null)
-                    pInventory.AddItem(pArmor.currentHipsArmor);
-
-                pArmor.currentHipsArmor = hipsArmor;
-                pInventory.RemoveItem(hipsArmor);
-                equipmentWin.GetHipArmorSlot().AddItem(pArmor.currentHipsArmor);
+                ReplaceEquippedArmor(hipsArmor, ref pArmor.currentHipsArmor, equipmentWin.GetHipArmorSlot(), pInventory);
             }
 
             // 加载模型
             pArmor.EquipAllArmorModels();
+        }
+
+        public static void ReplaceEquippedArmor<T>(T incoming, ref T equipped, EquipmentSlotUI slot, PlayerInventoryManager inventory)
+            where T : ArmorItem
+        {
+            if (equipped != null)
+                inventory.AddItem(equipped);
+
+            equipped = incoming;
+            inventory.RemoveItem(incoming);
+            slot.AddItem(equipped);
         }
     }
 }

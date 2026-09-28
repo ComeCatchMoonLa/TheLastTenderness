@@ -4,30 +4,30 @@
 
 ## 0. 开始前
 
-- [ ] 0.33 已完成。1.4 已完成。
-- [ ] 读过技术设计：交换步骤是静态方法，三岔和槽位名留下。
+- [x] 0.33 已完成。1.4 已完成。
+- [x] 读过技术设计：交换步骤是静态方法，三岔和槽位名留下。
 
 **阶段门槛：** 知道换模、五段吸收和武器装备不在本版。
 
 ## 1. 三岔调用同一步
 
-- [ ] `ReplaceEquippedArmor` 做旧件回背包、写入当前件、新件离开背包、放进装备格。
-- [ ] `EquipArmor` 的头、躯干、下身各调用一次，槽位仍是 `GetHeadArmorSlot`、`GetTorsoArmorSlot`、`GetHipArmorSlot`。
-- [ ] 调用之后仍是 `EquipAllArmorModels`。
-- [ ] `EquipPart`、三个空子类、`GetHipArmorSlot` 不改。
+- [x] `ReplaceEquippedArmor` 做旧件回背包、写入当前件、新件离开背包、放进装备格。
+- [x] `EquipArmor` 的头、躯干、下身各调用一次，槽位仍是 `GetHeadArmorSlot`、`GetTorsoArmorSlot`、`GetHipArmorSlot`。
+- [x] 调用之后仍是 `EquipAllArmorModels`。
+- [x] `EquipPart`、三个空子类、`GetHipArmorSlot` 不改。
 
 **阶段门槛：** 穿上后的模型和五段吸收与 1.4 相同。
 
 ## 2. 单元测试
 
-- [ ] 已穿头甲、背包有新头甲时：旧甲回到 `armors`，新甲离开，装备格是新甲。
-- [ ] 不跑 `Awake`，不调用 `EquipAllArmorModels`。
+- [x] 已穿头甲、背包有新头甲时：旧甲回到 `armors`，新甲离开，装备格是新甲。
+- [x] 不跑 `Awake`，不调用 `EquipAllArmorModels`。
 
 **阶段门槛：** 测试在 Edit Mode。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过，含其中的单元测试。
-- [ ] 大纲里的 1.12 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过，含其中的单元测试。
+- [x] 大纲里的 1.12 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
