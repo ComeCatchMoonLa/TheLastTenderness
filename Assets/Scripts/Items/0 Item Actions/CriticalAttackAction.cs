@@ -5,35 +5,70 @@ namespace CatchMoon
     [CreateAssetMenu(menuName = "Item Actions/Weapon Item Actions/Critical Attack Action")]
     public class CriticalAttackAction : WeaponItemAction
     {
+        public enum CriticalStrikeChoice
+        {
+            Backstab,
+            Riposte,
+            LightAttack
+        }
+
+        public static CriticalStrikeChoice Choose(bool hit, float dot, bool canBeRiposted)
+        {
+            if (hit && canBeRiposted && dot >= 0.8f && dot <= 1f)
+                return CriticalStrikeChoice.Riposte;
+            if (hit && dot >= -1f && dot <= -0.8f)
+                return CriticalStrikeChoice.Backstab;
+            return CriticalStrikeChoice.LightAttack;
+        }
+
         public override void PerformAction(CharacterManager character)
         {
             if (character.cStats.isInvulnerable) return;
 
+            bool hit = false;
+            float dot = 0f;
+            bool canBeRiposted = false;
+            CharacterManager attackTarget = null;
             Ray ray = new(character.cCombat.criticalAttackRayCastStartPoint.transform.position, character.transform.TransformDirection(Vector3.forward));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, character.cCombat.criticalAttackRange, LayerMask.player | LayerMask.npc))
+            if (Physics.Raycast(ray, out RaycastHit rayHit, character.cCombat.criticalAttackRange, LayerMask.player | LayerMask.npc))
             {
-                CharacterManager attackTarget = hit.transform.GetComponent<CharacterManager>();
-                Vector3 dirFormCharacterToEnemy = character.transform.position - attackTarget.transform.position;
-                dirFormCharacterToEnemy.y = 0;
-                float dot = Vector3.Dot(dirFormCharacterToEnemy.normalized, attackTarget.transform.forward);
-
-                //Debug.Log($"Dot: {dot:N1}");
-
-                if (attackTarget.canBeRiposted)
+                attackTarget = rayHit.transform.GetComponent<CharacterManager>();
+                if (attackTarget != null)
                 {
-                    if (0.8f <= dot && dot <= 1f)
-                    {
-                        AttempRiposte(character, attackTarget);
-                        attackTarget.canBeRiposted = false;
-                    }
-                }
-
-                if (-1f <= dot && dot <= -0.8f)
-                {
-                    AttempBackStab(character, attackTarget);
+                    hit = true;
+                    Vector3 dirFormCharacterToEnemy = character.transform.position - attackTarget.transform.position;
+                    dirFormCharacterToEnemy.y = 0;
+                    dot = Vector3.Dot(dirFormCharacterToEnemy.normalized, attackTarget.transform.forward);
+                    canBeRiposted = attackTarget.canBeRiposted;
                 }
             }
+
+            switch (Choose(hit, dot, canBeRiposted))
+            {
+                case CriticalStrikeChoice.Riposte:
+                    AttempRiposte(character, attackTarget);
+                    attackTarget.canBeRiposted = false;
+                    break;
+                case CriticalStrikeChoice.Backstab:
+                    AttempBackStab(character, attackTarget);
+                    break;
+                default:
+                    PlayLightAttack(character);
+                    break;
+            }
+        }
+
+        void PlayLightAttack(CharacterManager character)
+        {
+            WeaponItem weapon = character.cInventory != null ? character.cInventory.rightWeapon : null;
+            if (weapon == null || weapon.oh_tap_e_action == null || weapon.oh_tap_e_action == this)
+            {
+                string name = weapon != null ? weapon.itemName : character.transform.name;
+                Debug.LogError($"{name}: oh_tap_e_action");
+                return;
+            }
+
+            weapon.oh_tap_e_action.PerformAction(character);
         }
 
         void AttempRiposte(CharacterManager character, CharacterManager attackTarget)
