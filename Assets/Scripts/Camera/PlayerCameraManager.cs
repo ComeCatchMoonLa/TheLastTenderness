@@ -181,15 +181,15 @@ namespace CatchMoon
         }
         public void SetCameraPos_LockedMode()
         {
-            transform.position = player.transform.position;
+            transform.position = CameraRigMotion.LockPosition(player.transform.position);
         }
         public void SetCameraPos_DefaultMode()
         {
-            transform.position = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraCurrentVelocity, followFadeTime);
+            transform.position = CameraRigMotion.DefaultPosition(transform.position, player.transform.position, ref cameraCurrentVelocity, followFadeTime);
         }
         public void SetCameraPos_AimingMode()
         {
-            transform.position = player.cameraTransformWhileAiming.position;
+            transform.position = CameraRigMotion.AimPosition(player.cameraTransformWhileAiming.position);
         }
 
         /// <summary>
@@ -198,31 +198,29 @@ namespace CatchMoon
         /// 相机碰撞处理2：将遮挡物设为透明。(可能不会整了)
         void HandleCameraCollisions()
         {
-            float targetCameraForwardDist;
-            if (CurrentCameraPose() == CameraPose.Aim)
+            bool aiming = CurrentCameraPose() == CameraPose.Aim;
+            bool blocked = false;
+            float hitDistance = 0f;
+            if (!aiming)
             {
-                targetCameraForwardDist = aimingCameraForwardDist;
-            }
-            else
-            {
-                targetCameraForwardDist = defaultCameraForwardDist;
-                RaycastHit hit;
                 Vector3 dir = cameraTransform.position - cameraPivotTransform.position;
                 dir.Normalize();
-
-                if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, dir, out hit, Mathf.Abs(targetCameraForwardDist), LayerMask.environment))
+                if (Physics.SphereCast(cameraPivotTransform.position, cameraSphereRadius, dir, out RaycastHit hit, Mathf.Abs(defaultCameraForwardDist), LayerMask.environment))
                 {
-                    float dist = Vector3.Distance(cameraPivotTransform.position, hit.point);
-                    targetCameraForwardDist = dist - cameraCollisionOffSet;
-                }
-                if (Mathf.Abs(targetCameraForwardDist) < minCollisionOffSet)
-                {
-                    targetCameraForwardDist = minCollisionOffSet;
+                    blocked = true;
+                    hitDistance = Vector3.Distance(cameraPivotTransform.position, hit.point);
                 }
             }
 
-            
-            cameraTransform.localPosition = -Vector3.forward * targetCameraForwardDist;
+            float targetCameraForwardDist = CameraRigMotion.ForwardDistance(
+                aiming,
+                aimingCameraForwardDist,
+                defaultCameraForwardDist,
+                blocked,
+                hitDistance,
+                cameraCollisionOffSet,
+                minCollisionOffSet);
+            cameraTransform.localPosition = CameraRigMotion.LocalBack(targetCameraForwardDist);
         }
 
         /// <summary>
