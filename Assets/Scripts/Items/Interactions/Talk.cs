@@ -13,6 +13,13 @@ namespace CatchMoon
 
         [Header("对话内容")]
         public List<DialogueTextData> talkContent;
+        public bool offersFlaskSplit;
+
+        public bool AllocateFlasks(PlayerManager player, int estus, int ash)
+        {
+            if (!offersFlaskSplit || player == null || player.pInventory == null) return false;
+            return player.pInventory.TryAllocateFlasks(estus, ash);
+        }
 
         public override void Interact(PlayerManager player)
         {

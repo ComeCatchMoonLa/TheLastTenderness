@@ -4,29 +4,29 @@
 
 ## 0. 开始前
 
-- [ ] 2.12 已收尾。
-- [ ] 读过技术设计：划分不改剩余。休息才写满。
+- [x] 2.12 已收尾。
+- [x] 读过技术设计：划分不改剩余。休息才写满。
 
 **阶段门槛：** 知道两边相加必须等于 `flaskTotal`。
 
 ## 1. 划分和写回
 
-- [ ] `TryAllocateFlasks` 只改两份上限。
-- [ ] `Talk.AllocateFlasks` 在 `offersFlaskSplit` 时转发。
-- [ ] `RefillConsumablesToMax` 把剩余写成当前划分。
+- [x] `TryAllocateFlasks` 只改两份上限。
+- [x] `Talk.AllocateFlasks` 在 `offersFlaskSplit` 时转发。
+- [x] `RefillConsumablesToMax` 把剩余写成当前划分。
 
 **阶段门槛：** 相加不对时划分和剩余都不变。
 
 ## 2. 单元测试
 
-- [ ] `FlaskSplitTests` 断言划分、拒绝和写回。
-- [ ] 测试不创建对话窗。
+- [x] `FlaskSplitTests` 断言划分、拒绝和写回。
+- [x] 测试不创建对话窗。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。在 NPC 处改分配留给人看。
-- [ ] 大纲里的 2.13 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。在 NPC 处改分配留给人看。
+- [x] 大纲里的 2.13 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。

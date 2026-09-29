@@ -24,6 +24,8 @@ namespace CatchMoon
         public int flaskTotal = 3;
         public int estusShare = 3;
         public int ashShare = 0;
+        public int estusLeft = 3;
+        public int ashLeft = 0;
         public int boneTier = 0;
         public FlaskRecoveryTable recoveryTable;
 
@@ -79,6 +81,9 @@ namespace CatchMoon
         }
         public void RefillConsumablesToMax()
         {
+            estusLeft = estusShare;
+            ashLeft = ashShare;
+
             if (consumableLeft == null || consumableLeft.Count == 0) return;
             var items = new List<ConsumableItem>(consumableLeft.Keys);
             for (int i = 0; i < items.Count; i++)
@@ -98,6 +103,15 @@ namespace CatchMoon
             if (currentConsumable == null)
                 return;
             player.ui.hud.quickSlotsUI.SetConsumableCount(ConsumableRemaining(currentConsumable));
+        }
+
+        public bool TryAllocateFlasks(int estus, int ash)
+        {
+            if (estus < 0 || ash < 0) return false;
+            if (estus + ash != flaskTotal) return false;
+            estusShare = estus;
+            ashShare = ash;
+            return true;
         }
 
         public void ObtainAshFlask()
