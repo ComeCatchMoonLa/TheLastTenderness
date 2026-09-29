@@ -13,6 +13,7 @@ namespace CatchMoon
         [SerializeField] Image currentSpellIcon;
         [SerializeField] Image currentConsumableIcon;
         [SerializeField] TextMeshProUGUI consumableCountText;
+        [SerializeField] TextMeshProUGUI flaskCountText;
 
         private void Awake()
         {
@@ -31,6 +32,8 @@ namespace CatchMoon
                 Debug.LogError("consumableSlotIcon == null");
             if (consumableCountText == null)
                 Debug.LogError("consumableCountText == null");
+            if (flaskCountText == null)
+                Debug.LogError("flaskCountText == null");
             #endregion
 
             UpdateCurrentSpellIcon(player.pInventory.currentSpell);
@@ -59,7 +62,10 @@ namespace CatchMoon
             if (consumable == null) return;
             ShowIcon(currentConsumableIcon, consumable.itemIcon);
             if (player != null && player.pInventory != null)
+            {
                 SetConsumableCount(player.pInventory.ConsumableRemaining(consumable));
+                SetFlaskCounts(player.pInventory.estusLeft, player.pInventory.ashLeft);
+            }
         }
 
         public void SetConsumableCount(int remaining)
@@ -71,6 +77,12 @@ namespace CatchMoon
             }
 
             consumableCountText.text = remaining.ToString();
+        }
+
+        public void SetFlaskCounts(int estusLeft, int ashLeft)
+        {
+            if (flaskCountText == null) return;
+            flaskCountText.text = FlaskHudCounts.Line(estusLeft, ashLeft);
         }
 
         static void ShowIcon(Image icon, Sprite sprite)

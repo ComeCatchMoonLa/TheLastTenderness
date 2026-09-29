@@ -103,6 +103,7 @@ namespace CatchMoon
             if (currentConsumable == null)
                 return;
             player.ui.hud.quickSlotsUI.SetConsumableCount(ConsumableRemaining(currentConsumable));
+            player.ui.hud.quickSlotsUI.SetFlaskCounts(estusLeft, ashLeft);
         }
 
         public bool TryAllocateFlasks(int estus, int ash)
