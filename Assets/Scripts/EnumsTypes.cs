@@ -105,6 +105,7 @@ namespace CatchMoon
         inventory,
         skill,
         map,
+        status,
     }
 
     public enum SettingsWinType

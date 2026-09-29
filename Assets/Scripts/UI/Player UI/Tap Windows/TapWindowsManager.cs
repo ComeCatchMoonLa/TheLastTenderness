@@ -12,6 +12,7 @@ namespace CatchMoon
         [SerializeField] EquipmentWinManager equipmentWin;
         [SerializeField] InventoryWinManager inventoryWin;
         [SerializeField] ItemStatsWinManager itemStatsWin;
+        [SerializeField] StatusWinManager statusWin;
 
         [Header("子窗口标题文本(用于加粗文本, 凸显当前选择项)")]
         [SerializeField] TextMeshProUGUI selectButton_Equipment_Text;
@@ -50,6 +51,11 @@ namespace CatchMoon
             else if (selectedWin == TapWinType.map)
             {
 
+            }
+            else if (selectedWin == TapWinType.status)
+            {
+                if (statusWin != null)
+                    statusWin.Open();
             }
         }
 
@@ -120,6 +126,18 @@ namespace CatchMoon
             selectedWin = TapWinType.map;
             selectButton_Map_Text.fontStyle = FontStyles.Bold;
         }
+        public void SelectStatusWin()
+        {
+            UnselectCurrentWin();
+            selectedWin = TapWinType.status;
+            selectButton_Skill_Text.fontStyle = FontStyles.Bold;
+            if (statusWin == null)
+            {
+                Debug.LogError("statusWin == null");
+                return;
+            }
+            statusWin.Open();
+        }
         void UnselectCurrentWin()
         {
             if (selectedWin == TapWinType.equipment)
@@ -139,6 +157,12 @@ namespace CatchMoon
             else if (selectedWin == TapWinType.map)
             {
 
+            }
+            else if (selectedWin == TapWinType.status)
+            {
+                selectButton_Skill_Text.fontStyle = FontStyles.Normal;
+                if (statusWin != null)
+                    statusWin.Close();
             }
         }
     }
