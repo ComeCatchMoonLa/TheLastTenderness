@@ -4,11 +4,11 @@ namespace CatchMoon
 {
     public class DestroyAuto : MonoBehaviour
     {
-        public float timeUntilDestoryed = 1f; // 销毁前等待的时间
+        public float timeUntilDestroyed = 1f; // 销毁前等待的时间
 
         private void Start()
         {
-            Destroy(gameObject, timeUntilDestoryed);
+            Destroy(gameObject, timeUntilDestroyed);
         }
     }
 }

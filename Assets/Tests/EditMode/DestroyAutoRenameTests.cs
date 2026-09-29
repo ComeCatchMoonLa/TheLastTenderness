@@ -18,8 +18,8 @@ namespace CatchMoon.Tests
             string meta = File.ReadAllText(Path.Combine(scripts, "DestroyAuto.cs.meta"));
             Assert.IsTrue(meta.Contains("guid: " + ScriptGuid));
 
-            AssertPrefab("Prefabs/FX/BloodSplat_FX.prefab", "timeUntilDestoryed: 3");
-            AssertPrefab("Prefabs/FX/FX_Explosion.prefab", "timeUntilDestoryed: 5");
+            AssertPrefab("Prefabs/FX/BloodSplat_FX.prefab", "timeUntilDestroyed: 3");
+            AssertPrefab("Prefabs/FX/FX_Explosion.prefab", "timeUntilDestroyed: 5");
         }
 
         static void AssertPrefab(string relativePath, string wait)
@@ -27,6 +27,7 @@ namespace CatchMoon.Tests
             string text = File.ReadAllText(Path.Combine(Application.dataPath, relativePath));
             Assert.IsTrue(text.Contains("guid: " + ScriptGuid), relativePath);
             Assert.IsTrue(text.Contains(wait), relativePath);
+            Assert.IsFalse(text.Contains("timeUntilDestoryed"), relativePath);
             Assert.IsFalse(text.Contains("DestoryAuto"), relativePath);
         }
     }
