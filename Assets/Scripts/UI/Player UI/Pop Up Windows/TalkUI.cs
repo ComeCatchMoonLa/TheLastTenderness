@@ -160,7 +160,7 @@ namespace CatchMoon
                     talkContentText.text = newSentence;
                     yield return new WaitForSeconds((talkContent[0].duration - waitTime) / talkContent[0].text.Length);
                 }
-                talkContent.RemoveAt(0); // 处理完该段文本后，在对话内容列表中移除该段文本
+                DialogueTail.DropSpoken(talkContent);
                 yield return new WaitForSeconds(waitTime);
             }
             HandleTalkEnd(npc);
@@ -220,7 +220,7 @@ namespace CatchMoon
                     else
                     {
                         talkContentText.text = talkContent[0].text;
-                        talkContent.RemoveAt(0); // 处理完该段文本后，在对话内容列表中移除该段文本
+                        DialogueTail.DropSpoken(talkContent);
                         sentenceIsComplete = true;
                     }
                 }
@@ -258,7 +258,7 @@ namespace CatchMoon
                 talkContentText.text = newSentence;
                 yield return new WaitForSeconds((talkContent[0].duration - waitTime) / talkContent[0].text.Length);
             }
-            talkContent.RemoveAt(0); // 处理完该段文本后，在对话内容列表中移除该段文本
+            DialogueTail.DropSpoken(talkContent);
             sentenceIsComplete = true;
         }
         public void Start_UpdateDialogue_WFW_Helper(EnemyManager npc)
@@ -272,7 +272,7 @@ namespace CatchMoon
         {
             SetTalkerStatus(npc);
             talkContentText.text = talkContent[0].text;
-            talkContent.RemoveAt(0);
+            DialogueTail.DropSpoken(talkContent);
         }
 
         /// <summary>
