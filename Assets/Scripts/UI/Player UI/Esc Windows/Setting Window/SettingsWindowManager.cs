@@ -120,37 +120,27 @@ namespace CatchMoon
         }
         public void SelectLeftWin()
         {
-            switch (selectedWin)
-            {
-                case SettingsWinType.gameSettings:
-                    SelectControlWin();
-                    break;
-                case SettingsWinType.display:
-                    SelectGameSettingsWin();
-                    break;
-                case SettingsWinType.sound:
-                    SelectDisplayWin();
-                    break;
-                case SettingsWinType.control:
-                    SelectSoundWin();
-                    break;
-            }
+            Select(SettingsSubWindowNav.Left(selectedWin));
         }
         public void SelectRightWin()
         {
-            switch (selectedWin)
+            Select(SettingsSubWindowNav.Right(selectedWin));
+        }
+        void Select(SettingsWinType type)
+        {
+            switch (type)
             {
                 case SettingsWinType.gameSettings:
-                    SelectDisplayWin();
+                    SelectGameSettingsWin();
                     break;
                 case SettingsWinType.display:
-                    SelectSoundWin();
+                    SelectDisplayWin();
                     break;
                 case SettingsWinType.sound:
-                    SelectControlWin();
+                    SelectSoundWin();
                     break;
-                case SettingsWinType.control:
-                    SelectGameSettingsWin();
+                default:
+                    SelectControlWin();
                     break;
             }
         }
@@ -262,17 +252,9 @@ namespace CatchMoon
         }
         void VSYNC_ApplyCurrentOption()
         {
-            switch (gameSettingsData.vsync_Options)
-            {
-                case VSYNC_Options.enable:
-                    vsync_Option_Text.text = "启用";
-                    QualitySettings.vSyncCount = 1;
-                    break;
-                case VSYNC_Options.disable:
-                    vsync_Option_Text.text = "禁用";
-                    QualitySettings.vSyncCount = 0;
-                    break;
-            }
+            SettingsDisplayApply.Vsync(gameSettingsData.vsync_Options, out string label, out int vSyncCount);
+            vsync_Option_Text.text = label;
+            QualitySettings.vSyncCount = vSyncCount;
         }
 
         // 帧率限制
@@ -290,9 +272,9 @@ namespace CatchMoon
 
         void FrameRateLimit_ApplyCurrentOption()
         {
-            FrameRateLimit_Options option = gameSettingsData.frameRateLimit_Options;
-            frameRateLimit_Option_text.text = FrameRateLimitTable.Label(option);
-            Application.targetFrameRate = FrameRateLimitTable.Value(option);
+            SettingsDisplayApply.FrameRate(gameSettingsData.frameRateLimit_Options, out string label, out int targetFrameRate);
+            frameRateLimit_Option_text.text = label;
+            Application.targetFrameRate = targetFrameRate;
         }
 
         public void DisplayQuality_SetNextOption()
@@ -309,9 +291,9 @@ namespace CatchMoon
 
         void DisplayQuality_ApplyCurrentOption()
         {
-            DisplayQuality_Options option = gameSettingsData.displayQuality_Options;
-            displayQuality_Option_text.text = DisplayQualityTable.Label(option);
-            QualitySettings.SetQualityLevel(DisplayQualityTable.Level(option));
+            SettingsDisplayApply.DisplayQuality(gameSettingsData.displayQuality_Options, out string label, out int level);
+            displayQuality_Option_text.text = label;
+            QualitySettings.SetQualityLevel(level);
         }
 
         public void PostTreatmentQuality_SwitchOption()
@@ -322,7 +304,7 @@ namespace CatchMoon
 
         void PostTreatmentQuality_ApplyCurrentOption()
         {
-            postTreatmentQuality_text.text = PostTreatmentQualityTable.Label(gameSettingsData.postTreatmentQuality_Options);
+            postTreatmentQuality_text.text = SettingsDisplayApply.PostTreatment(gameSettingsData.postTreatmentQuality_Options);
         }
 
         public void SpecialEffectQuality_SwitchOption()
@@ -333,7 +315,7 @@ namespace CatchMoon
 
         void SpecialEffectQuality_ApplyCurrentOption()
         {
-            specialEffectQuality_text.text = SpecialEffectQualityTable.Label(gameSettingsData.specialEffectQuality_Options);
+            specialEffectQuality_text.text = SettingsDisplayApply.SpecialEffect(gameSettingsData.specialEffectQuality_Options);
         }
         
         /// [未完成] 亮度调节(准确来说是伽马值)
