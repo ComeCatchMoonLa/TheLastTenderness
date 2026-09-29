@@ -9,6 +9,7 @@ namespace CatchMoon
 
         [Header("篝火状态")]
         public bool hasBeenActived;
+        [SerializeField] float hostileRadius;
 
         [Header("篝火特效")]
         public ParticleSystem activationFX;
@@ -37,6 +38,14 @@ namespace CatchMoon
         {
             if (hasBeenActived)
             {
+                if (hostileRadius <= 0f)
+                {
+                    Debug.LogError($"{name}: hostileRadius 未填");
+                    return;
+                }
+                if (!CampFireRest.Allow(hostileRadius, PursuingEnemyInside()))
+                    return;
+
                 player.pStats.RestoreVitalsToMax();
                 player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             }
@@ -52,6 +61,18 @@ namespace CatchMoon
                 fireFX.Play();
                 audioSource.PlayOneShot(campFireActivationSFX);
             }
+        }
+
+        bool PursuingEnemyInside()
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, hostileRadius, LayerMask.npc);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                EnemyManager enemy = hits[i].GetComponentInParent<EnemyManager>();
+                if (enemy != null && enemy.CurrentState is PursueTargetState)
+                    return true;
+            }
+            return false;
         }
     }
 }
