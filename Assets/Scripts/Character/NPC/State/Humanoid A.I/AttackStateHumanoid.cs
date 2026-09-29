@@ -95,14 +95,7 @@ namespace CatchMoon
         /// </summary>
         private void RotateTowardsTargrtWhilstAttacking(EnemyManager enemy)
         {
-            if (enemy.canRotate && enemy.isInteracting)
-            {
-                if (enemy.targetDir == Vector3.zero)
-                    enemy.targetDir = transform.forward;
-
-                Quaternion targetRotation = Quaternion.LookRotation(enemy.targetDir);
-                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, targetRotation, enemy.aiSettings.rotationSpeed * Time.deltaTime);
-            }
+            AttackFacing.Apply(enemy.transform, transform, ref enemy.targetDir, enemy.canRotate, enemy.isInteracting, enemy.aiSettings.rotationSpeed * Time.deltaTime);
         }
 
         /// <summary>
