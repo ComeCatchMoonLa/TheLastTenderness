@@ -7,6 +7,8 @@ namespace CatchMoon
     /// </summary>
     public class CombatStanceState : State
     {
+        public const float ApproachDistance = 1.4f;
+
         PursueTargetState pursueTargetState;
         protected AttackState attackState;
         public EnemyAttackAction[] enemyAttacks;
@@ -114,7 +116,7 @@ namespace CatchMoon
                 setAroundDirection = false;
             }
 
-            if (enemy.distFromTarget > 1.4f)
+            if (enemy.distFromTarget > ApproachDistance)
                 verticalMovementValue = 0.5f;
             else
                 verticalMovementValue = 0f;

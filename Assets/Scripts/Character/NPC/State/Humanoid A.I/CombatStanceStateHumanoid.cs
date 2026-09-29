@@ -186,7 +186,7 @@ namespace CatchMoon
             {
                 horizontalMovementValue = 0f;
                 // 攻击冷却好了却打不到，接近Player
-                if (enemy.distFromTarget > 1.4f)
+                if (enemy.distFromTarget > CombatStanceState.ApproachDistance)
                     verticalMovementValue = 0.5f;
                 else
                     verticalMovementValue = 0;
