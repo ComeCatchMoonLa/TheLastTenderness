@@ -10,7 +10,7 @@ namespace CatchMoon
         [Header("状态条")]
         public HealthBar healthBar;
         public StaminaBar staminaBar;
-        public FocusPointsBar manaBar;
+        public FocusPointsBar focusPointsBar;
 
         [Header("快捷槽 UI")]
         public QuickSlotsUI quickSlotsUI;
@@ -33,7 +33,7 @@ namespace CatchMoon
 
             healthBar = GetComponentInChildren<HealthBar>();
             staminaBar = GetComponentInChildren<StaminaBar>();
-            manaBar = GetComponentInChildren<FocusPointsBar>();
+            focusPointsBar = GetComponentInChildren<FocusPointsBar>();
             quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
             soulCountUI = GetComponentInChildren<SoulCountUI>();
         }
@@ -47,8 +47,8 @@ namespace CatchMoon
                 Debug.LogError("healthBar == null");
             if (staminaBar == null)
                 Debug.LogError("staminaBar == null");
-            if (manaBar == null)
-                Debug.LogError("manaBar == null");
+            if (focusPointsBar == null)
+                Debug.LogError("focusPointsBar == null");
             if (quickSlotsUI == null)
                 Debug.LogError("quickSlotsUI == null");
             if (soulCountUI == null)

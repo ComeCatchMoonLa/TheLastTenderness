@@ -7996,7 +7996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
-  manaBar: {fileID: 0}
+  focusPointsBar: {fileID: 0}
   quickSlotsUI: {fileID: 0}
   soulCountUI: {fileID: 0}
   crosshair: {fileID: 1202845902950948380}

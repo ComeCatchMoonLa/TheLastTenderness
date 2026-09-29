@@ -25,8 +25,8 @@ namespace CatchMoon
             player.ui.hud.staminaBar.SetMaxStamina(maxStamina);
             player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
 
-            player.ui.hud.manaBar.SetMaxMP(maxMP);
-            player.ui.hud.manaBar.SetCurrentMP(currentMP);
+            player.ui.hud.focusPointsBar.SetMaxMP(maxMP);
+            player.ui.hud.focusPointsBar.SetCurrentMP(currentMP);
         }
 
         public override bool TakeDamage(string damageAnimation, DamageSegments damage, bool playHurtSound = true)
@@ -97,7 +97,7 @@ namespace CatchMoon
         {
             if (base.AddMP(addAmount))
             {
-                player.ui.hud.manaBar.SetCurrentMP(currentMP);
+                player.ui.hud.focusPointsBar.SetCurrentMP(currentMP);
                 return true;
             }
             else return false;
@@ -106,7 +106,7 @@ namespace CatchMoon
         {
             if (base.DeductMP(deductAmount))
             {
-                player.ui.hud.manaBar.SetCurrentMP(currentMP);
+                player.ui.hud.focusPointsBar.SetCurrentMP(currentMP);
                 return true;
             }
             else return false;
@@ -131,7 +131,7 @@ namespace CatchMoon
                 player.pInventory.RefillConsumablesToMax();
             player.ui.hud.healthBar.SetCurrentHP(currentHP);
             player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
-            player.ui.hud.manaBar.SetCurrentMP(currentMP);
+            player.ui.hud.focusPointsBar.SetCurrentMP(currentMP);
         }
 
         protected override void HandlePoiseResetTimer()

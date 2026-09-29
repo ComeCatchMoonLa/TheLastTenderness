@@ -45,7 +45,7 @@ namespace CatchMoon.Tests
             var hud = hudObject.AddComponent<HUDWindowsManager>();
             hud.healthBar = Bar<HealthBar>();
             hud.staminaBar = Bar<StaminaBar>();
-            hud.manaBar = Bar<FocusPointsBar>();
+            hud.focusPointsBar = Bar<FocusPointsBar>();
             ui.hud = hud;
             return ui;
         }

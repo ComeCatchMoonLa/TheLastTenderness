@@ -4,30 +4,30 @@
 
 ## 0. 开始前
 
-- [ ] 1.51 已收尾。
-- [ ] 读过技术设计：只改这个字段名和 `UI.prefab` 的键。`{fileID: 0}` 保持。
+- [x] 1.51 已收尾。
+- [x] 读过技术设计：只改这个字段名和 `UI.prefab` 的键。`{fileID: 0}` 保持。
 
 **阶段门槛：** 知道 `currentMP` 和 `focusLevel` 不动。
 
 ## 1. 改名
 
-- [ ] 字段、调用、日志和 `RestRefillConsumableTests` 改成 `focusPointsBar`。
-- [ ] `UI.prefab` 的键改成 `focusPointsBar`，引用值不变。
-- [ ] 技术设计点名的三篇代码分析跟着改。已收尾的版本文档不改。
+- [x] 字段、调用、日志和 `RestRefillConsumableTests` 改成 `focusPointsBar`。
+- [x] `UI.prefab` 的键改成 `focusPointsBar`，引用值不变。
+- [x] 技术设计点名的三篇代码分析跟着改。已收尾的版本文档不改。
 
 **阶段门槛：** 场景文件不进这次 diff。
 
 ## 2. 单元测试
 
-- [ ] `FocusBarFieldTests` 断言字段名和预制体键。
-- [ ] 测试不创建角色。
+- [x] `FocusBarFieldTests` 断言字段名和预制体键。
+- [x] 测试不创建角色。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。蓝条仍跟着专注走，留给人看。
-- [ ] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
-- [ ] 大纲里的 1.52 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。蓝条仍跟着专注走，留给人看。
+- [x] 收尾前 reviewer 的结论是「通过」或「有保留通过」。
+- [x] 大纲里的 1.52 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。
