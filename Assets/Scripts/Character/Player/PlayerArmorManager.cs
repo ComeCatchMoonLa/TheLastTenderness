@@ -8,7 +8,7 @@ namespace CatchMoon
 
         HeadModelChanger headModelChanger;
         TorsoModelChanger torsoModelChanger;
-        HipModelChanger hipModelChanger;
+        HipsModelChanger hipModelChanger;
 
         [Header("默认赤裸模型")]
         [SerializeField] string nakedTorsoModelName;
@@ -25,7 +25,7 @@ namespace CatchMoon
 
             headModelChanger = GetComponentInChildren<HeadModelChanger>();
             torsoModelChanger = GetComponentInChildren<TorsoModelChanger>();
-            hipModelChanger = GetComponentInChildren<HipModelChanger>();
+            hipModelChanger = GetComponentInChildren<HipsModelChanger>();
 
             if (!headModelChanger || !torsoModelChanger || !hipModelChanger) Debug.LogError("null");
         }

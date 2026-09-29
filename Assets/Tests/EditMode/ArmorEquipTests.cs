@@ -83,7 +83,7 @@ namespace CatchMoon.Tests
                 var hipsNaked = new GameObject("naked-hips");
                 var head = Changer<HeadModelChanger>(headHelm);
                 var torso = Changer<TorsoModelChanger>(torsoPlate, torsoNaked);
-                var hips = Changer<HipModelChanger>(hipsNaked);
+                var hips = Changer<HipsModelChanger>(hipsNaked);
 
                 var player = root.AddComponent<PlayerManager>();
                 var playerStats = root.AddComponent<PlayerStatsManager>();
