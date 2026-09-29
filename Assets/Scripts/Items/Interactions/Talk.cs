@@ -15,6 +15,19 @@ namespace CatchMoon
         public List<DialogueTextData> talkContent;
         public bool offersFlaskSplit;
 
+        public Item wantedGift;
+        public bool giftAdvanced;
+
+        public bool Give(PlayerManager player, Item offered)
+        {
+            if (player == null || player.pInventory == null) return false;
+            if (!GiftExchange.CanTake(player.pInventory.items, wantedGift, offered, giftAdvanced))
+                return false;
+            player.pInventory.RemoveItem(offered);
+            giftAdvanced = true;
+            return true;
+        }
+
         public bool AllocateFlasks(PlayerManager player, int estus, int ash)
         {
             if (!offersFlaskSplit || player == null || player.pInventory == null) return false;
