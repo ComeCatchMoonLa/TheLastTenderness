@@ -57,7 +57,9 @@ namespace CatchMoon
             arrowDamageCollider.character = player;
             arrowDamageCollider.teamID = player.pStats.teamID;
             arrowDamageCollider.ammoItem = player.pInventory.currentAmmo;
-            arrowDamageCollider.pd = player.pInventory.currentAmmo.physicalDamage;
+            AmmoItem ammo = player.pInventory.currentAmmo;
+            bool fullDraw = BowShot.FullDraw(ammo.name, ammo.fullDrawTimeFilled, ammo.fullDrawTime, player.aimHeld);
+            arrowDamageCollider.pd = BowShot.Damage(ammo.name, fullDraw, ammo.physicalDamage, ammo.fullDrawDamageFilled, ammo.fullDrawDamage);
 
             if (player.pInventory.AmmoRemaining(player.pInventory.currentAmmo) == 0)
                 player.pInventory.currentAmmo = null;

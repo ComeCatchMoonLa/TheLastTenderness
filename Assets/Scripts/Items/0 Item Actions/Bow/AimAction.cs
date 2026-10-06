@@ -18,16 +18,16 @@ namespace CatchMoon
             // 没有箭时不能瞄准
             if (player.pInventory.currentAmmo == null)
             {
-                player.aimingMode = false;
+                player.ClearAimingMode();
                 if (!player.isInteracting)
                     player.pAnimator.PlayTargetAnimation("Shrug", true);
                 return;
             }
 
             player.aimingMode = true;
-            // 交互打断瞄准
+            player.aimHeld = 0f;
             if (player.isInteracting)
-                player.aimingMode = false;
+                player.ClearAimingMode();
         }
     }
 }

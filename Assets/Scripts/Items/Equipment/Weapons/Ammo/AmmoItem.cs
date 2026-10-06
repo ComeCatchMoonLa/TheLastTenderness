@@ -19,6 +19,10 @@ namespace CatchMoon
 
         [Header("Ammo Base Damage")]
         public int physicalDamage;
+        public bool fullDrawTimeFilled;
+        public float fullDrawTime;
+        public bool fullDrawDamageFilled;
+        public int fullDrawDamage;
         //public int magicDamage;
         //public int fireDamage;
         //public int darkDamage;

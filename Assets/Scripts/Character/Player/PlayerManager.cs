@@ -19,10 +19,12 @@ namespace CatchMoon
 
         [Header("Player Flags")]
         public bool aimingMode = false;
+        public float aimHeld;
 
         public void ClearAimingMode()
         {
             aimingMode = false;
+            aimHeld = 0f;
         }
         [System.NonSerialized] public float colliderRadiusBeforeAim;
         [System.NonSerialized] public bool aimingRadiusApplied;
@@ -179,6 +181,8 @@ namespace CatchMoon
         protected override void UpdateBoolsValue()
         {
             base.UpdateBoolsValue();
+            if (aimingMode)
+                aimHeld += Time.deltaTime;
             animator.SetBool("aimingMode", aimingMode);
         }
     }
