@@ -147,6 +147,23 @@ namespace CatchMoon
             SetSouls(0);
         }
 
+        public bool RecoverRemnant()
+        {
+            if (!hasSoulRemnant) return false;
+            int amount = soulRemnant;
+            hasSoulRemnant = false;
+            soulRemnant = 0;
+            AddSouls(amount);
+            return true;
+        }
+
+        public void ReturnFromDeath(Transform fire, Transform body)
+        {
+            isDead = false;
+            if (fire != null && body != null)
+                body.position = fire.position;
+        }
+
         public bool ApplyEmber(float ratio, string assetName)
         {
             if (!EmberHealth.TryRaise(maxHP, ratio, out float newMax))
