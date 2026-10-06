@@ -187,6 +187,7 @@ namespace CatchMoon
                 leftHandDC.dd = weaponItem.dd;
 
                 character.cEffects.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+                NoteBuffFire(weaponItem, leftHandSlot.currentWeaponModel.transform);
             }
             else
             {
@@ -218,12 +219,22 @@ namespace CatchMoon
                 rightHandDC.dd = weaponItem.dd;
 
                 character.cEffects.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+                NoteBuffFire(weaponItem, rightHandSlot.currentWeaponModel.transform);
             }
         }
 
         /// <summary>
         /// 加载两手IK的目标
         /// </summary>
+        void NoteBuffFire(WeaponItem weaponItem, Transform model)
+        {
+            GameObject fire = WeaponBuff.FindFire(model);
+            if (fire == null) return;
+            character.cCombat.buffFire = fire;
+            bool show = character.cCombat.weaponBuff.active && character.cCombat.weaponBuff.weapon == weaponItem;
+            WeaponBuff.ShowFire(fire, show);
+        }
+
         public virtual void LoadTwoHandIKTarget()
         {
             if (rightHandSlot.currentWeapon.weaponType == WeaponType.melee_TH)

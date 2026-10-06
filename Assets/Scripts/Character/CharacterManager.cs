@@ -104,6 +104,8 @@ namespace CatchMoon
             if (cStats.isDead) return;
 
             UpdateBoolsValue();
+            cCombat.weaponBuff = WeaponBuff.Tick(cCombat.weaponBuff, Time.deltaTime);
+            WeaponBuff.ShowFire(cCombat.buffFire, cCombat.weaponBuff.active);
 
             if (talkWithSB)
                 RollForAnimation();

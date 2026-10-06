@@ -25,6 +25,8 @@ namespace CatchMoon
         public bool isUsingConsumable;          // 正在使用消耗品
         public bool isBlocking;                 // 正在防御
         public bool isAiming;                   // 正在瞄准
+        public WeaponBuffState weaponBuff;
+        public GameObject buffFire;
         public bool lastHitWasBlocked;
         public bool lastHitBrokePoise;
         public float lastHitDamageTotal;

@@ -137,17 +137,18 @@ namespace CatchMoon
             float multiplier = PhaseDamageMultiplier(character.isUsingRightHand, character.isUsingLeftHand,
                 character.cInventory.rightWeapon, character.cInventory.leftWeapon, character.cCombat.attackType);
 
+            DamageSegments segments = WeaponBuff.Add(new DamageSegments
+            {
+                Physical = pd,
+                Fire = fd,
+                Magic = md,
+                Lightning = ld,
+                Dark = dd
+            }, character.cCombat.weaponBuff);
             damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, new IncomingDamage
             {
                 Multiplier = multiplier,
-                Segments = new DamageSegments
-                {
-                    Physical = pd,
-                    Fire = fd,
-                    Magic = md,
-                    Lightning = ld,
-                    Dark = dd
-                }
+                Segments = segments
             }, true, poiseBreak, guardBreakModifider);
         }
 

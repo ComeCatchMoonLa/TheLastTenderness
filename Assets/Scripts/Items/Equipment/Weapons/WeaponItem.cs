@@ -18,6 +18,7 @@ namespace CatchMoon
         public bool spellPowerFilled;
         public float spellPower;
         public string infusion;
+        public bool cannotBuff;
         public int reinforceLevel;
         public UpgradePath upgradePath;
         public bool strengthNeedFilled;

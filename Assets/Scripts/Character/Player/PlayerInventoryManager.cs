@@ -273,6 +273,7 @@ namespace CatchMoon
                 {
                     player.isTwoHandingWeapon = !player.isTwoHandingWeapon;
                     player.pWeaponSlot.LoadWeaponsOnBothHands();
+                    NoteEquippedWeapons();
                 }
             }
         }
@@ -338,6 +339,7 @@ namespace CatchMoon
                 }
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
+            NoteEquippedWeapons();
         }
         public bool SelectHandWeapon(bool isLeft, int index)
         {
@@ -354,7 +356,15 @@ namespace CatchMoon
                 currentRightWeaponIdx = index;
                 rightWeapon = hand[index];
             }
+            NoteEquippedWeapons();
             return true;
+        }
+
+        void NoteEquippedWeapons()
+        {
+            if (player == null || player.pCombat == null) return;
+            player.pCombat.weaponBuff = WeaponBuff.ClearIfUnequipped(player.pCombat.weaponBuff, rightWeapon, leftWeapon);
+            WeaponBuff.ShowFire(player.pCombat.buffFire, player.pCombat.weaponBuff.active);
         }
 
         void ChangeRightWeapon()
@@ -374,6 +384,7 @@ namespace CatchMoon
                 }
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
+            NoteEquippedWeapons();
         }
         public bool Memorize(SpellItem spell, bool atBonfire)
         {
