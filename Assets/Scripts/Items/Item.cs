@@ -8,6 +8,7 @@ namespace CatchMoon
         public ItemType itemType;
         public bool isRing;
         public bool isCovenantMark;
+        public bool isKey;
         [Header("物品信息")]
         public Sprite itemIcon;
         public string itemName;

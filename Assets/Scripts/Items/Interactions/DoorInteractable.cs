@@ -23,6 +23,15 @@ namespace CatchMoon
             ApplyOpen();
         }
 
+        public void CloseForNewCycle()
+        {
+            opened = false;
+            transform.rotation = closedRotation;
+            Collider[] cols = GetComponents<Collider>();
+            for (int i = 0; i < cols.Length; i++)
+                cols[i].enabled = true;
+        }
+
         public void AfterRest()
         {
             opened = HingedDoor.AfterRest(opened);

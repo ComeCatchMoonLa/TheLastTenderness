@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace CatchMoon
@@ -115,7 +116,24 @@ namespace CatchMoon
                 return;
             }
 
+            if (enemy != null && enemy.aiSettings != null && enemy.aiSettings.isBoss)
+            {
+                StartCoroutine(HideBossAfterDelay());
+                return;
+            }
+
             Destroy(gameObject, destoryWaitTime);
+        }
+
+        public void StopBossHide()
+        {
+            StopAllCoroutines();
+        }
+
+        IEnumerator HideBossAfterDelay()
+        {
+            yield return new WaitForSeconds(destoryWaitTime);
+            gameObject.SetActive(false);
         }
 
         public void RestoreAfterRest()

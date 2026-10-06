@@ -10,6 +10,7 @@ namespace CatchMoon
         [Header("篝火状态")]
         public bool hasBeenActived;
         public bool sealedUntilBossClear;
+        public bool nextCycleInsteadOfRest;
         [SerializeField] float hostileRadius;
 
         [Header("篝火特效")]
@@ -39,6 +40,12 @@ namespace CatchMoon
         {
             if (hasBeenActived)
             {
+                if (nextCycleInsteadOfRest)
+                {
+                    nextCycleInsteadOfRest = false;
+                    NewCycle.Apply(player != null ? player.pInventory : null);
+                    return;
+                }
                 if (hostileRadius <= 0f)
                 {
                     Debug.LogError($"{name}: hostileRadius 未填");
@@ -76,6 +83,14 @@ namespace CatchMoon
                 fireFX.Play();
                 audioSource.PlayOneShot(campFireActivationSFX);
             }
+        }
+
+        public void ExtinguishForNewCycle()
+        {
+            hasBeenActived = false;
+            interactTipText = "点火";
+            if (fireFX != null)
+                fireFX.gameObject.SetActive(false);
         }
 
         bool PursuingEnemyInside()

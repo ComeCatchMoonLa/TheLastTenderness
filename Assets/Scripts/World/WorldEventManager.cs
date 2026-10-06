@@ -47,6 +47,15 @@ namespace CatchMoon
                 fogWall.ActivateFogWall();
         }
 
+        public void ResetForNewCycle()
+        {
+            bossHasBeenDefeated = false;
+            bossFightIsActive = false;
+            bossHasBeenAwakened = false;
+            if (rewardFire != null)
+                rewardFire.sealedUntilBossClear = true;
+        }
+
         public void BossHasBeenDefeated()
         {
             bool fogUp = true;
