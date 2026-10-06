@@ -28,6 +28,7 @@ namespace CatchMoon
         public int ashShare = 0;
         public int estusLeft = 3;
         public int ashLeft = 0;
+        PhantomLoadout phantomSaved;
         public int boneTier = 0;
         public FlaskRecoveryTable recoveryTable;
 
@@ -187,6 +188,26 @@ namespace CatchMoon
             HandleTwoHandInput();
             HandleQuickSlotsInput();
             HandleUseConsumableInput();
+        }
+
+        public bool EnterPhantom(PhantomSign sign, float maxHp, float unemberedMax, out float maxNow)
+        {
+            bool entered = PhantomEntry.Enter(
+                sign, estusLeft, estusShare, ashLeft, ashShare, maxHp, unemberedMax,
+                out phantomSaved, out int estusNow, out int ashNow, out maxNow);
+            if (!entered) return false;
+            estusLeft = estusNow;
+            ashLeft = ashNow;
+            return true;
+        }
+
+        public bool ReturnPhantom(out float maxHp)
+        {
+            if (!PhantomEntry.Return(phantomSaved, out int estus, out int ash, out maxHp)) return false;
+            estusLeft = estus;
+            ashLeft = ash;
+            phantomSaved = default;
+            return true;
         }
 
         public void AddItem(Item item)
