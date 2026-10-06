@@ -15,6 +15,8 @@ namespace CatchMoon
         [Header("武器类型")]
         public WeaponType weaponType;
         public CatalystKind catalystKind;
+        public string infusion;
+        public int reinforceLevel;
 
         [Header("伤害")]
         public int pd;
