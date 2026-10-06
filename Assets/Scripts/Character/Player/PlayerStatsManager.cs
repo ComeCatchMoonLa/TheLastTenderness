@@ -122,6 +122,23 @@ namespace CatchMoon
                 player.ui.hud.soulCountUI.SetSoulCountText(soulCount);
         }
 
+        public bool ApplyEmber(float ratio, string assetName)
+        {
+            if (!EmberHealth.TryRaise(maxHP, ratio, out float newMax))
+            {
+                Debug.LogError($"{assetName}: healthRatio 未填");
+                return false;
+            }
+            maxHP = newMax;
+            currentHP = newMax;
+            if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.healthBar != null)
+            {
+                player.ui.hud.healthBar.SetMaxHP(maxHP);
+                player.ui.hud.healthBar.SetCurrentHP(currentHP);
+            }
+            return true;
+        }
+
         public void RestoreVitalsToMax()
         {
             currentHP = maxHP;
