@@ -36,6 +36,7 @@ namespace CatchMoon
                         else
                         {
                             enemy.currentTarget = targetcharacter;
+                            AllyCall.WakeGroup(enemy, targetcharacter);
                         }
                     }
                 }

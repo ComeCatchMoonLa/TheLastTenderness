@@ -61,6 +61,9 @@ namespace CatchMoon
         {
             if (base.TakeDamage(damageAnimation, damage, playHurtSound))
             {
+                if (enemy != null && !string.IsNullOrEmpty(damageAnimation))
+                    AllyCall.Interrupt(ref enemy.isCalling, ref enemy.callFinished);
+
                 if (!enemy.aiSettings.isBoss)
                 {
                     enemyHealthBar.SetCurrentHealth(currentHP);

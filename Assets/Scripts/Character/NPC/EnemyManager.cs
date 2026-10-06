@@ -35,12 +35,27 @@ namespace CatchMoon
 
         [Header("目标信息")]
         public CharacterManager currentTarget;
+        public EnemyManager[] instantGroup;
+        public EnemyManager[] distantAllies;
+        public bool isCalling;
+        public bool callFinished;
         public float distFromTarget; // 到目标的距离
         public Vector3 targetDir;    // 目标方向
         public float targetDirAngle; // 目标方向与正前方的夹角
 
         [HideInInspector] public float turnAngle;   // 旋转角度(原地旋转)
         [HideInInspector] public bool hadTurned;    // 已经完成了旋转
+
+        public void BeginCall()
+        {
+            AllyCall.Begin(ref isCalling, ref callFinished);
+        }
+
+        public void FinishCall()
+        {
+            if (!AllyCall.Finish(ref isCalling, ref callFinished)) return;
+            AllyCall.WakeDistant(this);
+        }
 
         protected override void Awake()
         {
