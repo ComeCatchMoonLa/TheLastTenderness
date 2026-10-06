@@ -9,7 +9,7 @@ namespace CatchMoon.Tests
     public class DialogueAdvanceTests
     {
         [Test]
-        public void ManualSentence_Start_WritesFullLineAndRemovesIt()
+        public void ManualSentence_Start_WritesFullLineAndKeepsIt()
         {
             var root = new GameObject("talk-rig");
             var player = root.AddComponent<PlayerManager>();
@@ -36,7 +36,7 @@ namespace CatchMoon.Tests
 
             Assert.AreEqual("你好", lineText.text);
             Assert.AreEqual("甲", nameText.text);
-            Assert.AreEqual(0, talk.talkContent.Count);
+            Assert.AreEqual(1, talk.talkContent.Count);
             Assert.IsTrue(npc.talkWithSB);
             Assert.IsFalse(player.talkWithSB);
 
