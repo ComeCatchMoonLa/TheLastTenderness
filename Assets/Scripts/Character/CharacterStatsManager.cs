@@ -97,6 +97,7 @@ namespace CatchMoon
             HandlePoiseResetTimer();
             TickRegen(Time.deltaTime);
             TickCurse(Time.deltaTime);
+            TickPoison(Time.deltaTime);
         }
 
         public float regenPerSecond;
@@ -106,6 +107,12 @@ namespace CatchMoon
         public float curseCapacity;
         public float curseDecay;
         public bool curseInSource;
+
+        public float poisonMeter;
+        public float poisonCapacity;
+        public float poisonDuration;
+        public float poisonDamagePerSecond;
+        public float poisonTimeLeft;
 
         public bool BeginRegen(float perSecond, float seconds)
         {
@@ -129,6 +136,30 @@ namespace CatchMoon
             curseMeter = cleared;
             currentHP = 0f;
             isDead = true;
+            return true;
+        }
+
+        public void TickPoison(float deltaTime)
+        {
+            if (isDead) return;
+            currentHP = PoisonDoT.Tick(name, currentHP, poisonTimeLeft, poisonDamagePerSecond, deltaTime, out poisonTimeLeft);
+        }
+
+        public bool GainPoison(float gain, float resist)
+        {
+            if (isDead) return false;
+            poisonMeter = StatusBuildup.Add(isInvulnerable, name, poisonMeter, gain, resist, poisonCapacity);
+            if (!PoisonDoT.TryStart(name, poisonMeter, poisonCapacity, poisonDuration, out float timeLeft, out float cleared))
+                return false;
+            poisonMeter = cleared;
+            poisonTimeLeft = timeLeft;
+            return true;
+        }
+
+        public bool DrinkPurpleMoss()
+        {
+            if (poisonTimeLeft <= 0f) return false;
+            poisonTimeLeft = PoisonDoT.Stop();
             return true;
         }
 
