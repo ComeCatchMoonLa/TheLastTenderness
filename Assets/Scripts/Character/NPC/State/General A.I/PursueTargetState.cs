@@ -19,7 +19,12 @@ namespace CatchMoon
         {
             if (!enemy.enableAI || enemy.eStats.isDead || enemy.isInteracting) return this;
 
-            if (enemy.aiSettings != null && Leash.TooFar(enemy.distFromTarget, enemy.aiSettings.detectionRadius))
+            if (enemy.aiSettings != null && Territory.PulledOut(enemy.aiSettings.isBoss, enemy.distFromTarget, enemy.aiSettings.activityRadius))
+            {
+                enemy.returningHome = true;
+                enemy.returnToPlacement = true;
+            }
+            else if (enemy.aiSettings != null && Leash.TooFar(enemy.distFromTarget, enemy.aiSettings.detectionRadius))
                 enemy.returningHome = true;
             if (enemy.returningHome)
                 return TickReturn(enemy);
@@ -44,10 +49,14 @@ namespace CatchMoon
         State TickReturn(EnemyManager enemy)
         {
             float arrive = enemy.aiSettings != null ? enemy.aiSettings.returnArrive : 0f;
-            float homeDist = Vector3.Distance(enemy.transform.position, enemy.spottedFrom);
+            Vector3 home = enemy.returnToPlacement ? enemy.placement : enemy.spottedFrom;
+            float homeDist = Vector3.Distance(enemy.transform.position, home);
             if (Leash.Arrived(enemy.name, homeDist, arrive, ref enemy.returnArriveWarned))
             {
+                if (enemy.returnToPlacement && enemy.eStats != null)
+                    enemy.eStats.currentHP = Territory.Refill(enemy.eStats.currentHP, enemy.eStats.maxHP);
                 enemy.returningHome = false;
+                enemy.returnToPlacement = false;
                 enemy.spotRecorded = false;
                 enemy.currentTarget = null;
                 enemy.animator.SetFloat("Vertical", 0f);
@@ -65,7 +74,7 @@ namespace CatchMoon
             }
 
             enemy.animator.SetFloat("Vertical", 1f, 0.1f, Time.deltaTime);
-            WalkToward(enemy, enemy.spottedFrom);
+            WalkToward(enemy, enemy.returnToPlacement ? enemy.placement : enemy.spottedFrom);
             return this;
         }
 

@@ -145,6 +145,8 @@ namespace CatchMoon
             float poiseDamage,
             float guardBreakModifider)
         {
+            try
+            {
             float pd = incoming.Segments.Physical * incoming.Multiplier;
             float fd = incoming.Segments.Fire * incoming.Multiplier;
             float md = incoming.Segments.Magic * incoming.Multiplier;
@@ -203,6 +205,12 @@ namespace CatchMoon
             {
                 RecordIncomingHit(false, true, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(damageAnimation, DamageOf(pd, fd, md, ld, dd));
+            }
+            }
+            finally
+            {
+                if (character is EnemyManager hitEnemy)
+                    hitEnemy.BreakReturnIfStillInRange();
             }
         }
 

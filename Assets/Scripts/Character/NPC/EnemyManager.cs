@@ -36,8 +36,11 @@ namespace CatchMoon
         [Header("目标信息")]
         public CharacterManager currentTarget;
         public Vector3 spottedFrom;
+        public Vector3 placement;
+        public bool placementRecorded;
         public bool spotRecorded;
         public bool returningHome;
+        public bool returnToPlacement;
         public bool returnArriveWarned;
         public EnemyManager[] instantGroup;
         public EnemyManager[] distantAllies;
@@ -77,6 +80,11 @@ namespace CatchMoon
         protected override void Start()
         {
             base.Start();
+            if (!placementRecorded)
+            {
+                placement = transform.position;
+                placementRecorded = true;
+            }
 
             #region 判断空引用异常
             if (eAnimator == null)
@@ -161,6 +169,15 @@ namespace CatchMoon
                     isPreformingAction = false;
                 }
             }
+        }
+
+        public void BreakReturnIfStillInRange()
+        {
+            float engage = aiSettings != null ? aiSettings.aggroRadius : 0f;
+            if (!Territory.Resume(returningHome, true, distFromTarget, engage))
+                return;
+            returningHome = false;
+            returnToPlacement = false;
         }
 
         public void UpdateAICombatInfo()
