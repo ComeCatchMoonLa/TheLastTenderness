@@ -74,6 +74,13 @@ namespace CatchMoon
         /// <param name="collision">触发器捕获的对象</param>
         protected virtual void OnTriggerEnter(Collider collision)
         {
+            IllusionWall wall = collision.GetComponent<IllusionWall>();
+            if (wall != null)
+            {
+                wall.Strike();
+                return;
+            }
+
             if (collision.tag == "Player" || collision.tag == "Enemy") // 攻击角色
             {
                 CharacterManager damageTarget = collision.GetComponent<CharacterManager>();
