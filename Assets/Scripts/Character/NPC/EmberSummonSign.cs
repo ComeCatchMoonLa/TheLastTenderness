@@ -17,5 +17,14 @@ namespace CatchMoon
             helper.SetActive(appears);
             return appears;
         }
+
+        public bool TrySummon(bool emberLit, int hostTeam)
+        {
+            if (!TrySummon(emberLit)) return false;
+            CharacterStatsManager stats = helper.GetComponent<CharacterStatsManager>();
+            if (stats != null)
+                stats.teamID = PhantomTeam.Team(false, hostTeam, stats.teamID);
+            return true;
+        }
     }
 }
