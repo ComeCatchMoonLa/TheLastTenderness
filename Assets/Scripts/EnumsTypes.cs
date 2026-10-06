@@ -144,4 +144,13 @@ namespace CatchMoon
         nearest, // 最近
         minHP,   // 血量最低
     }
+
+    public enum CatalystKind
+    {
+        none,
+        staff,
+        chime,
+        talisman,
+        flame,
+    }
 }

@@ -14,6 +14,12 @@ namespace CatchMoon
             SpellItem spell = character.cInventory.currentSpell;
             if (spell != null && spell.spellType == spellType)
             {
+                WeaponItem held = character.isUsingLeftHand ? character.cInventory.leftWeapon : character.cInventory.rightWeapon;
+                if (held != null && held.catalystKind != CatalystKind.none && !CatalystMatch.Allows(held.catalystKind, spell.spellType))
+                {
+                    character.cAnimator.PlayTargetAnimation("Shrug", true);
+                    return;
+                }
                 if (!AttributesAllowCast(spell, character.cStats.intelligenceLevel, character.cStats.faithLevel))
                 {
                     character.cAnimator.PlayTargetAnimation("Shrug", true);
