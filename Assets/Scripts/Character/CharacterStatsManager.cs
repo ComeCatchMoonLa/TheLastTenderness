@@ -99,6 +99,7 @@ namespace CatchMoon
             TickCurse(Time.deltaTime);
             TickPoison(Time.deltaTime);
             TickFrost(Time.deltaTime);
+            TickToxic(Time.deltaTime);
         }
 
         public float regenPerSecond;
@@ -122,6 +123,13 @@ namespace CatchMoon
         public float frostDamageTaken;
         public float frostStaminaRegen;
         public float frostTimeLeft;
+
+        public float toxicMeter;
+        public float toxicCapacity;
+        public float toxicDuration;
+        public float toxicDamagePerSecond;
+        public float toxicStaminaRegen;
+        public float toxicTimeLeft;
 
         public bool BeginRegen(float perSecond, float seconds)
         {
@@ -191,11 +199,31 @@ namespace CatchMoon
             return true;
         }
 
+        public void TickToxic(float deltaTime)
+        {
+            if (isDead) return;
+            currentHP = ToxicDoT.Tick(name, currentHP, toxicTimeLeft, toxicDamagePerSecond, deltaTime, out toxicTimeLeft);
+        }
+
+        public bool GainToxic(float gain, float resist)
+        {
+            if (isDead) return false;
+            toxicMeter = StatusBuildup.Add(isInvulnerable, name, toxicMeter, gain, resist, toxicCapacity);
+            if (!ToxicDoT.TryStart(name, toxicMeter, toxicCapacity, toxicDuration, toxicDamagePerSecond, toxicStaminaRegen, out float timeLeft, out float cleared))
+                return false;
+            toxicMeter = cleared;
+            toxicTimeLeft = timeLeft;
+            return true;
+        }
+
         public bool DrinkPurpleMoss()
         {
-            if (poisonTimeLeft <= 0f) return false;
-            poisonTimeLeft = PoisonDoT.Stop();
-            return true;
+            return MossChoice.Apply(false, ref poisonTimeLeft, ref toxicTimeLeft);
+        }
+
+        public bool DrinkBloomingMoss()
+        {
+            return MossChoice.Apply(true, ref poisonTimeLeft, ref toxicTimeLeft);
         }
 
         public bool DrinkBlessing()
@@ -389,6 +417,7 @@ namespace CatchMoon
                         ? staminaRegenerationAmountWhilstBlocking
                         : staminaRegenerationAmount;
                     amount = Frostbite.Regen(name, amount, frostTimeLeft > 0f, frostStaminaRegen);
+                    amount = ToxicDoT.Regen(name, amount, toxicTimeLeft > 0f, toxicStaminaRegen);
                     currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
                 }
             }
