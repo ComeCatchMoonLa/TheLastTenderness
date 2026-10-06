@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace CatchMoon
@@ -8,8 +7,8 @@ namespace CatchMoon
         Animator animator;
 
         [SerializeField] Transform playerStandingPosition;
-        public GameObject itemSpawner;
         public WeaponItem itemInChest;
+        public bool opened;
 
         private void Awake()
         {
@@ -26,27 +25,31 @@ namespace CatchMoon
 
         public override void Interact(PlayerManager playerManager)
         {
-            playerManager.OpenChestInteracting(playerStandingPosition, transform.position);
+            if (itemInChest == null)
+            {
+                Debug.LogError($"{name}: itemInChest 未填");
+                return;
+            }
+            if (opened) return;
+            if (playerManager == null || playerManager.pInventory == null) return;
 
+            playerManager.OpenChestInteracting(playerStandingPosition, transform.position);
             animator.Play("Chest Open");
 
-            StartCoroutine(SpawnItemInChest());
-            PickUpItem pickUpItem = itemSpawner.GetComponent<PickUpItem>();
-            if (pickUpItem != null)
+            if (!ChestLoot.Give(false, itemInChest, playerManager.pInventory)) return;
+            opened = true;
+            gameObject.tag = "Untagged";
+
+            if (playerManager.ui != null && playerManager.ui.popUps != null && playerManager.ui.popUps.interactUI != null)
             {
-                pickUpItem.item = itemInChest;
+                playerManager.ui.popUps.interactUI.SetInteractionInfo(itemInChest);
+                playerManager.ui.popUps.interactUI.PopUpInteractionInfoUI();
             }
         }
 
-        private IEnumerator SpawnItemInChest()
+        public void AfterRest()
         {
-            yield return new WaitForSeconds(1f);
-            GameObject item = Instantiate(itemSpawner, transform);
-            item.transform.localPosition = new Vector3(0f, 0.5f, 0f);
-
-            gameObject.tag = "Untagged";
-            gameObject.layer = Layer.environment;
-            Destroy(this);
+            opened = ChestLoot.AfterRest(opened);
         }
     }
 }
