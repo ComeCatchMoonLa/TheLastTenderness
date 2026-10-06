@@ -348,8 +348,9 @@ namespace CatchMoon
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
         }
-        public bool Memorize(SpellItem spell)
+        public bool Memorize(SpellItem spell, bool atBonfire)
         {
+            if (!atBonfire) return false;
             if (spell == null || spells == null || !spells.Contains(spell)) return false;
             if (memorized == null)
                 memorized = new List<SpellItem>();

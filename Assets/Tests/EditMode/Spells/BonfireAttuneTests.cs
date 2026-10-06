@@ -4,24 +4,19 @@ using UnityEngine;
 
 namespace CatchMoon.Tests
 {
-    public class SpellMemoryTests
+    public class BonfireAttuneTests
     {
         [Test]
-        public void Next_SkipsUnmemorized_AndReadsItAfterMemorize()
+        public void Memorize_AwayFromBonfire_LeavesTheBarEmpty()
         {
-            GameObject root = new GameObject("spells");
+            GameObject root = new GameObject("attune");
             PlayerInventoryManager inventory = root.AddComponent<PlayerInventoryManager>();
             SpellItem learned = ScriptableObject.CreateInstance<HealingSpell>();
             inventory.spells = new List<SpellItem> { learned };
             inventory.memorized = new List<SpellItem>();
 
-            int index = 0;
-            Assert.IsNull(SpellMemory.Next(inventory.memorized, ref index));
-            Assert.AreEqual(0, index);
-
-            Assert.IsTrue(inventory.Memorize(learned, true));
-            SpellItem next = SpellMemory.Next(inventory.memorized, ref index);
-            Assert.AreSame(learned, next);
+            Assert.IsFalse(inventory.Memorize(learned, false));
+            Assert.AreEqual(0, inventory.memorized.Count);
 
             Object.DestroyImmediate(learned);
             Object.DestroyImmediate(root);
