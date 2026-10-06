@@ -191,6 +191,12 @@ namespace CatchMoon
 
         public void AddItem(Item item)
         {
+            if (item is CoilFragmentItem fragment)
+            {
+                int already = consumables != null && consumables.Contains(fragment) ? 1 : 0;
+                if (CoilFragment.Pickup(already) == already) return;
+            }
+
             items.Add(item);
 
             if (item.itemType == ItemType.equipment)

@@ -17,9 +17,21 @@ namespace CatchMoon
 
         public override void SuccessfullyUsedConsumable(PlayerManager player)
         {
-            if (player == null || player.pStats == null || player.pInventory == null) return;
-            int before = player.pInventory.ConsumableRemaining(this);
-            HomewardState state = new HomewardState
+            if (!TryCapture(player, out int before, out HomewardState state)) return;
+            if (!HomewardBone.TryUse(state)) return;
+            ApplyReturn(player, state);
+            int spent = before - state.bones;
+            for (int i = 0; i < spent; i++)
+                player.pInventory.TrySpendConsumable(this);
+        }
+
+        protected bool TryCapture(PlayerManager player, out int before, out HomewardState state)
+        {
+            before = 0;
+            state = null;
+            if (player == null || player.pStats == null || player.pInventory == null) return false;
+            before = player.pInventory.ConsumableRemaining(this);
+            state = new HomewardState
             {
                 bossBarVisible = BossBarVisible(),
                 bones = before,
@@ -35,24 +47,22 @@ namespace CatchMoon
                 ash = player.pInventory.ashLeft,
                 ashShare = player.pInventory.ashShare
             };
-            if (!HomewardBone.TryUse(state)) return;
+            return true;
+        }
 
+        protected void ApplyReturn(PlayerManager player, HomewardState state)
+        {
             player.pStats.currentHP = state.hp;
             player.pStats.currentMP = state.mp;
             player.pInventory.estusLeft = state.estus;
             player.pInventory.ashLeft = state.ash;
             WriteBars(player);
-
-            int spent = before - state.bones;
-            for (int i = 0; i < spent; i++)
-                player.pInventory.TrySpendConsumable(this);
-
             if (state.resetEnemies)
                 RestoreEnemies();
             RecordedFire.Move(player.transform, state.place);
         }
 
-        static bool BossBarVisible()
+        protected static bool BossBarVisible()
         {
             return BossFightGate.Active();
         }
