@@ -55,6 +55,12 @@ namespace CatchMoon
                     if (resting[i] != null)
                         resting[i].RestoreAfterRest();
                 }
+                DoorInteractable[] doors = FindObjectsByType<DoorInteractable>(FindObjectsInactive.Include);
+                for (int i = 0; i < doors.Length; i++)
+                {
+                    if (doors[i] != null)
+                        doors[i].AfterRest();
+                }
                 player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             }
             else
