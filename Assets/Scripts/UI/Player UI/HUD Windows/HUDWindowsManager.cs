@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CatchMoon
 {
@@ -20,6 +21,8 @@ namespace CatchMoon
 
         [Header("准心")]
         public GameObject crosshair;
+        public Image lockMark;
+        bool lockMarkMissingLogged;
 
         [Header("FPS(调试用)")]
         public TextMeshProUGUI fps_TMP;
@@ -54,6 +57,45 @@ namespace CatchMoon
             if (soulCountUI == null)
                 Debug.LogError("soulCountUI == null");
             #endregion
+        }
+
+        void Update()
+        {
+            UpdateLockMark();
+        }
+
+        public void UpdateLockMark()
+        {
+            if (player == null || player.pCamera == null) return;
+            CharacterManager target = player.pCamera.curLockOnTarget;
+            bool dead = target != null && target.cStats != null && target.cStats.isDead;
+            bool locked = player.pCamera.lockOnFlag && target != null;
+            if (!LockMark.Shown(locked, dead))
+            {
+                lockMarkMissingLogged = false;
+                if (lockMark != null)
+                    lockMark.enabled = false;
+                return;
+            }
+            if (lockMark == null)
+            {
+                if (!lockMarkMissingLogged)
+                {
+                    Debug.LogError($"{name}: lockMark 未填");
+                    lockMarkMissingLogged = true;
+                }
+                return;
+            }
+            if (target.lockOnTransform == null || player.pCamera.cameraObject == null)
+                return;
+            Vector3 screen = player.pCamera.cameraObject.WorldToScreenPoint(target.lockOnTransform.position);
+            if (screen.z < 0f)
+            {
+                lockMark.enabled = false;
+                return;
+            }
+            lockMark.enabled = true;
+            lockMark.rectTransform.position = screen;
         }
 
         public void Show()
