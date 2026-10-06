@@ -142,18 +142,12 @@ namespace CatchMoon
         void GrantWeaponAttackingPoiseBonus()
         {
             WeaponItem currentWeaponBeingUsed = character.cInventory.currentItemBeingUsed as WeaponItem;
-            character.cStats.totalPoiseDefence += currentWeaponBeingUsed.offensivePoiseBonus;
-            if (currentWeaponBeingUsed.offensivePoiseBonus > 0f)
-            {
-                character.cStats.attackPoise = currentWeaponBeingUsed.offensivePoiseBonus;
-                character.cStats.attackPoiseActive = true;
-            }
+            if (currentWeaponBeingUsed == null) return;
+            AttackPoiseWindow.Open(character.cStats, currentWeaponBeingUsed.offensivePoiseBonus);
         }
         void ResetWeaponAttackingPoiseBonus()
         {
-            character.cStats.totalPoiseDefence = character.cStats.armorPoiseBonus;
-            character.cStats.attackPoise = 0f;
-            character.cStats.attackPoiseActive = false;
+            AttackPoiseWindow.Close(character.cStats, character.cStats.attackPoiseToken);
         }
 
         void EnableRotate()
