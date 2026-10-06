@@ -25,6 +25,7 @@ namespace CatchMoon
 
         [Header("察觉半径")]
         public float detectionRadius = 20f;
+        public float returnArrive;
 
         [Header("战斗风格")]
         public NPCCombatStyle combatStyle;

@@ -5,6 +5,7 @@ namespace CatchMoon
     public class PursueTargetState : State
     {
         protected State combatStanceState;
+        IdleState idleState;
 
         private void Awake()
         {
@@ -18,7 +19,12 @@ namespace CatchMoon
         {
             if (!enemy.enableAI || enemy.eStats.isDead || enemy.isInteracting) return this;
 
-            HandleRotateTowardsTarget(enemy);
+            if (enemy.aiSettings != null && Leash.TooFar(enemy.distFromTarget, enemy.aiSettings.detectionRadius))
+                enemy.returningHome = true;
+            if (enemy.returningHome)
+                return TickReturn(enemy);
+
+            HandleRotateTowardsTarget(enemy, enemy.currentTarget.transform.position);
 
             if (enemy.isPreformingAction)
             {
@@ -35,7 +41,35 @@ namespace CatchMoon
                 return this;
         }
 
-        private void HandleRotateTowardsTarget(EnemyManager enemy)
+        State TickReturn(EnemyManager enemy)
+        {
+            float arrive = enemy.aiSettings != null ? enemy.aiSettings.returnArrive : 0f;
+            float homeDist = Vector3.Distance(enemy.transform.position, enemy.spottedFrom);
+            if (Leash.Arrived(enemy.name, homeDist, arrive, ref enemy.returnArriveWarned))
+            {
+                enemy.returningHome = false;
+                enemy.spotRecorded = false;
+                enemy.currentTarget = null;
+                enemy.animator.SetFloat("Vertical", 0f);
+                if (enemy.navmeshAgent != null)
+                    enemy.navmeshAgent.enabled = false;
+                if (idleState == null)
+                    idleState = GetComponent<IdleState>();
+                return idleState != null ? idleState : this;
+            }
+
+            if (enemy.isPreformingAction)
+            {
+                enemy.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                return this;
+            }
+
+            enemy.animator.SetFloat("Vertical", 1f, 0.1f, Time.deltaTime);
+            WalkToward(enemy, enemy.spottedFrom);
+            return this;
+        }
+
+        private void HandleRotateTowardsTarget(EnemyManager enemy, Vector3 destination)
         {
             if (enemy.isPreformingAction)
             {
@@ -47,12 +81,17 @@ namespace CatchMoon
             }
             else
             {
-                Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
-                enemy.navmeshAgent.enabled = true;
-                enemy.navmeshAgent.SetDestination(enemy.currentTarget.transform.position);
-                enemy.rigidBody.linearVelocity = targetVelocity;
-                enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
+                WalkToward(enemy, destination);
             }
+        }
+
+        void WalkToward(EnemyManager enemy, Vector3 destination)
+        {
+            Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
+            enemy.navmeshAgent.enabled = true;
+            enemy.navmeshAgent.SetDestination(destination);
+            enemy.rigidBody.linearVelocity = targetVelocity;
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
         }
     }
 }

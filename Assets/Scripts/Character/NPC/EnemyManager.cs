@@ -35,6 +35,10 @@ namespace CatchMoon
 
         [Header("目标信息")]
         public CharacterManager currentTarget;
+        public Vector3 spottedFrom;
+        public bool spotRecorded;
+        public bool returningHome;
+        public bool returnArriveWarned;
         public EnemyManager[] instantGroup;
         public EnemyManager[] distantAllies;
         public bool isCalling;

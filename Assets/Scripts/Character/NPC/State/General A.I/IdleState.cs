@@ -42,7 +42,14 @@ namespace CatchMoon
                 }
             }
             if (enemy.currentTarget != null)
+            {
+                if (!enemy.spotRecorded)
+                {
+                    enemy.spottedFrom = enemy.transform.position;
+                    enemy.spotRecorded = true;
+                }
                 return pursueTargetState;
+            }
             else return this;
         }
     }
