@@ -6,6 +6,7 @@ namespace CatchMoon
     {
         [Header("物品类型")]
         public ItemType itemType;
+        public bool isRing;
         [Header("物品信息")]
         public Sprite itemIcon;
         public string itemName;
