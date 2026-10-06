@@ -98,6 +98,7 @@ namespace CatchMoon
             TickRegen(Time.deltaTime);
             TickCurse(Time.deltaTime);
             TickPoison(Time.deltaTime);
+            TickFrost(Time.deltaTime);
         }
 
         public float regenPerSecond;
@@ -113,6 +114,14 @@ namespace CatchMoon
         public float poisonDuration;
         public float poisonDamagePerSecond;
         public float poisonTimeLeft;
+
+        public float frostMeter;
+        public float frostCapacity;
+        public float frostDuration;
+        public float frostChunk;
+        public float frostDamageTaken;
+        public float frostStaminaRegen;
+        public float frostTimeLeft;
 
         public bool BeginRegen(float perSecond, float seconds)
         {
@@ -153,6 +162,32 @@ namespace CatchMoon
                 return false;
             poisonMeter = cleared;
             poisonTimeLeft = timeLeft;
+            return true;
+        }
+
+        public void TickFrost(float deltaTime)
+        {
+            frostTimeLeft = Frostbite.Tick(frostTimeLeft, deltaTime);
+        }
+
+        public bool GainFrost(float gain, float resist)
+        {
+            if (isDead) return false;
+            frostMeter = StatusBuildup.Add(isInvulnerable, name, frostMeter, gain, resist, frostCapacity);
+            if (!Frostbite.TryProc(name, frostMeter, frostCapacity, frostDuration, frostChunk, frostDamageTaken, frostStaminaRegen, currentHP, out float nextHealth, out float timeLeft, out float cleared))
+                return false;
+            frostMeter = cleared;
+            frostTimeLeft = timeLeft;
+            currentHP = nextHealth;
+            return true;
+        }
+
+        public bool DrinkBlueMoss()
+        {
+            if (!Frostbite.ClearWithBlueMoss(frostMeter, frostTimeLeft, out float nextMeter, out float nextTime))
+                return false;
+            frostMeter = nextMeter;
+            frostTimeLeft = nextTime;
             return true;
         }
 
@@ -231,9 +266,10 @@ namespace CatchMoon
             float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
             float dd = damage.Dark * CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
 
-            float finalDamage = pd + fd + md + ld + dd;
-            //Debug.Log($"最终伤害: {finalDamage:N0}.");
+            float finalDamage = Frostbite.Taken(name, pd + fd + md + ld + dd, frostTimeLeft > 0f, frostDamageTaken);
             currentHP -= finalDamage;
+            if (Frostbite.ClearedByFire(fd, frostTimeLeft))
+                frostTimeLeft = 0f;
 
             if (playHurtSound)
                 character.cSoundFX.PlayRandomDamageSoundsFX();
@@ -352,6 +388,7 @@ namespace CatchMoon
                     float amount = character.cCombat.isBlocking
                         ? staminaRegenerationAmountWhilstBlocking
                         : staminaRegenerationAmount;
+                    amount = Frostbite.Regen(name, amount, frostTimeLeft > 0f, frostStaminaRegen);
                     currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
                 }
             }
