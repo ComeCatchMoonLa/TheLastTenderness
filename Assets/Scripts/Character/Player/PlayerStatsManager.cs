@@ -12,6 +12,12 @@ namespace CatchMoon
         public int soulRemnant;
         public bool emberLit;
         public float emberBaseMaxHP;
+        public string recordedEnding;
+
+        public bool RecordEnding(string ending)
+        {
+            return CycleGate.TryRecord(ref recordedEnding, ending, name);
+        }
 
         protected override void Awake()
         {

@@ -40,10 +40,13 @@ namespace CatchMoon
         {
             if (hasBeenActived)
             {
-                if (nextCycleInsteadOfRest)
+                if (nextCycleInsteadOfRest
+                    && player != null
+                    && player.pStats != null
+                    && CycleGate.Allow(player.pStats.recordedEnding))
                 {
                     nextCycleInsteadOfRest = false;
-                    NewCycle.Apply(player != null ? player.pInventory : null);
+                    NewCycle.Apply(player.pInventory);
                     return;
                 }
                 if (hostileRadius <= 0f)
