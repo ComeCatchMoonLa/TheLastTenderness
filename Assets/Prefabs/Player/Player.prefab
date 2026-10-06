@@ -7697,6 +7697,7 @@ MonoBehaviour:
   currentComsumableIdx: 0
   unarmed: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}
   items:
+  - {fileID: 11400000, guid: e48d3031122334455666778899ee2201, type: 2}
   - {fileID: 11400000, guid: c29ed8fd9b302ec4688ae3b28318a084, type: 2}
   - {fileID: 11400000, guid: 1824fb4fc0b76764f8bc6d5dff0626eb, type: 2}
   - {fileID: 11400000, guid: e9a830a7b77949445b8c9c0466af5571, type: 2}
