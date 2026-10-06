@@ -95,7 +95,7 @@ readonly: true
 ## 5. 验收
 
 - 0.x：不要求单元测试。看游戏设计里的手动验收有没有盖住这次行为。
-- 1.x 到 4.x：三件套写了的 Edit Mode 断言要在，放在 `Assets/Tests/EditMode`，程序集 `CatchMoon.Tests`。只断言公开返回值和字段。不进 Play Mode，不为测试把方法改成 `virtual`，不依赖已经初始化的 Animator。粒子、镜头、动画曲线、血条填充靠人看，缺测试不算缺口。
+- 1.x 到 4.x：三件套写了的 Edit Mode 断言要在，放在 `Assets/Tests/EditMode/<分类>`，程序集 `CatchMoon.Tests`。根目录只留程序集定义。分类见 `Docs/代码分析/可测试性.md`。只断言公开返回值和字段。不进 Play Mode，不为测试把方法改成 `virtual`，不依赖已经初始化的 Animator。粒子、镜头、动画曲线、血条填充靠人看，缺测试不算缺口。用例脚本落在 `EditMode` 根上，记为严重。
 - 只断言「没抛异常」、或没盖住该切片点名的边界，记为严重。
 - 历史脚本不补测试。
 

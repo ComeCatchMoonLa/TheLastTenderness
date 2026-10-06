@@ -40,7 +40,7 @@ alwaysApply: true
 
 看完仍然对不上的，不做：文档标了待核对或待补、两份文档互相打架、或者这个字段在两份文档里都没有。不要为了能排期或能编译自己选一个公式。
 
-0.x 不写单元测试。1.x 到 4.x 同一套：能在 Edit Mode 里断言的行为写进游戏设计、技术设计和 TODO，收尾前在 Test Runner 里通过，并放进收尾提交。命令行跑 Edit Mode 时执行 `powershell -NoProfile -ExecutionPolicy Bypass -File Tools/RunEditModeTests.ps1`，这一次调用的等待盖住脚本的 10 分钟。脚本返回 `PASS`、`FAIL`、`PROJECT_OPEN`、`START_FAILED`、`TIMEOUT`。不要先按进程名判断编辑器是否打开，不要轮询，不要加 sleep。`PROJECT_OPEN` 和 `START_FAILED` 时停止，不重试，不结束用户正在使用的 Unity。编辑器开着、正在改代码时不调用该脚本。Console 没有错误只表示编译通过，不代表 Edit Mode 用例通过。断言不到的（粒子、镜头、动画曲线、血条填充）写明不测哪一条，留在游戏设计里给人看。细则在 `Docs/代码分析/可测试性.md`。这些以外，不把进游戏联调当成这一版的验收。
+0.x 不写单元测试。1.x 到 4.x 同一套：能在 Edit Mode 里断言的行为写进游戏设计、技术设计和 TODO，收尾前在 Test Runner 里通过，并放进收尾提交。测试脚本路径写成 `Assets/Tests/EditMode/<分类>/<类名>Tests.cs`，先写进这一版技术设计，再按这个路径落文件。`<分类>` 和新建目录的规则在 `Docs/代码分析/可测试性.md`。`CatchMoon.Tests.asmdef` 留在 `EditMode` 根目录。命令行跑 Edit Mode 时执行 `powershell -NoProfile -ExecutionPolicy Bypass -File Tools/RunEditModeTests.ps1`，这一次调用的等待盖住脚本的 10 分钟。脚本返回 `PASS`、`FAIL`、`PROJECT_OPEN`、`START_FAILED`、`TIMEOUT`。不要先按进程名判断编辑器是否打开，不要轮询，不要加 sleep。`PROJECT_OPEN` 和 `START_FAILED` 时停止，不重试，不结束用户正在使用的 Unity。编辑器开着、正在改代码时不调用该脚本。Console 没有错误只表示编译通过，不代表 Edit Mode 用例通过。断言不到的（粒子、镜头、动画曲线、血条填充）写明不测哪一条，留在游戏设计里给人看。这些以外，不把进游戏联调当成这一版的验收。
 
 ## 从候选池里排版本
 

@@ -8,7 +8,7 @@
 
 `Scripts/`。怎么写见 [`Scripts/README.md`](Scripts/README.md)。目录表在 [`../Docs/代码分析/构架设计.md`](../Docs/代码分析/构架设计.md)。
 
-Edit Mode 测试：`Tests/EditMode`。
+Edit Mode 测试：`Tests/EditMode` 下的分类子目录。程序集定义留在该目录根上。分类见 [`../Docs/代码分析/可测试性.md`](../Docs/代码分析/可测试性.md)。
 
 ## 场景
 
