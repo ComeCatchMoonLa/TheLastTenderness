@@ -22,6 +22,8 @@ namespace CatchMoon
         {
             bossFightIsActive = true;
             bossHasBeenAwakened = true;
+            if (enemy != null && enemy.eStats != null)
+                FogDoor.Begin(ref enemy.eStats.currentHP, enemy.eStats.maxHP);
             world.wUI.ActivateBossBar(enemy.eStats);
 
             foreach(FogWall fogWall in fogWalls)
