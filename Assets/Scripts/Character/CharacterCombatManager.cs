@@ -94,6 +94,7 @@ namespace CatchMoon
                 character.cCombat.isBlocking = false;
                 character.cCombat.ResetBlockingAbsorption();
                 character.cAnimator.PlayTargetAnimation("Guard_Break", true);
+                character.canBeRiposted = GuardBreak.OpensRiposte(character.cStats.currentStamina);
             }
             else
             {
