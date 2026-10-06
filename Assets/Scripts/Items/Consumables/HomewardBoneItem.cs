@@ -49,7 +49,7 @@ namespace CatchMoon
 
             if (state.resetEnemies)
                 RestoreEnemies();
-            MoveToFire(player, state.place);
+            RecordedFire.Move(player.transform, state.place);
         }
 
         static bool BossBarVisible()
@@ -78,17 +78,5 @@ namespace CatchMoon
             }
         }
 
-        static void MoveToFire(PlayerManager player, string place)
-        {
-            CampFireInteractable[] fires = Object.FindObjectsByType<CampFireInteractable>(FindObjectsInactive.Include);
-            for (int i = 0; i < fires.Length; i++)
-            {
-                if (fires[i] != null && fires[i].name == place)
-                {
-                    player.transform.position = fires[i].transform.position;
-                    return;
-                }
-            }
-        }
     }
 }

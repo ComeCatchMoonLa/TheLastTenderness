@@ -28,20 +28,7 @@ namespace CatchMoon
             };
             if (!DarkSign.TryUse(state)) return;
             player.pStats.SetSouls(state.souls);
-            MoveToFire(player, state.place);
-        }
-
-        static void MoveToFire(PlayerManager player, string place)
-        {
-            CampFireInteractable[] fires = Object.FindObjectsByType<CampFireInteractable>(FindObjectsInactive.Include);
-            for (int i = 0; i < fires.Length; i++)
-            {
-                if (fires[i] != null && fires[i].name == place)
-                {
-                    player.transform.position = fires[i].transform.position;
-                    return;
-                }
-            }
+            RecordedFire.Move(player.transform, state.place);
         }
     }
 }
