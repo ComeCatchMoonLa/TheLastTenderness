@@ -50,7 +50,7 @@ namespace CatchMoon
                     attackTarget.canBeRiposted = false;
                     break;
                 case CriticalStrikeChoice.Backstab:
-                    AttempBackStab(character, attackTarget);
+                    AttempBackStab(character, attackTarget, dot);
                     break;
                 default:
                     PlayLightAttack(character);
@@ -84,9 +84,10 @@ namespace CatchMoon
 
         }
 
-        void AttempBackStab(CharacterManager character, CharacterManager attackTarget)
+        void AttempBackStab(CharacterManager character, CharacterManager attackTarget, float dot)
         {
-            if (character.isPerformingBackStabbed || attackTarget.isBeingBackStabbed) return;
+            bool already = character.isPerformingBackStabbed || attackTarget.isBeingBackStabbed;
+            if (!BackstabLock.TryEnter(true, dot, already, out _)) return;
 
             character.isPerformingBackStabbed = true;
             character.cStats.isInvulnerable = true;
