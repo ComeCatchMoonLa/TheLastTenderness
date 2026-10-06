@@ -66,6 +66,25 @@ namespace CatchMoon
             achievenmentWin.gameObject.SetActive(true);
             player.ui.openedWin = EscWinOpenedWinType.achievementWin;
         }
+
+        public void OpenBackpack()
+        {
+            if (player == null || player.ui == null || player.ui.tapWin == null) return;
+            player.ui.tapWin.gameObject.SetActive(true);
+            player.ui.tapWin.SelectInventoryWin();
+        }
+
+        public void OpenStatus()
+        {
+            if (player == null || player.ui == null || player.ui.tapWin == null) return;
+            player.ui.tapWin.gameObject.SetActive(true);
+            player.ui.tapWin.SelectStatusWin();
+        }
+
+        // 姿态入口不播放。解锁列表是另一条。
+        public void OpenStance()
+        {
+        }
         // 每个ui层级的返回按钮可能样式不一样
         public void ColseSettingsWin()
         {
