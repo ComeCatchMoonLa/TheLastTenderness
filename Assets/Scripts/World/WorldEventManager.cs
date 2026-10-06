@@ -12,6 +12,9 @@ namespace CatchMoon
         public bool deviceOnDuringFight;
         public bool deviceStaysAfter;
         public bool deviceOn;
+        public bool allyJoined;
+        public float allyHealthMultiplier;
+        public bool allyHealthApplied;
 
         public bool bossFightIsActive;   // 目前正在战斗的boss
         public bool bossHasBeenAwakened; // (播放boss出场动画,) boss被唤醒
@@ -28,7 +31,15 @@ namespace CatchMoon
             bossFightIsActive = true;
             bossHasBeenAwakened = true;
             if (enemy != null && enemy.eStats != null)
+            {
+                if (!allyHealthApplied
+                    && BossThickness.TryRaise(enemy.eStats.maxHP, allyJoined, allyHealthMultiplier, enemy.name, out float raised))
+                {
+                    enemy.eStats.maxHP = raised;
+                    allyHealthApplied = true;
+                }
                 FogDoor.Begin(ref enemy.eStats.currentHP, enemy.eStats.maxHP);
+            }
             deviceOn = ArenaDevice.IsOn(true, deviceOnDuringFight, deviceStaysAfter);
             world.wUI.ActivateBossBar(enemy.eStats);
 
