@@ -9,6 +9,10 @@ namespace CatchMoon
         {
             if (character.cStats.currentStamina <= 0) return;
 
+            PlayerManager player = character as PlayerManager;
+            bool movingForward = player != null && player.input != null && player.input.vertical > 0f;
+            character.kickArmed = ShieldKick.IsKick(character.isSprinting, movingForward);
+
             if (character.canDoCombo)
             {
                 character.canDoCombo = false;

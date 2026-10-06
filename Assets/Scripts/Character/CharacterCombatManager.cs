@@ -178,6 +178,8 @@ namespace CatchMoon
 
             if (successfulBlocked)
             {
+                if (attacker != null && ShieldKick.BreaksShield(attacker.kickArmed, true))
+                    character.cStats.EmptyStamina();
                 AttemptBlock(guardBreakModifider, damageAnimation, pd, fd, md, ld, dd);
                 DamageSegments absorbed = SpellOnShield.Absorb(DamageOf(pd, fd, md, ld, dd), new DamageSegments
                 {
