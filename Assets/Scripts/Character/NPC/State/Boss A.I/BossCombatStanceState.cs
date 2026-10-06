@@ -6,6 +6,8 @@ namespace CatchMoon
     {
         [Header("Second Phase Attacks")]
         public bool hasPhaseShifted;
+        public float phaseThreshold;
+        public bool phaseBlocksHits;
         public EnemyAttackAction[] sencondPhaseAttacks;
 
         protected override void GetNewAttack(EnemyManager enemy)

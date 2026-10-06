@@ -4,28 +4,28 @@
 
 ## 0. 开始前
 
-- [ ] 2.63 已收尾。
-- [ ] 读过技术设计：只按生命比例换一次，无敌看配置。
+- [x] 2.63 已收尾。
+- [x] 读过技术设计：只按生命比例换一次，无敌看配置。
 
 **阶段门槛：** 知道不改血条成下一截。
 
 ## 1. 换阶段
 
-- [ ] `BossPhase.ShouldShift`。
-- [ ] `phaseThreshold`、`phaseBlocksHits`，以及 `UpdateBossHealthBar` / `ShiftToSecondPhase`。
+- [x] `BossPhase.ShouldShift`。
+- [x] `phaseThreshold`、`phaseBlocksHits`，以及 `UpdateBossHealthBar` / `ShiftToSecondPhase`。
 
 **阶段门槛：** 门槛没填时不换。
 
 ## 2. 单元测试
 
-- [ ] `BossPhaseTests` 断言换、不换、换过、门槛空。
-- [ ] 测试不创建头目。
+- [x] `BossPhaseTests` 断言换、不换、换过、门槛空。
+- [x] 测试不创建头目。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。换招和打不中留给人看。
-- [ ] 大纲里的 2.64 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。换招和打不中留给人看。
+- [x] 大纲里的 2.64 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。

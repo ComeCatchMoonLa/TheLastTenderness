@@ -145,7 +145,8 @@ namespace CatchMoon
         {
             world.wUI.bossHealthBar.SetBossCurrentHealth(currentHealth);
 
-            if (!bossCombatStanceState.hasPhaseShifted && currentHealth <= maxHealth * 0.5f)
+            if (bossCombatStanceState != null
+                && BossPhase.ShouldShift(currentHealth, maxHealth, bossCombatStanceState.phaseThreshold, bossCombatStanceState.hasPhaseShifted))
                 ShiftToSecondPhase();
         }
 
@@ -154,7 +155,8 @@ namespace CatchMoon
         /// </summary>
         public void ShiftToSecondPhase()
         {
-            enemy.eStats.isInvulnerable = true;
+            if (bossCombatStanceState.phaseBlocksHits)
+                enemy.eStats.isInvulnerable = true;
             enemy.isPhaseShifting = true;
             enemy.eAnimator.PlayTargetAnimation("Phase Shift", true);
             bossCombatStanceState.hasPhaseShifted = true;
