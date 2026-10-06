@@ -20,6 +20,8 @@ namespace CatchMoon
 
         [Header("玩家速度")]
         [SerializeField] float rotateSpeed = 10; // 旋转速度
+        [SerializeField] float walkSpeed;
+        [SerializeField] float walkUntil;
         [SerializeField] float runSpeed = 5;     // 奔跑速度
         [SerializeField] float sprintSpeed = 7;  // 冲刺速度
         [SerializeField] float fallSpeed = 200;  // 降落速度
@@ -71,12 +73,9 @@ namespace CatchMoon
                 return;
 
             UpdateMoveDir();
-            float speed = runSpeed;
-            if (player.isSprinting) // 冲刺
-            {
-                speed = sprintSpeed;
+            float speed = WalkSpeed.Choose(name, player.input.moveAmount, player.isSprinting, walkSpeed, runSpeed, sprintSpeed, walkUntil);
+            if (player.isSprinting)
                 player.pStats.DeductStamina(sprintCost);
-            }
 
             // normalVector表示Player当前所站的位置处地形平面的垂直向量
             // 将Player的速度矢量投影到法向量所决定的平面上, 并将其设置为Player的刚体的速度(这个是上坡时的速度)
