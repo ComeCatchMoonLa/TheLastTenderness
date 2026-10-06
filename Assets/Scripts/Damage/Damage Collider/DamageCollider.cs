@@ -94,8 +94,10 @@ namespace CatchMoon
                 if (hitThisWindow.Contains(damageTarget)) return;
                 hitThisWindow.Add(damageTarget);
 
-                // 正在弹反
-                if (damageTarget.cCombat.isParrying)
+                int parryElapsed = Time.frameCount - damageTarget.cCombat.parryOpenedFrame;
+                bool parryOpen = damageTarget.cCombat.isParrying
+                    && ParryWindow.Open(parryElapsed, damageTarget.cCombat.parryWindowFrames, damageTarget.name);
+                if (parryOpen)
                 {
                     character.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Parried", true);
                     character.canBeRiposted = true;

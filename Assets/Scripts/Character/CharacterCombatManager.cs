@@ -19,6 +19,8 @@ namespace CatchMoon
         [Header("Flags")]
         public bool isAttacking;                // 正在攻击
         public bool isParrying;                 // 正在弹反
+        public int parryWindowFrames;
+        public int parryOpenedFrame;
         public bool isUsingSpell;               // 正在使用法术
         public bool isUsingConsumable;          // 正在使用消耗品
         public bool isBlocking;                 // 正在防御

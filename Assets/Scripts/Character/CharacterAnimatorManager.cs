@@ -179,6 +179,7 @@ namespace CatchMoon
         void EnableIsParrying()
         {
             character.cCombat.isParrying = true;
+            character.cCombat.parryOpenedFrame = Time.frameCount;
         }
         void DisableIsParrying()
         {
