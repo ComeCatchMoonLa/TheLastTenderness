@@ -103,6 +103,10 @@ namespace CatchMoon
             }
             AwardSoulsOnDeath(player);
 
+            if (enemy != null && enemy.aiSettings != null && enemy.aiSettings.isBoss
+                && world != null && world.wEvent != null && !world.wEvent.bossHasBeenDefeated)
+                world.wEvent.BossHasBeenDefeated();
+
             if (enemy != null && enemy.aiSettings != null
                 && MeleeRest.Keep(enemy.aiSettings.isBoss, enemy.aiSettings.combatStyle))
             {

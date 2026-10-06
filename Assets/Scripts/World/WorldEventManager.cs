@@ -8,6 +8,7 @@ namespace CatchMoon
         WorldManager world;
 
         public List<FogWall> fogWalls;
+        public CampFireInteractable rewardFire;
 
         public bool bossFightIsActive;   // 目前正在战斗的boss
         public bool bossHasBeenAwakened; // (播放boss出场动画,) boss被唤醒
@@ -20,6 +21,7 @@ namespace CatchMoon
 
         public void ActivateBossFight(EnemyManager enemy)
         {
+            if (!BossClear.CanOpenAgain(bossHasBeenDefeated)) return;
             bossFightIsActive = true;
             bossHasBeenAwakened = true;
             if (enemy != null && enemy.eStats != null)
@@ -32,9 +34,15 @@ namespace CatchMoon
 
         public void BossHasBeenDefeated()
         {
+            bool fogUp = true;
+            bool bossStillHere = true;
+            bool fireSealed = true;
+            BossClear.Apply(ref fogUp, ref bossStillHere, ref fireSealed);
             bossHasBeenDefeated = true;
-            bossFightIsActive= false;
+            bossFightIsActive = false;
             world.wUI.DeactivateBossBar();
+            if (rewardFire != null)
+                rewardFire.sealedUntilBossClear = fireSealed;
 
             foreach (FogWall fogWall in fogWalls)
                 fogWall.DeactivateFogWall();

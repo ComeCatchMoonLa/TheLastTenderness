@@ -9,6 +9,7 @@ namespace CatchMoon
 
         [Header("篝火状态")]
         public bool hasBeenActived;
+        public bool sealedUntilBossClear;
         [SerializeField] float hostileRadius;
 
         [Header("篝火特效")]
@@ -58,6 +59,7 @@ namespace CatchMoon
             }
             else
             {
+                if (sealedUntilBossClear) return;
                 player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
                 player.ui.popUps.campFireLitPopUpUI.PopUp();
                 hasBeenActived = true;
