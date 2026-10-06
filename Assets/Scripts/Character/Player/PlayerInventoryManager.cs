@@ -15,6 +15,7 @@ namespace CatchMoon
         public List<WeaponItem> weapons;
         public List<ArmorItem> armors;
         public List<SpellItem> spells;
+        public List<SpellItem> memorized;
         public List<ConsumableItem> consumables;
 
         Dictionary<ConsumableItem, int> consumableLeft;
@@ -332,10 +333,21 @@ namespace CatchMoon
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
         }
+        public bool Memorize(SpellItem spell)
+        {
+            if (spell == null || spells == null || !spells.Contains(spell)) return false;
+            if (memorized == null)
+                memorized = new List<SpellItem>();
+            if (memorized.Contains(spell)) return true;
+            memorized.Add(spell);
+            return true;
+        }
+
         void ChangeSpell()
         {
-            currentSpellIdx = ++currentSpellIdx % spells.Count;
-            currentSpell = spells[currentSpellIdx];
+            SpellItem next = SpellMemory.Next(memorized, ref currentSpellIdx);
+            if (next == null) return;
+            currentSpell = next;
             player.ui.hud.quickSlotsUI.UpdateCurrentSpellIcon(currentSpell);
         }
         void ChangeConsumable()

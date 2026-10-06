@@ -73,13 +73,8 @@ namespace CatchMoon
 
         void SelectSpell(SpellItem spell)
         {
+            // 学会列表上点一下不进入战斗轮换。放进记忆栏的菜单不在这一版。
             if (spell == null) return;
-            PlayerInventoryManager pInventory = player.pInventory;
-            pInventory.currentSpell = spell;
-            int index = pInventory.spells.IndexOf(spell);
-            if (index >= 0)
-                pInventory.currentSpellIdx = index;
-            player.ui.hud.quickSlotsUI.UpdateCurrentSpellIcon(spell);
         }
 
         void SelectConsumable(ConsumableItem consumable)
