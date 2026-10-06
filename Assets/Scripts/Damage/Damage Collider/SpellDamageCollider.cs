@@ -32,20 +32,42 @@ namespace CatchMoon
             {
                 hasCollided = true;
 
-                if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+                if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
                 {
                     spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
+                    CharacterManager target = collision.transform.GetComponent<CharacterManager>();
 
                     if (spellTarget != null && spellTarget.teamID != teamID)
-                        spellTarget.TakeDamage("Damage_ForwardRight_01", new DamageSegments
+                    {
+                        bool fromFront = target != null && CharacterCombatManager.ComesFromFront(
+                            transform.position, target.transform.position, target.transform.forward);
+                        if (target != null && SpellOnShield.UseShield(target.cCombat.isBlocking, fromFront))
                         {
-                            Physical = pd,
-                            Fire = fd,
-                            Magic = md,
-                            Lightning = ld,
-                            Dark = dd
-                        });
-
+                            target.cCombat.ResolveIncomingHit(null, "Block - Hit", new IncomingDamage
+                            {
+                                Multiplier = 1f,
+                                Segments = new DamageSegments
+                                {
+                                    Physical = pd,
+                                    Fire = fd,
+                                    Magic = md,
+                                    Lightning = ld,
+                                    Dark = dd
+                                }
+                            }, true, poiseBreak, guardBreakModifider, true);
+                        }
+                        else
+                        {
+                            spellTarget.TakeDamage("Damage_ForwardRight_01", new DamageSegments
+                            {
+                                Physical = pd,
+                                Fire = fd,
+                                Magic = md,
+                                Lightning = ld,
+                                Dark = dd
+                            });
+                        }
+                    }
                 }
                 impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
 

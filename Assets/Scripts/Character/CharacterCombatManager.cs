@@ -85,8 +85,11 @@ namespace CatchMoon
 
         public virtual void AttemptBlock(float guardBreakModifider, string blockAnimation, float pd, float fd, float md, float ld, float dd)
         {
-            float staminaDA = (pd + fd + md + ld + dd) * guardBreakModifider * (1 - character.cStats.blockingStabilityRating);
-            staminaDA *= 1f - BlockingWeaponStability();
+            float staminaDA = SpellOnShield.StaminaCost(
+                pd + fd + md + ld + dd,
+                guardBreakModifider,
+                character.cStats.blockingStabilityRating,
+                BlockingWeaponStability());
 
             if (!character.cStats.DeductStamina(staminaDA))
                 character.cStats.EmptyStamina();
@@ -95,13 +98,19 @@ namespace CatchMoon
             {
                 character.cCombat.isBlocking = false;
                 character.cCombat.ResetBlockingAbsorption();
-                character.cAnimator.PlayTargetAnimation("Guard_Break", true);
                 character.canBeRiposted = GuardBreak.OpensRiposte(character.cStats.currentStamina);
+                PlayBlockAnimation("Guard_Break");
             }
             else
             {
-                character.cAnimator.PlayTargetAnimation(blockAnimation, true);
+                PlayBlockAnimation(blockAnimation);
             }
+        }
+
+        void PlayBlockAnimation(string blockAnimation)
+        {
+            if (character.cAnimator == null || character.animator == null) return;
+            character.cAnimator.PlayTargetAnimation(blockAnimation, true);
         }
 
         IEnumerator ForceMoveCharacterToEnemyBackStabPosition(CharacterManager characterPerformingBackStab, float dist)
@@ -143,7 +152,8 @@ namespace CatchMoon
             IncomingDamage incoming,
             bool applyBlockAndPoise,
             float poiseDamage,
-            float guardBreakModifider)
+            float guardBreakModifider,
+            bool spellFromFront = false)
         {
             try
             {
@@ -163,15 +173,25 @@ namespace CatchMoon
             bool successfulBlocked = false;
             if (attacker != null && character.cCombat.isBlocking)
                 successfulBlocked = ComesFromFront(attacker.transform.position, character.transform.position, character.transform.forward);
+            if (!successfulBlocked)
+                successfulBlocked = SpellOnShield.UseShield(character.cCombat.isBlocking, spellFromFront);
 
             if (successfulBlocked)
             {
                 AttemptBlock(guardBreakModifider, damageAnimation, pd, fd, md, ld, dd);
-                pd *= (1 - character.cStats.blockingPDA);
-                fd *= (1 - character.cStats.blockingFDA);
-                md *= (1 - character.cStats.blockingMDA);
-                ld *= (1 - character.cStats.blockingLDA);
-                dd *= (1 - character.cStats.blockingDDA);
+                DamageSegments absorbed = SpellOnShield.Absorb(DamageOf(pd, fd, md, ld, dd), new DamageSegments
+                {
+                    Physical = character.cStats.blockingPDA,
+                    Fire = character.cStats.blockingFDA,
+                    Magic = character.cStats.blockingMDA,
+                    Lightning = character.cStats.blockingLDA,
+                    Dark = character.cStats.blockingDDA
+                });
+                pd = absorbed.Physical;
+                fd = absorbed.Fire;
+                md = absorbed.Magic;
+                ld = absorbed.Lightning;
+                dd = absorbed.Dark;
                 RecordIncomingHit(true, false, pd, fd, md, ld, dd);
                 character.cStats.TakeDamage(null, DamageOf(pd, fd, md, ld, dd), playHurtSound: character.cStats.currentStamina <= 0);
                 return;
