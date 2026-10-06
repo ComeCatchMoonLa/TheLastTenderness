@@ -10,6 +10,8 @@ namespace CatchMoon
         public int soulCount = 0;
         public bool hasSoulRemnant;
         public int soulRemnant;
+        public bool emberLit;
+        public float emberBaseMaxHP;
 
         protected override void Awake()
         {
@@ -50,6 +52,7 @@ namespace CatchMoon
                 {
                     base.Death(player);
                     ForfeitSouls();
+                    ExtinguishEmber();
                 }
 
                 return true;
@@ -171,6 +174,9 @@ namespace CatchMoon
                 Debug.LogError($"{assetName}: healthRatio 未填");
                 return false;
             }
+            if (!emberLit)
+                emberBaseMaxHP = maxHP;
+            emberLit = true;
             maxHP = newMax;
             currentHP = newMax;
             if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.healthBar != null)
@@ -179,6 +185,19 @@ namespace CatchMoon
                 player.ui.hud.healthBar.SetCurrentHP(currentHP);
             }
             return true;
+        }
+
+        public void ExtinguishEmber()
+        {
+            if (!emberLit) return;
+            maxHP = emberBaseMaxHP;
+            currentHP = maxHP;
+            emberLit = false;
+            if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.healthBar != null)
+            {
+                player.ui.hud.healthBar.SetMaxHP(maxHP);
+                player.ui.hud.healthBar.SetCurrentHP(currentHP);
+            }
         }
 
         public void RestoreVitalsToMax()
