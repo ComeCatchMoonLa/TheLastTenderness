@@ -15,6 +15,15 @@ namespace CatchMoon
 
             player = GetComponent<PlayerManager>();
         }
+        protected override void Update()
+        {
+            float before = currentHP;
+            base.Update();
+            if (currentHP == before) return;
+            if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.healthBar != null)
+                player.ui.hud.healthBar.SetCurrentHP(currentHP);
+        }
+
         protected override void Start()
         {
             base.Start();

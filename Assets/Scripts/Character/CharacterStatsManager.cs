@@ -95,6 +95,26 @@ namespace CatchMoon
         {
             RegenerateStamina();
             HandlePoiseResetTimer();
+            TickRegen(Time.deltaTime);
+        }
+
+        public float regenPerSecond;
+        public float regenTimeLeft;
+
+        public bool BeginRegen(float perSecond, float seconds)
+        {
+            if (perSecond <= 0f || seconds <= 0f) return false;
+            regenPerSecond = perSecond;
+            regenTimeLeft = seconds;
+            return true;
+        }
+
+        public void TickRegen(float deltaTime)
+        {
+            if (regenTimeLeft <= 0f || regenPerSecond <= 0f || deltaTime <= 0f) return;
+            float step = deltaTime < regenTimeLeft ? deltaTime : regenTimeLeft;
+            currentHP = RegenHeal.Apply(currentHP, maxHP, regenPerSecond, step);
+            regenTimeLeft -= step;
         }
 
         public static float LevelTimesTen(int level)

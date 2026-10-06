@@ -6,6 +6,8 @@ namespace CatchMoon
     public class HealingSpell : SpellItem
     {
         public float healAmount;
+        public float healPerSecond;
+        public float regenSeconds;
 
         public override void AttemptToCastSpell(CharacterManager character)
         {
@@ -19,6 +21,16 @@ namespace CatchMoon
         }
         public override void SuccessfullyCastSpell(CharacterManager character)
         {
+            if (healPerSecond > 0f)
+            {
+                if (regenSeconds <= 0f)
+                {
+                    Debug.LogError($"{name}: regenSeconds 未填");
+                    return;
+                }
+                character.cStats.BeginRegen(healPerSecond, regenSeconds);
+                return;
+            }
             GameObject instantiatedSpellFx = Instantiate(spellCastFX, character.transform);
             character.cStats.AddHP(healAmount);
         }
