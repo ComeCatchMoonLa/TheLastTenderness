@@ -9,6 +9,9 @@ namespace CatchMoon
 
         public List<FogWall> fogWalls;
         public CampFireInteractable rewardFire;
+        public bool deviceOnDuringFight;
+        public bool deviceStaysAfter;
+        public bool deviceOn;
 
         public bool bossFightIsActive;   // 目前正在战斗的boss
         public bool bossHasBeenAwakened; // (播放boss出场动画,) boss被唤醒
@@ -26,6 +29,7 @@ namespace CatchMoon
             bossHasBeenAwakened = true;
             if (enemy != null && enemy.eStats != null)
                 FogDoor.Begin(ref enemy.eStats.currentHP, enemy.eStats.maxHP);
+            deviceOn = ArenaDevice.IsOn(true, deviceOnDuringFight, deviceStaysAfter);
             world.wUI.ActivateBossBar(enemy.eStats);
 
             foreach(FogWall fogWall in fogWalls)
@@ -43,6 +47,7 @@ namespace CatchMoon
             world.wUI.DeactivateBossBar();
             if (rewardFire != null)
                 rewardFire.sealedUntilBossClear = fireSealed;
+            deviceOn = ArenaDevice.IsOn(false, deviceOnDuringFight, deviceStaysAfter);
 
             foreach (FogWall fogWall in fogWalls)
                 fogWall.DeactivateFogWall();
