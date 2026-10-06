@@ -124,7 +124,12 @@ $argumentList = @(
     $LogPath
 )
 $elapsed = [System.Diagnostics.Stopwatch]::StartNew()
-$process = Start-Process -FilePath $unity -ArgumentList $argumentList -WorkingDirectory $Repo -WindowStyle Hidden -PassThru -RedirectStandardOutput $StdoutDump -RedirectStandardError $StderrDump
+try {
+    $process = Start-Process -FilePath $unity -ArgumentList $argumentList -WorkingDirectory $Repo -WindowStyle Hidden -PassThru -RedirectStandardOutput $StdoutDump -RedirectStandardError $StderrDump
+}
+catch {
+    Format-StartFailed -Reason "Unity start failed: $($_.Exception.Message)" -ExitCode $null
+}
 if ($null -eq $process) {
     Format-StartFailed -Reason 'Unity process did not start' -ExitCode $null
 }
