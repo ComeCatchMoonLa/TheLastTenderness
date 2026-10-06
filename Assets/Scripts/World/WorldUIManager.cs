@@ -16,10 +16,16 @@ namespace CatchMoon
 
         public void ActivateBossBar(EnemyStatsManager eStats)
         {
-            bossHealthBar.SetBossName(eStats.cName);
-            bossHealthBar.SetBossCurrentHealth(eStats.maxHP);
+            if (bossHealthBar == null)
+            {
+                Debug.LogError("bossHealthBar == null");
+                return;
+            }
+            if (!BossBar.TryShow(eStats.cName, eStats.currentHP, eStats.maxHP, eStats.name, out string shown, out float length))
+                return;
+            bossHealthBar.SetBossName(shown);
             bossHealthBar.SetBossMaxHealth(eStats.maxHP);
-
+            bossHealthBar.SetBossCurrentHealth(eStats.maxHP * length);
             bossHealthBar.gameObject.SetActive(true);
         }
 
