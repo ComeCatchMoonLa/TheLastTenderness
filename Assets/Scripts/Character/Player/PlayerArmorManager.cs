@@ -17,6 +17,7 @@ namespace CatchMoon
         [Header("当前盔甲")]
         public HeadArmorItem currentHeadArmor;     // 当前头部铠甲
         public TorsoArmorItem currentTorsoArmor;   // 当前躯干铠甲
+        public HandArmorItem currentHandArmor;
         public HipsArmorItem currentHipsArmor;     // 当前下身铠甲 
 
         private void Awake()

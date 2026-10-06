@@ -19,8 +19,8 @@ namespace CatchMoon
         public AmmoItem currentAmmo;
 
         [Header("武器")] 
-        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];  // 左手武器槽中的武器
-        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1]; // 右手武器槽中的武器
+        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[EquipmentLayout.WeaponsPerHand];
+        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[EquipmentLayout.WeaponsPerHand];
         [HideInInspector] public int currentLeftWeaponIdx = 0;
         [HideInInspector] public int currentRightWeaponIdx = 0;
 
@@ -34,6 +34,8 @@ namespace CatchMoon
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+            weaponsInLeftHandSlot = EquipmentLayout.Ensure(weaponsInLeftHandSlot, EquipmentLayout.WeaponsPerHand);
+            weaponsInRightHandSlot = EquipmentLayout.Ensure(weaponsInRightHandSlot, EquipmentLayout.WeaponsPerHand);
         }
         protected virtual void Start()
         {

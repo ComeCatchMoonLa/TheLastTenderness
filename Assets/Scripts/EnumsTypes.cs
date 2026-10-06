@@ -30,6 +30,7 @@ namespace CatchMoon
         head,
         torso,
         hips,
+        hands,
     }
     public enum SpellType
     {

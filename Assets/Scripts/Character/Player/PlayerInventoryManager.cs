@@ -17,6 +17,7 @@ namespace CatchMoon
         public List<SpellItem> spells;
         public List<SpellItem> memorized;
         public List<ConsumableItem> consumables;
+        public Item[] ringSlots = new Item[EquipmentLayout.RingSlots];
 
         Dictionary<ConsumableItem, int> consumableLeft;
         Dictionary<AmmoItem, int> ammoLeft;
@@ -34,6 +35,7 @@ namespace CatchMoon
         {
             base.Awake();
             player = GetComponent<PlayerManager>();
+            ringSlots = EquipmentLayout.Ensure(ringSlots, EquipmentLayout.RingSlots);
             consumableLeft = new Dictionary<ConsumableItem, int>();
             ammoLeft = new Dictionary<AmmoItem, int>();
         }
@@ -269,20 +271,33 @@ namespace CatchMoon
             }
         }
 
+        static bool AdvanceHand(WeaponItem[] hand, ref int index, ref WeaponItem current)
+        {
+            if (hand == null || hand.Length == 0) return false;
+            for (int i = 0; i < hand.Length; i++)
+            {
+                index = (index + 1) % hand.Length;
+                if (hand[index] == null) continue;
+                current = hand[index];
+                return true;
+            }
+            return false;
+        }
+
         void ChangeLeftWeapon()
         {
             if (player.isInteracting) return;
-            if (player.isTwoHandingWeapon && leftWeapon.weaponType != WeaponType.bow) return;
+            if (player.isTwoHandingWeapon && leftWeapon != null && leftWeapon.weaponType != WeaponType.bow) return;
 
-            currentLeftWeaponIdx = ++currentLeftWeaponIdx % weaponsInLeftHandSlot.Length;
-            leftWeapon = weaponsInLeftHandSlot[currentLeftWeaponIdx];
+            if (!AdvanceHand(weaponsInLeftHandSlot, ref currentLeftWeaponIdx, ref leftWeapon)) return;
 
             if (player.isTwoHandingWeapon)
             {
+                int guard = 0;
                 while (leftWeapon.weaponType != WeaponType.bow)
                 {
-                    currentLeftWeaponIdx = ++currentLeftWeaponIdx % weaponsInLeftHandSlot.Length;
-                    leftWeapon = weaponsInLeftHandSlot[currentLeftWeaponIdx];
+                    if (++guard > weaponsInLeftHandSlot.Length) return;
+                    if (!AdvanceHand(weaponsInLeftHandSlot, ref currentLeftWeaponIdx, ref leftWeapon)) return;
                 }
             }
             else
@@ -318,17 +333,17 @@ namespace CatchMoon
         void ChangeRightWeapon()
         {
             if (player.isInteracting) return;
-            if (leftWeapon.weaponType == WeaponType.bow) return;
+            if (leftWeapon != null && leftWeapon.weaponType == WeaponType.bow) return;
 
-            currentRightWeaponIdx = ++currentRightWeaponIdx % weaponsInRightHandSlot.Length;
-            rightWeapon = weaponsInRightHandSlot[currentRightWeaponIdx];
+            if (!AdvanceHand(weaponsInRightHandSlot, ref currentRightWeaponIdx, ref rightWeapon)) return;
 
             if (player.isTwoHandingWeapon)
             {
+                int guard = 0;
                 while (rightWeapon.weaponType != WeaponType.melee_TH && rightWeapon.weaponType != WeaponType.melee_THL)
                 {
-                    currentRightWeaponIdx = ++currentRightWeaponIdx % weaponsInRightHandSlot.Length;
-                    rightWeapon = weaponsInRightHandSlot[currentRightWeaponIdx];
+                    if (++guard > weaponsInRightHandSlot.Length) return;
+                    if (!AdvanceHand(weaponsInRightHandSlot, ref currentRightWeaponIdx, ref rightWeapon)) return;
                 }
             }
             player.pWeaponSlot.LoadWeaponsOnBothHands();
