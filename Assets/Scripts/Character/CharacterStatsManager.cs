@@ -96,16 +96,47 @@ namespace CatchMoon
             RegenerateStamina();
             HandlePoiseResetTimer();
             TickRegen(Time.deltaTime);
+            TickCurse(Time.deltaTime);
         }
 
         public float regenPerSecond;
         public float regenTimeLeft;
+
+        public float curseMeter;
+        public float curseCapacity;
+        public float curseDecay;
+        public bool curseInSource;
 
         public bool BeginRegen(float perSecond, float seconds)
         {
             if (perSecond <= 0f || seconds <= 0f) return false;
             regenPerSecond = perSecond;
             regenTimeLeft = seconds;
+            return true;
+        }
+
+        public void TickCurse(float deltaTime)
+        {
+            if (isDead || curseInSource) return;
+            curseMeter = CurseMeter.Decay(name, curseMeter, curseDecay, deltaTime);
+        }
+
+        public bool GainCurse(float gain, float resist)
+        {
+            if (isDead) return false;
+            curseMeter = StatusBuildup.Add(isInvulnerable, name, curseMeter, gain, resist, curseCapacity);
+            if (!CurseMeter.TryKill(curseMeter, curseCapacity, out float cleared)) return false;
+            curseMeter = cleared;
+            currentHP = 0f;
+            isDead = true;
+            return true;
+        }
+
+        public bool DrinkBlessing()
+        {
+            if (isDead) return false;
+            if (!CurseMeter.TryBless(curseMeter, curseCapacity, out float cleared)) return false;
+            curseMeter = cleared;
             return true;
         }
 

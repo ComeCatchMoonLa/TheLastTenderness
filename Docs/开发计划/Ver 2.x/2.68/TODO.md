@@ -4,28 +4,28 @@
 
 ## 0. 开始前
 
-- [ ] 2.67 已收尾。
-- [ ] 读过技术设计：蓄满致死，离开来源才衰减，没满才能祝福。
+- [x] 2.67 已收尾。
+- [x] 读过技术设计：蓄满致死，离开来源才衰减，没满才能祝福。
 
 **阶段门槛：** 知道速度填在 `curseDecay`。
 
 ## 1. 咒死
 
-- [ ] `CurseMeter.Decay`、`TryKill`、`TryBless`。
-- [ ] `CharacterStatsManager` 在离开来源时衰减，`GainCurse` 蓄满致死，`DrinkBlessing` 只清没满的槽。
+- [x] `CurseMeter.Decay`、`TryKill`、`TryBless`。
+- [x] `CharacterStatsManager` 在离开来源时衰减，`GainCurse` 蓄满致死，`DrinkBlessing` 只清没满的槽。
 
 **阶段门槛：** 槽是 0 时不因为速度没填而每帧报错。
 
 ## 2. 单元测试
 
-- [ ] `CurseMeterTests` 断言致死、衰减、速度空着、祝福。
-- [ ] 测试不创建角色。
+- [x] `CurseMeterTests` 断言致死、衰减、速度空着、祝福。
+- [x] 测试不创建角色。
 
 **阶段门槛：** Test Runner 里这个测试通过后才收尾。
 
 ## 3. 验收
 
-- [ ] 游戏设计第 3 节看过。
-- [ ] 大纲里的 2.68 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节看过。
+- [x] 大纲里的 2.68 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节里 Edit Mode 能断言的那一条满足。
