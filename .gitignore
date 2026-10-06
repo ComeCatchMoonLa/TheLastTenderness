@@ -68,10 +68,6 @@ Thumbs.db
 *.log
 *.swp
 
-# Unity Test Runner 未指定路径时写在仓库根。结果改到 Logs/TestResults.xml。
-/TestResults-*.xml
-
-
 # ==================================================
 # Unity Collaborate 忽略列表里、上面没有的条目
 # ==================================================
