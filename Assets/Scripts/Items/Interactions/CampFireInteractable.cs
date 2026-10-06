@@ -46,6 +46,7 @@ namespace CatchMoon
                 if (!CampFireRest.Allow(hostileRadius, PursuingEnemyInside()))
                     return;
 
+                LastBonfire.Remember(name, true);
                 player.pStats.RestoreVitalsToMax();
                 EnemyStatsManager[] resting = FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
                 for (int i = 0; i < resting.Length; i++)
