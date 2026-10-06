@@ -17,6 +17,10 @@ namespace CatchMoon
         public CatalystKind catalystKind;
         public string infusion;
         public int reinforceLevel;
+        public bool strengthNeedFilled;
+        public int strengthNeed;
+        public bool dexterityNeedFilled;
+        public int dexterityNeed;
 
         [Header("伤害")]
         public int pd;
