@@ -45,7 +45,4 @@
         "Packages": true,
         "ProjectSettings": true
     },
-    "dotrush.roslyn.projectOrSolutionFiles": [
-        "TheLastTenderness.slnx"
-    ]
 }
