@@ -47,6 +47,12 @@ namespace CatchMoon
                     return;
 
                 player.pStats.RestoreVitalsToMax();
+                EnemyStatsManager[] resting = FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
+                for (int i = 0; i < resting.Length; i++)
+                {
+                    if (resting[i] != null)
+                        resting[i].RestoreAfterRest();
+                }
                 player.pAnimator.PlayTargetAnimation("Pick Up Item", true);
             }
             else

@@ -16,12 +16,15 @@ namespace CatchMoon
         public int soulsAwardedDeath = 50; // 死亡后生成的灵魂数量
 
         public float destoryWaitTime = 3f;
+        public bool hiddenForRest;
+        public Vector3 restOrigin;
 
         BossCombatStanceState bossCombatStanceState;
 
         protected override void Awake()
         {
             base.Awake();
+            restOrigin = transform.position;
             enemy = GetComponent<EnemyManager>();
 
             enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
@@ -96,8 +99,28 @@ namespace CatchMoon
                 player.pCamera.UpdateLockOnTargets();
             }
             AwardSoulsOnDeath(player);
-            
+
+            if (enemy != null && enemy.aiSettings != null
+                && MeleeRest.Keep(enemy.aiSettings.isBoss, enemy.aiSettings.combatStyle))
+            {
+                hiddenForRest = true;
+                gameObject.SetActive(false);
+                return;
+            }
+
             Destroy(gameObject, destoryWaitTime);
+        }
+
+        public void RestoreAfterRest()
+        {
+            if (!hiddenForRest) return;
+            if (enemyHealthBar != null)
+            {
+                enemyHealthBar.SetMaxHealth(maxHP);
+                enemyHealthBar.SetCurrentHealth(maxHP);
+            }
+            MeleeRest.Restore(gameObject, restOrigin, this);
+            hiddenForRest = false;
         }
         public void AwardSoulsOnDeath(PlayerManager player)
         {
