@@ -9,6 +9,9 @@ namespace CatchMoon
             WeaponItem weapon,
             int strengthLevel,
             int dexterityLevel,
+            int intelligenceLevel,
+            int faithLevel,
+            int luckLevel,
             float speedFactor,
             float damageFactor,
             int damage,
@@ -19,7 +22,10 @@ namespace CatchMoon
             scaledDamage = damage;
             bool strengthShort = WeaponNeed.TryStrength(weapon, out int strengthNeed) && strengthLevel < strengthNeed;
             bool dexterityShort = WeaponNeed.TryDexterity(weapon, out int dexterityNeed) && dexterityLevel < dexterityNeed;
-            if (!strengthShort && !dexterityShort) return true;
+            bool intelligenceShort = WeaponNeed.TryIntelligence(weapon, out int intelligenceNeed) && intelligenceLevel < intelligenceNeed;
+            bool faithShort = WeaponNeed.TryFaith(weapon, out int faithNeed) && faithLevel < faithNeed;
+            bool luckShort = WeaponNeed.TryLuck(weapon, out int luckNeed) && luckLevel < luckNeed;
+            if (!strengthShort && !dexterityShort && !intelligenceShort && !faithShort && !luckShort) return true;
             if (speedFactor <= 0f)
             {
                 Debug.LogError($"{assetName}: speedFactor 未填");

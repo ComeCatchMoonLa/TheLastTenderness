@@ -13,5 +13,23 @@ namespace CatchMoon
             value = weapon.dexterityNeed;
             return weapon.dexterityNeedFilled;
         }
+
+        public static bool TryIntelligence(WeaponItem weapon, out int value)
+        {
+            value = weapon.intelligenceNeed;
+            return weapon.intelligenceNeedFilled;
+        }
+
+        public static bool TryFaith(WeaponItem weapon, out int value)
+        {
+            value = weapon.faithNeed;
+            return weapon.faithNeedFilled;
+        }
+
+        public static bool TryLuck(WeaponItem weapon, out int value)
+        {
+            value = weapon.luckNeed;
+            return weapon.luckNeedFilled;
+        }
     }
 }

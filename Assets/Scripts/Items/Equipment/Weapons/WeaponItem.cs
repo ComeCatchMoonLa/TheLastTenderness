@@ -24,6 +24,12 @@ namespace CatchMoon
         public int strengthNeed;
         public bool dexterityNeedFilled;
         public int dexterityNeed;
+        public bool intelligenceNeedFilled;
+        public int intelligenceNeed;
+        public bool faithNeedFilled;
+        public int faithNeed;
+        public bool luckNeedFilled;
+        public int luckNeed;
 
         [Header("伤害")]
         public int pd;

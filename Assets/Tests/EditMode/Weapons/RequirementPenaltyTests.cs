@@ -13,16 +13,31 @@ namespace CatchMoon.Tests
             weapon.strengthNeedFilled = true;
             weapon.strengthNeed = 14;
 
-            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 10, 10, 0.5f, 0.5f, 10, out float speed, out float scaled));
+            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 10, 10, 10, 10, 10, 0.5f, 0.5f, 10, out float speed, out float scaled));
             Assert.AreEqual(0.5f, speed);
             Assert.AreEqual(5f, scaled);
 
-            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 14, 10, 0.5f, 0.5f, 10, out speed, out scaled));
+            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 14, 10, 10, 10, 10, 0.5f, 0.5f, 10, out speed, out scaled));
             Assert.AreEqual(1f, speed);
             Assert.AreEqual(10f, scaled);
 
+            weapon.intelligenceNeedFilled = true;
+            weapon.intelligenceNeed = 14;
+            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 14, 10, 10, 10, 10, 0.5f, 0.5f, 10, out speed, out scaled));
+            Assert.AreEqual(0.5f, speed);
+            Assert.AreEqual(5f, scaled);
+
+            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 14, 10, 14, 10, 10, 0.5f, 0.5f, 10, out speed, out scaled));
+            Assert.AreEqual(1f, speed);
+            Assert.AreEqual(10f, scaled);
+
+            weapon.intelligenceNeedFilled = false;
+            Assert.IsTrue(RequirementPenalty.TryScale("刀", weapon, 14, 10, 0, 0, 0, 0.5f, 0.5f, 10, out speed, out scaled));
+            Assert.AreEqual(1f, speed);
+
             LogAssert.Expect(LogType.Error, "刀: speedFactor 未填");
-            Assert.IsFalse(RequirementPenalty.TryScale("刀", weapon, 10, 10, 0f, 0.5f, 10, out speed, out scaled));
+            weapon.intelligenceNeedFilled = true;
+            Assert.IsFalse(RequirementPenalty.TryScale("刀", weapon, 14, 10, 10, 10, 10, 0f, 0.5f, 10, out speed, out scaled));
             Assert.AreEqual(1f, speed);
             Assert.AreEqual(10f, scaled);
         }
