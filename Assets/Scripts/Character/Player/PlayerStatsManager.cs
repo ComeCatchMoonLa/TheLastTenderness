@@ -8,6 +8,8 @@ namespace CatchMoon
 
         [Header("灵魂数量")]
         public int soulCount = 0;
+        public bool hasSoulRemnant;
+        public int soulRemnant;
 
         protected override void Awake()
         {
@@ -45,7 +47,10 @@ namespace CatchMoon
                 player.ui.hud.healthBar.SetCurrentHP(currentHP);
 
                 if (currentHP <= 0)
+                {
                     base.Death(player);
+                    ForfeitSouls();
+                }
 
                 return true;
             }
@@ -126,9 +131,20 @@ namespace CatchMoon
         /// </summary>
         public void AddSouls(int souls)
         {
-            soulCount += souls;
+            SetSouls(soulCount + souls);
+        }
+
+        public void SetSouls(int souls)
+        {
+            soulCount = souls;
             if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.soulCountUI != null)
                 player.ui.hud.soulCountUI.SetSoulCountText(soulCount);
+        }
+
+        public void ForfeitSouls()
+        {
+            hasSoulRemnant = SoulDrop.TryLeave(soulCount, out soulRemnant);
+            SetSouls(0);
         }
 
         public bool ApplyEmber(float ratio, string assetName)
