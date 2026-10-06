@@ -38,6 +38,8 @@ namespace CatchMoon
 
         [Header("Poise")]
         public float totalPoiseDefence;             // 伤害计算时的总镇定(火力差很大的话可以形成压制)
+        public float attackPoise;
+        public bool attackPoiseActive;
         public float offensivePoiseBonus;           // 你用武器攻击时的镇定
         public float armorPoiseBonus;               // 通过装备获得的镇定
         public float totalPoiseResetTime = 15f;

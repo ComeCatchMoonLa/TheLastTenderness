@@ -143,10 +143,17 @@ namespace CatchMoon
         {
             WeaponItem currentWeaponBeingUsed = character.cInventory.currentItemBeingUsed as WeaponItem;
             character.cStats.totalPoiseDefence += currentWeaponBeingUsed.offensivePoiseBonus;
+            if (currentWeaponBeingUsed.offensivePoiseBonus > 0f)
+            {
+                character.cStats.attackPoise = currentWeaponBeingUsed.offensivePoiseBonus;
+                character.cStats.attackPoiseActive = true;
+            }
         }
         void ResetWeaponAttackingPoiseBonus()
         {
             character.cStats.totalPoiseDefence = character.cStats.armorPoiseBonus;
+            character.cStats.attackPoise = 0f;
+            character.cStats.attackPoiseActive = false;
         }
 
         void EnableRotate()

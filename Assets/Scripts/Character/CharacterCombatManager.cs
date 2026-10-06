@@ -175,6 +175,23 @@ namespace CatchMoon
                 return;
             }
 
+            if (character.cStats.attackPoiseActive)
+            {
+                bool holds = AttackPoise.Holds(character.cStats.attackPoise, poiseDamage, out float nextPoise);
+                character.cStats.attackPoise = nextPoise;
+                if (holds)
+                {
+                    RecordIncomingHit(false, false, pd, fd, md, ld, dd);
+                    character.cStats.TakeDamage(null, DamageOf(pd, fd, md, ld, dd));
+                    return;
+                }
+                character.cStats.attackPoiseActive = false;
+                character.cStats.totalPoiseDefence = character.cStats.armorPoiseBonus;
+                RecordIncomingHit(false, true, pd, fd, md, ld, dd);
+                character.cStats.TakeDamage(damageAnimation, DamageOf(pd, fd, md, ld, dd));
+                return;
+            }
+
             character.cStats.poiseResetTimer = character.cStats.totalPoiseResetTime;
             character.cStats.totalPoiseDefence -= poiseDamage;
             if (character.cStats.totalPoiseDefence > poiseDamage)
