@@ -4565,19 +4565,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845901804781236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845901804781258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4612,7 +4600,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845901804781258}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4761,19 +4749,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845901840829650}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845901840829648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4808,7 +4784,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845901840829648}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6203,19 +6179,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845902085401789}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845902085401779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6250,7 +6214,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845902085401779}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -6543,19 +6507,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845902172077079}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845902172077075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6590,7 +6542,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845902172077075}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -8293,19 +8245,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845902734555001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845902734555007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8340,7 +8280,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845902734555007}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -11112,19 +11052,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845903291120742}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845903291120740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11159,7 +11087,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845903291120740}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -11773,19 +11701,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1202845903437367774}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1202845901675964283}
-        m_TargetAssemblyTypeName: CatchMoon.TapWindowManager, Assembly-CSharp
-        m_MethodName: SelectInventoryWin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1202845903437367772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11820,7 +11736,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1202845903437367772}
           m_TargetAssemblyTypeName: CatchMoon.EquipmentSlotUI, Assembly-CSharp
-          m_MethodName: SelectThisSlot
+          m_MethodName: PreviewThisSlot
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

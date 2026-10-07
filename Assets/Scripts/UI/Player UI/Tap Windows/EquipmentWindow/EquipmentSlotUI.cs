@@ -54,6 +54,11 @@ namespace CatchMoon
             icon.enabled = false;
         }
 
+        public void PreviewThisSlot()
+        {
+            player.ui.tapWin.GetItemStatsWin().UpdateEquipmentItemStats(equipment);
+        }
+
         public void SelectThisSlot()
         {
             EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
