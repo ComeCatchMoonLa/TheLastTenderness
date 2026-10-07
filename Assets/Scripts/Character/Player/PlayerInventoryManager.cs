@@ -51,6 +51,24 @@ namespace CatchMoon
             }
             RememberConsumable(currentConsumable);
             RememberAmmo(currentAmmo);
+
+            if (!SpellIsMemorized(currentSpell))
+            {
+                currentSpell = null;
+                if (player.ui != null && player.ui.hud != null && player.ui.hud.quickSlotsUI != null)
+                    player.ui.hud.quickSlotsUI.UpdateCurrentSpellIcon(null);
+            }
+        }
+
+        bool SpellIsMemorized(SpellItem spell)
+        {
+            if (spell == null || memorized == null) return false;
+            for (int i = 0; i < memorized.Count; i++)
+            {
+                if (memorized[i] == spell)
+                    return true;
+            }
+            return false;
         }
 
         public bool TrySpendConsumable(ConsumableItem item)

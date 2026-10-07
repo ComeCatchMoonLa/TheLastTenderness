@@ -53,8 +53,7 @@ namespace CatchMoon
 
         public void UpdateCurrentSpellIcon(SpellItem spell)
         {
-            if (spell == null) return;
-            ShowIcon(currentSpellIcon, spell.itemIcon);
+            ShowIcon(currentSpellIcon, spell == null ? null : spell.itemIcon);
         }
 
         public void UpdateCurrentConsumableIcon(ConsumableItem consumable)
