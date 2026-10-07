@@ -19,6 +19,7 @@ namespace CatchMoon
         Vector2 moveInput;
         bool leftShift_Input;
         [HideInInspector] public bool space_Input;
+        public bool DodgeHeld => leftShift_Input;
 
         // 交互输入
         [HideInInspector] public bool interacte_Tap_Input;
