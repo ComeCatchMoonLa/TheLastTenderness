@@ -25,6 +25,7 @@ namespace CatchMoon.Tests
 
             var flask = ScriptableObject.CreateInstance<FlaskItem>();
             flask.maxItemAmount = 3;
+            flask.currentItemAmount = 3;
             Assert.AreEqual(3, inventory.ConsumableRemaining(flask));
             Assert.IsTrue(inventory.TrySpendConsumable(flask));
             Assert.IsTrue(inventory.TrySpendConsumable(flask));

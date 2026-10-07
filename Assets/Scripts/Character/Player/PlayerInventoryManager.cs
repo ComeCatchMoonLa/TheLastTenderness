@@ -192,7 +192,10 @@ namespace CatchMoon
         void RememberConsumable(ConsumableItem item)
         {
             if (item == null || consumableLeft.ContainsKey(item)) return;
-            consumableLeft[item] = item.maxItemAmount;
+            int count = item.currentItemAmount;
+            if (count < 0) count = 0;
+            if (item.maxItemAmount > 0 && count > item.maxItemAmount) count = item.maxItemAmount;
+            consumableLeft[item] = count;
         }
         void RememberAmmo(AmmoItem item)
         {

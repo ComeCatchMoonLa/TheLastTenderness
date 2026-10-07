@@ -16,11 +16,12 @@ namespace CatchMoon.Tests
         }
 
         [Test]
-        public void FirstRead_UsesMaxAmount_SpendLeavesZero()
+        public void FirstRead_UsesCurrentAmount_SpendLeavesZero()
         {
             PlayerInventoryManager inventory = NewInventory();
             var flask = ScriptableObject.CreateInstance<FlaskItem>();
             flask.maxItemAmount = 1;
+            flask.currentItemAmount = 1;
 
             Assert.AreEqual(1, inventory.ConsumableRemaining(flask));
             Assert.IsTrue(inventory.TrySpendConsumable(flask));
