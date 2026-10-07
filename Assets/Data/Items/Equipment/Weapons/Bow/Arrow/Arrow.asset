@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Arrow
   m_EditorClassIdentifier: 
   itemType: 0
+  isRing: 0
+  isCovenantMark: 0
+  isKey: 0
   itemIcon: {fileID: 21300000, guid: b2634b9e26cf5724eb4ed456b37f096a, type: 3}
   itemName: "\u7BAD"
   transformName: 
@@ -22,8 +25,12 @@ MonoBehaviour:
   mass: 0
   useGravity: 0
   maxCnt: 25
-  cnt: 25
+  cnt: 1
   physicalDamage: 50
+  fullDrawTimeFilled: 1
+  fullDrawTime: 3
+  fullDrawDamageFilled: 1
+  fullDrawDamage: 100
   loadedItemModel: {fileID: 720195730454961944, guid: db3eafe2752351442bf81f7ff66ea724, type: 3}
   liveItemModel: {fileID: 720195730454961944, guid: bb8b8a03eec35be4f8aee4c3c071d61d, type: 3}
   penetratedModel: {fileID: 638357305408120754, guid: fb667e2c0367c0841b1d8d655edc4eee, type: 3}
