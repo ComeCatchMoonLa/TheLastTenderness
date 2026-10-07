@@ -1470,6 +1470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 84729106355412012, guid: 79b311a06b41c914ba6021e7f4d6ed78, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.99994
+      objectReference: {fileID: 0}
     - target: {fileID: 1202845902069060152, guid: 79b311a06b41c914ba6021e7f4d6ed78, type: 3}
       propertyPath: m_Name
       value: Global UI
@@ -2566,8 +2570,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 881580001}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: ashLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: ashShare
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: boneTier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: items.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: weapons.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'items.Array.data[0]'
@@ -2581,6 +2601,86 @@ PrefabInstance:
       propertyPath: 'items.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: e9a830a7b77949445b8c9c0466af5571, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: memorized.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weapons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weapons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weapons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weapons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: consumables.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'memorized.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a3ef8a6eaf983e4f87237247c9785d6, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'memorized.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 13cf1b7fa2cadaf439ea290b1592bb7f, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'consumables.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1abac5fd608874c46bcc939472e21442, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: weaponsInLeftHandSlot.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: weaponsInRightHandSlot.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInLeftHandSlot.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ef67db6b3bdeac54cbfd2cdd780bb494, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInLeftHandSlot.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f552a6d132e7dd44aa0f7ca7fcc2d42, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInLeftHandSlot.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 57bf0712141092749a7a3221d9ab6a9e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInLeftHandSlot.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 57bf0712141092749a7a3221d9ab6a9e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInLeftHandSlot.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 57bf0712141092749a7a3221d9ab6a9e, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInRightHandSlot.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d38eea5551858b4a9b2a5ce0b5ab179, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInRightHandSlot.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fda36b0a1b8cc764e98f95f06e1c08a8, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInRightHandSlot.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f552a6d132e7dd44aa0f7ca7fcc2d42, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'weaponsInRightHandSlot.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 57bf0712141092749a7a3221d9ab6a9e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
