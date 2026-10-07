@@ -208,6 +208,13 @@ namespace CatchMoon
             }
         }
 
+        public bool LeftActivity()
+        {
+            if (aiSettings == null) return false;
+            float fromHome = Vector3.Distance(transform.position, placement);
+            return Territory.PulledOut(aiSettings.isBoss, fromHome, aiSettings.activityRadius);
+        }
+
         public void BreakReturnIfStillInRange()
         {
             float engage = aiSettings != null ? aiSettings.aggroRadius : 0f;

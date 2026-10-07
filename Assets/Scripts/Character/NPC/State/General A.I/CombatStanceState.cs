@@ -37,6 +37,13 @@ namespace CatchMoon
         {
             if (enemy.eStats.isDead) return this;
 
+            if (enemy.LeftActivity())
+            {
+                enemy.returningHome = true;
+                enemy.returnToPlacement = true;
+                return pursueTargetState;
+            }
+
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 

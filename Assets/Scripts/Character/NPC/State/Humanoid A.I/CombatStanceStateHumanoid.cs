@@ -38,6 +38,13 @@ namespace CatchMoon
         {
             if (!enemy.enableAI || enemy.eStats.isDead) return this;
 
+            if (enemy.LeftActivity())
+            {
+                enemy.returningHome = true;
+                enemy.returnToPlacement = true;
+                return pursueTargetState;
+            }
+
             if (enemy.aiSettings.combatStyle == NPCCombatStyle.melee)
                 return ProcessMeleeCombatStyle(enemy);
             else if (enemy.aiSettings.combatStyle == NPCCombatStyle.archer)

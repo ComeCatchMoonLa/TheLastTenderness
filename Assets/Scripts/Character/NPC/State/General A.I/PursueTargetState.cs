@@ -19,7 +19,7 @@ namespace CatchMoon
         {
             if (!enemy.enableAI || enemy.eStats.isDead || enemy.isInteracting) return this;
 
-            if (enemy.aiSettings != null && Territory.PulledOut(enemy.aiSettings.isBoss, enemy.distFromTarget, enemy.aiSettings.activityRadius))
+            if (enemy.LeftActivity())
             {
                 enemy.returningHome = true;
                 enemy.returnToPlacement = true;

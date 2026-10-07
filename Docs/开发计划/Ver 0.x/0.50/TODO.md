@@ -11,15 +11,15 @@
 
 ## 1. 放置点
 
-- [ ] `EnemyManager.LeftActivity` 用到 `placement` 的距离。
-- [ ] `PursueTargetState` 的活动范围改调它。`Leash.TooFar` 仍用 `distFromTarget`。
-- [ ] General 周旋和人形周旋在 `LeftActivity` 时设回家并回到追击。
+- [x] `EnemyManager.LeftActivity` 用到 `placement` 的距离。
+- [x] `PursueTargetState` 的活动范围改调它。`Leash.TooFar` 仍用 `distFromTarget`。
+- [x] General 周旋和人形周旋在 `LeftActivity` 时设回家并回到追击。
 
 **阶段门槛：** `Territory.PulledOut` 和 `TerritoryTests` 不改。
 
 ## 2. 验收
 
-- [ ] 游戏设计第 3 节在编辑器里看过。
-- [ ] 大纲里的 0.50 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节在编辑器里看过。
+- [x] 大纲里的 0.50 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。没有新的单元测试要跑。
