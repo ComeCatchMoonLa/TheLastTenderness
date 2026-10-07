@@ -31,6 +31,16 @@ namespace CatchMoon
 
         void OnCollisionEnter(Collision collision)
         {
+            NotifyCollision(collision);
+        }
+
+        void OnCollisionStay(Collision collision)
+        {
+            NotifyCollision(collision);
+        }
+
+        void NotifyCollision(Collision collision)
+        {
             CharacterManager character = collision.collider.GetComponent<CharacterManager>();
             if (character == null)
                 character = collision.collider.GetComponentInParent<CharacterManager>();
