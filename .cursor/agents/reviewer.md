@@ -1,6 +1,6 @@
 ---
 name: reviewer
-model: grok-4.7[context=500k,reasoning_effort=xhigh,fast=false]
+model: inherit
 description: 仅高风险小版本在收尾前提前调用。高风险定义见 Docs/版本候选池/README.md。用户点名审查、review、reviewer 或 /reviewer 时也同样使用。其余版本不主动调用。对照该版三件套做只读审查。不改代码，不提交。结论是「要求修改」时由调用方改完再调用，直到「通过」或「有保留通过」。施工文档提交和闲聊时不调用。
 readonly: true
 ---
