@@ -11,16 +11,16 @@
 
 ## 1. 粒子
 
-- [ ] 血迹根粒子时长 3、不循环、`stopAction` 为 2，去掉 `DestroyAuto`。
-- [ ] 爆炸根粒子时长 5、不循环、`stopAction` 为 2，去掉 `DestroyAuto`。
-- [ ] 删 `DestroyAuto.cs`、它的 `.meta`，以及 `DestroyAutoRenameTests` 和它的 `.meta`。
-- [ ] `FxStopActionTests` 按技术设计。[`可测试性.md`](../../../代码分析/可测试性.md) 改 1.33 那一行并补上 1.59。
+- [x] 血迹根粒子发射仍是 0.1、寿命上限 2.9、不循环、`stopAction` 为 2，去掉 `DestroyAuto`。
+- [x] 爆炸根粒子发射仍是 0.5、寿命上限 4.5、不循环、`stopAction` 为 2，去掉 `DestroyAuto`。
+- [x] 删 `DestroyAuto.cs`、它的 `.meta`，以及 `DestroyAutoRenameTests` 和它的 `.meta`。
+- [x] `FxStopActionTests` 按技术设计。[`可测试性.md`](../../../代码分析/可测试性.md) 改 1.33 那一行并补上 1.59。
 
 **阶段门槛：** 子物体上的循环粒子不单独设 Stop Action。
 
 ## 2. 验收
 
-- [ ] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `FxStopActionTests` 通过。
-- [ ] 大纲里的 1.59 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `FxStopActionTests` 通过。
+- [x] 大纲里的 1.59 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。

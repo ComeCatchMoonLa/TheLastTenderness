@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4587786598044862}
   - component: {fileID: 198009975391485926}
   - component: {fileID: 199831857397119366}
-  - component: {fileID: 1460482960745976656}
   m_Layer: 0
   m_Name: FX_Explosion
   m_TagString: Untagged
@@ -46,7 +45,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -119,7 +118,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
+      scalar: 4.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4784,19 +4783,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1460482960745976656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290715649332758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8ce2664a73f11840a0fe2731eec1cf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeUntilDestroyed: 5
 --- !u!1 &1709467075766706
 GameObject:
   m_ObjectHideFlags: 0
