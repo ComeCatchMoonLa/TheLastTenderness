@@ -2568,7 +2568,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4185532010463437183, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: staminaLevel
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4387546589291920029, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: m_LocalPosition.x
