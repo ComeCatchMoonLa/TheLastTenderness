@@ -47,6 +47,8 @@ namespace CatchMoon
         public bool isRotatingWithRootMotion;   // 用动画根运动实现旋转
         public bool isSprinting;        // 冲刺中
         public bool kickArmed;
+        public bool stanceHolding;
+        public StanceDerive stanceDerive;
 
         [Header("对话")]
         public bool talkWithSB;

@@ -29,6 +29,11 @@ namespace CatchMoon
 
         void PlaySegment(CharacterManager character, bool combo)
         {
+            if (character.stanceHolding)
+            {
+                character.stanceDerive = WeaponStance.TakeSwing(true, true);
+                character.stanceHolding = false;
+            }
             MeleeAttackSegment.Play(
                 character,
                 combo,
