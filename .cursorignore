@@ -14,7 +14,3 @@ Assets/**/*.FBX
 Assets/**/*.hdr
 Assets/**/*.exr
 Assets/**/*.unitypackage
-
-# 超大地图预制体不进 Agent 上下文。
-# Map Test 1.prefab 仍由 git 跟踪，只是不让 Agent 整份读取。
-Assets/Prefabs/Map Test 1.prefab
