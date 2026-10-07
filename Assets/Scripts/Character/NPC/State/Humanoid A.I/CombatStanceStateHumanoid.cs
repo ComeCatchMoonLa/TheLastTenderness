@@ -56,10 +56,6 @@ namespace CatchMoon
                 return this;
             }
 
-            StopHorizontal(enemy);
-            enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
-
             // 在aggroRadius外察觉半径内时追向玩家
             if (enemy.distFromTarget > enemy.aiSettings.aggroRadius)
             {
@@ -69,6 +65,9 @@ namespace CatchMoon
 
             // 攻击冷却时围绕Player转圈(随机左右)
             DecideCirclingAction(enemy);
+            ApplyCircle(enemy);
+            enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+            enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
             HandleRotateTowardsTarget(enemy);
             
@@ -291,6 +290,14 @@ namespace CatchMoon
                 enemy.animator.SetFloat("Vertical", 0);
                 enemy.eInventory.rightWeapon.oh_hold_e_action.PerformAction(enemy);
             }
+        }
+
+        void ApplyCircle(EnemyManager enemy)
+        {
+            float speed = enemy.navmeshAgent.speed;
+            Vector3 velocity = (transform.right * horizontalMovementValue + transform.forward * verticalMovementValue) * speed;
+            velocity.y = enemy.rigidBody.linearVelocity.y;
+            enemy.rigidBody.linearVelocity = velocity;
         }
 
         static void StopHorizontal(EnemyManager enemy)
