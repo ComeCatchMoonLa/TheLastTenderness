@@ -197,7 +197,10 @@ namespace CatchMoon
         void RememberAmmo(AmmoItem item)
         {
             if (item == null || ammoLeft.ContainsKey(item)) return;
-            ammoLeft[item] = item.maxCnt;
+            int count = item.cnt;
+            if (count < 0) count = 0;
+            if (item.maxCnt > 0 && count > item.maxCnt) count = item.maxCnt;
+            ammoLeft[item] = count;
         }
         protected virtual void Update()
         {
