@@ -19,9 +19,9 @@ MonoBehaviour:
   allowAIToPerformCombos: 1
   comboLikeHood: 20
   aggroRadius: 5
-  detectionRadius: 30
+  detectionRadius: 20
   returnArrive: 1
-  activityRadius: 15
+  activityRadius: 30
   combatStyle: 0
   allowAIToPerformBlock: 1
   blockLikelyHood: 80
