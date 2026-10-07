@@ -11,7 +11,7 @@ namespace CatchMoon
         PlayerManager player;
 
         [Header("库存")]
-        [HideInInspector] public List<Item> items;
+        public List<Item> items;
         public List<WeaponItem> weapons;
         public List<ArmorItem> armors;
         public List<SpellItem> spells;
