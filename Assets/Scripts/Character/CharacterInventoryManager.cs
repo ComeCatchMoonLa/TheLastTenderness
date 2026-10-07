@@ -18,7 +18,7 @@ namespace CatchMoon
         [Header("弹药")]
         public AmmoItem currentAmmo;
 
-        [Header("武器")] 
+        [Header("武器")]
         public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[EquipmentLayout.WeaponsPerHand];
         public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[EquipmentLayout.WeaponsPerHand];
         [HideInInspector] public int currentLeftWeaponIdx = 0;
