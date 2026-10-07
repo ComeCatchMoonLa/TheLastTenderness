@@ -20,6 +20,8 @@ namespace CatchMoon
 
         public void PopUp()
         {
+            if (!gameObject.activeSelf)
+                gameObject.SetActive(true);
             StartCoroutine(FadeInPopUp());
         }
 
