@@ -14,7 +14,7 @@
 | **0.x** | `fix`。行为向本就该有的结果收敛。0.1–0.48 已完成，号不改。大纲见 [`Ver 0.x/README.md`](Ver%200.x/README.md) |
 | **1.x** | `refactor`、`optimize`。可观察结果不变。1.0–1.57 已完成，号不改。见 [`Ver 1.x/README.md`](Ver%201.x/README.md)。不换一套战斗核心 |
 | **2.x** | `new`、`add`。新入口，或已有入口上多一种子结果，包括把已经写好但未激活的旧功能重新用起来。2.1–2.94 已完成，号不改。见 [`Ver 2.x/README.md`](Ver%202.x/README.md) |
-| **3.x** | `change`、`change!`。已有结果按新要求改。3.1 已完成。3.2 已完成。见 [`Ver 3.x/README.md`](Ver%203.x/README.md) |
+| **3.x** | `change`、`change!`。已有结果按新要求改。3.1 已完成。3.2 已完成。3.3 只写了施工文档，还没做。见 [`Ver 3.x/README.md`](Ver%203.x/README.md) |
 | **4.x** | `remove!`、`delete!`。去掉子能力，或去掉整个功能、整份资源。还没有小版本 |
 
 类型定义和「同一版必须落在同一段」见 [`../更新日志/README.md`](../更新日志/README.md)。已经收尾的版本号不因为这张表改号。
