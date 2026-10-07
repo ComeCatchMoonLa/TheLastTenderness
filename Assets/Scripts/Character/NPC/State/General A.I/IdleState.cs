@@ -4,6 +4,8 @@ namespace CatchMoon
 {
     public class IdleState : State
     {
+        public static int SightMask => ~0 & ~(LayerMask.player | LayerMask.npc | LayerMask.characterCollisionBlocker);
+
         PursueTargetState pursueTargetState;
         Collider[] detectionOverlapResults = new Collider[16];
 
@@ -29,7 +31,7 @@ namespace CatchMoon
                     if (enemy.targetDirAngle > enemy.aiSettings.minViewAngel && enemy.targetDirAngle < enemy.aiSettings.maxViewAngel)
                     {
                         if (Physics.Linecast(enemy.lockOnTransform.position, targetcharacter.lockOnTransform.position,
-                            LayerMask.defaultLayerMask | LayerMask.environment, QueryTriggerInteraction.Ignore))
+                            SightMask, QueryTriggerInteraction.Ignore))
                         {
                             return this;
                         }

@@ -11,15 +11,15 @@
 
 ## 1. 遮罩
 
-- [ ] `IdleState.SightMask` 按技术设计。`Linecast` 改用它。
-- [ ] `IdleSightTests` 断言含 Default、Environment、Interactable，不含玩家、敌人、Blocker。
-- [ ] [`可测试性.md`](../../../代码分析/可测试性.md) 的用例表补上 3.3。
+- [x] `IdleState.SightMask` 按技术设计。`Linecast` 改用它。
+- [x] `IdleSightTests` 断言含 Default、Environment、Interactable，不含玩家、敌人、Blocker。
+- [x] [`可测试性.md`](../../../代码分析/可测试性.md) 的用例表补上 3.3。
 
 **阶段门槛：** 不创建碰撞体。锁定线不改。
 
 ## 2. 验收
 
-- [ ] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `IdleSightTests` 通过。
-- [ ] 大纲里的 3.3 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `IdleSightTests` 通过。
+- [x] 大纲里的 3.3 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
