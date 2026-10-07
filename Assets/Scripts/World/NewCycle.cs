@@ -73,6 +73,13 @@ namespace CatchMoon
                     events[i].ResetForNewCycle();
             }
 
+            PickUpItem[] pickups = Object.FindObjectsByType<PickUpItem>(FindObjectsInactive.Include);
+            for (int i = 0; i < pickups.Length; i++)
+            {
+                if (pickups[i] != null)
+                    pickups[i].ShowForNewCycle();
+            }
+
             OpenChest[] chests = Object.FindObjectsByType<OpenChest>(FindObjectsInactive.Include);
             for (int i = 0; i < chests.Length; i++)
             {

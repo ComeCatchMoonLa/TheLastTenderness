@@ -5,6 +5,7 @@ namespace CatchMoon
     public class PickUpItem : Interactable
     {
         public Item item; // 武器
+        public bool taken;
 
         private void Start()
         {
@@ -29,7 +30,20 @@ namespace CatchMoon
             player.ui.popUps.interactUI.SetInteractionInfo(item);
 
             player.ui.popUps.interactUI.PopUpInteractionInfoUI(); // 将提示物品信息的UI激活
-            Destroy(gameObject);
+            HideTaken();
+        }
+
+        public void HideTaken()
+        {
+            taken = true;
+            gameObject.SetActive(false);
+        }
+
+        public void ShowForNewCycle()
+        {
+            if (!taken) return;
+            taken = false;
+            gameObject.SetActive(true);
         }
     }
 }

@@ -11,16 +11,16 @@
 
 ## 1. 留下
 
-- [ ] `PickUpItem` 捡起后 `taken` 为真并关掉物体，不 `Destroy`。
-- [ ] `ShowForNewCycle` 只打开已捡的。
-- [ ] `NewCycle.Apply` 找出拾取并调用。
-- [ ] `PickupCycleTests` 按技术设计。[`可测试性.md`](../../../代码分析/可测试性.md) 补上 2.96。
+- [x] `PickUpItem` 捡起后 `taken` 为真并关掉物体，不 `Destroy`。
+- [x] `ShowForNewCycle` 只打开已捡的。
+- [x] `NewCycle.Apply` 找出拾取并调用。
+- [x] `PickupCycleTests` 按技术设计。[`可测试性.md`](../../../代码分析/可测试性.md) 补上 2.96。
 
 **阶段门槛：** 没捡过的保持原样。
 
 ## 2. 验收
 
-- [ ] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `PickupCycleTests` 通过。
-- [ ] 大纲里的 2.96 标成已完成。提交说明用中文。
+- [x] 游戏设计第 3 节在编辑器里看过。Edit Mode 里 `PickupCycleTests` 通过。
+- [x] 大纲里的 2.96 标成已完成。提交说明用中文。
 
 **阶段门槛：** 游戏设计第 3 节全部满足。
