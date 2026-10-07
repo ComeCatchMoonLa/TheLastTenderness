@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace CatchMoon
 {
@@ -61,6 +64,8 @@ namespace CatchMoon
 
         float rollInputTimer; // 滚动输入计时器
         LadderRide ladderRide;
+        PointerEventData uiPointer;
+        readonly List<RaycastResult> uiHits = new List<RaycastResult>();
 
         public void KeepDodgeFromRolling()
         {
@@ -68,6 +73,44 @@ namespace CatchMoon
             backStepFlag = false;
             if (rollInputTimer > 0f && rollInputTimer < 0.5f)
                 rollInputTimer = 0.5f;
+        }
+
+        bool MousePressHitsUi(InputAction.CallbackContext context)
+        {
+            if (context.control == null || !(context.control.device is Mouse)) return false;
+            EventSystem events = EventSystem.current;
+            if (events == null || Mouse.current == null) return false;
+            if (uiPointer == null)
+                uiPointer = new PointerEventData(events);
+            uiPointer.Reset();
+            uiPointer.position = Mouse.current.position.ReadValue();
+            uiHits.Clear();
+            events.RaycastAll(uiPointer, uiHits);
+            return uiHits.Count > 0;
+        }
+
+        void OnRightLightAttack(InputAction.CallbackContext context)
+        {
+            if (MousePressHitsUi(context)) return;
+            tap_e_Input = true;
+        }
+
+        void OnCriticalAttack(InputAction.CallbackContext context)
+        {
+            if (MousePressHitsUi(context)) return;
+            hold_e_Input = true;
+        }
+
+        void OnLeftLightAttack(InputAction.CallbackContext context)
+        {
+            if (MousePressHitsUi(context)) return;
+            tap_q_Input = true;
+        }
+
+        void OnBlockOrAim(InputAction.CallbackContext context)
+        {
+            if (MousePressHitsUi(context)) return;
+            hold_q_Input = true;
         }
 
         bool Climbing()
@@ -103,12 +146,12 @@ namespace CatchMoon
 
                 inputActions.Combat.SwitchHoldWeaponMode.performed += i => y_Input = true;
                 inputActions.Combat.UseComsumable.performed += i => x_Input = true;
-                inputActions.Combat.RightWeaponLightAttackOrShootArrow.performed += i => tap_e_Input = true;
-                inputActions.Combat.CriticalAttack.performed += i => hold_e_Input = true;
+                inputActions.Combat.RightWeaponLightAttackOrShootArrow.performed += OnRightLightAttack;
+                inputActions.Combat.CriticalAttack.performed += OnCriticalAttack;
                 inputActions.Combat.CriticalAttack.canceled += i => hold_e_Input = false;
                 inputActions.Combat.RightWeaponHeavyAttack.performed += i => tap_r_Input = true;
-                inputActions.Combat.LeftWeaponLightAttack.performed += i => tap_q_Input = true;
-                inputActions.Combat.BlockOrAim.performed += i => hold_q_Input = true;
+                inputActions.Combat.LeftWeaponLightAttack.performed += OnLeftLightAttack;
+                inputActions.Combat.BlockOrAim.performed += OnBlockOrAim;
                 inputActions.Combat.BlockOrAim.canceled += i => hold_q_Input = false;
                 inputActions.Combat.LeftWeaponHeavyAttackOrParry.performed += i => tap_z_Input = true;
                 inputActions.Combat.SwitchLeftWeapon.performed += i => left_Arrow_Input = true;

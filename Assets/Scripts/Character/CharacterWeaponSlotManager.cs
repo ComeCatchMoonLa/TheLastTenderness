@@ -154,14 +154,14 @@ namespace CatchMoon
         {
             if (isLeft)
             {
-                if (leftHandSlot.currentWeapon.weaponType == WeaponType.unarmed
-                    || leftHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
+                if (leftHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.pyromancyCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.spellCaster
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.bow
                     || leftHandSlot.currentWeapon.weaponType == WeaponType.melee_OH_Shield)
                 {
                     character.cEffects.leftWeaponFX = null;
+                    leftHandDC = null;
                     return;
                 }
 
@@ -191,11 +191,13 @@ namespace CatchMoon
             }
             else
             {
-                if (rightHandSlot.currentWeapon.weaponType == WeaponType.unarmed
-                    || rightHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
+                if (rightHandSlot.currentWeapon.weaponType == WeaponType.faithCaster
                     || rightHandSlot.currentWeapon.weaponType == WeaponType.pyromancyCaster
                     || rightHandSlot.currentWeapon.weaponType == WeaponType.spellCaster)
+                {
+                    rightHandDC = null;
                     return;
+                }
 
                 rightHandDC = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
                 if (rightHandDC == null)

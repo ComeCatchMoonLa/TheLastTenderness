@@ -189,18 +189,18 @@ namespace CatchMoon
 
         void OpenDamageCollider()
         {
-            if (character.isUsingLeftHand)
+            if (character.isUsingLeftHand && character.cWeaponSlot.leftHandDC != null)
                 character.cWeaponSlot.leftHandDC.EnableDamageCollider();
-            if (character.isUsingRightHand)
+            if (character.isUsingRightHand && character.cWeaponSlot.rightHandDC != null)
                 character.cWeaponSlot.rightHandDC.EnableDamageCollider();
 
             character.cSoundFX.PlayRandomWeaponWhoosh();
         }
         void CloseDamageCollider()
         {
-            if (character.isUsingLeftHand)
+            if (character.isUsingLeftHand && character.cWeaponSlot.leftHandDC != null)
                 character.cWeaponSlot.leftHandDC.DisableDamageCollider();
-            if (character.isUsingRightHand)
+            if (character.isUsingRightHand && character.cWeaponSlot.rightHandDC != null)
                 character.cWeaponSlot.rightHandDC.DisableDamageCollider();
         }
 

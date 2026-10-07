@@ -55,6 +55,7 @@ namespace CatchMoon
         /// </summary>
         public void EnableDamageCollider()
         {
+            if (damageCollider == null) return;
             hitThisWindow.Clear();
             damageCollider.enabled = true;
         }
@@ -64,6 +65,7 @@ namespace CatchMoon
         /// </summary>
         public void DisableDamageCollider()
         {
+            if (damageCollider == null) return;
             damageCollider.enabled = false;
             hitThisWindow.Clear();
         }
