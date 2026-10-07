@@ -5,6 +5,9 @@ namespace CatchMoon
     public class OpenChest : Interactable
     {
         Animator animator;
+        Transform lid;
+        Vector3 closedLidPosition;
+        Quaternion closedLidRotation;
 
         [SerializeField] Transform playerStandingPosition;
         public WeaponItem itemInChest;
@@ -13,6 +16,12 @@ namespace CatchMoon
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            lid = transform.Find("Lid");
+            if (lid != null)
+            {
+                closedLidPosition = lid.localPosition;
+                closedLidRotation = lid.localRotation;
+            }
 
             #region 检错
             if (animator == null)
@@ -34,7 +43,12 @@ namespace CatchMoon
             if (playerManager == null || playerManager.pInventory == null) return;
 
             playerManager.OpenChestInteracting(playerStandingPosition, transform.position);
-            animator.Play("Chest Open");
+            if (animator != null)
+            {
+                animator.enabled = true;
+                animator.speed = 1f;
+                animator.Play("Chest Open", 0, 0f);
+            }
 
             if (!ChestLoot.Give(false, itemInChest, playerManager.pInventory)) return;
             opened = true;
@@ -50,6 +64,19 @@ namespace CatchMoon
         public void AfterRest()
         {
             opened = ChestLoot.AfterRest(opened);
+        }
+
+        public void CloseForNewCycle()
+        {
+            opened = ChestLoot.ForNewCycle(opened);
+            gameObject.tag = "Interactable";
+            if (lid != null)
+            {
+                lid.localPosition = closedLidPosition;
+                lid.localRotation = closedLidRotation;
+            }
+            if (animator != null)
+                animator.enabled = false;
         }
     }
 }

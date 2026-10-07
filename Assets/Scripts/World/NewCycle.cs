@@ -73,6 +73,27 @@ namespace CatchMoon
                     events[i].ResetForNewCycle();
             }
 
+            OpenChest[] chests = Object.FindObjectsByType<OpenChest>(FindObjectsInactive.Include);
+            for (int i = 0; i < chests.Length; i++)
+            {
+                if (chests[i] != null)
+                    chests[i].CloseForNewCycle();
+            }
+
+            IllusionWall[] walls = Object.FindObjectsByType<IllusionWall>(FindObjectsInactive.Include);
+            for (int i = 0; i < walls.Length; i++)
+            {
+                if (walls[i] != null)
+                    walls[i].CloseForNewCycle();
+            }
+
+            EnemyStatsManager[] rested = Object.FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
+            for (int i = 0; i < rested.Length; i++)
+            {
+                if (rested[i] != null)
+                    rested[i].RestoreAfterRest();
+            }
+
             EnemyManager[] enemies = Object.FindObjectsByType<EnemyManager>(FindObjectsInactive.Include);
             for (int i = 0; i < enemies.Length; i++)
             {

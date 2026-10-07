@@ -15,5 +15,10 @@ namespace CatchMoon
         {
             return opened;
         }
+
+        public static bool ForNewCycle(bool opened)
+        {
+            return false;
+        }
     }
 }

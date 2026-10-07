@@ -29,6 +29,17 @@ namespace CatchMoon
         {
         }
 
+        public void CloseForNewCycle()
+        {
+            opened = false;
+            Collider[] cols = GetComponents<Collider>();
+            for (int i = 0; i < cols.Length; i++)
+                cols[i].enabled = true;
+            Renderer[] renderers = GetComponents<Renderer>();
+            for (int i = 0; i < renderers.Length; i++)
+                renderers[i].enabled = true;
+        }
+
         void OnCollisionEnter(Collision collision)
         {
             NotifyCollision(collision);
