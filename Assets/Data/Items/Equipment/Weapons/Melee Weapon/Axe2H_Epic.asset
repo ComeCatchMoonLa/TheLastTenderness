@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Axe2H_Epic
   m_EditorClassIdentifier: 
   itemType: 0
+  isRing: 0
+  isCovenantMark: 0
+  isKey: 0
   itemIcon: {fileID: 21300000, guid: b3379dfbd47568344bccd644c3bdf8ee, type: 3}
   itemName: "\u53CC\u624B\u65A7"
   transformName: 
@@ -22,6 +25,24 @@ MonoBehaviour:
   weaponController: {fileID: 22100000, guid: 2cff64762cb48e2488884f3fba6ee8aa, type: 2}
   offHandIdleAnimation: Left_Arm_Idle
   weaponType: 6
+  catalystKind: 0
+  spellPowerFilled: 0
+  spellPower: 0
+  infusion: 
+  cannotBuff: 0
+  stanceArt: 0
+  reinforceLevel: 0
+  upgradePath: 0
+  strengthNeedFilled: 0
+  strengthNeed: 0
+  dexterityNeedFilled: 0
+  dexterityNeed: 0
+  intelligenceNeedFilled: 0
+  intelligenceNeed: 0
+  faithNeedFilled: 0
+  faithNeed: 0
+  luckNeedFilled: 0
+  luckNeed: 0
   pd: 10
   fd: 0
   md: 0
@@ -46,7 +67,7 @@ MonoBehaviour:
   laStaminaCostM: 1
   haStaminaCostM: 1.5
   oh_tap_e_action: {fileID: 11400000, guid: 7eda8d58ef67b314a801f7bba18f22e7, type: 2}
-  oh_hold_e_action: {fileID: 0}
+  oh_hold_e_action: {fileID: 11400000, guid: a65d3d74d904f5f419212dc9701d2077, type: 2}
   oh_tap_q_action: {fileID: 11400000, guid: 7eda8d58ef67b314a801f7bba18f22e7, type: 2}
   oh_hold_q_action: {fileID: 0}
   oh_tap_r_action: {fileID: 11400000, guid: a1da57e59708a734e8b3baa003ebfb47, type: 2}
