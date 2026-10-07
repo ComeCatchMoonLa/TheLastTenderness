@@ -108,6 +108,43 @@ namespace CatchMoon
 
             navmeshAgent.enabled = false;       // 禁用导航
             rigidBody.isKinematic = false;      // 不启用物理系统
+            EnableBlocker();
+            IgnorePlayerPush();
+        }
+
+        void EnableBlocker()
+        {
+            foreach (Collider blocker in GetComponentsInChildren<Collider>(true))
+            {
+                if (blocker.gameObject.layer != Layer.characterCollisionBlocker) continue;
+                if (cCollider != null)
+                    Physics.IgnoreCollision(cCollider, blocker, true);
+                Transform node = blocker.transform;
+                while (node != null && node != transform)
+                {
+                    if (!node.gameObject.activeSelf)
+                        node.gameObject.SetActive(true);
+                    node = node.parent;
+                }
+            }
+        }
+
+        void IgnorePlayerPush()
+        {
+            PlayerManager player = FindAnyObjectByType<PlayerManager>();
+            if (player == null || cCollider == null) return;
+            if (player.cCollider != null)
+                Physics.IgnoreCollision(player.cCollider, cCollider, true);
+            foreach (Collider playerBlocker in player.GetComponentsInChildren<Collider>(true))
+            {
+                if (playerBlocker.gameObject.layer != Layer.characterCollisionBlocker) continue;
+                Physics.IgnoreCollision(playerBlocker, cCollider, true);
+                foreach (Collider enemyBlocker in GetComponentsInChildren<Collider>(true))
+                {
+                    if (enemyBlocker.gameObject.layer != Layer.characterCollisionBlocker) continue;
+                    Physics.IgnoreCollision(playerBlocker, enemyBlocker, true);
+                }
+            }
         }
         protected override void Update()
         {
