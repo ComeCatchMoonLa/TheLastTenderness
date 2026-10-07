@@ -26,10 +26,19 @@ namespace CatchMoon
                 return;
             }
 
+            bool twoHand = character.isTwoHandingWeapon;
+            if (character.cInventory != null)
+            {
+                WeaponItem weapon = character.isUsingRightHand ? character.cInventory.rightWeapon : character.cInventory.leftWeapon;
+                if (weapon != null)
+                    twoHand = PairedWeapons.AsTwoHand(weapon.weaponType, twoHand);
+            }
+
+            bool pairedTwoHand = twoHand && !character.isTwoHandingWeapon;
             Select(
-                character.isUsingRightHand,
-                character.isUsingLeftHand,
-                character.isTwoHandingWeapon,
+                character.isUsingRightHand || pairedTwoHand,
+                character.isUsingLeftHand && !pairedTwoHand,
+                twoHand,
                 combo,
                 character.cAnimator.lastAttack,
                 animations,
