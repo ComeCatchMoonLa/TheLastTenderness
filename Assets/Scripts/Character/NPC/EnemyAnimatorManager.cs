@@ -17,7 +17,7 @@ namespace CatchMoon
 
         public static bool WritesHorizontalRootVelocity(bool isInteracting, int baseLayerShortNameHash)
         {
-            return isInteracting || baseLayerShortNameHash == LocomotionState;
+            return isInteracting;
         }
 
         /// <summary>

@@ -79,12 +79,11 @@ namespace CatchMoon
             // 根据navmesh导航旋转
             else
             {
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navmeshAgent.desiredVelocity); // 相对方向
-                Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
-
                 enemy.navmeshAgent.enabled = true;
                 enemy.navmeshAgent.SetDestination(enemy.currentTarget.transform.position);
-                enemy.rigidBody.linearVelocity = targetVelocity;
+                Vector3 velocity = enemy.navmeshAgent.desiredVelocity;
+                velocity.y = enemy.rigidBody.linearVelocity.y;
+                enemy.rigidBody.linearVelocity = velocity;
                 enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed * Time.deltaTime);
             }
         }

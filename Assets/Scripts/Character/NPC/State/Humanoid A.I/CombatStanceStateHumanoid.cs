@@ -56,6 +56,7 @@ namespace CatchMoon
                 return this;
             }
 
+            StopHorizontal(enemy);
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
@@ -120,6 +121,7 @@ namespace CatchMoon
                 return this;
             }
 
+            StopHorizontal(enemy);
             enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
             enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
 
@@ -289,6 +291,14 @@ namespace CatchMoon
                 enemy.animator.SetFloat("Vertical", 0);
                 enemy.eInventory.rightWeapon.oh_hold_e_action.PerformAction(enemy);
             }
+        }
+
+        static void StopHorizontal(EnemyManager enemy)
+        {
+            Vector3 velocity = enemy.rigidBody.linearVelocity;
+            velocity.x = 0f;
+            velocity.z = 0f;
+            enemy.rigidBody.linearVelocity = velocity;
         }
 
         void ResetStateFlags()

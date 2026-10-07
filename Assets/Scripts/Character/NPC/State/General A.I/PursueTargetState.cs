@@ -96,10 +96,11 @@ namespace CatchMoon
 
         void WalkToward(EnemyManager enemy, Vector3 destination)
         {
-            Vector3 targetVelocity = enemy.rigidBody.linearVelocity;
             enemy.navmeshAgent.enabled = true;
             enemy.navmeshAgent.SetDestination(destination);
-            enemy.rigidBody.linearVelocity = targetVelocity;
+            Vector3 velocity = enemy.navmeshAgent.desiredVelocity;
+            velocity.y = enemy.rigidBody.linearVelocity.y;
+            enemy.rigidBody.linearVelocity = velocity;
             enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navmeshAgent.transform.rotation, enemy.aiSettings.rotationSpeed / Time.deltaTime);
         }
     }
