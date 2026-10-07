@@ -20,9 +20,9 @@ namespace CatchMoon.Tests
             Assert.IsNull(typeof(WeaponFX).GetField("noramalWeaponTrial", flags));
             Assert.IsFalse(Enum.IsDefined(typeof(WeaponType), "unaremd"));
 
-            AssertPrefab("Prefabs/Humanoid A.I - Melee.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 0}");
-            AssertPrefab("Prefabs/Player/Player.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}");
-            AssertPrefab("Prefabs/NPC/Default Story NPC.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 0}");
+            AssertPrefab("Prefabs/Characters/Humanoid A.I - Melee.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 0}");
+            AssertPrefab("Prefabs/Characters/Player.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 11400000, guid: 2fca6e6dda10e70439d4ed7559a71089, type: 2}");
+            AssertPrefab("Prefabs/Characters/Default Story NPC.prefab", "isPerformingBackStabbed: 0", "unarmed: {fileID: 0}");
             AssertPrefab("Prefabs/Items/Weapons/Axe2H_Epic.prefab", "normalWeaponTrail: {fileID: 1042571222865278056}");
             AssertPrefab("Prefabs/Items/Weapons/Sword/Sword15_Lave.prefab", "normalWeaponTrail: {fileID: 347222509994406306}");
             AssertPrefab("Prefabs/Items/Weapons/Sword/Sword15_Frost.prefab", "normalWeaponTrail: {fileID: 8791912116022625030}");

@@ -21,9 +21,9 @@ namespace CatchMoon.Tests
         [Test]
         public void Prefab_StatusButtonOpensTheStatusPage()
         {
-            string prefab = File.ReadAllText(Path.Combine(Application.dataPath, "Prefabs", "#", "UI.prefab"));
+            string prefab = File.ReadAllText(Path.Combine(Application.dataPath, "Prefabs", "UI", "Global UI", "Global UI.prefab"));
             Assert.IsTrue(prefab.Contains("m_MethodName: SelectStatusWin"));
-            Assert.IsTrue(prefab.Contains("m_text: \"\\u72b6\\u6001\""));
+            Assert.IsTrue(prefab.Contains("m_text: \"\\u72B6\\u6001\""));
             Assert.IsTrue(prefab.Contains("m_Name: Status Window"));
             Assert.IsFalse(prefab.Contains("m_text: \"\\u6280\\u80FD\""));
         }

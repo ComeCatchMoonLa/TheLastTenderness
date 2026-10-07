@@ -15,7 +15,7 @@ namespace CatchMoon.Tests
             Assert.AreEqual(typeof(FocusPointsBar), field.FieldType);
             Assert.IsNull(typeof(HUDWindowsManager).GetField("manaBar"));
 
-            string prefab = File.ReadAllText(Path.Combine(Application.dataPath, "Prefabs", "#", "UI.prefab"));
+            string prefab = File.ReadAllText(Path.Combine(Application.dataPath, "Prefabs", "UI", "Global UI", "Global UI.prefab"));
             Assert.IsTrue(prefab.Contains("focusPointsBar: {fileID: 0}"));
             Assert.IsFalse(prefab.Contains("manaBar"));
         }
