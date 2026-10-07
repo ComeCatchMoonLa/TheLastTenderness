@@ -60,6 +60,22 @@ namespace CatchMoon
         public bool sprintFlag;    // 是否在冲刺
 
         float rollInputTimer; // 滚动输入计时器
+        LadderRide ladderRide;
+
+        public void KeepDodgeFromRolling()
+        {
+            rollFlag = false;
+            backStepFlag = false;
+            if (rollInputTimer > 0f && rollInputTimer < 0.5f)
+                rollInputTimer = 0.5f;
+        }
+
+        bool Climbing()
+        {
+            if (ladderRide == null)
+                ladderRide = GetComponent<LadderRide>();
+            return ladderRide != null && ladderRide.onLadder;
+        }
 
         private void OnEnable()
         {
@@ -162,6 +178,16 @@ namespace CatchMoon
                 player.isSprinting = false;
 
             if (player.isInteracting) return;
+
+            if (Climbing())
+            {
+                player.isSprinting = false;
+                if (leftShift_Input)
+                    rollInputTimer += Time.deltaTime;
+                else
+                    rollInputTimer = 0f;
+                return;
+            }
 
             if (leftShift_Input)
             {

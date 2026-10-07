@@ -35,7 +35,7 @@ namespace CatchMoon
             ride.top = top;
             ride.climbSpeedFilled = climbSpeedFilled;
             ride.climbSpeed = climbSpeed;
-            ride.Mount(bottom, top);
+            ride.Mount(player.transform.position.y, bottom, top);
         }
     }
 }

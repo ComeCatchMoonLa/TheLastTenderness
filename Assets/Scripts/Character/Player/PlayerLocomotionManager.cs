@@ -5,6 +5,7 @@ namespace CatchMoon
     public class PlayerLocomotionManager : MonoBehaviour
     {
         PlayerManager player;
+        LadderRide ladderRide;
 
         Vector3 normalVector = Vector3.up;  // 法向量(用于调整上下坡的速度, 上坡速度减小, 下坡速度增大)
         public Vector3 moveDir;             // 移动方向
@@ -66,8 +67,21 @@ namespace CatchMoon
             currentSpeed = player.rigidBody.linearVelocity.magnitude;
         }
 
+        bool OnLadder()
+        {
+            if (ladderRide == null)
+                ladderRide = GetComponent<LadderRide>();
+            return ladderRide != null && ladderRide.onLadder;
+        }
+
         void HandleMove()
         {
+            if (OnLadder())
+            {
+                player.rigidBody.linearVelocity = Vector3.zero;
+                return;
+            }
+
             if (player.isInteracting || player.input.rollFlag)
                 return;
 
@@ -98,6 +112,8 @@ namespace CatchMoon
 
         void HandleRotate()
         {
+            if (OnLadder()) return;
+
             if (!player.aimingMode)
             {
                 if (player.canRotate)
@@ -124,6 +140,8 @@ namespace CatchMoon
 
         void HandleFall()
         {
+            if (OnLadder()) return;
+
             if (player.isJumping)
             {
                 KeepJumpOnLift();
@@ -208,6 +226,12 @@ namespace CatchMoon
 
         void HandleRoll()
         {
+            if (OnLadder())
+            {
+                player.input.rollFlag = false;
+                return;
+            }
+
             if (player.input.rollFlag)
             {
                 player.input.rollFlag = false;
@@ -223,6 +247,12 @@ namespace CatchMoon
 
         void HandleBackStep()
         {
+            if (OnLadder())
+            {
+                player.input.backStepFlag = false;
+                return;
+            }
+
             if (player.input.backStepFlag)
             {
                 player.input.backStepFlag = false;
@@ -236,6 +266,7 @@ namespace CatchMoon
 
         void HandleJump()
         {
+            if (OnLadder()) return;
             if (player.isInteracting) return;
 
             if (player.input.space_Input)
