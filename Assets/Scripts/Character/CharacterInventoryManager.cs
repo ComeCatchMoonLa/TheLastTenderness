@@ -48,6 +48,18 @@ namespace CatchMoon
             { Debug.LogError("leftWeapon is null."); }
             if (rightWeapon == null)
             { Debug.LogError("rightWeapon is null."); }
+
+            WarnWeaponActions(weaponsInLeftHandSlot);
+            WarnWeaponActions(weaponsInRightHandSlot);
+        }
+
+        static void WarnWeaponActions(WeaponItem[] weapons)
+        {
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                if (weapons[i] != null)
+                    weapons[i].WarnIfActionsMissing();
+            }
         }
     }
 }

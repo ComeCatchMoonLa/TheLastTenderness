@@ -93,5 +93,30 @@ namespace CatchMoon
 
         [Header("音效")]
         public AudioClip[] weaponWhooshesSound;
+
+        public void WarnIfActionsMissing()
+        {
+            if (weaponType == WeaponType.bow)
+            {
+                WarnIfActionMissing(oh_tap_e_action, nameof(oh_tap_e_action));
+                WarnIfActionMissing(oh_hold_q_action, nameof(oh_hold_q_action));
+                return;
+            }
+
+            if (weaponType == WeaponType.melee_OH_Shield
+                || weaponType == WeaponType.pyromancyCaster
+                || weaponType == WeaponType.faithCaster
+                || weaponType == WeaponType.spellCaster)
+                return;
+
+            WarnIfActionMissing(oh_tap_e_action, nameof(oh_tap_e_action));
+            WarnIfActionMissing(oh_hold_e_action, nameof(oh_hold_e_action));
+        }
+
+        void WarnIfActionMissing(WeaponItemAction action, string field)
+        {
+            if (action != null) return;
+            Debug.LogWarning($"{name}: {field} 未填");
+        }
     }
 }
