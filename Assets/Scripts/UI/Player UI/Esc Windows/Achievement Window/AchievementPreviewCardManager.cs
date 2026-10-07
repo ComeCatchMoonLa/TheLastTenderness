@@ -19,7 +19,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = transform.root.GetComponent<PlayerManager>();
+            player = PlayerUIManager.FindPlayer(this);
         }
         private void Start()
         {

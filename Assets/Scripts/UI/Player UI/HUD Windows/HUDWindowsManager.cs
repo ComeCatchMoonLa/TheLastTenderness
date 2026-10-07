@@ -32,7 +32,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = transform.root.GetComponent<PlayerManager>();
+            player = PlayerUIManager.FindPlayer(this);
 
             healthBar = GetComponentInChildren<HealthBar>();
             staminaBar = GetComponentInChildren<StaminaBar>();

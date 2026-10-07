@@ -4,7 +4,13 @@ namespace CatchMoon
 {
     public class PlayerUIManager : MonoBehaviour
     {
-        PlayerManager player;
+        [SerializeField] PlayerManager player;
+
+        public static PlayerManager FindPlayer(Component from)
+        {
+            PlayerUIManager ui = from.GetComponentInParent<PlayerUIManager>();
+            return ui != null ? ui.player : null;
+        }
 
         [Header("HUD & PopUps")]
         public HUDWindowsManager hud;
@@ -16,15 +22,11 @@ namespace CatchMoon
         [Tooltip("用于决定ESC窗口模式下，Back按钮将执行什么操作")]
         public EscWinOpenedWinType openedWin;
 
-        private void Awake()
-        {
-            player = transform.root.GetComponent<PlayerManager>();
-        }
         private void Start()
         {
             #region 检测空引用异常
             if (player == null)
-                Debug.LogError("player == null");
+                Debug.LogError($"{name}: player 未填");
 
             if (hud == null)
                 Debug.LogError("hud == null");

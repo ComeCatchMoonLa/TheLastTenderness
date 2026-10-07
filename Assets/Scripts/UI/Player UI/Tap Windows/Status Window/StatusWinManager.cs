@@ -16,7 +16,7 @@ namespace CatchMoon
                 return;
             }
 
-            PlayerManager player = transform.root.GetComponent<PlayerManager>();
+            PlayerManager player = PlayerUIManager.FindPlayer(this);
             if (player == null || player.pStats == null)
             {
                 Debug.LogError("Status Window: player.pStats == null");

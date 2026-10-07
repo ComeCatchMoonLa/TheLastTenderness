@@ -11,24 +11,26 @@
 
 ## 1. 人改层级
 
-在 `Assets/Scenes/Game.unity` 里做。场景视图左上角的工具用「轴心」，不要用「中心」。
+先打开 `Assets/Scenes/Game.unity`。场景视图左上角的工具用「轴心」，不要用「中心」。不要点 Play。
 
-- [ ] 展开场景里的 `Player`，选中子物体 `UI`。它上面有 `Canvas`（屏幕空间）和 `PlayerUIManager`。
-- [ ] 在 Hierarchy 里把 `UI` 拖到最外层，父物体留空。不要拖到 `Test Map - Interacte` 或 `World` 下面。
-- [ ] 把这个物体改名为 `Global UI`。不要改它下面的 HUD、暂停、分页窗、弹出层的名字。
-- [ ] 选中场景里的 `Player` 实例。只对「去掉 UI」这一条覆盖做 Apply，把 `Player.prefab` 里的这块界面也去掉。不要 Apply All。角色现在的位置、已经填过的走路字段，都不要写进预制体。
-- [ ] 确认 `Player` 下面已经没有 `UI` 或 `Global UI`。`Global UI` 的父物体是场景根。
+场景里的 `Player` 是预制体实例。直接把子物体 `UI` 拖到外面，会弹出「无法重构预制件实例」。这时点 **Open Prefab**，不要点 Cancel 之后继续在场景里拖，也不要 Unpack 整个 `Player`。
+
+- [ ] 进入 `Assets/Prefabs/Player/Player.prefab` 的预制体模式。层级里有一块嵌套的界面，预制体是 `Assets/Prefabs/UI/Global UI/Global UI.prefab`。
+- [ ] 在预制体层级里选中这块界面，按 Delete。这只把它从 `Player` 上拿掉，不删除 `Global UI.prefab` 这份资产。
+- [ ] Ctrl+S 保存预制体，点层级顶上的箭头回到 `Game` 场景。场景里的 `Player` 下面不再有这块界面。
+- [ ] 把 `Assets/Prefabs/UI/Global UI/Global UI.prefab` 拖到 Hierarchy 最外层，父物体留空。场景里的名字用 `Global UI`。不要拖到 `Test Map - Interacte` 或 `World` 下面。
+- [ ] 不要对场景里的 `Player` 做 Apply All。角色现在的位置不要写进预制体。
 - [ ] `World` 保持灰色关闭。不要选中 `World Canvas`，不要把它或 `Boss Health Bar` 拖出来，不要改名，不要激活。
 
-**阶段门槛：** 层级已经这样，并且还没有点 Play。做到这里就停，交给改代码。
+**阶段门槛：** `Player` 下面没有界面。`Global UI` 的父物体是场景根。还没有点 Play。做到这里就停，交给改代码。
 
 ## 2. 改两处查找
 
 层级完成之后才做。
 
-- [ ] `PlayerManager` 用序列化字段引用 `Global UI` 上的 `PlayerUIManager`，不再 `GetComponentInChildren`。
-- [ ] `PlayerUIManager` 用序列化字段引用场景里的 `Player`，不再 `transform.root`。
-- [ ] 两个字段都在 Inspector 里接上。空着时 Play 会报出物体名并停住。
+- [x] `PlayerManager` 用序列化字段引用 `Global UI` 上的 `PlayerUIManager`，不再 `GetComponentInChildren`。
+- [x] `PlayerUIManager` 用序列化字段引用场景里的 `Player`，不再 `transform.root`。界面内部原来用 `transform.root` 找玩家的，改从这块界面上取。
+- [x] 两个字段都在场景里接上。空着时 Play 会报出物体名。
 
 **阶段门槛：** 场景里两处引用都不是空。
 

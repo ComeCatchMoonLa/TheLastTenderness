@@ -32,7 +32,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = transform.root.GetComponent<PlayerManager>();
+            player = PlayerUIManager.FindPlayer(this);
             weaponInventorySlots.Add(weaponInventorySlotsParent.GetComponentInChildren<InventorySlotUI>());
             armorInventorySlots.Add(armorInventorySlotsParent.GetComponentInChildren<InventorySlotUI>());
             spellInventorySlots.Add(spellInventorySlotsParent.GetComponentInChildren<InventorySlotUI>());

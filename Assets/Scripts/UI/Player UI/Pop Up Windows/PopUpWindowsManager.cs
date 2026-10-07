@@ -13,7 +13,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = transform.root.GetComponent<PlayerManager>();
+            player = PlayerUIManager.FindPlayer(this);
 
             viewInfoUI = GetComponentInChildren<ViewInfoUI>();
             interactUI = GetComponentInChildren<InteractUI>();

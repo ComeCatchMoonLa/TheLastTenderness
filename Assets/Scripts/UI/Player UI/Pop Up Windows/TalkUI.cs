@@ -25,7 +25,7 @@ namespace CatchMoon
 
         private void Awake()
         {
-            player = transform.root.GetComponent<PlayerManager>();
+            player = PlayerUIManager.FindPlayer(this);
         }
         private void Start()
         {
@@ -53,7 +53,7 @@ namespace CatchMoon
         {
             // 窗口未激活时 Awake 还没跑，Update 仍会每帧进来。
             if (player == null)
-                player = transform.root.GetComponent<PlayerManager>();
+                player = PlayerUIManager.FindPlayer(this);
             if (player == null)
                 return;
 

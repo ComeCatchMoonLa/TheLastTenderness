@@ -6,7 +6,7 @@ namespace CatchMoon
     {
         [HideInInspector] public InputManager input;
         [HideInInspector] public PlayerCameraManager pCamera;
-        [HideInInspector] public PlayerUIManager ui;
+        public PlayerUIManager ui;
 
         [HideInInspector] public PlayerAnimatorManager pAnimator;
         [HideInInspector] public PlayerCombatManager pCombat;
@@ -47,7 +47,6 @@ namespace CatchMoon
 
             input = GetComponent<InputManager>();
             pCamera = FindAnyObjectByType<PlayerCameraManager>();
-            ui = GetComponentInChildren<PlayerUIManager>();
 
             pAnimator = GetComponent<PlayerAnimatorManager>();
             pArmor = GetComponent<PlayerArmorManager>();
