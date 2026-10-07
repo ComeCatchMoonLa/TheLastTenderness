@@ -56,6 +56,11 @@ namespace CatchMoon
             pLocomotion = GetComponent<PlayerLocomotionManager>();
             pStats = GetComponent<PlayerStatsManager>();
             pWeaponSlot = GetComponent<PlayerWeaponSlotManager>();
+
+            // 自己的 Blocker 和身体胶囊体整段重叠, 不忽略就会把人从里面往外顶
+            foreach (Collider blocker in GetComponentsInChildren<Collider>(true))
+                if (blocker.gameObject.layer == Layer.characterCollisionBlocker)
+                    Physics.IgnoreCollision(cCollider, blocker, true);
         }
         protected override void Start()
         {

@@ -16,7 +16,8 @@ namespace CatchMoon
         [SerializeField] float HeightToBeginLand = 0.8f;        // 开始着陆的高度
         float minHeightNeedToLand;                              // 下某个平台播放Land动画的最小平台高度
         [SerializeField] float rayStartPointOffsetDist = 0.2f;  // 落地检测射线起点的偏移(Player移动时)
-        [SerializeField] UnityEngine.LayerMask GroundCheckLayer;            // 落地检侧的层
+        // 不做成序列化字段: 资产里存的是 0, 运行中被写回资产值时判地会整段失效, 人卡在 Falling 里
+        const int groundCheckLayer = LayerMask.environment | LayerMask.npc | LayerMask.player;
 
         [Header("玩家速度")]
         [SerializeField] float rotateSpeed = 10; // 旋转速度
@@ -51,8 +52,6 @@ namespace CatchMoon
         {
             rayStartPointHeight = player.cCollider.center.y - player.cCollider.height * 0.5f; //(与Player碰撞器最下方同高)
             minHeightNeedToLand = rayStartPointHeight; // 能直接上的平台高度就能直接下
-
-            GroundCheckLayer = (LayerMask.environment | LayerMask.npc | LayerMask.player);
         }
         private void FixedUpdate()
         {
@@ -146,7 +145,7 @@ namespace CatchMoon
 
             // 判断是否着陆(进入Land状态或在地面上)
             Debug.DrawRay(origin, Vector3.down * (rayStartPointHeight +  HeightToBeginLand), Color.red, 0.1f, false);
-            if (Physics.Raycast(origin, Vector3.down, out hit, (rayStartPointHeight + HeightToBeginLand), GroundCheckLayer))
+            if (Physics.Raycast(origin, Vector3.down, out hit, (rayStartPointHeight + HeightToBeginLand), groundCheckLayer))
             {
                 player.isInAir = false;
 
