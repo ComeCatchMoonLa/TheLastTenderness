@@ -170,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 957113857933904708, guid: 7690a16fd4a14ad4896b57f3b32babbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.28
+      value: -7.29
       objectReference: {fileID: 0}
     - target: {fileID: 957113857933904708, guid: 7690a16fd4a14ad4896b57f3b32babbc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -178,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 957113857933904708, guid: 7690a16fd4a14ad4896b57f3b32babbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.69
+      value: -22.16
       objectReference: {fileID: 0}
     - target: {fileID: 957113857933904708, guid: 7690a16fd4a14ad4896b57f3b32babbc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1089,7 +1089,7 @@ Transform:
   m_GameObject: {fileID: 810000011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.45, y: 0.511, z: 22.436}
+  m_LocalPosition: {x: -7.31, y: 0.511, z: -16.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2013,6 +2013,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 86744956}
     m_Modifications:
+    - target: {fileID: 4502027474111187790, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4502027474970607120, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.8
@@ -2056,6 +2060,10 @@ PrefabInstance:
     - target: {fileID: 4502027474970607121, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_Name
       value: Humanoid A.I - Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502027474970607135, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4502027475200929320, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2524,6 +2532,10 @@ PrefabInstance:
     - target: {fileID: 853711141688128627, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185532010463437183, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: staminaLevel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4387546589291920029, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: m_LocalPosition.x
