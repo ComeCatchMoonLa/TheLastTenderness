@@ -2596,7 +2596,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 937559261381068288, guid: e251d263fc8f6514f9e1fc3cf6d250e7, type: 3}
       propertyPath: m_Name
-      value: Weapon Pick Up Item
+      value: Pick Up Item
       objectReference: {fileID: 0}
     - target: {fileID: 2624092082863718604, guid: e251d263fc8f6514f9e1fc3cf6d250e7, type: 3}
       propertyPath: m_LocalPosition.x
