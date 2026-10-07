@@ -99,6 +99,16 @@ namespace CatchMoon
                 WeaponItem[] hand = isLeft ? pInventory.weaponsInLeftHandSlot : pInventory.weaponsInRightHandSlot;
                 if (hand != null && index >= 0 && index < hand.Length)
                 {
+                    WeaponItem current = hand[index];
+                    if (!EquipCompare.Arm(weapon))
+                    {
+                        EquipCompare.Preview(
+                            current != null ? current.pd : 0,
+                            weapon.pd,
+                            current != null ? current.physicalDA : 0f,
+                            weapon.physicalDA);
+                        return;
+                    }
                     if (hand[index] != null)
                         pInventory.AddItem(hand[index]);
                     hand[index] = weapon;
@@ -135,6 +145,13 @@ namespace CatchMoon
             PlayerInventoryManager pInventory = player.pInventory;
             EquipmentWinManager equipmentWin = player.ui.tapWin.GetEquipmentWin();
 
+            ArmorItem currentArmor = CurrentArmor(pArmor, armor.armorType);
+            if (!EquipCompare.Arm(armor))
+            {
+                EquipCompare.Preview(0, 0, currentArmor != null ? currentArmor.physicalDA : 0f, armor.physicalDA);
+                return;
+            }
+
             if (armor.armorType == ArmorType.head)
             {
                 HeadArmorItem headArmor = armor as HeadArmorItem;
@@ -164,6 +181,15 @@ namespace CatchMoon
             equipped = incoming;
             inventory.RemoveItem(incoming);
             slot.AddItem(equipped);
+        }
+
+        static ArmorItem CurrentArmor(PlayerArmorManager armor, ArmorType type)
+        {
+            if (armor == null) return null;
+            if (type == ArmorType.head) return armor.currentHeadArmor;
+            if (type == ArmorType.torso) return armor.currentTorsoArmor;
+            if (type == ArmorType.hips) return armor.currentHipsArmor;
+            return null;
         }
     }
 }
