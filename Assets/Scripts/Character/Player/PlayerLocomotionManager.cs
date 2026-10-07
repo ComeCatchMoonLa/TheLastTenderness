@@ -124,7 +124,11 @@ namespace CatchMoon
 
         void HandleFall()
         {
-            if (player.isJumping) return;
+            if (player.isJumping)
+            {
+                KeepJumpOnLift();
+                return;
+            }
 
             bool wasInAir = player.isInAir;
             RaycastHit hit;
@@ -170,9 +174,36 @@ namespace CatchMoon
                 }
             }
             
-            // 将Player设置到targetPosition(避免玩家的陷入地面或悬空)
-            if (!player.isInAir)
+            // 电梯用插值的 MovePosition 带人。这里再写 transform 会和插值抢，人就抖。
+            if (!player.isInAir && !RideMovingLift(hit))
                 transform.position = targetPosition;
+        }
+
+        bool RideMovingLift(RaycastHit hit)
+        {
+            if (hit.collider == null) return false;
+            ElevatorPlatform lift = hit.collider.GetComponent<ElevatorPlatform>();
+            if (lift == null || lift.VerticalSpeed == 0f) return false;
+            if (Mathf.Abs(player.transform.position.y - hit.point.y) > 0.35f) return false;
+
+            Vector3 velocity = player.rigidBody.linearVelocity;
+            velocity.y = lift.VerticalSpeed;
+            player.rigidBody.linearVelocity = velocity;
+            return true;
+        }
+
+        void KeepJumpOnLift()
+        {
+            Vector3 origin = transform.position;
+            origin.y += rayStartPointHeight;
+            if (!Physics.Raycast(origin, Vector3.down, out RaycastHit hit, rayStartPointHeight + HeightToBeginLand, groundCheckLayer))
+                return;
+            ElevatorPlatform lift = hit.collider.GetComponent<ElevatorPlatform>();
+            if (lift == null || lift.StepY == 0f) return;
+
+            Vector3 position = player.rigidBody.position;
+            position.y += lift.StepY;
+            player.rigidBody.MovePosition(position);
         }
 
         void HandleRoll()
