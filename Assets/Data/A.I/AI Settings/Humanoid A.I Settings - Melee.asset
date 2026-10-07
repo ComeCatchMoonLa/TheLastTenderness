@@ -20,6 +20,8 @@ MonoBehaviour:
   comboLikeHood: 20
   aggroRadius: 5
   detectionRadius: 30
+  returnArrive: 1
+  activityRadius: 15
   combatStyle: 0
   allowAIToPerformBlock: 1
   blockLikelyHood: 80
