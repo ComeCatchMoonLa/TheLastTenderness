@@ -26,7 +26,7 @@ readonly: true
 
 # 仓库里已经定下来的结构
 
-脚本在 `Assets/Scripts/`，命名空间 `CatchMoon`（`Animator/HandleState/` 在全局命名空间）。形态是 MonoBehaviour、Animator 的 `StateMachineBehaviour`、ScriptableObject。没有自定义脚本执行顺序，没有把角色进度写到磁盘的模块。类型之间没有接口层；全仓库的 C# `interface` 只有 `PopUpInterface`。跨物体查找是开局的 `FindAnyObjectByType`。
+脚本在 `Assets/Scripts/`，命名空间 `CatchMoon`（`Animator/HandleState/` 在全局命名空间）。形态是 MonoBehaviour、Animator 的 `StateMachineBehaviour`、ScriptableObject。项目设置里没有脚本执行顺序配置，只有 `ElevatorPlatform` 挂了一处 `[DefaultExecutionOrder(-200)]`；没有把角色进度写到磁盘的模块。手写的 C# `interface` 有 `PopUpInterface` 和选招用的 `IAttackWindows` 两个（生成的 `InputActions.cs` 另带输入回调接口）。跨物体查找是开局的 `FindAnyObjectByType`。
 
 后续改动沿这些入口接：
 
@@ -76,7 +76,7 @@ readonly: true
 
 只看这次 diff 碰到的对象：
 
-- `GetComponent`、`FindAnyObjectByType` 留在 `Awake` 或 `Start` 并缓存。这次新写进 `Update` / `FixedUpdate` 的查找，记为关注。[`Docs/代码分析/可维护性与性能.md`](../../Docs/代码分析/可维护性与性能.md) 里已经列出的旧热路径不重复记。
+- `GetComponent`、`FindAnyObjectByType` 留在 `Awake` 或 `Start` 并缓存。这次新写进 `Update` / `FixedUpdate` 的查找，记为关注。[`Docs/代码分析/性能.md`](../../Docs/代码分析/性能.md) 里已经列出的旧热路径不重复记。
 - 这次新增或修改的 `Handle*State`：进入时置的旗标，离开时要清。动画事件打开的命中窗要有关闭。
 - 换武器模型：新模型的预制体还没确认存在，就不能先毁掉当前模型。
 - 这次新增的协程要有停掉的路径。仓库不靠 C# `event` 串联。diff 为了这一处去加事件订阅，按「没点名的框架」记为严重。
