@@ -19,8 +19,8 @@ MonoBehaviour:
   autoChangeLockOnTarget: 0
   cameraUpAndDownSpeed: 60
   cameraLeftAndRightSpeed: 240
-  vsync_Options: 1
-  frameRateLimit_Options: 3
+  vsync_Options: 0
+  frameRateLimit_Options: 0
   displayQuality_Options: 5
   postTreatmentQuality_Options: 1
   specialEffectQuality_Options: 1
