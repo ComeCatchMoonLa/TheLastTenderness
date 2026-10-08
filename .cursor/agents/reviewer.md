@@ -18,40 +18,31 @@ readonly: true
 1. 这次改动的 git diff，以及 diff 点名的脚本。审查范围是当前这一版 `TODO.md` 点名的路径。工作区里其余已修改文件不据此记为严重，回复里不列举。
 2. [`Docs/开发计划/README.md`](../../Docs/开发计划/README.md)。进度是里面最小的未完成小版本。没有未完成版本时，只审用户点名的那一版，不要自己开一版。
 3. 该版的 `游戏设计.md`、`技术设计.md`、`TODO.md`。实现范围是 TODO 当前那一节。
-4. diff 碰到角色、动画、物品动作、伤害、敌人状态或 HUD 时，读 [`Docs/代码分析/构架设计.md`](../../Docs/代码分析/构架设计.md) 的「已固定的入口」和「状态所有权」。要核对调用方式再打开 [`Docs/代码分析/接口设计.md`](../../Docs/代码分析/接口设计.md) 里对应的那一节。
+4. 每次都读 [`Docs/代码分析/构架设计.md`](../../Docs/代码分析/构架设计.md) 的「已固定的入口」「状态所有权」「运行时如何拼起来」：入口守不守、旗标归谁写，以这篇当前内容为准，本规则不复制这些事实。要核对方法签名或字段，再查 [`Docs/代码分析/接口设计.md`](../../Docs/代码分析/接口设计.md) 对应的一节。
 5. 公式、扣不扣、乘进哪一段，以该版游戏设计为准。游戏设计没写死时，[`Docs/需求文档/README.md`](../../Docs/需求文档/README.md) 和 [`Docs/调研文档/README.md`](../../Docs/调研文档/README.md) 都要写明玩家能看见的结果。两处对不上、标了待核对、或两边都没有这个字段：diff 里若已经选了一个公式，记为严重。
 6. [`Docs/代码分析/正确性.md`](../../Docs/代码分析/正确性.md) 里标待补、还没做完的，不是这次该修的偏离。只有 diff 声称做完了其中一条，才拿来对照。
 7. diff 新增或修改了序列化字段时，读 [`Docs/程序工作流解耦指导/策划数据.md`](../../Docs/程序工作流解耦指导/策划数据.md) 的「三类字段」。
 8. 该版要求 Edit Mode 测试时，用 [`Docs/代码分析/可测试性.md`](../../Docs/代码分析/可测试性.md) 判断用例是否在测真实行为。
 
-# 仓库里已经定下来的结构
+# 仓库结构以代码分析为准
 
-脚本在 `Assets/Scripts/`，命名空间 `CatchMoon`（`Animator/HandleState/` 在全局命名空间）。形态是 MonoBehaviour、Animator 的 `StateMachineBehaviour`、ScriptableObject。项目设置里没有脚本执行顺序配置，只有 `ElevatorPlatform` 挂了一处 `[DefaultExecutionOrder(-200)]`；没有把角色进度写到磁盘的模块。手写的 C# `interface` 有 `PopUpInterface` 和选招用的 `IAttackWindows` 两个（生成的 `InputActions.cs` 另带输入回调接口）。跨物体查找是开局的 `FindAnyObjectByType`。
+不把当前代码的结构事实复制进本规则，避免重构后规则过期。审查时以下面两篇的当前内容为准，读的时候它们是什么就按什么判：
 
-后续改动沿这些入口接：
+- 运行时形态、命名空间、脚本执行顺序、跨物体查找、磁盘持久化的有无，以及「后续改动沿哪些入口接」：[`Docs/代码分析/构架设计.md`](../../Docs/代码分析/构架设计.md) 的「已固定的入口」「运行时如何拼起来」。
+- 旗标归谁写、谁不许碰：同篇「状态所有权」。
+- 公开方法、字段、动画事件的契约：[`Docs/代码分析/接口设计.md`](../../Docs/代码分析/接口设计.md)。
 
-| 事情 | 入口 |
+这一版技术设计若写明「谁写、谁不许碰」，diff 必须守住这一句。
+
+版本段含义（`fix` / `refactor` / `new` / `change` / `remove!` 各属哪一段）以 [`Docs/开发计划/README.md`](../../Docs/开发计划/README.md) 的版本段表为准，这里不复制。审查时，版本段约束这次 diff 的可观察结果：
+
+| 段 | diff 应有的结果 |
 | --- | --- |
-| 角色与旗标 | 同一物体上的 `CharacterManager` 加七个 Manager。玩家逻辑在 `Player*`，敌人在 `Enemy*` |
-| 播具名动作 | `CharacterAnimatorManager.PlayTargetAnimation`。随状态翻转的旗标在现有 `Handle*State`，随片段时刻翻转的在动画事件 |
-| 玩家战斗键 | 武器资产上的 `WeaponItemAction.PerformAction`。人形 AI 出招最终仍落到武器动作 |
-| 近战命中 | `DamageCollider` → `ResolveIncomingHit` → `TakeDamage`。背刺与弹反走 `GetBackStabbed` / `GetRiposte` |
-| 敌人决策 | 子物体上的 `State`，由 `EnemyManager` 执行 `Tick` |
-| 场景交互 | `Interactable.Interact`。Boss 开战与雾墙走 `WorldEventManager` |
-| 新物品 | `Item` 子类资产。运行时数量和快捷栏在玩家组件上 |
-| 界面数字 | 属性变化时写入 HUD。血条自己不读属性。暂停只改 `EscWindowsManager` 的 `timeScale` 和输入图 |
-
-`CharacterManager` 上的公开布尔由动画状态、输入和 Manager 分头写入。这是现有结构。这一版技术设计若写明「谁写、谁不许碰」，diff 必须守住这一句。
-
-版本段约束这次 diff 的可观察结果：
-
-| 段 | 类型 | diff 应有的结果 |
-| --- | --- | --- |
-| 0.x | fix | 行为收到本就该有的结果。不写单元测试 |
-| 1.x | refactor、optimize | 可观察结果不变 |
-| 2.x | new、add | 新入口，或已有入口上多一种子结果 |
-| 3.x | change、change! | 已有结果按新要求改 |
-| 4.x | remove!、delete! | 去掉子能力或整份功能 |
+| 0.x | 行为收到本就该有的结果。不写单元测试 |
+| 1.x | 可观察结果不变 |
+| 2.x | 新入口，或已有入口上多一种子结果 |
+| 3.x | 已有结果按新要求改 |
+| 4.x | 去掉子能力或整份功能 |
 
 # 审查清单
 
@@ -67,7 +58,7 @@ readonly: true
 
 ## 2. 入口与职责
 
-- 新行为走上一节那张表里的入口。平行的第二套结算、第二套对话推进或第二套装武器，记为严重。
+- 新行为走构架设计「已固定的入口」里的入口。平行的第二套结算、第二套对话推进或第二套装武器，记为严重。
 - 职责停在原模块：UI 不改战斗数值；`StateMachineBehaviour` 不堆物品规则；`DamageCollider` 不做流程控制。
 - 数值、文案、引用在资产上。界面用场景或预制体上的 uGUI。不新建模型、贴图、字体、动画片段、声音来凑能跑。
 - 空着的必填进玩法前报出资产名和字段然后停住，不能变成一个能玩的结果。
