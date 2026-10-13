@@ -1,3 +1,6 @@
+# 文本文件检出和提交都用 LF。text=auto 碰到二进制文件会跳过。
+* text=auto eol=lf
+
 # Unity/插件自带的 Shader、字体等资源文件不代表本项目的实际代码构成，
 # 标记为 vendored，避免 GitHub 语言统计把它们算作项目主要语言。
 *.shader linguist-vendored
