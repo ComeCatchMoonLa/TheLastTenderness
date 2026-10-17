@@ -12,7 +12,7 @@ namespace CatchMoon
             if (!HomewardBone.Allowed(BossBarVisible(), player.pInventory.ConsumableRemaining(this), LastBonfire.recorded))
                 return;
             player.pInventory.consumableBeingUsed = this;
-            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting);
+            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, new AnimationOptions { CanRotate = true });
         }
 
         public override void SuccessfullyUsedConsumable(PlayerManager player)

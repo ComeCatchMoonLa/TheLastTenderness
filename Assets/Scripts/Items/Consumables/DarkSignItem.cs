@@ -12,7 +12,7 @@ namespace CatchMoon
             if (BossFightGate.Active() || player.pStats.soulCount <= 0 || string.IsNullOrEmpty(LastBonfire.recorded))
                 return;
             player.pInventory.consumableBeingUsed = this;
-            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting);
+            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, new AnimationOptions { CanRotate = true });
         }
 
         public override void SuccessfullyUsedConsumable(PlayerManager player)

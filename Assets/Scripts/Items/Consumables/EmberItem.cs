@@ -16,7 +16,7 @@ namespace CatchMoon
             }
             if (player == null || player.pCombat == null || player.pCombat.isUsingConsumable) return;
             player.pInventory.consumableBeingUsed = this;
-            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting);
+            player.pAnimator.PlayTargetAnimation(consumeAnimation, isInteracting, new AnimationOptions { CanRotate = true });
         }
 
         public override void SuccessfullyUsedConsumable(PlayerManager player)
