@@ -39,5 +39,12 @@ namespace CatchMoon
             absorption = nextAbsorption;
             return true;
         }
+
+        public static string Line(float delta)
+        {
+            if (delta > 0f) return "高 " + delta;
+            if (delta < 0f) return "低 " + delta;
+            return "平 0";
+        }
     }
 }

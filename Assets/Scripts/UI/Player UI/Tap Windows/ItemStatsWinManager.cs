@@ -34,6 +34,19 @@ namespace CatchMoon
         [SerializeField] TextMeshProUGUI armorLightningDAText;
         [SerializeField] TextMeshProUGUI armorDarkDAText;
 
+        public void ShowPhysicalCompare(EquipmentItem equipment, EquipPreview preview)
+        {
+            UpdateEquipmentItemStats(equipment);
+            if (equipment == null) return;
+            if (equipment.equipmentType == EquipmentType.weapon)
+            {
+                physicalAttackPowerText.text = EquipCompare.Line(preview.attackDelta);
+                weaponPhysicalDAText.text = EquipCompare.Line(preview.absorptionDelta);
+            }
+            else if (equipment.equipmentType == EquipmentType.armor)
+                armorPhysicalDAText.text = EquipCompare.Line(preview.absorptionDelta);
+        }
+
         public void UpdateEquipmentItemStats(EquipmentItem equipment)
         {
             weaponStats.SetActive(false);

@@ -102,11 +102,12 @@ namespace CatchMoon
                     WeaponItem current = hand[index];
                     if (!EquipCompare.Arm(weapon))
                     {
-                        EquipCompare.Preview(
+                        EquipPreview preview = EquipCompare.Preview(
                             current != null ? current.pd : 0,
                             weapon.pd,
                             current != null ? current.physicalDA : 0f,
                             weapon.physicalDA);
+                        player.ui.tapWin.GetItemStatsWin().ShowPhysicalCompare(weapon, preview);
                         return;
                     }
                     if (hand[index] != null)
@@ -126,6 +127,7 @@ namespace CatchMoon
             if (!placed)
                 return;
 
+            player.ui.tapWin.GetItemStatsWin().UpdateEquipmentItemStats(weapon);
             pInventory.RemoveItem(weapon);
 
             // 加载模型
@@ -148,7 +150,8 @@ namespace CatchMoon
             ArmorItem currentArmor = CurrentArmor(pArmor, armor.armorType);
             if (!EquipCompare.Arm(armor))
             {
-                EquipCompare.Preview(0, 0, currentArmor != null ? currentArmor.physicalDA : 0f, armor.physicalDA);
+                EquipPreview preview = EquipCompare.Preview(0, 0, currentArmor != null ? currentArmor.physicalDA : 0f, armor.physicalDA);
+                player.ui.tapWin.GetItemStatsWin().ShowPhysicalCompare(armor, preview);
                 return;
             }
 
@@ -167,6 +170,8 @@ namespace CatchMoon
                 HipsArmorItem hipsArmor = armor as HipsArmorItem;
                 ReplaceEquippedArmor(hipsArmor, ref pArmor.currentHipsArmor, equipmentWin.GetHipArmorSlot(), pInventory);
             }
+
+            player.ui.tapWin.GetItemStatsWin().UpdateEquipmentItemStats(armor);
 
             // 加载模型
             pArmor.EquipAllArmorModels();
