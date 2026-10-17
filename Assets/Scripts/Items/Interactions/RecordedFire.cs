@@ -39,6 +39,10 @@ namespace CatchMoon
             if (!TryMatch(place, names, at, count, out Vector3 position))
                 return;
             body.position = position;
+            if (!body.TryGetComponent(out Rigidbody bodyRigid)) return;
+            bodyRigid.position = position;
+            bodyRigid.linearVelocity = Vector3.zero;
+            bodyRigid.angularVelocity = Vector3.zero;
         }
     }
 }
