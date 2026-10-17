@@ -43,6 +43,7 @@ namespace CatchMoon
         public int attackPoiseToken;
         public float offensivePoiseBonus;           // 你用武器攻击时的镇定
         public float armorPoiseBonus;               // 通过装备获得的镇定
+        public float thrustCounterRing;
         public float totalPoiseResetTime = 15f;
         public float poiseResetTimer = 0f;
 

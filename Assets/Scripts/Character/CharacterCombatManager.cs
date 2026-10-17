@@ -69,6 +69,23 @@ namespace CatchMoon
             stats.blockingStabilityRating = 0;
         }
 
+        float ThrustScale(CharacterManager attacker, PhysicalKind kind)
+        {
+            if (attacker == null || attacker.cCombat == null || attacker.cStats == null)
+                return 1f;
+            WeaponItem weapon = attacker.cInventory != null
+                ? attacker.cInventory.currentItemBeingUsed as WeaponItem
+                : null;
+            bool filled = weapon != null && weapon.thrustCounterFilled;
+            float weaponScale = weapon != null ? weapon.thrustCounter : 0f;
+            return ThrustCounter.Scale(
+                attacker.cCombat.isAttacking,
+                kind,
+                filled,
+                weaponScale,
+                attacker.cStats.thrustCounterRing);
+        }
+
         float BlockingWeaponStability()
         {
             if (character.cInventory == null)
@@ -159,7 +176,7 @@ namespace CatchMoon
         {
             try
             {
-            float pd = incoming.Segments.Physical * incoming.Multiplier;
+            float pd = incoming.Segments.Physical * incoming.Multiplier * ThrustScale(attacker, incoming.Segments.Kind);
             float fd = incoming.Segments.Fire * incoming.Multiplier;
             float md = incoming.Segments.Magic * incoming.Multiplier;
             float ld = incoming.Segments.Lightning * incoming.Multiplier;

@@ -24,6 +24,8 @@ namespace CatchMoon
         public int lightDeriveFocus;
         public bool heavyDeriveFocusFilled;
         public int heavyDeriveFocus;
+        public bool thrustCounterFilled;
+        public float thrustCounter;
         public int reinforceLevel;
         public UpgradePath upgradePath;
         public bool strengthNeedFilled;
