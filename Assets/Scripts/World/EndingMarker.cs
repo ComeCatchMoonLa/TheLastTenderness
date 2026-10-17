@@ -9,7 +9,8 @@ namespace CatchMoon
         public override void Interact(PlayerManager player)
         {
             if (player == null || player.pStats == null) return;
-            string ending = EndingChoice.Choose(stolenFlame, eyesGiven, keeperSignUsed);
+            bool stolen = Usurpation.Holds(stolenFlame, player.pStats.darkSigilsCleared);
+            string ending = EndingChoice.Choose(stolen, eyesGiven, keeperSignUsed);
             player.pStats.RecordEnding(ending);
         }
     }

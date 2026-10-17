@@ -13,6 +13,7 @@ namespace CatchMoon
         public bool emberLit;
         public float emberBaseMaxHP;
         public string recordedEnding;
+        public bool darkSigilsCleared;
 
         public bool RecordEnding(string ending)
         {
