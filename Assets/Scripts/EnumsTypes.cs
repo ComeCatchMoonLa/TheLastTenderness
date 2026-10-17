@@ -37,6 +37,7 @@ namespace CatchMoon
         miracle,
         pyromancy,
         sorcery,
+        dark,
     }
     public enum AmmoType
     {
