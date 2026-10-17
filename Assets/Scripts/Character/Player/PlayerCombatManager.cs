@@ -45,7 +45,7 @@ namespace CatchMoon
             Handle_Hold_E_Input(rightWeapon);
             Handle_Hold_Q_Input(leftWeapon, rightWeapon);
             Handle_Tap_E_Input(leftWeapon, rightWeapon);
-            Handle_Tap_R_Input(rightWeapon);
+            Handle_Tap_R_Input(leftWeapon, rightWeapon);
             Handle_Tap_Q_Input(leftWeapon, rightWeapon);
             Handle_Tap_Z_Input(leftWeapon, rightWeapon);
         }
@@ -90,18 +90,25 @@ namespace CatchMoon
                 }
             }
         }
-        void Handle_Tap_R_Input(WeaponItem rightWeapon)
+        void Handle_Tap_R_Input(WeaponItem leftWeapon, WeaponItem rightWeapon)
         {
             if (player.isTwoHandingWeapon && player.pInventory.leftWeapon != null && player.pInventory.leftWeapon.weaponType == WeaponType.bow) return;
 
             if (player.input.tap_r_Input)
             {
                 player.input.tap_r_Input = false;
-                if (rightWeapon != null && rightWeapon.oh_tap_r_action != null)
+                bool leftArtIsParry = leftWeapon != null && leftWeapon.oh_tap_r_action is ParryAction;
+                bool useLeft = leftWeapon != null && ParryShield.UseLeft(
+                    player.isTwoHandingWeapon,
+                    leftWeapon.weaponType,
+                    leftWeapon.stanceArt,
+                    leftArtIsParry);
+                WeaponItem weapon = useLeft ? leftWeapon : rightWeapon;
+                if (weapon != null && weapon.oh_tap_r_action != null)
                 {
-                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
-                    player.pInventory.currentItemBeingUsed = rightWeapon;
-                    rightWeapon.oh_tap_r_action.PerformAction(player);
+                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: !useLeft);
+                    player.pInventory.currentItemBeingUsed = weapon;
+                    weapon.oh_tap_r_action.PerformAction(player);
                 }
             }
         }
