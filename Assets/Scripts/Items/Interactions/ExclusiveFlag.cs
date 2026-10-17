@@ -13,5 +13,10 @@ namespace CatchMoon
         {
             return open && !failed;
         }
+
+        public static void Rest(bool failed, ref bool open)
+        {
+            if (failed) open = false;
+        }
     }
 }

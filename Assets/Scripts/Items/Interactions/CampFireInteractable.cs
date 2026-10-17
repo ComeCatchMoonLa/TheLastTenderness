@@ -60,6 +60,12 @@ namespace CatchMoon
                 LastBonfire.Remember(name, true);
                 player.pStats.RestoreVitalsToMax();
                 BodyBuffs.Clear(player.pStats.bodyBuffs);
+                Talk[] talks = FindObjectsByType<Talk>(FindObjectsInactive.Include);
+                for (int i = 0; i < talks.Length; i++)
+                {
+                    if (talks[i] == null) continue;
+                    ExclusiveFlag.Rest(talks[i].otherLineFailed, ref talks[i].otherLineOpen);
+                }
                 EnemyStatsManager[] resting = FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
                 for (int i = 0; i < resting.Length; i++)
                 {
