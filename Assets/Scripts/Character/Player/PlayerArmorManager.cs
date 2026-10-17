@@ -49,6 +49,18 @@ namespace CatchMoon
                 ref player.pStats.hipsArmorLDA, ref player.pStats.hipsArmorDDA);
             WriteHandAbsorption();
             WritePhysicalKinds();
+            WriteArmorPoise();
+        }
+
+        void WriteArmorPoise()
+        {
+            float head = currentHeadArmor != null ? currentHeadArmor.poise : 0f;
+            float torso = currentTorsoArmor != null ? currentTorsoArmor.poise : 0f;
+            float hips = currentHipsArmor != null ? currentHipsArmor.poise : 0f;
+            float hand = currentHandArmor != null ? currentHandArmor.poise : 0f;
+            player.pStats.armorPoiseBonus = ArmorPoise.FromPieces(head, torso, hips, hand);
+            if (!player.pStats.attackPoiseActive)
+                player.pStats.totalPoiseDefence = player.pStats.armorPoiseBonus;
         }
 
         void WritePhysicalKinds()

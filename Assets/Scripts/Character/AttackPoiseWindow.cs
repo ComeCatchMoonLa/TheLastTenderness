@@ -5,9 +5,10 @@ namespace CatchMoon
         public static int Open(CharacterStatsManager stats, float bonus)
         {
             if (bonus <= 0f) return 0;
+            float poise = ArmorPoise.Fold(stats.armorPoiseBonus, bonus);
             if (!stats.attackPoiseActive)
-                stats.totalPoiseDefence += bonus;
-            stats.attackPoise = bonus;
+                stats.totalPoiseDefence += poise - stats.armorPoiseBonus;
+            stats.attackPoise = poise;
             stats.attackPoiseActive = true;
             stats.attackPoiseToken += 1;
             return stats.attackPoiseToken;

@@ -6,6 +6,9 @@ namespace CatchMoon
     {
         [Header("Armor Type")]
         public ArmorType armorType;
+        [Header("Poise")]
+        public float poise;
+
         [Header("Defense Bonus")]
         [Range(0, 1)] public float physicalDA;
         public bool strikeFilled;
