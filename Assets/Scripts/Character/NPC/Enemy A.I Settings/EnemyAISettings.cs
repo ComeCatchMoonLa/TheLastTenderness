@@ -45,6 +45,9 @@ namespace CatchMoon
         public bool allowAIToPerformDodge;
         [Range(0, 100)] public int dodgeLikelyHood;    // 随机到dodge的概率
 
+        [Header("掉落")]
+        public DropLine[] drops;
+
         [Header("弹反设置")]
         public bool allowAIToPerformParry;
         [Range(0, 100)] public int parryLikelyHood;    // 随机到parry的概率

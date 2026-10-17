@@ -103,6 +103,7 @@ namespace CatchMoon
                 player.pCamera.UpdateLockOnTargets();
             }
             AwardSoulsOnDeath(player);
+            AwardDrops(player);
 
             if (enemy != null && enemy.aiSettings != null && enemy.aiSettings.isBoss
                 && world != null && world.wEvent != null && !world.wEvent.bossHasBeenDefeated)
@@ -171,6 +172,21 @@ namespace CatchMoon
         public void AwardSoulsOnDeath(PlayerManager player)
         {
             player.pStats.AddSouls(soulsAwardedDeath);
+        }
+
+        public void AwardDrops(PlayerManager player)
+        {
+            if (enemy == null || enemy.aiSettings == null || enemy.aiSettings.drops == null) return;
+            if (player.pInventory == null || player.pInventory.items == null) return;
+            float discovery = RingDiscovery.Total(player.pStats.luckLevel, player.pInventory.ringSlots);
+            DropLine[] lines = enemy.aiSettings.drops;
+            Item[] found = new Item[lines.Length];
+            float[] rolls = new float[lines.Length];
+            for (int i = 0; i < rolls.Length; i++)
+                rolls[i] = UnityEngine.Random.value;
+            int count = DropRoll.Collect(enemy.aiSettings.name, lines, discovery, rolls, found);
+            for (int i = 0; i < count; i++)
+                player.pInventory.AddItem(found[i]);
         }
 
         /// <summary>
