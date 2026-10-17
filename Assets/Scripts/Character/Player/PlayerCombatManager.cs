@@ -154,7 +154,19 @@ namespace CatchMoon
 
             if (player.isTwoHandingWeapon && leftWeapon != null && leftWeapon.weaponType != WeaponType.bow)
             {
-                if (rightWeapon != null && rightWeapon.oh_hold_q_action != null)
+                if (rightWeapon != null && WeaponBlock.Use(true, rightWeapon.weaponType))
+                {
+                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
+                    player.pInventory.currentItemBeingUsed = rightWeapon;
+                    if (rightWeapon.oh_hold_q_action != null)
+                        rightWeapon.oh_hold_q_action.PerformAction(player);
+                    else if (!player.isInteracting && !player.pCombat.isBlocking && player.pStats.currentStamina > 0f)
+                    {
+                        player.pCombat.isBlocking = true;
+                        player.pCombat.SetBlockingAbsorptionFromBlockingWeapon();
+                    }
+                }
+                else if (rightWeapon != null && rightWeapon.oh_hold_q_action != null)
                 {
                     player.UpdateWhichHandCharacterIsUsing(usingRightHand: true);
                     player.pInventory.currentItemBeingUsed = rightWeapon;
