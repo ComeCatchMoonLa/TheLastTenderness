@@ -7,6 +7,11 @@ namespace CatchMoon
             return !sprinting && movingForward;
         }
 
+        public static float Stamina(bool kick, float lightCost)
+        {
+            return kick ? lightCost : 0f;
+        }
+
         public static bool BreaksShield(bool kickArmed, bool blocking)
         {
             return kickArmed && blocking;

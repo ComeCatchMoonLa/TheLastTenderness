@@ -12,6 +12,14 @@ namespace CatchMoon
             PlayerManager player = character as PlayerManager;
             bool movingForward = player != null && player.input != null && player.input.vertical > 0f;
             character.kickArmed = ShieldKick.IsKick(character.isSprinting, movingForward);
+            if (character.kickArmed)
+            {
+                WeaponItem weapon = null;
+                if (character.cInventory != null)
+                    weapon = character.isUsingLeftHand ? character.cInventory.leftWeapon : character.cInventory.rightWeapon;
+                character.cStats.DeductAttackStamina(
+                    ShieldKick.Stamina(true, CharacterAnimatorManager.AttackStaminaCost(weapon, AttackType.light_1)));
+            }
 
             if (character.canDoCombo)
             {

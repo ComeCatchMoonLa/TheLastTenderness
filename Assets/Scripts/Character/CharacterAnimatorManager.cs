@@ -124,6 +124,8 @@ namespace CatchMoon
 
         void DrainStamina()
         {
+            if (character.kickArmed) return;
+
             WeaponItem weapon = null;
             if (character.isUsingRightHand)
                 weapon = character.cInventory.rightWeapon;
