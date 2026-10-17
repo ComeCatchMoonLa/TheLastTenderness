@@ -54,6 +54,12 @@ namespace CatchMoon
             bossHasBeenAwakened = false;
             if (rewardFire != null)
                 rewardFire.sealedUntilBossClear = true;
+            if (fogWalls == null) return;
+            for (int i = 0; i < fogWalls.Count; i++)
+            {
+                if (fogWalls[i] != null)
+                    fogWalls[i].ActivateFogWall();
+            }
         }
 
         public void BossHasBeenDefeated()
