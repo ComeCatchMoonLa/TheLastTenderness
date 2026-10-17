@@ -39,7 +39,7 @@ namespace CatchMoon
         {
             if (player.pInventory.TryGetFlaskSip(flaskType, out int amount))
             {
-                if (flaskType == FlaskType.ashen)
+                if (FlaskRestore.RestoresFocus(flaskType))
                     player.pStats.AddMP(amount);
                 else
                     player.pStats.AddHP(amount);

@@ -4,24 +4,24 @@
 
 ## 0. 开始前
 
-- [ ] 读过技术设计：灰瓶只加专注，血瓶只加生命。
+- [x] 读过技术设计：灰瓶只加专注，血瓶只加生命。
 
 **阶段门槛：** 知道不改回复表，不改扣次数。
 
 ## 1. 只改一条
 
-- [ ] `FlaskRestore.Apply` 按瓶种只改一条，不超过上限。
-- [ ] `SuccessfullyUsedConsumable` 灰瓶走 `AddMP`，其余走 `AddHP`。
+- [x] `FlaskRestore.Apply` 按瓶种只改一条，不超过上限。
+- [x] `SuccessfullyUsedConsumable` 灰瓶走 `AddMP`，其余走 `AddHP`。
 
 **阶段门槛：** 两种物品回复量都大于 0 时，仍只改瓶种那一条。
 
 ## 2. 测试
 
-- [ ] `FlaskRestoreTests` 盖住游戏设计第 3 节的四个数字。
-- [ ] Test Runner 里这组通过。
+- [x] `FlaskRestoreTests` 盖住游戏设计第 3 节的四个数字。
+- [x] Test Runner 里这组通过。
 
 **阶段门槛：** 粒子和喝药模型不测。
 
 ## 3. 验收
 
-- [ ] 大纲里的 3.4 标成已完成。提交说明用中文。
+- [x] 大纲里的 3.4 标成已完成。提交说明用中文。
