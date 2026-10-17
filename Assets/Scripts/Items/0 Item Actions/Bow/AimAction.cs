@@ -15,12 +15,11 @@ namespace CatchMoon
         {
             if (!player.isTwoHandingWeapon) return;
 
-            // 没有箭时不能瞄准
-            if (player.pInventory.currentAmmo == null)
+            if (EmptyDraw.Plays(player.pInventory.AmmoRemaining(player.pInventory.currentAmmo)))
             {
                 player.ClearAimingMode();
                 if (!player.isInteracting)
-                    player.pAnimator.PlayTargetAnimation("Shrug", true);
+                    player.pAnimator.PlayTargetAnimation(EmptyDraw.Clip, true);
                 return;
             }
 

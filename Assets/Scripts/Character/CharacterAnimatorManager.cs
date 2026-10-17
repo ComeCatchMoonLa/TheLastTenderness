@@ -208,7 +208,12 @@ namespace CatchMoon
 
         void SuccessfullyGetArrow()
         {
-            GameObject loadedArrow = Instantiate(character.cInventory.currentAmmo.loadedItemModel, character.cWeaponSlot.rightHandSlot.overrideParentWhileGetting);
+            AmmoItem ammo = character.cInventory.currentAmmo;
+            if (ammo == null) return;
+            if (character is PlayerManager player && EmptyDraw.Plays(player.pInventory.AmmoRemaining(ammo)))
+                return;
+
+            GameObject loadedArrow = Instantiate(ammo.loadedItemModel, character.cWeaponSlot.rightHandSlot.overrideParentWhileGetting);
             character.cEffects.Ammo = loadedArrow;
         }
         void EndGetArrow()

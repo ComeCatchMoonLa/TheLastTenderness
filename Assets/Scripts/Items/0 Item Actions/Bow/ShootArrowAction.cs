@@ -18,6 +18,12 @@ namespace CatchMoon
             if (!player.aimingMode || player.pStats.currentStamina <= 0)
                 return;
 
+            if (EmptyDraw.Plays(player.pInventory.AmmoRemaining(player.pInventory.currentAmmo)))
+            {
+                player.pAnimator.PlayTargetAnimation(EmptyDraw.Clip, true);
+                return;
+            }
+
             if (!player.pInventory.TrySpendAmmo(player.pInventory.currentAmmo))
             {
                 player.pInventory.currentAmmo = null;
