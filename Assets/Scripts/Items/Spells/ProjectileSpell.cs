@@ -25,6 +25,8 @@ namespace CatchMoon
         void AttempToCastSpellWithPlayer(PlayerManager player)
         {
             if (player.pCombat.isUsingSpell) return;
+            if (!MagicSpellAction.AttributesAllowCast(this, player.pStats.intelligenceLevel, player.pStats.faithLevel))
+                return;
 
             if (player.pStats.DeductMP(focusPointCost))
             {
@@ -49,6 +51,8 @@ namespace CatchMoon
         void AttempToCastSpellWithAI(EnemyManager enemy)
         {
             if (enemy.eCombat.isUsingSpell) return;
+            if (!MagicSpellAction.AttributesAllowCast(this, enemy.eStats.intelligenceLevel, enemy.eStats.faithLevel))
+                return;
 
             if (enemy.eStats.DeductMP(focusPointCost))
             {

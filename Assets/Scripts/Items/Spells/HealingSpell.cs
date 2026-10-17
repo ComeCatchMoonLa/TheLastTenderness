@@ -12,6 +12,8 @@ namespace CatchMoon
         public override void AttemptToCastSpell(CharacterManager character)
         {
             if (character.cCombat.isUsingSpell) return;
+            if (!MagicSpellAction.AttributesAllowCast(this, character.cStats.intelligenceLevel, character.cStats.faithLevel))
+                return;
 
             if (!character.cStats.DeductMP(focusPointCost))
                 return;
