@@ -258,6 +258,8 @@ namespace CatchMoon
                     float amount = player.pCombat.isBlocking
                         ? staminaRegenerationAmountWhilstBlocking
                         : staminaRegenerationAmount;
+                    if (player.pInventory != null)
+                        amount += RingRecovery.Stamina(player.pInventory.ringSlots);
                     currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
                     player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
                 }

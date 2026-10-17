@@ -197,6 +197,7 @@ namespace CatchMoon
             }
 
             amount = flaskType == FlaskType.ashen ? row.focus : row.health;
+            amount += flaskType == FlaskType.ashen ? RingRecovery.Ashen(ringSlots) : RingRecovery.Estus(ringSlots);
             return true;
         }
         void RememberConsumable(ConsumableItem item)
