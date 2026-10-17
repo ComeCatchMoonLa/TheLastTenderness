@@ -104,7 +104,17 @@ namespace CatchMoon
                     leftWeapon.stanceArt,
                     leftArtIsParry);
                 WeaponItem weapon = useLeft ? leftWeapon : rightWeapon;
-                if (weapon != null && weapon.oh_tap_r_action != null)
+                SpellItem spell = player.pInventory.currentSpell;
+                WeaponArtSpell art = weapon == null
+                    ? WeaponArtSpell.WeaponArt
+                    : WeaponCatalyst.Decide(weapon.catalystKind, spell != null ? spell.spellType : default, spell != null);
+                if (art == WeaponArtSpell.Cast)
+                {
+                    player.UpdateWhichHandCharacterIsUsing(usingRightHand: !useLeft);
+                    player.pInventory.currentItemBeingUsed = weapon;
+                    MagicSpellAction.TryCast(player, spell.spellType);
+                }
+                else if (art == WeaponArtSpell.WeaponArt && weapon != null && weapon.oh_tap_r_action != null)
                 {
                     player.UpdateWhichHandCharacterIsUsing(usingRightHand: !useLeft);
                     player.pInventory.currentItemBeingUsed = weapon;

@@ -9,6 +9,11 @@ namespace CatchMoon
 
         protected void PerformSpellAction(CharacterManager character, SpellType spellType)
         {
+            TryCast(character, spellType);
+        }
+
+        public static void TryCast(CharacterManager character, SpellType spellType)
+        {
             if (character.isInteracting) return;
 
             if (character is PlayerManager player && !SpellIsMemorized(player, player.pInventory.currentSpell))
