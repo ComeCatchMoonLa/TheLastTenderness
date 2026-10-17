@@ -175,13 +175,13 @@ namespace CatchMoon
 
         public bool ApplyEmber(float ratio, string assetName)
         {
+            if (emberLit) return false;
             if (!EmberHealth.TryRaise(maxHP, ratio, out float newMax))
             {
                 Debug.LogError($"{assetName}: healthRatio 未填");
                 return false;
             }
-            if (!emberLit)
-                emberBaseMaxHP = maxHP;
+            emberBaseMaxHP = maxHP;
             emberLit = true;
             maxHP = newMax;
             currentHP = newMax;
