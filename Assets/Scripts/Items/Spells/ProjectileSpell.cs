@@ -7,6 +7,12 @@ namespace CatchMoon
     {
         [Header("Projectile Damage")]
         public int baseDamage;
+        public int pelletCount = 1;
+
+        public int SettledHits()
+        {
+            return SpellBehavior.Strikes(pelletCount);
+        }
 
         [Header("Projectile Physics")]
         public float projectileForwardVelocity;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CatchMoon
@@ -14,6 +15,7 @@ namespace CatchMoon
         public float emberBaseMaxHP;
         public string recordedEnding;
         public bool darkSigilsCleared;
+        public List<BodyBuff> bodyBuffs = new List<BodyBuff>();
 
         public bool RecordEnding(string ending)
         {
