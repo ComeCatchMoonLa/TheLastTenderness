@@ -179,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4502027474970607120, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.93
+      value: 18.64
       objectReference: {fileID: 0}
     - target: {fileID: 4502027474970607120, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_LocalPosition.y
@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4502027474970607121, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4502027474970607131, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: cName
       value: "\u5934\u76EE"
@@ -237,6 +241,14 @@ PrefabInstance:
       propertyPath: aiSettings
       value: 
       objectReference: {fileID: 11400000, guid: c4e1f8a27b3d4e90a5c6d7e8f9012345, type: 2}
+    - target: {fileID: 4502027475200929320, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502027475200929320, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3023,6 +3035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Humanoid A.I - Melee
       objectReference: {fileID: 0}
+    - target: {fileID: 4502027474970607133, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
+      propertyPath: enableAI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4502027474970607135, guid: 715f38dda36a9f74a97bfd1e962e9085, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3572,6 +3588,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4437747708042887105, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: isParrying
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437747708042887105, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: isAttacking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437747708042887105, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: parryWindowFrames
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8107545121892593960, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: ui
       value: 
@@ -3630,7 +3658,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: consumables.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'memorized.Array.data[0]'
@@ -3655,19 +3683,19 @@ PrefabInstance:
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1abac5fd608874c46bcc939472e21442, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e2a9c4b1d8f4e63a0b5c6d7e8f91a02, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7e2a9c4b1d8f4e63a0b5c6d7e8f91a02, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f3b0d5c2e9a4f74b1c6d7e8f9a02b13, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[4]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8f3b0d5c2e9a4f74b1c6d7e8f9a02b13, type: 2}
+      objectReference: {fileID: 11400000, guid: 9a4c1e6d3f0b4852c2d7e8f9a1b03c24, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[5]'
       value: 
-      objectReference: {fileID: 11400000, guid: 9a4c1e6d3f0b4852c2d7e8f9a1b03c24, type: 2}
+      objectReference: {fileID: 11400000, guid: 0b5d2f7e4a1c4963d3e8f9a0b2c14d35, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[6]'
       value: 
