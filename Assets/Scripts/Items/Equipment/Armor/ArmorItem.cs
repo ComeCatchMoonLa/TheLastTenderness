@@ -9,6 +9,13 @@ namespace CatchMoon
         [Header("Poise")]
         public float poise;
 
+        [Header("耐久")]
+        public bool durabilityFilled;
+        public float durabilityMax;
+        public float durability;
+        public bool lossPerHitFilled;
+        public float lossPerHit;
+
         [Header("Defense Bonus")]
         [Range(0, 1)] public float physicalDA;
         public bool strikeFilled;

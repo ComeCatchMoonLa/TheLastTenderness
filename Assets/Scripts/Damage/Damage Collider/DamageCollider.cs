@@ -154,11 +154,20 @@ namespace CatchMoon
                 Lightning = ld,
                 Dark = dd
             }, character.cCombat.weaponBuff);
+            segments = DurabilityTier.WeaponDamage(segments, AttackingWeapon());
             damageTarget.cCombat.ResolveIncomingHit(character, damageAnimation, new IncomingDamage
             {
                 Multiplier = multiplier,
                 Segments = segments
             }, true, poiseBreak, guardBreakModifider);
+        }
+
+        WeaponItem AttackingWeapon()
+        {
+            if (character == null || character.cInventory == null) return null;
+            if (character.isUsingRightHand) return character.cInventory.rightWeapon;
+            if (character.isUsingLeftHand) return character.cInventory.leftWeapon;
+            return null;
         }
 
         public static float PhaseDamageMultiplier(bool usingRightHand, bool usingLeftHand, WeaponItem rightWeapon, WeaponItem leftWeapon, AttackType attackType)

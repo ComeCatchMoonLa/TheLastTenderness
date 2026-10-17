@@ -17,7 +17,8 @@ namespace CatchMoon
             bool combo,
             MeleeAnimations animations,
             AttackType firstType,
-            AttackType secondType)
+            AttackType secondType,
+            bool spendDurability = true)
         {
             if (!character.isUsingRightHand && !character.isUsingLeftHand)
             {
@@ -31,7 +32,11 @@ namespace CatchMoon
             {
                 WeaponItem weapon = character.isUsingRightHand ? character.cInventory.rightWeapon : character.cInventory.leftWeapon;
                 if (weapon != null)
+                {
                     twoHand = PairedWeapons.AsTwoHand(weapon.weaponType, twoHand);
+                    if (spendDurability)
+                        DurabilityTier.Swing(weapon);
+                }
             }
 
             bool pairedTwoHand = twoHand && !character.isTwoHandingWeapon;

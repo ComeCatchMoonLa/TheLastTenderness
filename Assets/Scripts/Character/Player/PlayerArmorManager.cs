@@ -52,6 +52,23 @@ namespace CatchMoon
             WriteArmorPoise();
         }
 
+        public void RefreshDurabilityFactors()
+        {
+            player.pStats.headDurabilityFactor = DurabilityTier.Piece(currentHeadArmor);
+            player.pStats.torsoDurabilityFactor = DurabilityTier.Piece(currentTorsoArmor);
+            player.pStats.hipsDurabilityFactor = DurabilityTier.Piece(currentHipsArmor);
+            player.pStats.handDurabilityFactor = DurabilityTier.Piece(currentHandArmor);
+        }
+
+        public void WearOnHit()
+        {
+            DurabilityTier.ArmorHit(currentHeadArmor);
+            DurabilityTier.ArmorHit(currentTorsoArmor);
+            DurabilityTier.ArmorHit(currentHipsArmor);
+            DurabilityTier.ArmorHit(currentHandArmor);
+            RefreshDurabilityFactors();
+        }
+
         void WriteArmorPoise()
         {
             float head = currentHeadArmor != null ? currentHeadArmor.poise : 0f;

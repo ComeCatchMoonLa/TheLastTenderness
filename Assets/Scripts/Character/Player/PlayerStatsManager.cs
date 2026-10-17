@@ -53,8 +53,12 @@ namespace CatchMoon
 
         public override bool TakeDamage(string damageAnimation, DamageSegments damage, bool playHurtSound = true)
         {
+            if (player != null && player.pArmor != null)
+                player.pArmor.RefreshDurabilityFactors();
             if (base.TakeDamage(damageAnimation, damage, playHurtSound))
             {
+                if (player != null && player.pArmor != null)
+                    player.pArmor.WearOnHit();
                 player.ui.hud.healthBar.SetCurrentHP(currentHP);
 
                 if (currentHP <= 0)

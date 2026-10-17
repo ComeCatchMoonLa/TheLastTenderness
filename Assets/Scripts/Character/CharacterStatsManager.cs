@@ -86,6 +86,10 @@ namespace CatchMoon
         [Range(0, 1)] public float torsoArmorDDA;
         [Range(0, 1)] public float hipsArmorDDA;
         [Range(0, 1)] public float handArmorDDA;
+        public float headDurabilityFactor = 1f;
+        public float torsoDurabilityFactor = 1f;
+        public float hipsDurabilityFactor = 1f;
+        public float handDurabilityFactor = 1f;
 
         [Header("防御时的伤害吸收率")]
         [Range(0, 1)] public float blockingPDA;
@@ -321,11 +325,35 @@ namespace CatchMoon
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
             PhysicalRates physical = PhysicalRatesOf(damage.Kind);
-            float pd = damage.Physical * CombinedArmorRate(physical.Head, physical.Torso, physical.Hips) * (1f - physical.Hand);
-            float fd = damage.Fire * CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA) * (1f - handArmorFDA);
-            float md = damage.Magic * CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA) * (1f - handArmorMDA);
-            float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA) * (1f - handArmorLDA);
-            float dd = damage.Dark * CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA) * (1f - handArmorDDA);
+            float headF = headDurabilityFactor;
+            float torsoF = torsoDurabilityFactor;
+            float hipsF = hipsDurabilityFactor;
+            float handF = handDurabilityFactor;
+            float pd = damage.Physical * CombinedArmorRate(
+                DurabilityTier.Mitigation(physical.Head, headF),
+                DurabilityTier.Mitigation(physical.Torso, torsoF),
+                DurabilityTier.Mitigation(physical.Hips, hipsF))
+                * (1f - DurabilityTier.Mitigation(physical.Hand, handF));
+            float fd = damage.Fire * CombinedArmorRate(
+                DurabilityTier.Mitigation(headArmorFDA, headF),
+                DurabilityTier.Mitigation(torsoArmorFDA, torsoF),
+                DurabilityTier.Mitigation(hipsArmorFDA, hipsF))
+                * (1f - DurabilityTier.Mitigation(handArmorFDA, handF));
+            float md = damage.Magic * CombinedArmorRate(
+                DurabilityTier.Mitigation(headArmorMDA, headF),
+                DurabilityTier.Mitigation(torsoArmorMDA, torsoF),
+                DurabilityTier.Mitigation(hipsArmorMDA, hipsF))
+                * (1f - DurabilityTier.Mitigation(handArmorMDA, handF));
+            float ld = damage.Lightning * CombinedArmorRate(
+                DurabilityTier.Mitigation(headArmorLDA, headF),
+                DurabilityTier.Mitigation(torsoArmorLDA, torsoF),
+                DurabilityTier.Mitigation(hipsArmorLDA, hipsF))
+                * (1f - DurabilityTier.Mitigation(handArmorLDA, handF));
+            float dd = damage.Dark * CombinedArmorRate(
+                DurabilityTier.Mitigation(headArmorDDA, headF),
+                DurabilityTier.Mitigation(torsoArmorDDA, torsoF),
+                DurabilityTier.Mitigation(hipsArmorDDA, hipsF))
+                * (1f - DurabilityTier.Mitigation(handArmorDDA, handF));
 
             float finalDamage = Frostbite.Taken(name, pd + fd + md + ld + dd, frostTimeLeft > 0f, frostDamageTaken);
             currentHP -= finalDamage;

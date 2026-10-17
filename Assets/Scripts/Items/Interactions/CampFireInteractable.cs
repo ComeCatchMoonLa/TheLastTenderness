@@ -61,6 +61,7 @@ namespace CatchMoon
                 player.pStats.RestoreVitalsToMax();
                 BodyBuffs.Clear(player.pStats.bodyBuffs);
                 AilmentRest.Clear(player.pStats);
+                RepairDurability(player);
                 Talk[] talks = FindObjectsByType<Talk>(FindObjectsInactive.Include);
                 for (int i = 0; i < talks.Length; i++)
                 {
@@ -94,6 +95,41 @@ namespace CatchMoon
                 fireFX.Play();
                 audioSource.PlayOneShot(campFireActivationSFX);
             }
+        }
+
+        void RepairDurability(PlayerManager player)
+        {
+            PlayerInventoryManager inventory = player.pInventory;
+            if (inventory != null)
+            {
+                RepairWeapons(inventory.weaponsInRightHandSlot);
+                RepairWeapons(inventory.weaponsInLeftHandSlot);
+                if (inventory.weapons != null)
+                {
+                    for (int i = 0; i < inventory.weapons.Count; i++)
+                        DurabilityTier.RepairWeapon(inventory.weapons[i]);
+                }
+                if (inventory.armors != null)
+                {
+                    for (int i = 0; i < inventory.armors.Count; i++)
+                        DurabilityTier.RepairArmor(inventory.armors[i]);
+                }
+            }
+
+            PlayerArmorManager armor = player.pArmor;
+            if (armor == null) return;
+            DurabilityTier.RepairArmor(armor.currentHeadArmor);
+            DurabilityTier.RepairArmor(armor.currentTorsoArmor);
+            DurabilityTier.RepairArmor(armor.currentHipsArmor);
+            DurabilityTier.RepairArmor(armor.currentHandArmor);
+            armor.RefreshDurabilityFactors();
+        }
+
+        static void RepairWeapons(WeaponItem[] hand)
+        {
+            if (hand == null) return;
+            for (int i = 0; i < hand.Length; i++)
+                DurabilityTier.RepairWeapon(hand[i]);
         }
 
         public void ExtinguishForNewCycle()

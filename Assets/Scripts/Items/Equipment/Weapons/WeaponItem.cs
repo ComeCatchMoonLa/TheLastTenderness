@@ -39,6 +39,14 @@ namespace CatchMoon
         public bool luckNeedFilled;
         public int luckNeed;
 
+        [Header("耐久")]
+        public bool durabilityFilled;
+        public float durabilityMax;
+        public float durability;
+        public bool swingsPerPointFilled;
+        public int swingsPerPoint;
+        public int swingCount;
+
         [Header("伤害")]
         public int pd;
         public int fd;

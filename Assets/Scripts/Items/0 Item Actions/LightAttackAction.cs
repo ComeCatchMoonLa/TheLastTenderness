@@ -49,7 +49,8 @@ namespace CatchMoon
                     TwoHandSecond = character.cAnimator.thLightAttack2
                 },
                 AttackType.light_1,
-                AttackType.light_2);
+                AttackType.light_2,
+                !character.kickArmed);
         }
     }
 }
