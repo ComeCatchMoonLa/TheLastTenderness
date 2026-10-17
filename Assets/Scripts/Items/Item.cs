@@ -12,6 +12,7 @@ namespace CatchMoon
         [Header("物品信息")]
         public Sprite itemIcon;
         public string itemName;
+        public float weight;
         [Header("item在Hierarchy窗口中的名称")]
         [Tooltip("用于切换模型")] public string transformName;
     }
