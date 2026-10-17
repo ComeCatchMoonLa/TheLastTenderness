@@ -17,6 +17,10 @@ namespace CatchMoon
 
         public Item wantedGift;
         public bool giftAdvanced;
+        public bool closesOtherLine;
+        public bool exclusiveRaised;
+        public bool otherLineOpen = true;
+        public bool otherLineFailed;
 
         public bool Give(PlayerManager player, Item offered)
         {
@@ -25,6 +29,8 @@ namespace CatchMoon
                 return false;
             player.pInventory.RemoveItem(offered);
             giftAdvanced = true;
+            if (closesOtherLine)
+                ExclusiveFlag.Raise(ref exclusiveRaised, ref otherLineOpen, ref otherLineFailed);
             return true;
         }
 
