@@ -20,7 +20,7 @@ namespace CatchMoon
 
             if (EmptyDraw.Plays(player.pInventory.AmmoRemaining(player.pInventory.currentAmmo)))
             {
-                player.pAnimator.PlayTargetAnimation(EmptyDraw.Clip, true);
+                player.animator.Play(EmptyDraw.Clip);
                 return;
             }
 

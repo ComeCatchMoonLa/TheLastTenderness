@@ -2,7 +2,7 @@ namespace CatchMoon
 {
     public static class EmptyDraw
     {
-        public const string Clip = "Aiming - Start";
+        public const string Clip = "Shoot Arrow";
 
         public static bool Plays(int remaining)
         {

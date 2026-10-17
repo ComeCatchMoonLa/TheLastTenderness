@@ -9,7 +9,7 @@ namespace CatchMoon.Tests
         {
             Assert.IsTrue(EmptyDraw.Plays(0));
             Assert.IsFalse(EmptyDraw.Plays(1));
-            Assert.AreEqual("Aiming - Start", EmptyDraw.Clip);
+            Assert.AreEqual("Shoot Arrow", EmptyDraw.Clip);
         }
     }
 }

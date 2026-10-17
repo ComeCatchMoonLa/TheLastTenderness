@@ -15,14 +15,6 @@ namespace CatchMoon
         {
             if (!player.isTwoHandingWeapon) return;
 
-            if (EmptyDraw.Plays(player.pInventory.AmmoRemaining(player.pInventory.currentAmmo)))
-            {
-                player.ClearAimingMode();
-                if (!player.isInteracting)
-                    player.pAnimator.PlayTargetAnimation(EmptyDraw.Clip, true);
-                return;
-            }
-
             player.aimingMode = true;
             player.aimHeld = 0f;
             if (player.isInteracting)

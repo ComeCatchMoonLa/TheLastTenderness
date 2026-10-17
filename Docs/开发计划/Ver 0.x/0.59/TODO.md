@@ -4,18 +4,18 @@
 
 ## 0. 开始前
 
-- [ ] 读过技术设计：瞄准不看剩余，空拉播 `Shoot Arrow`。
+- [x] 读过技术设计：瞄准不看剩余，空拉播 `Shoot Arrow`。
 
 **阶段门槛：** 知道镜头切换不在这一版。
 
 ## 1. 入口
 
-- [ ] `AimAction` 剩余为 0 时仍进入 `aimingMode`。
-- [ ] 射出在剩余小于或等于 0 时播 `Shoot Arrow` 并返回，不生成、不扣弹。
+- [x] `AimAction` 剩余为 0 时仍进入 `aimingMode`。
+- [x] 射出在剩余小于或等于 0 时播 `Shoot Arrow` 并返回，不生成、不扣弹。
 
 **阶段门槛：** 弦上仍不放新箭。
 
 ## 2. 验收
 
-- [ ] 已有 `EmptyDrawTests` 的片段名改为 `Shoot Arrow`。Test Runner 通过。
-- [ ] 大纲里的 0.59 标成已完成。提交说明用中文。
+- [x] 已有 `EmptyDrawTests` 的片段名改为 `Shoot Arrow`。Test Runner 通过。
+- [x] 大纲里的 0.59 标成已完成。提交说明用中文。
