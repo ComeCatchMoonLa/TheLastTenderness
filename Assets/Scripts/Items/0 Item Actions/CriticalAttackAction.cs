@@ -50,7 +50,7 @@ namespace CatchMoon
 
             bool backstabAllowed = true;
             if (attackTarget is EnemyManager enemy && enemy.aiSettings != null)
-                backstabAllowed = BackstabBody.Allows(enemy.aiSettings.isBoss, enemy.aiSettings.largeBody);
+                backstabAllowed = BackstabBody.Allows(enemy.aiSettings.isBoss, enemy.aiSettings.largeBody, enemy.aiSettings.beast);
 
             switch (Choose(hit, dot, canBeRiposted, backstabAllowed))
             {

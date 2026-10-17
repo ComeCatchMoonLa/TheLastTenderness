@@ -8,6 +8,7 @@ namespace CatchMoon
         [Header("A.I 类型")]
         public bool isBoss;
         public bool largeBody;
+        public bool beast;
         public bool mimic;
         public bool lizard;
         public bool oneShot;

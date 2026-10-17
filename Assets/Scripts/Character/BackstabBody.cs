@@ -4,7 +4,12 @@ namespace CatchMoon
     {
         public static bool Allows(bool boss, bool large)
         {
-            if (boss || large) return false;
+            return Allows(boss, large, false);
+        }
+
+        public static bool Allows(bool boss, bool large, bool beast)
+        {
+            if (boss || large || beast) return false;
             return true;
         }
     }
