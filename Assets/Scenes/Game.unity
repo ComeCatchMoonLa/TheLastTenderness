@@ -3304,7 +3304,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e9a830a7b77949445b8c9c0466af5571, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: memorized.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'weapons.Array.data[0]'
@@ -3324,7 +3324,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f6874e77bc493a44eb7320440c41d19e, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: consumables.Array.size
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'memorized.Array.data[0]'
@@ -3335,9 +3335,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 13cf1b7fa2cadaf439ea290b1592bb7f, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'memorized.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c6e3a8f5b2d4a74e4f9a0b1c3d25e46, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'memorized.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d7f4b9a6c3e4b85f5a0b1c2d4e36f57, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'memorized.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e8a5c0b7d4f4c96a6b1c2d3e5f47068, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: 'consumables.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: 1abac5fd608874c46bcc939472e21442, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'consumables.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e2a9c4b1d8f4e63a0b5c6d7e8f91a02, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'consumables.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f3b0d5c2e9a4f74b1c6d7e8f9a02b13, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'consumables.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a4c1e6d3f0b4852c2d7e8f9a1b03c24, type: 2}
+    - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
+      propertyPath: 'consumables.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b5d2f7e4a1c4963d3e8f9a0b2c14d35, type: 2}
     - target: {fileID: 8189054979652004575, guid: 52abc9072950cb34aa367476f873b229, type: 3}
       propertyPath: weaponsInLeftHandSlot.Array.size
       value: 5
