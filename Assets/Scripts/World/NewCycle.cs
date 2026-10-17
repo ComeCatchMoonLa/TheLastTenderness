@@ -94,6 +94,22 @@ namespace CatchMoon
                     walls[i].CloseForNewCycle();
             }
 
+            EnemyManager[] npcs = Object.FindObjectsByType<EnemyManager>(FindObjectsInactive.Include);
+            for (int i = 0; i < npcs.Length; i++)
+            {
+                EnemyManager npc = npcs[i];
+                if (npc == null || !npc.isStoryNpc) continue;
+                Vector3 home = npc.placementRecorded ? npc.placement : (npc.eStats != null ? npc.eStats.restOrigin : npc.transform.position);
+                StoryNpcCycle.Place(npc.gameObject, home, npc.eStats);
+            }
+
+            Talk[] talks = Object.FindObjectsByType<Talk>(FindObjectsInactive.Include);
+            for (int i = 0; i < talks.Length; i++)
+            {
+                if (talks[i] != null)
+                    talks[i].giftAdvanced = false;
+            }
+
             EnemyStatsManager[] rested = Object.FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
             for (int i = 0; i < rested.Length; i++)
             {

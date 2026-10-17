@@ -108,6 +108,13 @@ namespace CatchMoon
                 && world != null && world.wEvent != null && !world.wEvent.bossHasBeenDefeated)
                 world.wEvent.BossHasBeenDefeated();
 
+            if (enemy != null && enemy.isStoryNpc)
+            {
+                isDead = true;
+                gameObject.SetActive(false);
+                return;
+            }
+
             if (AreaRefresh.Returns(RefreshActor(true)))
             {
                 hiddenForRest = true;
