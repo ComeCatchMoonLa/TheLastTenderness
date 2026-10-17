@@ -24,6 +24,8 @@ namespace CatchMoon
         faithCaster,
         spellCaster,
         bow,
+        crossbow,
+        greatbow,
     }
     public enum ArmorType
     {
@@ -42,6 +44,8 @@ namespace CatchMoon
     public enum AmmoType
     {
         arrow,
+        bolt,
+        greatArrow,
     }
     public enum FlaskType
     {

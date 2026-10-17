@@ -24,6 +24,14 @@ namespace CatchMoon
                 return;
             }
 
+            WeaponItem weapon = player.isUsingLeftHand ? player.pInventory.leftWeapon : player.pInventory.rightWeapon;
+            AmmoItem ammoNow = player.pInventory.currentAmmo;
+            if (weapon != null && ammoNow != null && !AmmoMatch.Allows(weapon.weaponType, ammoNow.ammoType))
+            {
+                player.animator.Play("Shoot Arrow");
+                return;
+            }
+
             if (!player.pInventory.TrySpendAmmo(player.pInventory.currentAmmo))
             {
                 player.pInventory.currentAmmo = null;
