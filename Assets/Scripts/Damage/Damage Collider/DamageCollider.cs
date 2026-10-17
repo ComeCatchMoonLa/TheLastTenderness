@@ -139,9 +139,16 @@ namespace CatchMoon
             float multiplier = PhaseDamageMultiplier(character.isUsingRightHand, character.isUsingLeftHand,
                 character.cInventory.rightWeapon, character.cInventory.leftWeapon, character.cCombat.attackType);
 
+            float physical = pd;
+            if (character is PlayerManager attacker && attacker.pInventory != null)
+                physical += RingBonus.Attack(attacker.pInventory.ringSlots);
+            if (damageTarget is PlayerManager defender && defender.pInventory != null)
+                physical -= RingBonus.Absorption(defender.pInventory.ringSlots);
+            if (physical < 0f) physical = 0f;
+
             DamageSegments segments = WeaponBuff.Add(new DamageSegments
             {
-                Physical = pd,
+                Physical = physical,
                 Fire = fd,
                 Magic = md,
                 Lightning = ld,

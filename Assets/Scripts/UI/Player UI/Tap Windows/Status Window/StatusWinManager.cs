@@ -34,12 +34,15 @@ namespace CatchMoon
                 stats.intelligenceLevel,
                 stats.faithLevel,
                 stats.luckLevel);
+            int strength = stats.strengthLevel;
+            if (player.pInventory != null)
+                strength += RingBonus.Attribute(player.pInventory.ringSlots);
             body.text = StatusPageLines.Format(
                 stats.healthLevel,
                 stats.staminaLevel,
                 stats.focusLevel,
                 stats.poiseLevel,
-                stats.strengthLevel,
+                strength,
                 stats.dexterityLevel,
                 stats.intelligenceLevel,
                 stats.faithLevel,

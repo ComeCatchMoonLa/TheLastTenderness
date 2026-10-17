@@ -19,6 +19,16 @@ namespace CatchMoon
         public List<ConsumableItem> consumables;
         public Item[] ringSlots = new Item[EquipmentLayout.RingSlots];
 
+        public bool TryWearRing(Item ring)
+        {
+            return RingWear.TryPut(ringSlots, ring);
+        }
+
+        public bool TryRemoveRing(Item ring)
+        {
+            return RingWear.TryRemove(ringSlots, ring);
+        }
+
         Dictionary<ConsumableItem, int> consumableLeft;
         Dictionary<AmmoItem, int> ammoLeft;
         public ConsumableItem consumableBeingUsed;

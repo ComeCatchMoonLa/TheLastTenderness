@@ -13,6 +13,10 @@ namespace CatchMoon
         public Sprite itemIcon;
         public string itemName;
         public float weight;
+        public string ringFamily;
+        public float attackBonus;
+        public float absorptionBonus;
+        public int attributeBonus;
         [Header("item在Hierarchy窗口中的名称")]
         [Tooltip("用于切换模型")] public string transformName;
     }
