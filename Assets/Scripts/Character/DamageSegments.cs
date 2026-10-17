@@ -1,5 +1,13 @@
 namespace CatchMoon
 {
+    public enum PhysicalKind
+    {
+        Standard,
+        Strike,
+        Slash,
+        Thrust
+    }
+
     public struct DamageSegments
     {
         public float Physical;
@@ -7,6 +15,7 @@ namespace CatchMoon
         public float Magic;
         public float Lightning;
         public float Dark;
+        public PhysicalKind Kind;
     }
 
     public struct IncomingDamage

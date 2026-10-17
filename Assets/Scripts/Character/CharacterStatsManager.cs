@@ -51,6 +51,18 @@ namespace CatchMoon
         [Range(0, 1)] public float torsoArmorPDA;
         [Range(0, 1)] public float hipsArmorPDA;
         [Range(0, 1)] public float handArmorPDA;
+        [Range(0, 1)] public float headArmorStrike;
+        [Range(0, 1)] public float torsoArmorStrike;
+        [Range(0, 1)] public float hipsArmorStrike;
+        [Range(0, 1)] public float handArmorStrike;
+        [Range(0, 1)] public float headArmorSlash;
+        [Range(0, 1)] public float torsoArmorSlash;
+        [Range(0, 1)] public float hipsArmorSlash;
+        [Range(0, 1)] public float handArmorSlash;
+        [Range(0, 1)] public float headArmorThrust;
+        [Range(0, 1)] public float torsoArmorThrust;
+        [Range(0, 1)] public float hipsArmorThrust;
+        [Range(0, 1)] public float handArmorThrust;
         [Space(5)]
         [Range(0, 1)] public float headArmorFDA;
         [Range(0, 1)] public float torsoArmorFDA;
@@ -296,7 +308,8 @@ namespace CatchMoon
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
-            float pd = damage.Physical * CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA) * (1f - handArmorPDA);
+            PhysicalRates physical = PhysicalRatesOf(damage.Kind);
+            float pd = damage.Physical * CombinedArmorRate(physical.Head, physical.Torso, physical.Hips) * (1f - physical.Hand);
             float fd = damage.Fire * CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA) * (1f - handArmorFDA);
             float md = damage.Magic * CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA) * (1f - handArmorMDA);
             float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA) * (1f - handArmorLDA);
@@ -314,6 +327,58 @@ namespace CatchMoon
                 character.cAnimator.PlayTargetAnimation(damageAnimation, true);
 
             return true;
+        }
+
+        struct PhysicalRates
+        {
+            public float Head;
+            public float Torso;
+            public float Hips;
+            public float Hand;
+        }
+
+        PhysicalRates PhysicalRatesOf(PhysicalKind kind)
+        {
+            if (kind == PhysicalKind.Strike)
+            {
+                return new PhysicalRates
+                {
+                    Head = headArmorStrike,
+                    Torso = torsoArmorStrike,
+                    Hips = hipsArmorStrike,
+                    Hand = handArmorStrike
+                };
+            }
+
+            if (kind == PhysicalKind.Slash)
+            {
+                return new PhysicalRates
+                {
+                    Head = headArmorSlash,
+                    Torso = torsoArmorSlash,
+                    Hips = hipsArmorSlash,
+                    Hand = handArmorSlash
+                };
+            }
+
+            if (kind == PhysicalKind.Thrust)
+            {
+                return new PhysicalRates
+                {
+                    Head = headArmorThrust,
+                    Torso = torsoArmorThrust,
+                    Hips = hipsArmorThrust,
+                    Hand = handArmorThrust
+                };
+            }
+
+            return new PhysicalRates
+            {
+                Head = headArmorPDA,
+                Torso = torsoArmorPDA,
+                Hips = hipsArmorPDA,
+                Hand = handArmorPDA
+            };
         }
 
         static float CombinedArmorRate(float head, float torso, float hips)

@@ -48,6 +48,34 @@ namespace CatchMoon
                 ref player.pStats.hipsArmorPDA, ref player.pStats.hipsArmorFDA, ref player.pStats.hipsArmorMDA,
                 ref player.pStats.hipsArmorLDA, ref player.pStats.hipsArmorDDA);
             WriteHandAbsorption();
+            WritePhysicalKinds();
+        }
+
+        void WritePhysicalKinds()
+        {
+            WriteKind(PhysicalKind.Strike, out float head, out float torso, out float hips, out float hand);
+            player.pStats.headArmorStrike = head;
+            player.pStats.torsoArmorStrike = torso;
+            player.pStats.hipsArmorStrike = hips;
+            player.pStats.handArmorStrike = hand;
+            WriteKind(PhysicalKind.Slash, out head, out torso, out hips, out hand);
+            player.pStats.headArmorSlash = head;
+            player.pStats.torsoArmorSlash = torso;
+            player.pStats.hipsArmorSlash = hips;
+            player.pStats.handArmorSlash = hand;
+            WriteKind(PhysicalKind.Thrust, out head, out torso, out hips, out hand);
+            player.pStats.headArmorThrust = head;
+            player.pStats.torsoArmorThrust = torso;
+            player.pStats.hipsArmorThrust = hips;
+            player.pStats.handArmorThrust = hand;
+        }
+
+        void WriteKind(PhysicalKind kind, out float head, out float torso, out float hips, out float hand)
+        {
+            head = ArmorPhysical.Of(currentHeadArmor, kind);
+            torso = ArmorPhysical.Of(currentTorsoArmor, kind);
+            hips = ArmorPhysical.Of(currentHipsArmor, kind);
+            hand = ArmorPhysical.Of(currentHandArmor, kind);
         }
 
         void WriteHandAbsorption()
