@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Stance Sword
   m_EditorClassIdentifier: 
   itemType: 0
+  isRing: 0
+  isCovenantMark: 0
+  isKey: 0
   itemIcon: {fileID: -332921342, guid: 85b36d7c8413bb542bf36f3d89b895f4, type: 3}
   itemName: "\u67B6\u52BF\u5251"
   transformName: 
@@ -22,7 +25,24 @@ MonoBehaviour:
   weaponController: {fileID: 22100000, guid: c605ba7f0edacaa42916573a3005469c, type: 2}
   offHandIdleAnimation: Left_Arm_Idle
   weaponType: 3
+  catalystKind: 0
+  spellPowerFilled: 0
+  spellPower: 0
+  infusion: 
+  cannotBuff: 0
   stanceArt: 1
+  reinforceLevel: 0
+  upgradePath: 0
+  strengthNeedFilled: 0
+  strengthNeed: 0
+  dexterityNeedFilled: 0
+  dexterityNeed: 0
+  intelligenceNeedFilled: 0
+  intelligenceNeed: 0
+  faithNeedFilled: 0
+  faithNeed: 0
+  luckNeedFilled: 0
+  luckNeed: 0
   pd: 10
   fd: 0
   md: 0
@@ -50,7 +70,7 @@ MonoBehaviour:
   oh_hold_e_action: {fileID: 11400000, guid: a65d3d74d904f5f419212dc9701d2077, type: 2}
   oh_tap_q_action: {fileID: 11400000, guid: 7eda8d58ef67b314a801f7bba18f22e7, type: 2}
   oh_hold_q_action: {fileID: 0}
-  oh_tap_r_action: {fileID: 11400000, guid: a1da57e59708a734e8b3baa003ebfb47, type: 2}
+  oh_tap_r_action: {fileID: 11400000, guid: a7de2e0ea9ceaa94c8262094cc54b321, type: 2}
   oh_hold_r_action: {fileID: 0}
   oh_tap_z_action: {fileID: 11400000, guid: a1da57e59708a734e8b3baa003ebfb47, type: 2}
   oh_hold_z_action: {fileID: 0}
