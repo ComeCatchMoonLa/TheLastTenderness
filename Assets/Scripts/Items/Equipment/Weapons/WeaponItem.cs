@@ -20,6 +20,10 @@ namespace CatchMoon
         public string infusion;
         public bool cannotBuff;
         public bool stanceArt;
+        public bool lightDeriveFocusFilled;
+        public int lightDeriveFocus;
+        public bool heavyDeriveFocusFilled;
+        public int heavyDeriveFocus;
         public int reinforceLevel;
         public UpgradePath upgradePath;
         public bool strengthNeedFilled;
