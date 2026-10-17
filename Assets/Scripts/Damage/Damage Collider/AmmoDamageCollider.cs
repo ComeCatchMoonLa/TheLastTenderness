@@ -33,6 +33,9 @@ namespace CatchMoon
 
                     if (character == damageTarget || damageTarget.cStats.teamID == teamID) return;
 
+                    if (ammoItem != null)
+                        AmmoStatus.Apply(damageTarget.cStats, ammoItem.statusSlot, ammoItem.statusGain);
+
                     if (!damageTarget.cStats.isInvulnerable)
                         CreatePenetratedAmmo(collision);
                 }

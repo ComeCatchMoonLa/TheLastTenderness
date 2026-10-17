@@ -139,6 +139,9 @@ namespace CatchMoon
         public float poisonDamagePerSecond;
         public float poisonTimeLeft;
 
+        public float bleedMeter;
+        public float bleedCapacity;
+
         public float frostMeter;
         public float frostCapacity;
         public float frostDuration;
@@ -183,6 +186,12 @@ namespace CatchMoon
         {
             if (isDead) return;
             currentHP = PoisonDoT.Tick(name, currentHP, poisonTimeLeft, poisonDamagePerSecond, deltaTime, out poisonTimeLeft);
+        }
+
+        public void GainBleed(float gain, float resist)
+        {
+            if (isDead) return;
+            bleedMeter = StatusBuildup.Add(isInvulnerable, name, bleedMeter, gain, resist, bleedCapacity);
         }
 
         public bool GainPoison(float gain, float resist)
