@@ -264,7 +264,8 @@ namespace CatchMoon
                         : staminaRegenerationAmount;
                     if (player.pInventory != null)
                         amount += RingRecovery.Stamina(player.pInventory.ringSlots);
-                    currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime, maxStamina);
+                    float extra = ConsumableEffect.BlossomGain(Time.time, blossomUntil, blossomPerSecond, Time.deltaTime);
+                    currentStamina = Mathf.Min(currentStamina + amount * Time.deltaTime + extra, maxStamina);
                     player.ui.hud.staminaBar.SetCurrentStamina(currentStamina);
                 }
             }

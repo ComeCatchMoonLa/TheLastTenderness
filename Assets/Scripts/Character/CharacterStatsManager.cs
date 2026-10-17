@@ -131,6 +131,10 @@ namespace CatchMoon
 
         public float regenPerSecond;
         public float regenTimeLeft;
+        public float blossomUntil;
+        public float blossomPerSecond;
+        public float coinUntil;
+        public int coinBonus;
 
         public float curseMeter;
         public float curseCapacity;

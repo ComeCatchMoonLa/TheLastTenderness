@@ -178,7 +178,8 @@ namespace CatchMoon
         {
             if (enemy == null || enemy.aiSettings == null || enemy.aiSettings.drops == null) return;
             if (player.pInventory == null || player.pInventory.items == null) return;
-            float discovery = RingDiscovery.Total(player.pStats.luckLevel, player.pInventory.ringSlots);
+            float discovery = RingDiscovery.Total(player.pStats.luckLevel, player.pInventory.ringSlots)
+                + ConsumableEffect.CoinBonus(Time.time, player.pStats.coinUntil, player.pStats.coinBonus);
             DropLine[] lines = enemy.aiSettings.drops;
             Item[] found = new Item[lines.Length];
             float[] rolls = new float[lines.Length];
