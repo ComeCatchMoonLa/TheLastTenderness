@@ -31,6 +31,8 @@ namespace CatchMoon
 
         [Header("体力消耗")]
         [SerializeField] float rollCost = 10;     // 翻滚消耗的体力值
+        float rollElapsed;
+        bool rollInvulnerable;
         [SerializeField] float backStepCost = 5;  // 后跳步消耗的体力值
         public float sprintCost = 0.2f;           // 冲刺消耗
         public float sprintNeedMinStamina = 10f;  // 冲刺需要的最少体力值
@@ -63,6 +65,7 @@ namespace CatchMoon
             HandleFall();
             HandleJump();
             HandleRoll();
+            TickRollIFrame();
             HandleBackStep();
             currentSpeed = player.rigidBody.linearVelocity.magnitude;
         }
@@ -238,11 +241,32 @@ namespace CatchMoon
 
                 if (player.pStats.DeductStamina(rollCost))
                 {
+                    rollElapsed = 0f;
                     UpdateMoveDir();
                     player.transform.localRotation = Quaternion.LookRotation(moveDir);
                     player.pAnimator.PlayTargetAnimation("Rolling", true);
                 }
             }
+        }
+
+        void TickRollIFrame()
+        {
+            if (!player.isRolling)
+            {
+                rollElapsed = 0f;
+                if (!rollInvulnerable) return;
+                player.cStats.isInvulnerable = false;
+                rollInvulnerable = false;
+                return;
+            }
+
+            bool open = RollIFrame.Open(RollIFrame.Frame(rollElapsed), false);
+            if (open != rollInvulnerable)
+            {
+                player.cStats.isInvulnerable = open;
+                rollInvulnerable = open;
+            }
+            rollElapsed += Time.fixedDeltaTime;
         }
 
         void HandleBackStep()
