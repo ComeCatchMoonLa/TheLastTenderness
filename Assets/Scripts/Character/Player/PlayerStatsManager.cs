@@ -62,6 +62,7 @@ namespace CatchMoon
                     base.Death(player);
                     ForfeitSouls();
                     ExtinguishEmber();
+                    RefreshEnemies();
                 }
 
                 return true;
@@ -151,6 +152,16 @@ namespace CatchMoon
             soulCount = souls;
             if (player != null && player.ui != null && player.ui.hud != null && player.ui.hud.soulCountUI != null)
                 player.ui.hud.soulCountUI.SetSoulCountText(soulCount);
+        }
+
+        public void RefreshEnemies()
+        {
+            EnemyStatsManager[] all = FindObjectsByType<EnemyStatsManager>(FindObjectsInactive.Include);
+            for (int i = 0; i < all.Length; i++)
+            {
+                if (all[i] != null)
+                    all[i].RestoreAfterRest();
+            }
         }
 
         public void ForfeitSouls()

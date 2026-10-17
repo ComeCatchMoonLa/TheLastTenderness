@@ -19,10 +19,13 @@ namespace CatchMoon.Tests
             var enemy = enemyObject.AddComponent<EnemyManager>();
             var settings = ScriptableObject.CreateInstance<EnemyAISettings>();
             settings.isBoss = false;
+            settings.oneShot = true;
             enemy.aiSettings = settings;
             var stats = enemyObject.AddComponent<EnemyStatsManager>();
             typeof(EnemyStatsManager).GetField("player", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(stats, cached);
+            typeof(EnemyStatsManager).GetField("enemy", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(stats, enemy);
 
             LogAssert.Expect(LogType.Error, new Regex("Destroy may not be called from edit mode"));
             stats.HandleEnemyDeathEvent();

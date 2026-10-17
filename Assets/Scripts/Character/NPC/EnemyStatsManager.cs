@@ -108,8 +108,7 @@ namespace CatchMoon
                 && world != null && world.wEvent != null && !world.wEvent.bossHasBeenDefeated)
                 world.wEvent.BossHasBeenDefeated();
 
-            if (enemy != null && enemy.aiSettings != null
-                && MeleeRest.Keep(enemy.aiSettings.isBoss, enemy.aiSettings.combatStyle))
+            if (AreaRefresh.Returns(RefreshActor(true)))
             {
                 hiddenForRest = true;
                 gameObject.SetActive(false);
@@ -138,7 +137,7 @@ namespace CatchMoon
 
         public void RestoreAfterRest()
         {
-            if (!hiddenForRest) return;
+            if (!AreaRefresh.Returns(RefreshActor(isDead))) return;
             if (enemyHealthBar != null)
             {
                 enemyHealthBar.SetMaxHealth(maxHP);
@@ -146,6 +145,21 @@ namespace CatchMoon
             }
             MeleeRest.Restore(gameObject, restOrigin, this);
             hiddenForRest = false;
+        }
+
+        AreaRefresh.Actor RefreshActor(bool dead)
+        {
+            EnemyAISettings settings = enemy != null ? enemy.aiSettings : null;
+            return new AreaRefresh.Actor
+            {
+                story = enemy != null && enemy.isStoryNpc,
+                boss = settings != null && settings.isBoss,
+                mimic = settings != null && settings.mimic,
+                lizard = settings != null && settings.lizard,
+                dead = dead,
+                oneShot = settings != null && settings.oneShot,
+                oneShotReturns = settings != null && settings.oneShotReturns
+            };
         }
         public void AwardSoulsOnDeath(PlayerManager player)
         {
