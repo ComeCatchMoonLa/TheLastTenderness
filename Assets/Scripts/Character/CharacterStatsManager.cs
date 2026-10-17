@@ -35,6 +35,8 @@ namespace CatchMoon
         public int dexterityLevel = 10;
         public int intelligenceLevel = 10;
         public int faithLevel = 10;
+        public int vitalityLevel = 10;
+        public int luckLevel = 10;
 
         [Header("Poise")]
         public float totalPoiseDefence;             // 伤害计算时的总镇定(火力差很大的话可以形成压制)

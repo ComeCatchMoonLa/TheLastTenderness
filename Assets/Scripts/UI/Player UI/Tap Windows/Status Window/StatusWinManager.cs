@@ -24,6 +24,16 @@ namespace CatchMoon
             }
 
             PlayerStatsManager stats = player.pStats;
+            int soulLevel = SoulLevel.From(
+                stats.healthLevel,
+                stats.focusLevel,
+                stats.staminaLevel,
+                stats.vitalityLevel,
+                stats.strengthLevel,
+                stats.dexterityLevel,
+                stats.intelligenceLevel,
+                stats.faithLevel,
+                stats.luckLevel);
             body.text = StatusPageLines.Format(
                 stats.healthLevel,
                 stats.staminaLevel,
@@ -33,7 +43,7 @@ namespace CatchMoon
                 stats.dexterityLevel,
                 stats.intelligenceLevel,
                 stats.faithLevel,
-                stats.soulCount);
+                stats.soulCount) + "\n灵魂等级 " + soulLevel;
         }
 
         public void Close()
