@@ -31,6 +31,12 @@ namespace CatchMoon
 
         [Header("体力消耗")]
         [SerializeField] float rollCost = 10;     // 翻滚消耗的体力值
+        [SerializeField] bool rollChainStepFilled;
+        [SerializeField] float rollChainStep;
+        [SerializeField] bool rollChainPauseFilled;
+        [SerializeField] float rollChainPause;
+        int rollStreak;
+        float lastRollTime = -1f;
         float rollElapsed;
         bool rollInvulnerable;
         [SerializeField] float backStepCost = 5;  // 后跳步消耗的体力值
@@ -239,8 +245,12 @@ namespace CatchMoon
             {
                 player.input.rollFlag = false;
 
-                if (player.pStats.DeductStamina(rollCost))
+                float sinceLast = lastRollTime < 0f ? float.PositiveInfinity : Time.time - lastRollTime;
+                float cost = RollChain.Cost(name, rollChainStepFilled, rollChainStep, rollChainPauseFilled, rollChainPause, sinceLast, rollStreak, rollCost, out int nextStreak);
+                if (player.pStats.DeductStamina(cost))
                 {
+                    rollStreak = nextStreak;
+                    lastRollTime = Time.time;
                     rollElapsed = 0f;
                     UpdateMoveDir();
                     player.transform.localRotation = Quaternion.LookRotation(moveDir);
