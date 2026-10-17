@@ -14,9 +14,14 @@ namespace CatchMoon
 
         public static CriticalStrikeChoice Choose(bool hit, float dot, bool canBeRiposted)
         {
+            return Choose(hit, dot, canBeRiposted, true);
+        }
+
+        public static CriticalStrikeChoice Choose(bool hit, float dot, bool canBeRiposted, bool backstabAllowed)
+        {
             if (hit && canBeRiposted && dot >= 0.8f && dot <= 1f)
                 return CriticalStrikeChoice.Riposte;
-            if (hit && dot >= -1f && dot <= -0.8f)
+            if (hit && backstabAllowed && dot >= -1f && dot <= -0.8f)
                 return CriticalStrikeChoice.Backstab;
             return CriticalStrikeChoice.LightAttack;
         }
@@ -43,7 +48,11 @@ namespace CatchMoon
                 }
             }
 
-            switch (Choose(hit, dot, canBeRiposted))
+            bool backstabAllowed = true;
+            if (attackTarget is EnemyManager enemy && enemy.aiSettings != null)
+                backstabAllowed = BackstabBody.Allows(enemy.aiSettings.isBoss, enemy.aiSettings.largeBody);
+
+            switch (Choose(hit, dot, canBeRiposted, backstabAllowed))
             {
                 case CriticalStrikeChoice.Riposte:
                     AttempRiposte(character, attackTarget);

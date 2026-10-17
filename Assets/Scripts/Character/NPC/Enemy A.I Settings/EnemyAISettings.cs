@@ -7,6 +7,7 @@ namespace CatchMoon
     {
         [Header("A.I 类型")]
         public bool isBoss;
+        public bool largeBody;
 
         [Header("速度设置")]
         public float rotationSpeed = 25f;           // 旋转速度
