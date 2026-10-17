@@ -20,6 +20,8 @@ namespace CatchMoon
         public float staminaRegenBonus;
         public int estusBonus;
         public int ashenBonus;
+        public int spellBonus;
+        public float criticalBonus;
         [Header("item在Hierarchy窗口中的名称")]
         [Tooltip("用于切换模型")] public string transformName;
     }

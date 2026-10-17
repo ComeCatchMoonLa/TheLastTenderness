@@ -100,7 +100,10 @@ namespace CatchMoon
             SpellDamageCollider spellDC = instantiatedSpellFx.GetComponent<SpellDamageCollider>();
 
             spellDC.teamID = player.pStats.teamID;
-            DamageSegments hit = SpellHit.Of(spellType, baseDamage);
+            int damage = baseDamage;
+            if (player.pInventory != null)
+                damage += RingCast.Spell(player.pInventory.ringSlots);
+            DamageSegments hit = SpellHit.Of(spellType, damage);
             spellDC.pd = hit.Physical;
             spellDC.fd = hit.Fire;
             spellDC.md = hit.Magic;

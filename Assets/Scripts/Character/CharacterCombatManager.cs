@@ -271,6 +271,14 @@ namespace CatchMoon
             };
         }
 
+        static IncomingDamage CriticalHit(CharacterManager attacker, WeaponItem weapon)
+        {
+            IncomingDamage hit = WeaponIncoming(weapon);
+            if (attacker is PlayerManager player && player.pInventory != null)
+                hit.Multiplier += RingCast.Critical(player.pInventory.ringSlots);
+            return hit;
+        }
+
         static DamageSegments DamageOf(float pd, float fd, float md, float ld, float dd)
         {
             return new DamageSegments
@@ -299,7 +307,7 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingBackStab.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cCombat.ResolveIncomingHit(characterPerformingBackStab, "Back Stabbed", WeaponIncoming(weapon),
+            character.cCombat.ResolveIncomingHit(characterPerformingBackStab, "Back Stabbed", CriticalHit(characterPerformingBackStab, weapon),
                 false, 0f, 0f);
         }
 
@@ -312,7 +320,7 @@ namespace CatchMoon
             // 2.处理受伤
             WeaponItem weapon = characterPerformingRiposte.cInventory.rightWeapon;
             if (weapon == null) return;
-            character.cCombat.ResolveIncomingHit(characterPerformingRiposte, "Riposted", WeaponIncoming(weapon),
+            character.cCombat.ResolveIncomingHit(characterPerformingRiposte, "Riposted", CriticalHit(characterPerformingRiposte, weapon),
                 false, 0f, 0f);
         }
     }
