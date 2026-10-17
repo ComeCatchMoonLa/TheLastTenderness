@@ -183,14 +183,17 @@ namespace CatchMoon
                 if (attacker != null && ShieldKick.BreaksShield(attacker.kickArmed, true))
                     character.cStats.EmptyStamina();
                 AttemptBlock(guardBreakModifider, damageAnimation, pd, fd, md, ld, dd);
-                DamageSegments absorbed = SpellOnShield.Absorb(DamageOf(pd, fd, md, ld, dd), new DamageSegments
-                {
-                    Physical = character.cStats.blockingPDA,
-                    Fire = character.cStats.blockingFDA,
-                    Magic = character.cStats.blockingMDA,
-                    Lightning = character.cStats.blockingLDA,
-                    Dark = character.cStats.blockingDDA
-                });
+                DamageSegments absorbed = SpellOnShield.Leak(
+                    character.cStats.currentStamina <= 0f,
+                    DamageOf(pd, fd, md, ld, dd),
+                    new DamageSegments
+                    {
+                        Physical = character.cStats.blockingPDA,
+                        Fire = character.cStats.blockingFDA,
+                        Magic = character.cStats.blockingMDA,
+                        Lightning = character.cStats.blockingLDA,
+                        Dark = character.cStats.blockingDDA
+                    });
                 pd = absorbed.Physical;
                 fd = absorbed.Fire;
                 md = absorbed.Magic;

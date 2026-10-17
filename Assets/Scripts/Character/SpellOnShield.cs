@@ -12,6 +12,12 @@ namespace CatchMoon
             return damageSum * guardBreak * (1f - stabilityRating) * (1f - weaponStability);
         }
 
+        public static DamageSegments Leak(bool broke, DamageSegments incoming, DamageSegments rates)
+        {
+            if (broke) return incoming;
+            return Absorb(incoming, rates);
+        }
+
         public static DamageSegments Absorb(DamageSegments incoming, DamageSegments rates)
         {
             return new DamageSegments
