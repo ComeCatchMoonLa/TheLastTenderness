@@ -47,6 +47,26 @@ namespace CatchMoon
             EquipPart(hipModelChanger, currentHipsArmor, nakedHipsModelName,
                 ref player.pStats.hipsArmorPDA, ref player.pStats.hipsArmorFDA, ref player.pStats.hipsArmorMDA,
                 ref player.pStats.hipsArmorLDA, ref player.pStats.hipsArmorDDA);
+            WriteHandAbsorption();
+        }
+
+        void WriteHandAbsorption()
+        {
+            if (currentHandArmor != null)
+            {
+                player.pStats.handArmorPDA = currentHandArmor.physicalDA;
+                player.pStats.handArmorFDA = currentHandArmor.fireDA;
+                player.pStats.handArmorMDA = currentHandArmor.magicDA;
+                player.pStats.handArmorLDA = currentHandArmor.lightningDA;
+                player.pStats.handArmorDDA = currentHandArmor.darkDA;
+                return;
+            }
+
+            player.pStats.handArmorPDA = 0f;
+            player.pStats.handArmorFDA = 0f;
+            player.pStats.handArmorMDA = 0f;
+            player.pStats.handArmorLDA = 0f;
+            player.pStats.handArmorDDA = 0f;
         }
 
         void EquipPart(ModelChanger changer, ArmorItem armor, string nakedModelName,

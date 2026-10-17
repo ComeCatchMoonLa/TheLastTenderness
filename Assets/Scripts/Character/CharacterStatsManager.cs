@@ -50,22 +50,27 @@ namespace CatchMoon
         [Range(0, 1)] public float headArmorPDA;
         [Range(0, 1)] public float torsoArmorPDA;
         [Range(0, 1)] public float hipsArmorPDA;
+        [Range(0, 1)] public float handArmorPDA;
         [Space(5)]
         [Range(0, 1)] public float headArmorFDA;
         [Range(0, 1)] public float torsoArmorFDA;
-        [Range(0, 1)] public float hipsArmorFDA; 
+        [Range(0, 1)] public float hipsArmorFDA;
+        [Range(0, 1)] public float handArmorFDA; 
         [Space(5)]
         [Range(0, 1)] public float headArmorMDA;
         [Range(0, 1)] public float torsoArmorMDA;
         [Range(0, 1)] public float hipsArmorMDA;
+        [Range(0, 1)] public float handArmorMDA;
         [Space(5)]
         [Range(0, 1)] public float headArmorLDA;
         [Range(0, 1)] public float torsoArmorLDA;
         [Range(0, 1)] public float hipsArmorLDA;
+        [Range(0, 1)] public float handArmorLDA;
         [Space(5)]
         [Range(0, 1)] public float headArmorDDA;
         [Range(0, 1)] public float torsoArmorDDA;
         [Range(0, 1)] public float hipsArmorDDA;
+        [Range(0, 1)] public float handArmorDDA;
 
         [Header("防御时的伤害吸收率")]
         [Range(0, 1)] public float blockingPDA;
@@ -291,11 +296,11 @@ namespace CatchMoon
         {
             if (character.cStats.isDead || character.cStats.isInvulnerable) return false;
 
-            float pd = damage.Physical * CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA);
-            float fd = damage.Fire * CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA);
-            float md = damage.Magic * CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA);
-            float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA);
-            float dd = damage.Dark * CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA);
+            float pd = damage.Physical * CombinedArmorRate(headArmorPDA, torsoArmorPDA, hipsArmorPDA) * (1f - handArmorPDA);
+            float fd = damage.Fire * CombinedArmorRate(headArmorFDA, torsoArmorFDA, hipsArmorFDA) * (1f - handArmorFDA);
+            float md = damage.Magic * CombinedArmorRate(headArmorMDA, torsoArmorMDA, hipsArmorMDA) * (1f - handArmorMDA);
+            float ld = damage.Lightning * CombinedArmorRate(headArmorLDA, torsoArmorLDA, hipsArmorLDA) * (1f - handArmorLDA);
+            float dd = damage.Dark * CombinedArmorRate(headArmorDDA, torsoArmorDDA, hipsArmorDDA) * (1f - handArmorDDA);
 
             float finalDamage = Frostbite.Taken(name, pd + fd + md + ld + dd, frostTimeLeft > 0f, frostDamageTaken);
             currentHP -= finalDamage;
