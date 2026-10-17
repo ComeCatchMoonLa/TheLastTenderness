@@ -32,7 +32,8 @@ namespace CatchMoon
                 return;
             }
             GameObject instantiatedSpellFx = Instantiate(spellCastFX, character.transform);
-            character.cStats.AddHP(healAmount);
+            float next = SpellHeal.Apply(character.cStats.currentHP, character.cStats.maxHP, healAmount);
+            character.cStats.AddHP(next - character.cStats.currentHP);
         }
     }
 }
