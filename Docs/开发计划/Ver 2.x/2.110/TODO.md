@@ -4,25 +4,25 @@
 
 ## 0. 开始前
 
-- [ ] 读过技术设计：双手力量按向下取整的 1.5 倍，封顶 99。
+- [x] 读过技术设计：双手力量按向下取整的 1.5 倍，封顶 99。
 
 **阶段门槛：** 知道力量补正和战技不在这一版。
 
 ## 1. 需求
 
-- [ ] `TwoHandStrength.ForNeed` 在双手时提高力量并封顶。
-- [ ] `RequirementPenalty.TryScale` 只用这个数比力量需求。
+- [x] `TwoHandStrength.ForNeed` 在双手时提高力量并封顶。
+- [x] `RequirementPenalty.TryScale` 只用这个数比力量需求。
 
 **阶段门槛：** 单手结果与原来相同。另一项不足时双手仍然不足。
 
 ## 2. 测试
 
-- [ ] `TwoHandStrengthTests` 盖住游戏设计第 3 节。
-- [ ] `RequirementPenaltyTests` 补上是否双手，单手断言不变。
-- [ ] Test Runner 里这组通过。
+- [x] `TwoHandStrengthTests` 盖住游戏设计第 3 节。
+- [x] `RequirementPenaltyTests` 补上是否双手，单手断言不变。
+- [x] Test Runner 里这组通过。
 
 **阶段门槛：** 动画不测。
 
 ## 3. 验收
 
-- [ ] 大纲里的 2.110 标成已完成。提交说明用中文。
+- [x] 大纲里的 2.110 标成已完成。提交说明用中文。

@@ -15,12 +15,14 @@ namespace CatchMoon
             float speedFactor,
             float damageFactor,
             int damage,
+            bool twoHanding,
             out float speed,
             out float scaledDamage)
         {
             speed = 1f;
             scaledDamage = damage;
-            bool strengthShort = WeaponNeed.TryStrength(weapon, out int strengthNeed) && strengthLevel < strengthNeed;
+            int strengthForNeed = TwoHandStrength.ForNeed(strengthLevel, twoHanding);
+            bool strengthShort = WeaponNeed.TryStrength(weapon, out int strengthNeed) && strengthForNeed < strengthNeed;
             bool dexterityShort = WeaponNeed.TryDexterity(weapon, out int dexterityNeed) && dexterityLevel < dexterityNeed;
             bool intelligenceShort = WeaponNeed.TryIntelligence(weapon, out int intelligenceNeed) && intelligenceLevel < intelligenceNeed;
             bool faithShort = WeaponNeed.TryFaith(weapon, out int faithNeed) && faithLevel < faithNeed;
