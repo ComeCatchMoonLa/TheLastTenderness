@@ -46,7 +46,8 @@ namespace CatchMoon
                 stats.dexterityLevel,
                 stats.intelligenceLevel,
                 stats.faithLevel,
-                stats.soulCount) + "\n灵魂等级 " + soulLevel;
+                stats.soulCount) + "\n灵魂等级 " + soulLevel
+                + "\n发现力 " + RingDiscovery.Total(stats.luckLevel, player.pInventory != null ? player.pInventory.ringSlots : null);
         }
 
         public void Close()
