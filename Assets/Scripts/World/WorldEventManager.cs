@@ -25,6 +25,11 @@ namespace CatchMoon
             world = GetComponentInParent<WorldManager>();
         }
 
+        public EnemyManager ChurchOpponent(bool offline, EnemyManager local)
+        {
+            return ChurchSpear.Opponent(offline, local, name);
+        }
+
         public void ActivateBossFight(EnemyManager enemy)
         {
             if (!BossClear.CanOpenAgain(bossHasBeenDefeated)) return;
